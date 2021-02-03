@@ -18,17 +18,19 @@ export default {
         autoplay: true,
         animationData: this.options.animationData
       })
-      anim.addEventListener('complete', () => {this.$parent.loading = false})
+      anim.addEventListener('complete', () => {
+        this.$parent.loading = false
+      })
     }
     const AnimStorage = () => {
-      if (sessionStorage.getItem('access')) {
-        // 初回アクセス以外の処理
-        this.$parent.loading = false
-      } else {
-        // 初回アクセス時の処理
-        animationEvt()
-        sessionStorage.setItem('access', 0)
-      }
+      // if (sessionStorage.getItem('access')) {
+      //   // 初回アクセス以外の処理
+      //   this.$parent.loading = false
+      // } else {
+      // 初回アクセス時の処理
+      animationEvt()
+      sessionStorage.setItem('access', 0)
+      // }
     }
     AnimStorage()
   }

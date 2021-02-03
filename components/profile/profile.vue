@@ -1,13 +1,13 @@
 <template>
 <v-container>
-  <div class="text-left display-2">
+  <div class="text-left display-1">
     <h1>プロフィール</h1>
   </div>
   <div id="profile" class="text-center">
     <TextAnimetion :frontMsg="frontMsg" />
     <v-container>
       <v-row no-gutter>
-        <v-col v-for="site of sites" cols="12" sm="6">
+        <v-col v-for="(site,i) in sites" :key="`first-${i}`" cols="12" sm="6">
           <!-- ニュースカード（参考：https://qiita.com/KIYS/items/9805118aa86f35c7a852#%E5%AE%9F%E8%A3%85-6） -->
           <a class="nuxtLink" :href="site.url" target="_blank">
             <v-card class="mx-auto" max-width="344">

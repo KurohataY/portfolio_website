@@ -1,10 +1,10 @@
 <template>
 <v-card class="mx-auto" min-width="50vw" tile>
-  <v-img height="250" src="images/profile_bg.jpg">
+  <v-img height="250" src="images/profile_bg.webp">
     <v-row align="end" class="fill-height">
       <v-col align-self="start" class="pa-6" cols="12">
         <v-avatar class="profile" color="grey" size="164">
-          <v-img src="images/profile.jpg"></v-img>
+          <v-img src="images/profile.webp"></v-img>
         </v-avatar>
       </v-col>
       <v-col class="py-0">

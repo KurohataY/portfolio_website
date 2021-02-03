@@ -5,35 +5,44 @@
   </article>
 </v-container>
 <article v-else>
-  <!-- <v-img lazy-src="images/bg_pic-m.webp" max-height="300" max-width="100%" src="images/bg_pic-m.webp"></v-img> -->
-  <ProfileCard id="profile"/>
+  <Navi />
+  <ProfileCard id="profile" />
   <v-container>
     <Profile />
   </v-container>
   <div class="top_padding">
-    <div class="blue lighten-4 ">
+    <div class="blue lighten-4">
       <v-container>
         <SkillsCard />
       </v-container>
     </div>
   </div>
-  <Form />
+  <v-container>
+    <Products calss="top_padding" />
+  </v-container>
+  <Form class="top_padding" />
+  </div>
+
 </article>
 </template>
 
 <script>
+import Navi from '~/components/nav/navbar.vue'
 import Lottie from '~/components/animation/loadingLottie.vue'
 import ProfileCard from '~/components/profile/profileCard.vue'
 import Profile from '~/components/profile/profile.vue'
-import SkillsCard from '~/components/skills.vue'
+import Products from '~/components/product/product.vue'
+import SkillsCard from '~/components/skill/skills.vue'
 import Form from '~/components/form/form.vue'
 
 
 export default {
   components: {
+    Navi,
     Lottie,
     ProfileCard,
     Profile,
+    Products,
     SkillsCard,
     Form
   },
