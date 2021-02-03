@@ -1,7 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
 require('dotenv').config();
-const {FORM_RUN_URL} = process.env;
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -41,7 +40,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    
+
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -78,6 +77,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   env: {
-    FORM_RUN_URL
+    FORM_RUN_URL: process.env.FORM_RUN_URL
   },
 }
