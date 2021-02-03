@@ -1,5 +1,5 @@
 <template>
-<v-form ref="form" v-model="valid" class="formrun" action=process.env.FORM_RUN_URL @submit="validate" lazy-validation>
+<v-form ref="form" v-model="valid" class="formrun" action=process.env.FORM_RUN_URL method="post" @submit="validate" lazy-validation>
   <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" name="お名前" required></v-text-field>
 
   <v-text-field v-model="email" :rules="emailRules" label="E-mail" name="メールアドレス" required></v-text-field>
@@ -39,6 +39,7 @@ export default {
       if (!this.$refs.form.validate()) {
         this.isError = true
         event.preventDefault()
+        console.log(process.env.FORM_RUN_URL)
       }
     },
     reset() {
