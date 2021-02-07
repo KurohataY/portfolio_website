@@ -25,7 +25,7 @@
 <script>
 import TextAnimetion from "../animation/stringAnimation.vue"
 export default {
-  components:{
+  components: {
     TextAnimetion
   },
   data: () => ({
@@ -34,10 +34,6 @@ export default {
     ],
 
     sites: [{
-      url: "https://github.com",
-      image: "images/profile/Octocat.webp",
-      title: "GitHub",
-    }, {
       url: "https://izanagiblog.com",
       image: "images/profile/blogImg.webp",
       title: "開発ブログ",
