@@ -11,9 +11,9 @@
     <Profile />
   </v-container>
   <div class="top_padding">
-    <div class="blue lighten-4">
+    <div class="">
       <v-container>
-        <SkillsCard />
+        <SkillsCarousel />
       </v-container>
     </div>
   </div>
@@ -32,7 +32,7 @@ import Lottie from '~/components/animation/loadingLottie.vue'
 import ProfileCard from '~/components/profile/profileCard.vue'
 import Profile from '~/components/profile/profile.vue'
 import Products from '~/components/product/product.vue'
-import SkillsCard from '~/components/skill/skills.vue'
+import SkillsCarousel from '~/components/skill/skills_carousel.vue'
 import Form from '~/components/form/form.vue'
 
 
@@ -43,7 +43,7 @@ export default {
     ProfileCard,
     Profile,
     Products,
-    SkillsCard,
+    SkillsCarousel,
     Form
   },
   data() {
