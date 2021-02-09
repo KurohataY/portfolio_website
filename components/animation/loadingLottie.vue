@@ -36,3 +36,10 @@ export default {
   }
 }
 </script>
+
+<style media="screen" scoped>
+.animationItem {
+  width: 100wv;
+  height: 100hv;
+}
+</style>

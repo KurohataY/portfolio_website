@@ -27,15 +27,16 @@ export default {
       }
     ],
     link: [{
+      rel: 'stylesheet',
+      href: 'https://use.typekit.net/ttj5ikc.css'
+    }, {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
     }],
-    script: [
-      {
-        src: 'https://sdk.form.run/js/v2/formrun.js'
-      }
-    ],
+    script: [{
+      src: 'https://sdk.form.run/js/v2/formrun.js'
+    }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

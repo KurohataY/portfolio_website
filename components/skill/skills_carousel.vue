@@ -8,7 +8,7 @@
   </template>
   <v-carousel-item v-for="(skill,i) in skills" :key="`first-${i}`">
       <v-card class="mx-auto" max-width="400" height="400">
-        <v-img :aspect-ratio="1/1" :src="skill.image" height="300px"></v-img>
+        <v-img :aspect-ratio="1/1" :src="skill.image" height="300px" class="light-green accent-2"></v-img>
         <v-card-title>{{ skill.language }}</v-card-title>
         <v-card-subtitle>
           <span v-for="framework of skill.frameworks">

@@ -1,9 +1,9 @@
 <template>
 <v-container class="text-center">
-  <div class="text-left display-1">
+  <div class="text-left display-1 product-title">
     <h1>過去の制作物</h1>
   </div>
-  <v-row id="product" no-gutter>
+  <v-row  no-gutter>
     <v-col v-for="(content,i) in contents" :key="`first-${i}`" cols="12" sm="6">
       <div v-if="content.url !== ''">
         <a :href="content.url" class="nuxtLink" :target="content.target">
@@ -63,7 +63,15 @@ export default {
 .nuxtLink {
     text-decoration: none;
 }
-#product {
-    margin-top: 20px;
+.product-title {
+  margin-bottom: 30px;
+  h1 {
+    font-size: 4vw;
+    font-family: lust-script, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    text-shadow: #fff 2px 0, #fff -2px 0, #fff 0 -2px, #fff 0 2px, #fff 2px 2px, #fff -2px 2px, #fff 2px -2px, #fff -2px -2px, #fff 1px 2px, #fff -1px 2px, #fff 1px -2px, #fff -1px -2px, #fff 2px 1px, #fff -2px 1px, #fff 2px -1px, #fff -2px -1px, rgba(0, 0, 0, .5) 3px 3px 3px;
+  }
 }
+
 </style>

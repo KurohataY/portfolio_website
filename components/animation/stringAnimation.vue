@@ -1,40 +1,37 @@
 <template>
-<div id="text-area"></div>
+  <div class="TextAnime1">
+    <span
+      v-for="(t, index) in text"
+      :key="index"
+      class="item mb-5"
+      :style="{animationDelay: index*50+'ms'}"
+      v-text="t"
+      />
+  </div>
 </template>
 
 <script>
 export default {
-  props: [
-    "frontMsg"
-  ],
   data() {
     return {
-      msg: this.frontMsg,
-      currentMsgArray: [],
+      text: 'みなさんこんにちは！地方で大学生をしています。イザナギと申します。このサイトは、ポートフォリオサイトです。簡単に自己紹介するために作成しました。私の趣味は漫画・アニメ・動画鑑賞やバイクでのツーリングや温泉など様々ありますが、温泉が一番好きですね！温泉に入ると肩こりが治りやすく、心が落ち着きますwww。現在は様々なWebサイトを作成したりしております。開発したものはGitHubに、開発中の記録はブログに上げています。',
     }
-  },
-  mounted() {
-    //メッセージ一覧から取得する
-    if (this.msg.length === 0)
-      return
-    const currentTarget = this.msg.slice(0, 1)
-    //メッセージ一覧を一つ削除する
-    this.msg = this.msg.slice(1)
-    //メッセージを一文字ずつ分解して配列に入れる。
-    this.currentMsgArray = Array.from(currentTarget[0])
-    //メッセージを一文字ずつ表示する
-    this.printChar()
-  },
-  methods: {
-    printChar() {
-      if (this.currentMsgArray.length === 0)
-        return
-      let currentChar = this.currentMsgArray.slice(0, 1)
-      document.getElementById('text-area').innerHTML += currentChar
-      this.currentMsgArray = this.currentMsgArray.slice(1)
-      setTimeout(this.printChar, 50)
-    },
-
-  },
+  }
 }
 </script>
+
+<style scoped>
+@keyframes text-in {
+  0% {
+    transform: translate(0, -20px);
+    opacity: 0;
+  }
+}
+.item {
+  display: inline-block;
+  font-size: 2vw;
+  color: #000;
+  font-weight: bold;
+  animation: text-in .8s cubic-bezier(0.22, 0.15, 0.25, 1.43) 0s backwards;
+}
+</style>
