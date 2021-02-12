@@ -1,11 +1,5 @@
 <template>
 <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hove>
-  <template v-slot:prev="{ on, attrs }">
-    <v-btn color="success" v-bind="attrs" v-on="on">Previous slide</v-btn>
-  </template>
-  <template v-slot:next="{ on, attrs }">
-    <v-btn color="info" v-bind="attrs" v-on="on">Next slide</v-btn>
-  </template>
   <v-carousel-item v-for="(skill,i) in skills" :key="`first-${i}`">
       <v-card class="mx-auto" max-width="400" height="400">
         <v-img :aspect-ratio="1/1" :src="skill.image" height="300px" class="light-green accent-2"></v-img>

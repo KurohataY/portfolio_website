@@ -8,14 +8,14 @@
     </v-col>
     <v-col cols="12" sm="8">
       <v-form ref="form" v-model="valid" class="formrun" action="https://form.run/api/v1/r/c7wiuizwka3nctwy0bilygcg" method="post" @submit="validate" lazy-validation>
-        <v-text-field v-model="name" :counter="10" :rules="nameRules" label="Name" name="お名前" required></v-text-field>
-        <v-text-field v-model="email" :rules="emailRules" label="E-mail" name="メールアドレス" required></v-text-field>
-        <v-text-field v-model="text" label="Text" name="コメント" required></v-text-field>
+        <v-text-field v-model="name" :counter="10" :rules="nameRules" label="お名前" name="お名前" required></v-text-field>
+        <v-text-field v-model="email" :rules="emailRules" label="メールアドレス" name="メールアドレス" required></v-text-field>
+        <v-textarea v-model="text" label="コメント" name="コメント" required></v-textarea>
         <v-btn color="error" class="mr-4" @click="reset">
-          Reset Form
+          フォームリセット
         </v-btn>
         <v-btn color="success" type="submit">
-          Submit
+          送信
         </v-btn>
       </v-form>
     </v-col>
