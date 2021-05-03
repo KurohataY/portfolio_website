@@ -2,26 +2,26 @@ FROM centos:8
 
 WORKDIR /portfolio_web_site
 
-RUN yum -y update
+RUN dnf -y update
 
-RUN yum -y install epel-release
-RUN yum -y install http://rpms.remirepo.net/enterprise/remi-release-8.rpm
-
-RUN yum -y upgrade
-RUN yum -y install nginx
+RUN dnf -y install epel-release
 
 RUN curl -sL https://rpm.nodesource.com/setup_15.x | bash -
-RUN yum install -y gcc-c++
-RUN yum install -y nodejs
+RUN dnf install -y gcc-c++
+RUN dnf install -y nodejs
 
+RUN dnf -y clean all
+RUN rm -r /var/cache/dnf
+RUN dnf -y upgrade
 
-RUN npm install -g vue-cli
-RUN npm install -g nuxt
-RUN npm install -g create-nuxt-app
+RUN npm install -g yarn
+RUN yarn add global vue-cli
+RUN yarn add global nuxt
+RUN yarn add global create-nuxt-app
+RUN yarn add global npm-check-updates
+RUN yarn
 
 
 ENV HOST 0.0.0.0
 
-
-
-# CMD ["nginx", "-g", "daemon off;"]
+# CMD ["yarn"]

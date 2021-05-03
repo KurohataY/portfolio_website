@@ -6,9 +6,7 @@
         <v-list-item-title class="headline mb-1 ">
           <h1>Profile</h1>
         </v-list-item-title>
-        <v-list-item-text>
-          <TextAnimetion />
-        </v-list-item-text>
+        <TextAnimetion />
       </v-list-item-content>
       <v-list-item-avatar tile size="150" color="grey">
         <v-img src="images/profile.webp"></v-img>

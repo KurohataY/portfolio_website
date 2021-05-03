@@ -75,9 +75,15 @@ export default {
     }
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
   env: {
     FORM_RUN_URL: process.env.FORM_RUN_URL
   },
+
+  build: {
+    babel:{
+      plugins: [
+        ['@babel/plugin-proposal-private-methods', { loose: true }]
+      ]
+    }
+  }
 }
