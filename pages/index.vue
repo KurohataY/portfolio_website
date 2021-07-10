@@ -26,10 +26,7 @@
       <Products id="product" />
     </v-container>
   </div>
-
-  <Form class="top_padding" />
-  </div>
-
+  <Modal class="top_padding" />
 </article>
 </template>
 
@@ -40,8 +37,8 @@ import Top from '~/components/profile/topImage.vue'
 import Profile from '~/components/profile/profile.vue'
 import Products from '~/components/product/product.vue'
 import SkillsCarousel from '~/components/skill/skills_carousel.vue'
-import Form from '~/components/form/form.vue'
 import BlogCard from '~/components/profile/blogCard.vue'
+import Modal from '~/components/form/modal.vue'
 
 
 export default {
@@ -52,8 +49,8 @@ export default {
     Profile,
     Products,
     SkillsCarousel,
-    Form,
-    BlogCard
+    BlogCard,
+    Modal
   },
   data() {
     return {
