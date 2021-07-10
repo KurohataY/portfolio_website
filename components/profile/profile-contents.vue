@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import TextAnimetion from "../animation/stringAnimation.vue"
+import TextAnimetion from "../animation/string-animation.vue"
 export default {
   components: {
     TextAnimetion

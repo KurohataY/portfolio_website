@@ -31,7 +31,7 @@
             ></button>
           </header>
           <main class="modal__content" id="modal-1-content">
-            <Form />
+            <ContactForm />
           </main>
         </div>
       </div>
@@ -39,13 +39,14 @@
   </div>
 </template>
 <script>
-import Form from '~/components/form/form.vue'
+import ContactForm from '~/components/contact/contact-form.vue'
 export default {
+
   mounted() {
     this.init();
   },
   component: {
-    Form
+    ContactForm,
   },
   methods: {
     init() {

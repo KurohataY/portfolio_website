@@ -26,19 +26,19 @@
       <Products id="product" />
     </v-container>
   </div>
-  <Modal class="top_padding" />
+  <ContactModal />
 </article>
 </template>
 
 <script>
 import Navi from '~/components/nav/navbar.vue'
-import Lottie from '~/components/animation/loadingLottie.vue'
-import Top from '~/components/profile/topImage.vue'
-import Profile from '~/components/profile/profile.vue'
+import Lottie from '~/components/animation/loading-lottie.vue'
+import Top from '~/components/profile/profile-top-image.vue'
+import Profile from '~/components/profile/profile-contents.vue'
 import Products from '~/components/product/product.vue'
-import SkillsCarousel from '~/components/skill/skills_carousel.vue'
-import BlogCard from '~/components/profile/blogCard.vue'
-import Modal from '~/components/form/modal.vue'
+import SkillsCarousel from '~/components/skill/skills-carousel.vue'
+import BlogCard from '~/components/profile/profile-blog-card.vue'
+import ContactModal from '~/components/contact/contact-modal.vue'
 
 
 export default {
@@ -50,7 +50,7 @@ export default {
     Products,
     SkillsCarousel,
     BlogCard,
-    Modal
+    ContactModal
   },
   data() {
     return {
