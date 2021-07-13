@@ -10,9 +10,8 @@
         <v-list-item-avatar tile size="150" color="grey">
           <v-img src="images/profile.webp"></v-img>
         </v-list-item-avatar>
-        
       </v-list-item>
-       <TextAnimetion />
+      <TextAnimetion />
     </v-card>
   </v-container>
 </template>
@@ -30,7 +29,6 @@ export default {
 #profile {
   white-space: pre-line;
   font-size: 20px;
-  margin: 50px 20px;
 }
 
 h1 {
@@ -47,5 +45,4 @@ h1 {
 .nuxtLink {
   text-decoration: none;
 }
-
 </style>
