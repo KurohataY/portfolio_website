@@ -33,6 +33,9 @@ export default {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
+    }, {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
     }],
     script: [{
       src: 'https://sdk.form.run/js/v2/formrun.js'
@@ -45,9 +48,10 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [ 
-    { src: '~/plugins/micromodal.js', ssr: false },
-  ],
+  plugins: [{
+    src: '~/plugins/micromodal.js',
+    ssr: false
+  }, ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -82,9 +86,11 @@ export default {
   },
 
   build: {
-    babel:{
+    babel: {
       plugins: [
-        ['@babel/plugin-proposal-private-methods', { loose: true }]
+        ['@babel/plugin-proposal-private-methods', {
+          loose: true
+        }]
       ]
     }
   }
