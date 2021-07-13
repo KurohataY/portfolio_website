@@ -6,9 +6,9 @@
           <button
             type="button"
             data-micromodal-trigger="modal-1"
-            class="button"
+            class="button material-icons"
           >
-            お問い合わせ
+            help_outline
           </button>
         </div>
       </div>
@@ -39,9 +39,8 @@
   </div>
 </template>
 <script>
-import ContactForm from '~/components/contact/contact-form.vue'
+import ContactForm from "~/components/contact/contact-form.vue";
 export default {
-
   mounted() {
     this.init();
   },
@@ -55,20 +54,32 @@ export default {
         disableScroll: true,
         awaitOpenAnimation: true,
         awaitCloseAnimation: true,
+        onShow: (modal) => console.info(`${modal.id} is shown`), // [1]
+        onClose: (modal) => console.info(`${modal.id} is hidden`), // [2]
+        // openTrigger: 'data-custom-open', // [3]
+        // closeTrigger: 'data-custom-close', // [4]
+        // openClass: 'is-open', // [5]
+        disableFocus: false, // [7]
+        debugMode: true, // [10]
       });
     },
   },
 };
 </script>
 <style lang="scss" scoped>
+section.section {
+  position: fixed;
+  top: 85%;
+  left: 93%;
+  z-index: 5;
+}
 .button {
   width: 100%;
   height: 100%;
-  padding: 10px 16px;
-  background-color: #000;
-  color: #fff;
+  // padding: 10px 16px;
+  color: #000000;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 55px;
   transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
 }
 
@@ -89,19 +100,21 @@ export default {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
+  top: 20%;
   right: 0;
   bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.6);
+  left: 70%;
+  z-index: 5;
+  // background: rgba(0, 0, 0, 0.6);
 }
 
 .modal__container {
-  width: 80vw;
-  max-height: 100vh;
-  padding: 30px;
+  // max-height: 100vh;
+  // padding: 30px;
   background-color: #fff;
   overflow-y: auto;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .modal__header {
@@ -190,5 +203,15 @@ export default {
 .micromodal-slide .modal__container,
 .micromodal-slide .modal__overlay {
   will-change: transform;
+}
+
+@media screen and (max-width: 640px) {
+  section.section {
+    left: 80%;
+  }
+  .modal__overlay {
+    top: 30%;
+    left: 40%;
+  }
 }
 </style>
