@@ -17,6 +17,20 @@
                         <span>{{category.name}}</span>
                     </v-tooltip>
                 </li>
+                <li :class="{'animate': menuClick}">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                              <v-icon 
+                                  v-bind="attrs"
+                                  v-on="on"
+                                  @click="toggleMenu" 
+                                  class="material-icons icon_style">
+                                  close
+                              </v-icon>
+                        </template>
+                        <span>メニューを閉じる</span>
+                    </v-tooltip>
+                </li>
             </ul>
         </nav>
         <div class="nav-container" :class="{'nav-open': menuClick}"><div class="menu-icon" :class="{'open': menuClick}" v-on:click="toggleMenu"><span></span></div></div>  
@@ -51,6 +65,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+// 参考：https://codepen.io/markmurray/pen/yyNZpz
 @mixin longshadow($color) {
   text-shadow: makelongshadow($color);
 }
@@ -102,8 +117,27 @@ body {
 }
 
 .nav-container.nav-open {
-  margin-top: 8em;
+  margin-top: 5em;
+  opacity: 0;
   @include transition(all 0.3s ease);
+}
+
+@media screen and (max-width: 395px)  {
+    .nav-container.nav-open {
+        margin-top: 24em;
+    }
+}
+
+@media screen and (max-width: 520px) and (min-width: 396px) {
+    .nav-container.nav-open {
+        margin-top: 20em;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 521px) {
+    .nav-container.nav-open {
+        margin-top: 11em;
+    }
 }
 
 .menu-icon {
@@ -188,7 +222,7 @@ nav {
       margin: 1em 2em;
       cursor: pointer;
       position: relative;
-      top: -8em;
+      top: -24em;
       $speed: 0.3s;
       $icons: 3;
 
