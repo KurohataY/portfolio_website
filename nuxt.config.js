@@ -39,7 +39,7 @@ export default {
     }],
     script: [{
       src: 'https://sdk.form.run/js/v2/formrun.js'
-    }],
+    }, ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -51,7 +51,10 @@ export default {
   plugins: [{
     src: '~/plugins/micromodal.js',
     ssr: false
-  }, ],
+  }, {
+    src: '~/plugins/swiper.js',
+    ssr: false
+  }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -60,7 +63,15 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    "nuxt-microcms-module",
   ],
+  microcms: {
+    options: {
+      serviceDomain: "izanagiblog",
+      apiKey: process.env.MICRO_CMS_API_KEY,
+    },
+    mode: process.env.NODE_ENV === "production" ? "server" : "all",
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -82,7 +93,8 @@ export default {
   },
 
   env: {
-    FORM_RUN_URL: process.env.FORM_RUN_URL
+    FORM_RUN_URL: process.env.FORM_RUN_URL,
+    MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY
   },
 
   build: {
@@ -92,6 +104,9 @@ export default {
           loose: true
         }]
       ]
-    }
-  }
+    },
+    // vendor: [
+    //   'vue-awesome-swiper',
+    // ],
+  },
 }
