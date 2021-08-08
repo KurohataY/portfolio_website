@@ -35,7 +35,7 @@
     </div>
 </template>
 <script>
-import Navi from '~/components/blog/nav/navbar.vue'
+import Navi from '~/components/blog/ui/nav/navbar.vue'
 export default {
     components: {
         Navi,

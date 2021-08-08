@@ -13,6 +13,7 @@
     "@mdi/font": "^5.9.55",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "axios": "^0.21.1",
     "core-js": "^3.11.1",
     "lottie-web": "^5.7.8",
     "micromodal": "^0.4.6",
