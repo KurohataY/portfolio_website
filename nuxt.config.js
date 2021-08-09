@@ -126,6 +126,11 @@ export default {
       })
     },
   },
+  modules: [
+    '@nuxtjs/axios',
+  ],
+  axios: {
+  },
   generate: {
     async routes() {
       const limit = 10

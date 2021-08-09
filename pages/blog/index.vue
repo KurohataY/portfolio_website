@@ -34,13 +34,15 @@
         </v-col>
       </v-row>
     </v-container>
-    <Pagination :contents="contents" />
+    <Pagination :contents="contents" @pageNum="emitEvent" />
   </div>
 </template>
 <script>
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
 import Pagination from "~/components/blog/ui/pagination/pagination.vue";
+import axios from 'axios'
+
 export default {
   components: {
     Swiper,
@@ -51,18 +53,42 @@ export default {
     const page = "1";
     const limit = 10;
     const range = (start, end) =>
-        [...Array(end - start + 1)].map((_, i) => start + i)
+      [...Array(end - start + 1)].map((_, i) => start + i);
     const data = await $microcms.get({
       endpoint: `blog`,
       // queries: {limit: 1},
-      // contentId: 'sv_2wekudj',
     });
     return data;
   },
   data() {
-   
+    return {
+      pageNum: 1,
+    };
   },
   methods: {
+    emitEvent(pageNum) {
+      this.pageNum = pageNum;
+      console.log(this.pageNum);
+      this.getContentData();
+    },
+    async getContentData() {
+      const offset = this.pageNum * 10 - 9;
+      try {
+        const data = await this.$axios.$get(
+          `https://izanagiblog.microcms.io/api/v1/blog?offset=${offset}`,
+          {
+            headers: {
+              "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+            },
+          }
+        );
+        this.contents = data.contents
+        console.log(data);
+        return data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
 </script>
