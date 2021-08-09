@@ -22,8 +22,6 @@
           </v-list-item-content>
         </v-list-item>
       </a>
-
-
     </v-list>
   </v-navigation-drawer>
   <v-app-bar :clipped-left="clipped" fixed app>
@@ -62,7 +60,7 @@ export default {
       out_site_item: [{
           icon: 'mdi-post-outline',
           title: '開発ブログ',
-          url: 'https://izanagiblog.com/'
+          url: '/blog'
         },
         {
           icon: 'mdi-controller-classic',
