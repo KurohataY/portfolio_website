@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style media="screen">
+<style media="screen" scoped>
 .top_padding {
   padding-top: 20px;
 }
