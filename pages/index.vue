@@ -1,10 +1,5 @@
 <template>
-<div v-if="loading" width="100%" height="100%">
-  <article>
-    <Lottie :options='lottieOptions' :loading="loading"></Lottie>
-  </article>
-</div>
-<article v-else>
+<article>
   <Navi />
   <Top />
   <div class="under-water">
@@ -32,7 +27,6 @@
 
 <script>
 import Navi from '~/components/nav/navbar.vue'
-import Lottie from '~/components/animation/loading-lottie.vue'
 import Top from '~/components/profile/profile-top-image.vue'
 import Profile from '~/components/profile/profile-contents.vue'
 import Products from '~/components/product/product.vue'
@@ -44,7 +38,6 @@ import ContactModal from '~/components/contact/contact-modal.vue'
 export default {
   components: {
     Navi,
-    Lottie,
     Top,
     Profile,
     Products,
@@ -54,14 +47,11 @@ export default {
   },
   data() {
     return {
-      loading: true,
     }
   },
   asyncData() {
     return {
-      lottieOptions: {
-        animationData: require(`~/assets/animation/loadingAnimation.json`)
-      }
+      
     }
   },
 }
