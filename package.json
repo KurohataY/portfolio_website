@@ -1,13 +1,12 @@
 {
-  "name": "portfolio_web_spa",
+  "name": "portfolio-web-site",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
-    "heroku-postbuild": "yarn build"
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@mdi/font": "^5.9.55",
@@ -15,11 +14,10 @@
     "@nuxtjs/dotenv": "^1.4.1",
     "axios": "^0.21.1",
     "core-js": "^3.16.1",
-    "lottie-web": "^5.7.12",
     "micromodal": "^0.4.6",
     "nuxt": "^2.15.7",
-    "nuxt-microcms-module": "^1.0.1",
     "swiper": "6.8.1",
+    "vuetify": "^2.5.8",
     "vue-awesome-swiper": "^4.1.1"
   },
   "devDependencies": {

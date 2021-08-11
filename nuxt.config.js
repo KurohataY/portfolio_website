@@ -11,7 +11,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - portfolio_web_spa',
-    title: 'portfolio_web_spa',
+    title: 'portfolio-web-site',
     htmlAttrs: {
       lang: 'ja'
     },
@@ -25,8 +25,9 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: ''
-      }
+        content: 'Izanagiのポートフォリオサイトです。Nuxt＋Jamstackで構成されたサイトです。'
+      },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [{
       rel: 'stylesheet',
@@ -67,15 +68,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    "nuxt-microcms-module",
   ],
-  microcms: {
-    options: {
-      serviceDomain: process.env.MICRO_CMS_SERVICE_DOMAIN,
-      apiKey: process.env.MICRO_CMS_API_KEY,
-    },
-    mode: process.env.NODE_ENV === "production" ? "server" : "all",
-  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
