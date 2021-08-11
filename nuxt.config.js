@@ -116,7 +116,7 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         path: '/blog/:p',
-        component: resolve(__dirname, 'pages/blog/contents.vue'),
+        component: resolve(__dirname, 'pages/blog/post.vue'),
         name: 'contents',
       })
     },

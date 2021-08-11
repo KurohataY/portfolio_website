@@ -5,7 +5,7 @@
     <v-container>
       <v-row no-gutters>
         <v-col cols="12" sm="12" md="8" class="grey lighten-5">
-          <Content :title="title" :blogContent="blogContent" />
+          <Post :title="title" :blogContent="blogContent" />
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" sm="0" md="3">
@@ -18,7 +18,7 @@
 <script>
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
-import Content from "~/components/blog/ui/contents/content.vue";
+import Post from "~/components/blog/post/post.vue";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 import axios from "axios";
@@ -27,7 +27,7 @@ export default {
   components: {
     Swiper,
     Navi,
-    Content,
+    Post,
     SideMenu,
   },
   async asyncData({ $microcms, params }) {

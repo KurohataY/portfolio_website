@@ -17,7 +17,6 @@
       <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
     </v-container>
     <Pagination :paginationNums="paginationNums" @pageNum="emitEvent" />
-    <ContactModal />
   </div>
 </template>
 <script>
@@ -26,7 +25,6 @@ import Navi from "~/components/blog/ui/nav/navbar.vue";
 import Pagination from "~/components/blog/ui/pagination/pagination.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
-import ContactModal from '~/components/contact/contact-modal.vue'
 
 import axios from "axios";
 
@@ -37,7 +35,6 @@ export default {
     Pagination,
     ContentOrderListType,
     ContentOrderCardType,
-    ContactModal,
   },
   data() {
     return {
