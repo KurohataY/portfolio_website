@@ -2,89 +2,95 @@
   <div>
     <Navi />
     <div>
-      <Swiper :contents="contents" />
+      <Swiper :contents="orderpublishedAtContents" />
     </div>
-
-    <v-container class="grey lighten-5" fluid="true">
-      <v-row no-gutters>
-        <v-col cols="8" sm="12" md="8">
-          <v-card v-for="content in contents" :key="content.id">
-            <div
-              v-if="'thumbnail' in content"
-              class="d-flex flex-no-wrap justify-space-between"
-            >
-              <nuxt-link :to="'/blog/' + content.id">
-                <v-avatar class="ma-3" size="125" tile>
-                  <v-img :src="content.thumbnail.url"></v-img>
-                </v-avatar>
-                <div>
-                  <v-card-title class="text-h5" v-text="content.title">
-                  </v-card-title>
-                  <v-card-subtitle
-                    v-text="content.description"
-                  ></v-card-subtitle>
-                </div>
-              </nuxt-link>
-            </div>
-          </v-card>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="3" sm="0" md="3">
-          <v-card class="pa-2" outlined tile> サイドメニュー </v-card>
-        </v-col>
-      </v-row>
+    <v-container>
+      <v-btn-toggle class="d-flex justify-end mt-3 mb-5" v-model="toggleNone">
+        <v-btn>
+          <v-icon>mdi-format-list-text</v-icon>
+        </v-btn>
+        <v-btn>
+          <v-icon>mdi-card-text</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+      <ContentOrderListType :contents="contents" :orderpublishedAtContents="orderpublishedAtContents" v-if="toggleNone === 0" />
+      <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
     </v-container>
-    <Pagination :contents="contents" @pageNum="emitEvent" />
+    <Pagination :paginationNums="paginationNums" @pageNum="emitEvent" />
   </div>
 </template>
 <script>
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
 import Pagination from "~/components/blog/ui/pagination/pagination.vue";
-import axios from 'axios'
+import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
+import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
+import axios from "axios";
 
 export default {
   components: {
     Swiper,
     Navi,
     Pagination,
-  },
-  async asyncData({ $microcms }) {
-    const page = "1";
-    const limit = 10;
-    const range = (start, end) =>
-      [...Array(end - start + 1)].map((_, i) => start + i);
-    const data = await $microcms.get({
-      endpoint: `blog`,
-      // queries: {limit: 1},
-    });
-    return data;
+    ContentOrderListType,
+    ContentOrderCardType,
   },
   data() {
     return {
       pageNum: 1,
+      toggleNone: 0,
+      orderpublishedAtContents: [],
     };
+  },
+  async asyncData() {
+    const { data } = await axios.get(
+      `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`,
+      {
+        headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
+      }
+    );
+    return {
+      contents: data.contents,
+      paginationNums: [...Array((data.totalCount / 10) | 0)].map((_, i) => i),
+    };
+  },
+  mounted() {
+    this.getOrdersContentData("publishedAt");
+    console.log(this.orderpublishedAtContents);
   },
   methods: {
     emitEvent(pageNum) {
       this.pageNum = pageNum;
-      console.log(this.pageNum);
       this.getContentData();
     },
     async getContentData() {
       const offset = this.pageNum * 10 - 9;
       try {
-        const data = await this.$axios.$get(
-          `https://izanagiblog.microcms.io/api/v1/blog?offset=${offset}`,
+        const { data } = await axios.get(
+          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`,
           {
             headers: {
               "X-API-KEY": process.env.MICRO_CMS_API_KEY,
             },
           }
         );
-        this.contents = data.contents
-        console.log(data);
-        return data;
+        this.contents = data.contents;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getOrdersContentData(order) {
+      try {
+        const { data } = await axios.get(
+          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=${order}&limit=5`,
+          {
+            headers: {
+              "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+            },
+          }
+        );
+        this.orderpublishedAtContents = data.contents;
+        console.log(data.contents);
       } catch (err) {
         console.log(err);
       }

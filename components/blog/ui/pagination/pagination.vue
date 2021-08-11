@@ -3,8 +3,8 @@
     <span class="prev" @click="clickPrevNewsPage()">前へ</span>
     <ul>
       <li
-        v-for="(content, index) in contents"
-        :key="content.id"
+        v-for="(_ , index) in paginationNums"
+        :key="index"
         @click="clickNowPage(index)"
       >
         <div :class="{ selected: newsSection.nav.now === index }">
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  props: ["contents"],
+  props: ["paginationNums"],
   data() {
     return {
       newsSection: {

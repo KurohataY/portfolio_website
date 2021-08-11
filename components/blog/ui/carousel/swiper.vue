@@ -4,15 +4,17 @@
       <swiper-slide v-for="content in contents" :key="content.id">
         <!-- <v-img v-if="'thumbnail' in content" :src="content.thumbnail.url" width="250px" height="200px"></v-img> -->
         <v-card v-if="'thumbnail' in content">
-          <v-img
-            :src="content.thumbnail.url"
-            width="300px"
-            height="250px"
-            class="white--text align-end"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-          >
-            <v-card-title>{{ content.title }}</v-card-title>
-          </v-img>
+          <nuxt-link :to="'/blog/' + content.id">
+            <v-img
+              :src="content.thumbnail.url"
+              width="300px"
+              height="250px"
+              class="white--text align-end"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            >
+              <v-card-title>{{ content.title }}</v-card-title>
+            </v-img>
+          </nuxt-link>
         </v-card>
       </swiper-slide>
       <div slot="button-prev" class="swiper-button-prev" />

@@ -1,7 +1,5 @@
-const blogCount = 100
-const fs = require('fs')
-
 import colors from 'vuetify/es5/util/colors'
+import axios from 'axios'
 
 require('dotenv').config();
 
@@ -44,7 +42,6 @@ export default {
     script: [{
       src: 'https://sdk.form.run/js/v2/formrun.js'
     }, {
-
       src: 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=doxy'
     }],
   },
@@ -108,9 +105,7 @@ export default {
   build: {
     babel: {
       plugins: [
-        ['@babel/plugin-proposal-private-methods', {
-          loose: true
-        }]
+        ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
       ]
     },
     // vendor: [
@@ -129,26 +124,20 @@ export default {
   modules: [
     '@nuxtjs/axios',
   ],
-  axios: {
-  },
+  axios: {},
   generate: {
     async routes() {
-      const limit = 10
-      const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i)
-
-      // 一覧のページング
       const pages = await axios
-        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0`, {
-          headers: {
-            'X-API-KEY': process.env.MICRO_CMS_API_KEY
-          },
+        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=100`, {
+          headers: { 'X-API-KEY': process.env.MICRO_CMS_API_KEY }
         })
         .then((res) =>
-          range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
-            route: `/blog/contents/${p}`,
+          res.data.contents.map((content) => ({
+            route: `/blog/${content.id}`,
+            payload: content
           }))
         )
       return pages
-    },
+    }
   },
 }

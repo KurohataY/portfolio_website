@@ -13,13 +13,12 @@ export default {
     title: String,
     blogContent: Array,
   },
-  mounted() {
-    // https://github.com/google/code-prettify/issues/578
-    // これを行わないとうまく反映されない
-    const prettyPrint = require("code-prettify");
+
+  mounted: function () {
+     // https://github.com/google/code-prettify/issues/578
     this.$nextTick(function () {
-      prettyPrint.prettyPrint();
-    });
+      PR.prettyPrint()
+    })
   },
 };
 </script>
