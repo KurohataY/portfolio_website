@@ -1,7 +1,7 @@
 <template>
 <v-container>
   <div class="text-left display-1">
-    <h1>お問い合わせ</h1>
+    <h1 class="contact_header">お問い合わせ</h1>
   </div>
 
     
@@ -21,7 +21,7 @@
 </template>
 
 <style lang="scss">
-h1 {
+.contact_header {
   font-size: 20px;
   font-family: lust-script, sans-serif;
   font-style: normal;
