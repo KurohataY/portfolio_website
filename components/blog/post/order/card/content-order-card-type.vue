@@ -1,7 +1,7 @@
 <template lang="">
   <div>
     <v-card
-      class="d-flex flex-wrap"
+      class="d-flex flex-wrap justify-space-around"
       color="lighten-2"
       flat
       tile
