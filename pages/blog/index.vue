@@ -5,7 +5,7 @@
       <Swiper :contents="orderpublishedAtContents" />
     </div>
     <v-container>
-      <v-btn-toggle class="d-flex justify-end mt-3 mb-5" v-model="toggleNone">
+      <v-btn-toggle mandatory class="d-flex justify-end mt-3 mb-5" v-model="toggleNone">
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
         </v-btn>
