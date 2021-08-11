@@ -27,7 +27,10 @@ export default {
         name: 'description',
         content: 'Izanagiのポートフォリオサイトです。Nuxt＋Jamstackで構成されたサイトです。'
       },
-      { name: 'format-detection', content: 'telephone=no' }
+      {
+        name: 'format-detection',
+        content: 'telephone=no'
+      }
     ],
     link: [{
       rel: 'stylesheet',
@@ -98,7 +101,9 @@ export default {
   build: {
     babel: {
       plugins: [
-        ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
+        ["@babel/plugin-proposal-private-property-in-object", {
+          "loose": true
+        }]
       ]
     },
     // vendor: [
@@ -122,7 +127,9 @@ export default {
     async routes() {
       const pages = await axios
         .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=100`, {
-          headers: { 'X-API-KEY': process.env.MICRO_CMS_API_KEY }
+          headers: {
+            'X-API-KEY': process.env.MICRO_CMS_API_KEY
+          }
         })
         .then((res) =>
           res.data.contents.map((content) => ({

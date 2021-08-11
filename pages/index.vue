@@ -1,28 +1,28 @@
 <template>
-<article>
-  <Navi />
-  <Top />
-  <div class="under-water">
-    <v-container>
-      <Profile id="profile" />
-    </v-container>
-  </div>
-  <div class="top_padding">
-    <BlogCard />
-  </div>
+  <article>
+    <Navi />
+    <Top />
+    <div class="under-water">
+      <v-container>
+        <Profile id="profile" />
+      </v-container>
+    </div>
+    <div class="top_padding">
+      <BlogCard />
+    </div>
 
-  <div class="top_padding under-water">
-    <v-container>
-      <SkillsCarousel />
-    </v-container>
-  </div>
-  <div class="top_padding">
-    <v-container>
-      <Products id="product" />
-    </v-container>
-  </div>
-  <ContactModal />
-</article>
+    <div class="top_padding under-water">
+      <v-container>
+        <SkillsCarousel />
+      </v-container>
+    </div>
+    <div class="top_padding">
+      <v-container>
+        <Products id="product" />
+      </v-container>
+    </div>
+    <ContactModal />
+  </article>
 </template>
 
 <script>
@@ -34,7 +34,6 @@ import SkillsCarousel from '~/components/skill/skills-carousel.vue'
 import BlogCard from '~/components/profile/profile-blog-card.vue'
 import ContactModal from '~/components/contact/contact-modal.vue'
 
-
 export default {
   components: {
     Navi,
@@ -44,16 +43,7 @@ export default {
     SkillsCarousel,
     BlogCard,
     ContactModal
-  },
-  data() {
-    return {
-    }
-  },
-  asyncData() {
-    return {
-      
-    }
-  },
+  }
 }
 </script>
 

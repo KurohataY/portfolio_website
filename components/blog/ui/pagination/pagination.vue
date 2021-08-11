@@ -3,7 +3,7 @@
     <span class="prev" @click="clickPrevNewsPage()">前へ</span>
     <ul>
       <li
-        v-for="(_ , index) in paginationNums"
+        v-for="(_, index) in paginationNums"
         :key="index"
         @click="clickNowPage(index)"
       >
@@ -45,8 +45,8 @@ export default {
       this.sentNowPageNum();
     },
     clickNowPage(index) {
-        this.newsSection.nav.now = index
-        this.sentNowPageNum();
+      this.newsSection.nav.now = index;
+      this.sentNowPageNum();
     },
     sentNowPageNum() {
       this.$emit("pageNum", this.newsSection.nav.now + 1);

@@ -30,12 +30,12 @@
   </div>
 </template>
 <script>
-import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue"
+import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 export default {
-    props: ["contents", "orderpublishedAtContents"],
-    components: {
-      SideMenu,
-    },
+  props: ["contents", "orderpublishedAtContents"],
+  components: {
+    SideMenu,
+  },
 };
 </script>
 <style lang="">

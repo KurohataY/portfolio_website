@@ -1,14 +1,14 @@
 <template>
-<v-app>
-  <v-main>
-    <nuxt />
-    <ContactModal />
-  </v-main>
-  <v-footer :absolute="!fixed" app>
-    <span>&copy; {{ new Date().getFullYear() }}</span>
-  </v-footer>
-  
-</v-app>
+  <v-app>
+    <v-main>
+      <nuxt />
+      <ContactModal />
+    </v-main>
+    <v-footer :absolute="!fixed" app>
+      <span>&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+    
+  </v-app>
 </template>
 
 <script>

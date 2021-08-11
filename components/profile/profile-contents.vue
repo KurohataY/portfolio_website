@@ -4,7 +4,7 @@
       <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <h1>{{profile_title}}</h1>
+            <h1>{{ profile_title }}</h1>
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-avatar tile size="150" color="grey">

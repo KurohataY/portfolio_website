@@ -1,7 +1,6 @@
 <template lang="">
-    <div>
+  <div>
     <Navi />
-
     <v-container>
       <v-row no-gutters>
         <v-col cols="12" sm="12" md="8" class="grey lighten-5">
@@ -42,7 +41,7 @@ export default {
   data() {
     return {
       orderpublishedAtContents: [],
-    }
+    };
   },
   created() {
     this.getOrdersContentData();

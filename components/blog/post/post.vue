@@ -15,10 +15,10 @@ export default {
   },
 
   mounted: function () {
-     // https://github.com/google/code-prettify/issues/578
+    // https://github.com/google/code-prettify/issues/578
     this.$nextTick(function () {
-      PR.prettyPrint()
-    })
+      PR.prettyPrint();
+    });
   },
 };
 </script>

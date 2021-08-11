@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <div class="outer">
       <div id="error_box" class="inner">
         <h1 v-if="error.statusCode === 404">

@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div>
         <nav>
             <ul>
@@ -20,13 +20,14 @@
                 <li :class="{'animate': menuClick}">
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
-                              <v-icon 
-                                  v-bind="attrs"
-                                  v-on="on"
-                                  @click="toggleMenu" 
-                                  class="material-icons icon_style">
-                                  close
-                              </v-icon>
+                          <v-icon
+                            v-bind="attrs"
+                            v-on="on"
+                            @click="toggleMenu"
+                            class="material-icons icon_style"
+                          >
+                            close
+                          </v-icon>
                         </template>
                         <span>メニューを閉じる</span>
                     </v-tooltip>
@@ -122,22 +123,22 @@ body {
   @include transition(all 0.3s ease);
 }
 
-@media screen and (max-width: 395px)  {
-    .nav-container.nav-open {
-        margin-top: 24em;
-    }
+@media screen and (max-width: 395px) {
+  .nav-container.nav-open {
+    margin-top: 24em;
+  }
 }
 
 @media screen and (max-width: 520px) and (min-width: 396px) {
-    .nav-container.nav-open {
-        margin-top: 20em;
-    }
+  .nav-container.nav-open {
+    margin-top: 20em;
+  }
 }
 
 @media screen and (max-width: 900px) and (min-width: 521px) {
-    .nav-container.nav-open {
-        margin-top: 11em;
-    }
+  .nav-container.nav-open {
+    margin-top: 11em;
+  }
 }
 
 .menu-icon {
