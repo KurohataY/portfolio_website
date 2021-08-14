@@ -105,6 +105,7 @@ export default {
           id: data.attribs.id,
           name: data.name,
         }));
+        toc = toc.length !== 1 ? toc : [];
       }
       return toc;
     },

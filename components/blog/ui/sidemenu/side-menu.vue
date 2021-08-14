@@ -1,28 +1,47 @@
 <template lang="">
+<div>
   <v-card
     class="mx-auto"
     >
-    <v-list three-line>
-      <template v-for="(content, index) in orderContents">
-        <nuxt-link :to="'/blog/' + content.id">
-            <v-list-item>
-              <v-list-item-content>
-                  <v-list-item-title v-html="content.title"></v-list-item-title>
-                  <v-list-item-subtitle v-html="content.description"></v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-        </nuxt-link>
-        <v-divider
-          v-if="index !== 4"
-        ></v-divider>
-      </template>
-    </v-list>
-  </v-card>
+      <v-list three-line>
+        <template v-for="(content, index) in orderContents">
+          <nuxt-link :to="'/blog/' + content.id">
+              <v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title v-html="content.title"></v-list-item-title>
+                    <v-list-item-subtitle v-html="content.description"></v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+          </nuxt-link>
+          <v-divider
+            v-if="index !== 4"
+          ></v-divider>
+        </template>
+      </v-list>
+    </v-card>
+    <div v-html="a8[0].html.pc" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"></div>
+    <div v-html="a8[0].html.sp" v-else></div>
+  </div>
+  
 </template>
 <script>
+import a8 from "~/assets/affiliate/a8.json";
 export default {
   props: ["content", "orderContents"],
+  data() {
+    return {
+      a8: a8,
+    };
+  },
 };
 </script>
-<style lang="">
+<style lang="scss">
+img {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
+}
 </style>
