@@ -93,7 +93,7 @@ export default {
       var body = "";
       var toc;
       const contentList = this.content.blogContent;
-      const contentListCount = contentList != [] ?  0 : contentList.length;
+      const contentListCount = contentList != [] ?  contentList.length : 0;
       if (contentListCount !== 0) {
         for (let i = 0; i < contentListCount; i++) {
           body = body + contentList[i].content;
