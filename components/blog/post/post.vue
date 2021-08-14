@@ -9,7 +9,7 @@
         </n-link>
         </li>
       </ul>
-      <div v-for="(bc, index) in blogContent" :key="index">
+      <div v-for="(bc, index) in blogContent" :key="index + bc.fieldId">
           <div v-html="bc.content"></div>
           <div v-html="bc.html"> </div>
       </div>

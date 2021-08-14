@@ -3,8 +3,8 @@
     <nav>
       <ul>
         <li
-          v-for="(category, index) in categorys"
-          :key="index"
+          v-for="category in categorys"
+          :key="category.id"
           :class="{ animate: menuClick }"
         >
           <v-tooltip bottom>

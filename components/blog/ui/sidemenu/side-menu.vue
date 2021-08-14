@@ -5,7 +5,7 @@
     >
       <v-list three-line>
         <template v-for="(content, index) in orderContents">
-          <nuxt-link :to="'/blog/' + content.id" :key="index">
+          <nuxt-link :to="'/blog/' + content.id" :key="index + content.id">
               <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title v-html="content.title"></v-list-item-title>
@@ -15,7 +15,7 @@
           </nuxt-link>
           <v-divider
             v-if="index !== 4"
-            :key="index"
+            :key="content.id"
           ></v-divider>
         </template>
       </v-list>
@@ -48,9 +48,9 @@ export default {
 img {
   width: -webkit-fill-available;
   width: -moz-available;
-  width: fill-available;
+  width: stretch;
   height: -webkit-fill-available;
   height: -moz-available;
-  height: fill-available;
+  height: stretch;
 }
 </style>

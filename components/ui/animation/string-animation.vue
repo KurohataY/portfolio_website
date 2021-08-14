@@ -2,7 +2,7 @@
   <div class="TextAnime1">
     <span
       v-for="(t, index) in text"
-      :key="index"
+      :key=t
       class="item mb-5"
       :style="{animationDelay: index*50+'ms'}"
       v-text="t"
