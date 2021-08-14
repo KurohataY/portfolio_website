@@ -12,11 +12,17 @@
       outlined
       tile
       v-for="content in contents" :key="content.id"
-      v-if="'thumbnail' in content"
     >
       <nuxt-link color="orange lighten-2" :to="'/blog/' + content.id">
         <v-img
           :src="content.thumbnail.url"
+          v-if="'thumbnail' in content"
+          class="white--text align-end"
+          height="150px"
+          max-width="344px"
+          ></v-img>
+        <v-img v-else 
+          :src="noImageUrl"
           class="white--text align-end"
           height="150px"
           max-width="344px"
@@ -33,6 +39,7 @@ export default {
   props: ["contents"],
   data: () => ({
     show: false,
+    noImageUrl: process.env.NO_IMAGE_URL,
   }),
 };
 </script>
