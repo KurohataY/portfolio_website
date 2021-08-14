@@ -9,7 +9,10 @@
         >
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <nuxt-link :to="{ path: category.link }">
+              <nuxt-link
+                :to="category.link"
+                @click.native="sentCategory(category.categoryQueryValue)"
+              >
                 <v-icon
                   v-bind="attrs"
                   v-on="on"
@@ -60,19 +63,32 @@ export default {
         {
           name: "プログラミング",
           iconName: "code",
-          link: "/blog?category=programming",
+          link: "/blog?category=プログラミング",
+          categoryQueryValue: "プログラミング",
         },
-        { name: "IT", iconName: "computer", link: "/blog?category=it" },
+        {
+          name: "IT",
+          iconName: "computer",
+          link: "/blog?category=IT",
+          categoryQueryValue: "IT",
+        },
         {
           name: "日記",
           iconName: "auto_stories",
-          link: "/blog?category=daily",
+          link: "/blog?category=日記",
+          categoryQueryValue: "日記",
         },
-        { name: "サイトマップ", iconName: "view_list", link: "/blog/site-map" },
+        {
+          name: "サイトマップ",
+          iconName: "view_list",
+          link: "/blog/site-map",
+          categoryQueryValue: undefined,
+        },
         {
           name: "プライバシーポリシー",
           iconName: "policy",
           link: "/blog/privacy-policy",
+          categoryQueryValue: undefined,
         },
       ],
     };
@@ -81,6 +97,12 @@ export default {
     toggleMenu() {
       this.menuClick = !this.menuClick;
     },
+    sentCategory(categoryValue) {
+      this.$emit("categoryValue", categoryValue);
+    },
+    // sentContents() {
+    //   this.$emit("contents", this.newsSection.nav.now + 1);
+    // },
   },
 };
 </script>
