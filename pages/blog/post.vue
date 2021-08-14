@@ -3,12 +3,12 @@
     <Navi />
     <v-container>
       <v-row no-gutters>
-        <v-col cols="auto" sm="12" md="8" lg="8" class="">
-          <Post :title="title" :blogContent="content.blogContent" />
+        <v-col cols="12" sm="12" md="8" lg="8">
+          <Post :title="title" :blogContent="content.blogContent" :toc="toc" />
         </v-col>
         <v-spacer></v-spacer>
-        <v-col cols="4" sm="0" md="3">
-         <SideMenu :orderContents="orderpublishedAtContents" />
+        <v-col cols="4" sm="0" md-auto="3">
+          <SideMenu :orderContents="orderpublishedAtContents" />
         </v-col>
       </v-row>
     </v-container>
@@ -22,6 +22,7 @@ import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 import axios from "axios";
 import Meta from '~/assets/mixin/headMeta'
+import cheerio from "cheerio";
 
 export default {
   mixins: [Meta],
@@ -57,10 +58,12 @@ export default {
         type: "article",
         site_name: "Izanagi's Develop Blog",
       },
+      toc: [],
     };
   },
   created() {
     this.getOrdersContentData();
+    this.toc = this.tableOfContents();
   },
   methods: {
     createElementFromHTML(html) {
@@ -83,6 +86,20 @@ export default {
         console.log(err);
       }
     },
+    tableOfContents() {
+      var body = "";
+      for (let i = 0; i < this.content.blogContent.length; i++) {
+        body = body + this.content.blogContent[i].content;
+      }
+      const $ = cheerio.load(body);
+      const headings = $("h1, h2, h3").toArray();
+      const toc = headings.map((data) => ({
+        text: data.children[0].data,
+        id: data.attribs.id,
+        name: data.name,
+      }));
+      return toc;
+    },
   },
 };
 </script>
@@ -91,5 +108,8 @@ export default {
   display: contents;
   text-decoration: none;
   color: black;
+}
+.container {
+  max-width: 90%;
 }
 </style>
