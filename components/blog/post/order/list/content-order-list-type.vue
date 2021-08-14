@@ -3,12 +3,12 @@
     <v-col cols="8" sm="12" md="8" style="margin-bottom: 50px;">
       <v-card v-for="content in contents" :key="content.id">
         <div
-          v-if="'thumbnail' in content"
           class="d-flex flex-no-wrap "
         >
           <nuxt-link :to="'/blog/' + content.id">
             <v-avatar class="ma-3" size="125" tile>
-              <v-img :src="content.thumbnail.url"></v-img>
+              <v-img v-if="'thumbnail' in content" :src="content.thumbnail.url"></v-img>
+              <v-img v-else :src="noImageUrl"></v-img>
             </v-avatar>
             <div>
               <v-card-title class="text-h5" v-text="content.title">
@@ -33,6 +33,11 @@ export default {
   props: ["contents", "orderpublishedAtContents"],
   components: {
     SideMenu,
+  },
+  data() {
+    return {
+      noImageUrl: process.env.NO_IMAGE_URL,
+    };
   },
 };
 </script>
