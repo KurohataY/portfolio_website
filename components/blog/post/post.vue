@@ -8,7 +8,13 @@
           open-all
           shaped
           :items="toc"
-        ></v-treeview>
+        >
+        <template v-slot:label="{ item }"> 
+          <n-link style="margin-right: 1em;text-decoration: none; color: black;" v-scroll-to="`#${item.id}`" to>
+            {{ item.name }}
+          </n-link>
+        </template>
+        </v-treeview>
       </div>
       <!-- <ul class="toc_lists">
         <li :class="`list ${toc.name}`" v-for="toc in toc" :key="toc.id">
@@ -34,9 +40,9 @@ export default {
     // https://github.com/google/code-prettify/issues/578
     this.$nextTick(function () {
       PR.prettyPrint();
-      var pre = document.getElementsByTagName('pre');
-      for (let i=0;i<pre.length;i++) {
-        pre[i].style.overflow = 'auto';
+      var pre = document.getElementsByTagName("pre");
+      for (let i = 0; i < pre.length; i++) {
+        pre[i].style.overflow = "auto";
         pre[i].style.whiteSpace = "normal";
       }
     });
@@ -54,7 +60,7 @@ img {
   text-decoration: none;
   color: black;
 }
-.prettyprint{
+.prettyprint {
   overflow: auto;
   white-space: nomal !important;
 }
