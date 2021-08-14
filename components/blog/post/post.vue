@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div class="pa-4">
         <h1>{{title}}</h1>
         <div v-for="(bc, index) in blogContent" :key="index">
             <div v-html="bc.content"></div>

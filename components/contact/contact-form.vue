@@ -8,7 +8,7 @@
       ref="form"
       v-model="valid"
       class="formrun"
-      action="https://form.run/api/v1/r/c7wiuizwka3nctwy0bilygcg"
+      :action="formRunUrl"
       method="post"
       @submit="validate"
       lazy-validation
@@ -72,6 +72,7 @@ export default {
     ],
     text: "",
     select: null,
+    formRunUrl: "https://form.run/api/v1/r/" + process.env.FORM_RUN_URL
   }),
 
   methods: {

@@ -20,6 +20,8 @@
   </div>
 </template>
 <script>
+import Meta from '~/assets/mixin/headMeta'
+
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
 import Pagination from "~/components/blog/ui/pagination/pagination.vue";
@@ -29,6 +31,7 @@ import ContentOrderCardType from "~/components/blog/post/order/card/content-orde
 import axios from "axios";
 
 export default {
+  mixins: [Meta],
   components: {
     Swiper,
     Navi,
@@ -41,6 +44,13 @@ export default {
       pageNum: 1,
       toggleNone: 0,
       orderpublishedAtContents: [],
+      meta: {
+        title: "Izanagi's Develop Blog",
+        description:
+          "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
+        type: "website",
+        site_name: "Izanagi' Home Page",
+      },
     };
   },
   async asyncData() {

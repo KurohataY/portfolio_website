@@ -3,8 +3,8 @@
     <Navi />
     <v-container>
       <v-row no-gutters>
-        <v-col cols="12" sm="12" md="8" class="grey lighten-5">
-          <Post :title="title" :blogContent="blogContent" />
+        <v-col cols="auto" sm="12" md="8" lg="8" class="">
+          <Post :title="title" :blogContent="content.blogContent" />
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" sm="0" md="3">
@@ -21,26 +21,42 @@ import Post from "~/components/blog/post/post.vue";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 import axios from "axios";
+import Meta from '~/assets/mixin/headMeta'
 
 export default {
+  mixins: [Meta],
   components: {
     Swiper,
     Navi,
     Post,
     SideMenu,
   },
-  async asyncData({ $microcms, params }) {
+  async asyncData({ params }) {
     const { data } = await axios.get(
       `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog/${params.p}`,
       {
         headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
       }
     );
-    return data;
+    return {
+      title: data.title,
+      content: data
+    };
+  },
+  head() {
+    return {
+      title: this.title
+    }
   },
   data() {
     return {
       orderpublishedAtContents: [],
+      meta: {
+        description:
+          "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
+        type: "article",
+        site_name: "Izanagi's Develop Blog",
+      },
     };
   },
   created() {
@@ -63,7 +79,6 @@ export default {
           }
         );
         this.orderpublishedAtContents = data.contents;
-        console.log(data.contents);
       } catch (err) {
         console.log(err);
       }
@@ -76,8 +91,5 @@ export default {
   display: contents;
   text-decoration: none;
   color: black;
-}
-.container {
-  max-width: 90%;
 }
 </style>

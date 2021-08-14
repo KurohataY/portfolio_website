@@ -1,41 +1,54 @@
 <template>
-    <div>
-        <nav>
-            <ul>
-                <li v-for="(category, index) in categorys" :key="index" :class="{'animate': menuClick}">
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                            <nuxt-link :to="{path: category.link}">
-                                <v-icon 
-                                    v-bind="attrs"
-                                    v-on="on" 
-                                    class="material-icons icon_style">
-                                    {{category.iconName}}
-                                </v-icon>
-                            </nuxt-link>
-                        </template>
-                        <span>{{category.name}}</span>
-                    </v-tooltip>
-                </li>
-                <li :class="{'animate': menuClick}">
-                    <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-icon
-                            v-bind="attrs"
-                            v-on="on"
-                            @click="toggleMenu"
-                            class="material-icons icon_style"
-                          >
-                            close
-                          </v-icon>
-                        </template>
-                        <span>メニューを閉じる</span>
-                    </v-tooltip>
-                </li>
-            </ul>
-        </nav>
-        <div class="nav-container" :class="{'nav-open': menuClick}"><div class="menu-icon" :class="{'open': menuClick}" v-on:click="toggleMenu"><span></span></div></div>  
+  <div>
+    <nav>
+      <ul>
+        <li
+          v-for="(category, index) in categorys"
+          :key="index"
+          :class="{ animate: menuClick }"
+        >
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <nuxt-link :to="{ path: category.link }">
+                <v-icon
+                  v-bind="attrs"
+                  v-on="on"
+                  class="material-icons icon_style"
+                >
+                  {{ category.iconName }}
+                </v-icon>
+              </nuxt-link>
+            </template>
+            <span>{{ category.name }}</span>
+          </v-tooltip>
+        </li>
+        <li :class="{ animate: menuClick }">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon
+                v-bind="attrs"
+                v-on="on"
+                @click="toggleMenu"
+                class="material-icons icon_style"
+              >
+                close
+              </v-icon>
+            </template>
+            <span>メニューを閉じる</span>
+          </v-tooltip>
+        </li>
+      </ul>
+    </nav>
+    <div class="nav-container" :class="{ 'nav-open': menuClick }">
+      <div
+        class="menu-icon"
+        :class="{ open: menuClick }"
+        v-on:click="toggleMenu"
+      >
+        <span></span>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 export default {
@@ -107,7 +120,6 @@ body {
 }
 
 .nav-container {
-  background: #eff0f1;
   width: 100%;
   height: 100%;
   margin: 0 auto;
