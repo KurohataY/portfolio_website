@@ -103,6 +103,8 @@ export default {
   }, {
     src: '~/plugins/swiper.js',
     ssr: false
+  }, {
+    src: '~plugins/vue-scrollto'
   }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

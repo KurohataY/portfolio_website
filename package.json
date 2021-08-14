@@ -19,6 +19,7 @@
     "nuxt": "^2.15.7",
     "swiper": "6.8.1",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-scrollto": "^2.20.0",
     "vuetify": "^2.5.8"
   },
   "devDependencies": {
