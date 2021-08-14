@@ -160,14 +160,34 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         path: '/blog/:p',
-        component: resolve(__dirname, 'pages/blog/post.vue'),
+        component: resolve(__dirname, 'pages/blog/slug/_post.vue'),
         name: 'contents',
       })
     },
   },
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/sitemap',
   ],
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: process.env.HOMEPAGE_ROOT_URL,
+    routes(callback) {
+      axios
+        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
+          headers: {
+            'X-API-KEY': process.env.MICRO_CMS_API_KEY
+          }
+        })
+        .then((res) => {
+          const routes = res.data.contents.map((content) => {
+            return `/blog/${content.id}`
+          })
+          callback(null, routes)
+        })
+        .catch(callback)
+    }
+  },
   axios: {},
   generate: {
     async routes() {
