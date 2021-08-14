@@ -137,7 +137,7 @@ export default {
 .v-application a {
   display: contents;
   text-decoration: none;
-  color: black;
+  color: black !important;
 }
 .container {
   max-width: 90%;
