@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <v-row no-gutters>
     <v-col cols="8" sm="12" md="8" style="margin-bottom: 50px;">
       <v-card v-for="content in contents" :key="content.id">

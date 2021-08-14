@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div class="entry-content cf" itemprop="mainEntityOfPage">
         <Navi />
         <div id="toc" class="toc tnt-number toc-center tnt-number border-element">

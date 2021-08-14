@@ -69,7 +69,6 @@ export default {
   },
   async asyncData({ query }) {
     const category = query.category;
-    console.log(query);
     const url = category !== undefined ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}` : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
     const { data } = await axios.get(
       encodeURI(

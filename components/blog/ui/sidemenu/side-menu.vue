@@ -1,11 +1,11 @@
-<template lang="">
+<template>
 <div>
   <v-card
     class="mx-auto"
     >
       <v-list three-line>
         <template v-for="(content, index) in orderContents">
-          <nuxt-link :to="'/blog/' + content.id">
+          <nuxt-link :to="'/blog/' + content.id" :key="index">
               <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title v-html="content.title"></v-list-item-title>
@@ -15,6 +15,7 @@
           </nuxt-link>
           <v-divider
             v-if="index !== 4"
+            :key="index"
           ></v-divider>
         </template>
       </v-list>
