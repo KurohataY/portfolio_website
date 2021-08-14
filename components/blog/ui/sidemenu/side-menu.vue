@@ -1,18 +1,15 @@
 <template lang="">
-    <v-card
-    max-width="450"
+  <v-card
     class="mx-auto"
-  >
-
+    >
     <v-list three-line>
       <template v-for="(content, index) in orderContents">
-
         <nuxt-link :to="'/blog/' + content.id">
             <v-list-item>
-            <v-list-item-content>
-                <v-list-item-title v-html="content.title"></v-list-item-title>
-                <v-list-item-subtitle v-html="content.description"></v-list-item-subtitle>
-            </v-list-item-content>
+              <v-list-item-content>
+                  <v-list-item-title v-html="content.title"></v-list-item-title>
+                  <v-list-item-subtitle v-html="content.description"></v-list-item-subtitle>
+              </v-list-item-content>
             </v-list-item>
         </nuxt-link>
         <v-divider
