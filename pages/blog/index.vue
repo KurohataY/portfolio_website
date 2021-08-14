@@ -67,7 +67,6 @@ export default {
   },
   mounted() {
     this.getOrdersContentData("publishedAt");
-    console.log(this.orderpublishedAtContents);
   },
   methods: {
     emitEvent(pageNum) {
