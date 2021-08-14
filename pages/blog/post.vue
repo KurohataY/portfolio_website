@@ -2,12 +2,15 @@
   <div>
     <Navi />
     <v-container>
-      <v-row no-gutters>
+      <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
           <Post :title="title" :blogContent="content.blogContent" :toc="toc" />
         </v-col>
         <v-spacer></v-spacer>
-        <v-col cols="4" sm="0" md-auto="3">
+        <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
+          <SideMenu :orderContents="orderpublishedAtContents" />
+        </v-col>
+        <v-col cols="10" v-else>
           <SideMenu :orderContents="orderpublishedAtContents" />
         </v-col>
       </v-row>
