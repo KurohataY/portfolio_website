@@ -246,7 +246,6 @@ body {
 nav {
   position: fixed;
   top: 0;
-  //   left: 20%;
   color: black;
   z-index: 1;
   width: 100%;
