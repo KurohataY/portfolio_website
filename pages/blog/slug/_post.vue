@@ -4,7 +4,7 @@
     <v-container>
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
-          <Post :title="title" :blogContent="content.blogContent" :toc="toc" />
+          <Post :title="title" :blogContent="content.blogContent" :toc="items" />
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
@@ -24,7 +24,7 @@ import Post from "~/components/blog/post/post.vue";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 import axios from "axios";
-import Meta from '~/assets/mixin/headMeta'
+import Meta from "~/assets/mixin/headMeta";
 import cheerio from "cheerio";
 
 export default {
@@ -44,13 +44,13 @@ export default {
     );
     return {
       title: data.title,
-      content: data
+      content: data,
     };
   },
   head() {
     return {
-      title: this.title
-    }
+      title: this.title,
+    };
   },
   data() {
     return {
@@ -62,6 +62,7 @@ export default {
         site_name: "Izanagi's Develop Blog",
       },
       toc: [],
+      items: [],
     };
   },
   created() {
@@ -93,20 +94,46 @@ export default {
       var body = "";
       var toc;
       const contentList = this.content.blogContent;
-      const contentListCount = contentList !== null ?  contentList.length : 0;
+      const contentListCount = contentList !== null ? contentList.length : 0;
       if (contentListCount !== 0) {
         for (let i = 0; i < contentListCount; i++) {
           body = body + contentList[i].content;
         }
         const $ = cheerio.load(body);
-        const headings = $("h1, h2, h3").toArray();
-         toc = headings.map((data) => ({
+        const headings = $("h2, h3").toArray();
+
+        toc = headings.map((data) => ({
           text: data.children[0].data,
           id: data.attribs.id,
           name: data.name,
         }));
         toc = toc.length !== 1 ? toc : [];
+
+        var flag = 0;
+        var flag2 = 0;
+        var result = [];
+        toc.forEach(function (t, i) {
+          var item = {
+            id: "",
+            name: "",
+            children: [],
+          };
+
+          if (t.name === "h2") {
+            item.id = t.id;
+            item.name = t.text;
+            flag++;
+            result.push(item);
+          } else if (t.name === "h3") {
+            item.id = t.id;
+            item.name = t.text;
+            result[flag - 1].children[flag2] = item;
+            flag2 += 1;
+          }
+        });
+        console.log(result);
       }
+      this.items = result;
       return toc;
     },
   },

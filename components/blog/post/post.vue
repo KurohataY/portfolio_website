@@ -2,13 +2,21 @@
 
    <v-container class="pa-4 post">
       <h1>{{title}}</h1>
-      <ul class="toc_lists">
+      <div style="margin: 50px 0; border: solid; background-color: #f4f4f4;padding: 10px">
+        <h2>目次</h2>
+        <v-treeview
+          open-all
+          shaped
+          :items="toc"
+        ></v-treeview>
+      </div>
+      <!-- <ul class="toc_lists">
         <li :class="`list ${toc.name}`" v-for="toc in toc" :key="toc.id">
         <n-link v-scroll-to="`#${toc.id}`" to>
           {{ toc.text }}
         </n-link>
         </li>
-      </ul>
+      </ul> -->
       <div v-for="(bc, index) in blogContent" :key="index + bc.fieldId">
           <div v-html="bc.content"></div>
           <div v-html="bc.html"> </div>
