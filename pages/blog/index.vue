@@ -16,7 +16,8 @@
       <ContentOrderListType :contents="contents" :orderpublishedAtContents="orderpublishedAtContents" v-if="toggleNone === 0" />
       <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
     </v-container>
-    <Pagination :paginationNums="paginationNums" @pageNum="emitEvent" />
+    <!-- <Pagination :paginationNums="paginationNums" @pageNum="emitEvent" /> -->
+    <PaginationVuetify :paginationNum="paginationNum" @pageNum="emitEvent" />
   </div>
 </template>
 <script>
@@ -25,6 +26,7 @@ import Meta from '~/assets/mixin/headMeta'
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
 import Pagination from "~/components/blog/ui/pagination/pagination.vue";
+import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
 
@@ -38,6 +40,7 @@ export default {
     Pagination,
     ContentOrderListType,
     ContentOrderCardType,
+    PaginationVuetify,
   },
   data() {
     return {
@@ -63,6 +66,7 @@ export default {
     return {
       contents: data.contents,
       paginationNums: [...Array((data.totalCount / 10) | 0)].map((_, i) => i),
+      paginationNum: (data.totalCount / 10) | 0,
     };
   },
   mounted() {
