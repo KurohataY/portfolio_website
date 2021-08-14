@@ -88,16 +88,21 @@ export default {
     },
     tableOfContents() {
       var body = "";
-      for (let i = 0; i < this.content.blogContent.length; i++) {
-        body = body + this.content.blogContent[i].content;
+      var toc;
+      const contentList = this.content.blogContent;
+      const contentListCount = contentList != [] ?  0 : contentList.length;
+      if (contentListCount !== 0) {
+        for (let i = 0; i < contentListCount; i++) {
+          body = body + contentList[i].content;
+        }
+        const $ = cheerio.load(body);
+        const headings = $("h1, h2, h3").toArray();
+         toc = headings.map((data) => ({
+          text: data.children[0].data,
+          id: data.attribs.id,
+          name: data.name,
+        }));
       }
-      const $ = cheerio.load(body);
-      const headings = $("h1, h2, h3").toArray();
-      const toc = headings.map((data) => ({
-        text: data.children[0].data,
-        id: data.attribs.id,
-        name: data.name,
-      }));
       return toc;
     },
   },
