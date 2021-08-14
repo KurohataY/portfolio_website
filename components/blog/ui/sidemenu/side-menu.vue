@@ -19,8 +19,8 @@
         </template>
       </v-list>
     </v-card>
-    <div v-html="a8[0].html.pc" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"></div>
-    <div v-html="a8[0].html.sp" v-else></div>
+    <div v-html="a8[getRandomInt(countJsonData(a8))].html.pc" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"></div>
+    <div v-html="a8[getRandomInt(countJsonData(a8))].html.sp" v-else></div>
   </div>
   
 </template>
@@ -32,6 +32,14 @@ export default {
     return {
       a8: a8,
     };
+  },
+  methods: {
+     getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    },
+    countJsonData(json) {
+      return json.length;
+    }
   },
 };
 </script>
