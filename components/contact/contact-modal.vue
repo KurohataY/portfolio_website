@@ -45,9 +45,11 @@ export default {
   mounted() {
     this.init();
   },
-  data: () => ({
-    modalButtonShow: true,
-  }),
+  data() {
+    return {
+      modalButtonShow: true,
+    };
+  },
   component: {
     ContactForm,
   },

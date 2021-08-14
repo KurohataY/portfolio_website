@@ -52,25 +52,31 @@
 </template>
 <script>
 export default {
-  data: () => ({
-    menuClick: false,
-    categorys: [
-      { name: "トップ", iconName: "home", link: "/blog" },
-      {
-        name: "プログラミング",
-        iconName: "code",
-        link: "/blog?category=programming",
-      },
-      { name: "IT", iconName: "computer", link: "/blog?category=it" },
-      { name: "日記", iconName: "auto_stories", link: "/blog?category=daily" },
-      { name: "サイトマップ", iconName: "view_list", link: "/blog/site-map" },
-      {
-        name: "プライバシーポリシー",
-        iconName: "policy",
-        link: "/blog/privacy-policy",
-      },
-    ],
-  }),
+  data() {
+    return {
+      menuClick: false,
+      categorys: [
+        { name: "トップ", iconName: "home", link: "/blog" },
+        {
+          name: "プログラミング",
+          iconName: "code",
+          link: "/blog?category=programming",
+        },
+        { name: "IT", iconName: "computer", link: "/blog?category=it" },
+        {
+          name: "日記",
+          iconName: "auto_stories",
+          link: "/blog?category=daily",
+        },
+        { name: "サイトマップ", iconName: "view_list", link: "/blog/site-map" },
+        {
+          name: "プライバシーポリシー",
+          iconName: "policy",
+          link: "/blog/privacy-policy",
+        },
+      ],
+    };
+  },
   methods: {
     toggleMenu() {
       this.menuClick = !this.menuClick;

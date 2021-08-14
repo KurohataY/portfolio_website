@@ -40,9 +40,6 @@ export default {
     components: {
         Navi,
     },
-    data: () => ({
-
-    }),
 };
 </script>
 <style lang="">

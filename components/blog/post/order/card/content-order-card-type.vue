@@ -37,10 +37,12 @@
 <script>
 export default {
   props: ["contents"],
-  data: () => ({
-    show: false,
-    noImageUrl: process.env.NO_IMAGE_URL,
-  }),
+  data() {
+    return {
+      show: false,
+      noImageUrl: process.env.NO_IMAGE_URL,
+    }
+  },
 };
 </script>
 <style lang="scss">
