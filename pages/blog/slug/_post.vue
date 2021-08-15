@@ -4,7 +4,7 @@
     <v-container>
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
-          <Post :title="title" :blogContent="content.blogContent" :toc="items" />
+          <Post :title="title" :blogContent="content.blogContent" :tocList="items" />
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">

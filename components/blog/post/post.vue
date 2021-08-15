@@ -1,28 +1,10 @@
-<template lang="">
-
+<template>
    <v-container class="pa-4 post">
       <h1>{{title}}</h1>
       <div style="margin: 50px 0; border: solid; background-color: #f4f4f4;padding: 10px">
-        <h2>目次</h2>
-        <v-treeview
-          open-all
-          shaped
-          :items="toc"
-        >
-        <template v-slot:label="{ item }"> 
-          <n-link style="margin-right: 1em;text-decoration: none; color: black;" v-scroll-to="`#${item.id}`" to>
-            {{ item.name }}
-          </n-link>
-        </template>
-        </v-treeview>
+          <h2>目次</h2>
+          <Toc :tocList="tocList" />
       </div>
-      <!-- <ul class="toc_lists">
-        <li :class="`list ${toc.name}`" v-for="toc in toc" :key="toc.id">
-        <n-link v-scroll-to="`#${toc.id}`" to>
-          {{ toc.text }}
-        </n-link>
-        </li>
-      </ul> -->
       <div v-for="(bc, index) in blogContent" :key="index + bc.fieldId">
           <div v-html="bc.content"></div>
           <div v-html="bc.html"> </div>
@@ -30,11 +12,15 @@
     </v-container>
 </template>
 <script>
+import Toc from "~/components/blog/ui/toc/toc.vue";
 export default {
   props: {
     title: String,
     blogContent: Array,
-    toc: Array,
+    tocList: Array,
+  },
+  components: {
+    Toc,
   },
   mounted: function () {
     // https://github.com/google/code-prettify/issues/578
