@@ -29,7 +29,7 @@ export default {
       var pre = document.getElementsByTagName("pre");
       for (let i = 0; i < pre.length; i++) {
         pre[i].style.overflow = "auto";
-        pre[i].style.whiteSpace = "normal";
+        // pre[i].style.whiteSpace = "normal";
       }
     });
   },

@@ -9,6 +9,7 @@
         mandatory
         class="d-flex justify-end mt-3 mb-5"
         v-model="toggleNone"
+        v-if="$vuetify.breakpoint.mdAndUp"
       >
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
@@ -20,9 +21,10 @@
       <ContentOrderListType
         :contents="contents"
         :orderpublishedAtContents="orderpublishedAtContents"
-        v-if="toggleNone === 0"
+        v-if="toggleNone === 0 && $vuetify.breakpoint.mdAndUp"
       />
-      <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
+      
+      <ContentOrderCardType :contents="contents" v-if="toggleNone === 1 || $vuetify.breakpoint.smAndDown" />
     </v-container>
     <!-- <Pagination :paginationNums="paginationNums" @pageNum="emitPaginationEvent" /> -->
     <PaginationVuetify

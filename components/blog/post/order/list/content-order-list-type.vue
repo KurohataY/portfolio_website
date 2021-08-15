@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters>
-    <v-col cols="8" sm="12" md="8" style="margin-bottom: 50px;">
+    <v-col cols="12" xs="12" sm="12" md="8" lg="8" xl="8" style="margin-bottom: 50px;">
       <v-card v-for="content in contents" :key="content.id">
         <div
           class="d-flex flex-no-wrap "
@@ -22,7 +22,7 @@
       </v-card>
     </v-col>
     <v-spacer></v-spacer>  
-    <v-col cols="3" sm="12" md="3">
+    <v-col cols="12" xs="12" sm="12" md="3" lg="3" xl="3">
       <SideMenu :orderContents="orderpublishedAtContents" />
     </v-col>
   </v-row>
