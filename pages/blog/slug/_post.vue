@@ -131,7 +131,6 @@ export default {
             flag2 += 1;
           }
         });
-        console.log(result);
       }
       this.items = result;
       return toc;
