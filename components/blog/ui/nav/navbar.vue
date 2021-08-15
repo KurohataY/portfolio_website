@@ -59,7 +59,13 @@ export default {
     return {
       menuClick: false,
       categories: [
-        { name: "トップ", iconName: "home", link: "/blog" },
+        {
+          name: "トップページ",
+          iconName: "home",
+          link: "/",
+          categoryQueryValue: undefined,
+        },
+        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
         {
           name: "プログラミング",
           iconName: "code",
@@ -77,12 +83,6 @@ export default {
           iconName: "auto_stories",
           link: "/blog?category=日記",
           categoryQueryValue: "日記",
-        },
-        {
-          name: "サイトマップ",
-          iconName: "view_list",
-          link: "/blog/site-map",
-          categoryQueryValue: undefined,
         },
         {
           name: "プライバシーポリシー",
@@ -265,10 +265,10 @@ nav {
       top: -24em;
       $speed: 0.3s;
       $icons: 3;
-       
-       a{
-         display: block;
-       }
+
+      a {
+        display: block;
+      }
 
       &:nth-child(1) {
         @include transition(top $speed ease 0.15s);
