@@ -3,8 +3,8 @@
     <nav>
       <ul>
         <li
-          v-for="category in categorys"
-          :key="category.id"
+          v-for="category in categories"
+          :key="category.iconName"
           :class="{ animate: menuClick }"
         >
           <v-tooltip bottom>
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       menuClick: false,
-      categorys: [
+      categories: [
         { name: "トップ", iconName: "home", link: "/blog" },
         {
           name: "プログラミング",
@@ -265,6 +265,10 @@ nav {
       top: -24em;
       $speed: 0.3s;
       $icons: 3;
+       
+       a{
+         display: block;
+       }
 
       &:nth-child(1) {
         @include transition(top $speed ease 0.15s);
