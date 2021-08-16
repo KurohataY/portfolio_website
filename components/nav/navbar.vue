@@ -7,27 +7,29 @@
       fixed
       app
     >
-      <v-list>
-        <div v-for="(item, i) in items" :key="`first-${i}`">
-          <v-list-item :to="item.to" router exact>
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
-            </v-list-item-content>
-          </v-list-item>
-        </div>
+      <v-list nav dense>
+        <template v-for="(item, i) in items">
+          <nuxt-link :to="item.to" :key="`first-${i}`">
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title" />
+              </v-list-item-content>
+            </v-list-item>
+          </nuxt-link>
+        </template>
         <a
           v-for="(item, i) in out_site_item"
           :key="`second-${i}`"
           :href="item.url"
           style="text-decoration: none"
         >
-          <v-list-item router exact>
-            <v-list-item-action>
+          <v-list-item nuxt>
+            <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
+            </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
