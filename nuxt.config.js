@@ -6,7 +6,6 @@ require('dotenv').config();
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   target: 'static',
-  mode: 'universal',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -192,7 +191,6 @@ export default {
   },
   'google-gtag': {
     id: process.env.GOOGLE_ANALYTICS_ID,
-    debug: true, // Enable to track in dev mode.
   },
   axios: {},
   generate: {

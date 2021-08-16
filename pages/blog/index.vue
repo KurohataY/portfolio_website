@@ -2,14 +2,13 @@
   <div>
     <Navi @categoryValue="emitGetCategoryEvent" />
     <div>
-      <Swiper :contents="orderpublishedAtContents" />
+      <Swiper :contents="order" />
     </div>
     <v-container>
       <v-btn-toggle
         mandatory
         class="d-flex justify-end mt-3 mb-5"
         v-model="toggleNone"
-        v-if="$vuetify.breakpoint.mdAndUp"
       >
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
@@ -20,11 +19,11 @@
       </v-btn-toggle>
       <ContentOrderListType
         :contents="contents"
-        :orderpublishedAtContents="orderpublishedAtContents"
-        v-if="toggleNone === 0 && $vuetify.breakpoint.mdAndUp"
+        :order="order"
+        v-if="toggleNone === 0"
       />
       
-      <ContentOrderCardType :contents="contents" v-if="toggleNone === 1 || $vuetify.breakpoint.smAndDown" />
+      <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
     </v-container>
     <!-- <Pagination :paginationNums="paginationNums" @pageNum="emitPaginationEvent" /> -->
     <PaginationVuetify
@@ -59,7 +58,7 @@ export default {
     return {
       pageNum: 1,
       toggleNone: 0,
-      orderpublishedAtContents: [],
+      order: [],
       meta: {
         title: "Izanagi's Develop Blog",
         description:
@@ -80,6 +79,7 @@ export default {
         headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
       }
     );
+    
     return {
       contents: data.contents,
       paginationNums: [...Array((data.totalCount / 10) | 0)].map((_, i) => i),
@@ -127,7 +127,7 @@ export default {
             },
           }
         );
-        this.orderpublishedAtContents = data.contents;
+        this.order = data.contents;
       } catch (err) {
         console.log(err);
       }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav>
+    <nav :class="{ 'nav-z-index-change': !menuClick }">
       <ul>
         <li
           v-for="category in categories"
@@ -156,6 +156,9 @@ body {
   padding: 1em;
   position: relative;
 }
+.nav-z-index-change {
+  z-index: 0;
+}
 
 .nav-container.nav-open {
   margin-top: 5em;
@@ -247,7 +250,7 @@ nav {
   position: fixed;
   top: 0;
   color: black;
-  z-index: 1;
+  z-index: 5;
   width: 100%;
   text-align: center;
 

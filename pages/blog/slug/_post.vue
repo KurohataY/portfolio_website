@@ -8,10 +8,10 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
-          <SideMenu :orderContents="orderpublishedAtContents" />
+          <SideMenu :order="orderpublishedAtContents" />
         </v-col>
         <v-col cols="10" v-else>
-          <SideMenu :orderContents="orderpublishedAtContents" />
+          <SideMenu :order="orderpublishedAtContents" />
         </v-col>
       </v-row>
     </v-container>
