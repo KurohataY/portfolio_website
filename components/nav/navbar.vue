@@ -65,11 +65,6 @@ export default {
           title: "制作物",
           to: "#product",
         },
-        {
-          icon: "mdi-file-question",
-          title: "お問い合わせ",
-          to: "#form",
-        },
       ],
       out_site_item: [
         {
