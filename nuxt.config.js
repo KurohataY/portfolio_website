@@ -1,30 +1,76 @@
 import colors from 'vuetify/es5/util/colors'
+import axios from 'axios'
 
 require('dotenv').config();
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+  target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - portfolio_web_spa',
-    title: 'portfolio_web_spa',
+    titleTemplate: '%s - Izanagi Home Page',
+    title: 'Izanagi Home Page',
     htmlAttrs: {
-      lang: 'ja'
+      lang: 'ja',
+      prefix: 'og: http://ogp.me/ns#'
     },
     meta: [{
         charset: 'utf-8'
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0'
       },
       {
         hid: 'description',
         name: 'description',
-        content: ''
-      }
+        content: 'Izanagiのポートフォリオサイトです。Nuxt＋Jamstackで構成されたサイトです。'
+      },
+      {
+        name: 'format-detection',
+        content: 'telephone=no'
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'Izanagi Home Page'
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: 'Izanagiのポートフォリオサイトです。Nuxt＋Jamstackで構成されたサイトです。'
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: process.env.HOMEPAGE_ROOT_URL
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: '/favicon.ico'
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'Izanagi Home Page'
+      },
+      {
+        hid: 'twitter:card',
+        property: 'twitter:card',
+        content: 'summary'
+      },
+      {
+        hid: 'twitter:site',
+        property: 'twitter:site',
+        content: process.env.TWITTER_MY_USER_ID
+      },
     ],
     link: [{
       rel: 'stylesheet',
@@ -39,6 +85,8 @@ export default {
     }],
     script: [{
       src: 'https://sdk.form.run/js/v2/formrun.js'
+    }, {
+      src: 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=doxy'
     }],
   },
 
@@ -51,7 +99,12 @@ export default {
   plugins: [{
     src: '~/plugins/micromodal.js',
     ssr: false
-  }, ],
+  }, {
+    src: '~/plugins/swiper.js',
+    ssr: false
+  }, {
+    src: '~plugins/vue-scrollto',
+  }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -82,16 +135,79 @@ export default {
   },
 
   env: {
-    FORM_RUN_URL: process.env.FORM_RUN_URL
+    FORM_RUN_URL: process.env.FORM_RUN_URL,
+    MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
+    MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
+    TWITTER_MY_USER_ID: process.env.TWITTER_MY_USER_ID,
+    HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
+    NO_IMAGE_URL: process.env.NO_IMAGE_URL,
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
   },
 
   build: {
     babel: {
       plugins: [
-        ['@babel/plugin-proposal-private-methods', {
-          loose: true
+        ["@babel/plugin-proposal-private-property-in-object", {
+          "loose": true
         }]
       ]
+    },
+    // vendor: [
+    //   'vue-awesome-swiper',
+    // ],
+  },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/blog/:p',
+        component: resolve(__dirname, 'pages/blog/slug/_post.vue'),
+        name: 'contents',
+      })
+    },
+  },
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/google-gtag',
+  ],
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: process.env.HOMEPAGE_ROOT_URL,
+    routes(callback) {
+      axios
+        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
+          headers: {
+            'X-API-KEY': process.env.MICRO_CMS_API_KEY
+          }
+        })
+        .then((res) => {
+          const routes = res.data.contents.map((content) => {
+            return `/blog/${content.id}`
+          })
+          callback(null, routes)
+        })
+        .catch(callback)
     }
-  }
+  },
+  'google-gtag': {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+  },
+  axios: {},
+  generate: {
+    async routes() {
+      const pages = await axios
+        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
+          headers: {
+            'X-API-KEY': process.env.MICRO_CMS_API_KEY
+          }
+        })
+        .then((res) =>
+          res.data.contents.map((content) => ({
+            route: `/blog/${content.id}`,
+            payload: content
+          }))
+        )
+      return pages
+    }
+  },
 }

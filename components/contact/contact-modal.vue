@@ -7,6 +7,7 @@
             type="button"
             data-micromodal-trigger="modal-1"
             class="button material-icons"
+            v-show="modalButtonShow"
           >
             help_outline
           </button>
@@ -44,6 +45,11 @@ export default {
   mounted() {
     this.init();
   },
+  data() {
+    return {
+      modalButtonShow: true,
+    };
+  },
   component: {
     ContactForm,
   },
@@ -54,8 +60,14 @@ export default {
         disableScroll: true,
         awaitOpenAnimation: true,
         awaitCloseAnimation: true,
-        onShow: (modal) => console.info(`${modal.id} is shown`), // [1]
-        onClose: (modal) => console.info(`${modal.id} is hidden`), // [2]
+        onShow: (modal) => {
+          console.info(`${modal.id} is shown`);
+          this.modalButtonShow = false;
+        }, // [1]
+        onClose: (modal) => {
+          console.info(`${modal.id} is hidden`);
+          this.modalButtonShow = true;
+        }, // [2]
         // openTrigger: 'data-custom-open', // [3]
         // closeTrigger: 'data-custom-close', // [4]
         // openClass: 'is-open', // [5]
