@@ -25,7 +25,6 @@
       
       <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
     </v-container>
-    <!-- <Pagination :paginationNums="paginationNums" @pageNum="emitPaginationEvent" /> -->
     <PaginationVuetify
       :paginationNum="paginationNum"
       @pageNum="emitPaginationEvent"
@@ -33,11 +32,8 @@
   </div>
 </template>
 <script>
-import Meta from "~/assets/mixin/headMeta";
-
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
-import Pagination from "~/components/blog/ui/pagination/pagination.vue";
 import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
@@ -45,11 +41,9 @@ import ContentOrderCardType from "~/components/blog/post/order/card/content-orde
 import axios from "axios";
 
 export default {
-  mixins: [Meta],
   components: {
     Swiper,
     Navi,
-    Pagination,
     ContentOrderListType,
     ContentOrderCardType,
     PaginationVuetify,
@@ -59,14 +53,58 @@ export default {
       pageNum: 1,
       toggleNone: 0,
       order: [],
-      meta: {
-        title: "Izanagi's Develop Blog",
-        description:
-          "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
-        type: "website",
-        site_name: "Izanagi' Home Page",
-      },
     };
+  },
+  head() {
+    return {
+      title: "Izanagi's Develop Blog",
+      meta: [{
+          hid: 'description',
+          name: 'description',
+          content: "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。"
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content:  "article",
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。"
+        },
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content: process.env.HOMEPAGE_ROOT_URL + '/blog/'
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。"
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: "/favicon.ico"
+        },
+        {
+          hid: 'og:site_name',
+          property: 'og:site_name',
+          content: "Izanagi's Develop Blog"
+        },
+        {
+          hid: 'twitter:card',
+          property: 'twitter:card',
+          content: "summary"
+        },
+        {
+          hid: 'twitter:site',
+          property: 'twitter:site',
+          content: process.env.TWITTER_MY_USER_ID
+        },
+      ],
+    }
   },
   async asyncData({ query }) {
     const category = query.category;

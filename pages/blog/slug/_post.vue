@@ -4,7 +4,11 @@
     <v-container>
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
-          <Post :title="title" :blogContent="content.blogContent" :tocList="items" />
+          <Post
+            :title="title"
+            :blogContent="content.blogContent"
+            :tocList="items"
+          />
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
@@ -24,11 +28,9 @@ import Post from "~/components/blog/post/post.vue";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 import axios from "axios";
-import Meta from "~/assets/mixin/headMeta";
 import cheerio from "cheerio";
 
 export default {
-  mixins: [Meta],
   components: {
     Swiper,
     Navi,
@@ -42,25 +44,99 @@ export default {
         headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
       }
     );
+
+    var description = "";
+    var thumbnailUrl = "";
+    const $ = cheerio.load;
+    if (
+      "description" in data
+    ) {
+      description = data.description;
+    } else if (
+      typeof data.blogContent !== "undefined" &&
+      data.blogContent !== null &&
+      typeof data.blogContent[0] !== "undefined" &&
+      !("content" in data.blogContent)
+    ) {
+      description =
+        $(data.blogContent[0].content).text().substr(0, 100) + "...";
+    } else if (data.contents !== undefined) {
+      description = $(data.contents).text().substr(0, 100) + "...";
+    } else {
+      description = "No create description...";
+    }
+
+    if (
+      "thumbnail" in data &&
+      "url" in data.thumbnail
+    ) {
+      thumbnailUrl = data.thumbnail.url
+    } else {
+      thumbnailUrl = process.env.NO_IMAGE_URL;
+    }
+
     return {
       title: data.title,
       content: data,
+      description: description,
+      thumbnailUrl: thumbnailUrl,
     };
   },
   head() {
     return {
       title: this.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.description,
+        },
+        {
+          hid: "og:type",
+          property: "og:type",
+          content: "article",
+        },
+        {
+          hid: "og:title",
+          property: "og:title",
+          content: this.title,
+        },
+        {
+          hid: "og:url",
+          property: "og:url",
+          content: process.env.HOMEPAGE_ROOT_URL + "/blog/" + this.content.id,
+        },
+        {
+          hid: "og:description",
+          property: "og:description",
+          content: this.description,
+        },
+        {
+          hid: "og:image",
+          property: "og:image",
+          content: this.thumbnailUrl,
+        },
+        {
+          hid: "og:site_name",
+          property: "og:site_name",
+          content: "Izanagi's Develop Blog",
+        },
+        {
+          hid: "twitter:card",
+          property: "twitter:card",
+          content: "summary",
+        },
+        {
+          hid: "twitter:site",
+          property: "twitter:site",
+          content: process.env.TWITTER_MY_USER_ID,
+        },
+      ],
     };
   },
   data() {
     return {
       orderpublishedAtContents: [],
-      meta: {
-        description:
-          "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
-        type: "article",
-        site_name: "Izanagi's Develop Blog",
-      },
       toc: [],
       items: [],
     };
@@ -99,6 +175,7 @@ export default {
         for (let i = 0; i < contentListCount; i++) {
           body = body + contentList[i].content;
         }
+        // const $ = cheerio.load(body);
         const $ = cheerio.load(body);
         const headings = $("h2, h3").toArray();
 
