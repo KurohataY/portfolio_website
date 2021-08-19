@@ -2,15 +2,13 @@
   <div>
     <Navi @categoryValue="emitGetCategoryEvent" />
 
-    <div>
-      <v-parallax src="images/profile_bg.webp" height="500" class="mask">
-        <v-row align="center" justify="center">
-          <v-col class="text-center" cols="12">
-            <h1>Izanagi's Develop Blog</h1>
-          </v-col>
-        </v-row>
-      </v-parallax>
-    </div>
+    <v-parallax src="images/profile_bg.webp" height="500" class="mask">
+      <v-row align="center" justify="center">
+        <v-col class="text-center" cols="12">
+          <h1>Izanagi's Develop Blog</h1>
+        </v-col>
+      </v-row>
+    </v-parallax>
     <div>
       <Swiper :contents="order" />
     </div>

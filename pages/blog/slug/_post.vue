@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navi />
+    <Navi :menuClick="menuClick" />
     <v-container>
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
@@ -48,9 +48,7 @@ export default {
     var description = "";
     var thumbnailUrl = "";
     const $ = cheerio.load;
-    if (
-      "description" in data
-    ) {
+    if ("description" in data) {
       description = data.description;
     } else if (
       typeof data.blogContent !== "undefined" &&
@@ -66,11 +64,8 @@ export default {
       description = "No create description...";
     }
 
-    if (
-      "thumbnail" in data &&
-      "url" in data.thumbnail
-    ) {
-      thumbnailUrl = data.thumbnail.url
+    if ("thumbnail" in data && "url" in data.thumbnail) {
+      thumbnailUrl = data.thumbnail.url;
     } else {
       thumbnailUrl = process.env.NO_IMAGE_URL;
     }

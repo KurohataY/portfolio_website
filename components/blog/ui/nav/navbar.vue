@@ -149,19 +149,19 @@ body {
 
 .nav-container {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   margin: 0 auto;
   @include transition(all 0.3s ease 0.6s);
   z-index: 10;
   padding: 1em;
-  position: absolute;
+  position: fixed;
+  opacity: 0.4;
 }
 .nav-z-index-change {
-  z-index: 0;
+  z-index:0;
 }
 
 .nav-container.nav-open {
-  margin-top: 5em;
   opacity: 0;
   @include transition(all 0.3s ease);
 }
@@ -185,11 +185,12 @@ body {
 }
 
 .menu-icon {
-  position: relative;
+  position: fixed;
   display: block;
   width: 2.5em;
   height: 2.5em;
   cursor: pointer;
+  top: 20px;
 
   &:hover span {
     background: #222;
@@ -250,7 +251,7 @@ nav {
   position: fixed;
   top: 0;
   color: black;
-  z-index: 20;
+  z-index: 11;
   width: 100%;
   text-align: center;
 
