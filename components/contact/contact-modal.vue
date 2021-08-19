@@ -9,7 +9,7 @@
             class="button material-icons"
             v-show="modalButtonShow"
           >
-            help_outline
+            <v-icon>help_outline</v-icon>
           </button>
         </div>
       </div>
@@ -86,19 +86,21 @@ section.section {
   z-index: 5;
 }
 .button {
-  width: 100%;
-  height: 100%;
-  // padding: 10px 16px;
-  color: #000000;
-  font-weight: 700;
-  font-size: 55px;
-  transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-}
-
-.button:hover,
-.button:focus {
-  background: transparent;
-  color: #000;
+  i {
+    width: 100%;
+    height: 100%;
+    // padding: 10px 16px;
+    color: #000000;
+    font-weight: 700;
+    font-size: 55px;
+    transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    font-size: 55px;
+  }
+  &:hover,
+  &:focus {
+    background: transparent;
+    color: #000;
+  }
 }
 
 /* Modal */

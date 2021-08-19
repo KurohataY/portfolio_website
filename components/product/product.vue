@@ -45,10 +45,10 @@ export default {
         target: "_blank",
       },
       {
-        image: "images/product/kanko.webp",
-        title: "地方観光サイト",
-        subtitle: "個人で開発した、勝手に地元を紹介するサイト（開発中）",
-        url: "https://kesennuma-oshima-sightseeing.herokuapp.com/",
+        image: "images/product/developBlog.webp",
+        title: "開発ブログ（Nuxt＋JamStack「MicroCMS」）",
+        subtitle: "WordPressから当サイトに移行中の開発ブログです。",
+        url: "/blog",
         target: "_blank",
       },
       {

@@ -2,3 +2,82 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+.blockquote-info {
+  position: relative;
+  background: #bef5f7;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 1px 3px 5px #777;
+
+  &:before {
+    position: absolute;
+    left: 45%;
+    top: -24px;
+    background-color: #ffffff;
+    color: #808080;
+    border: 2px solid #bef5f7;
+    box-sizing: border-box;
+    font-family: "Material Icons";
+    content: "format_quote";
+    text-align: center;
+    width: 48px;
+    height: 48px;
+    font-size: 30px;
+    border-radius: 50%;
+    padding-right: 7px;
+  }
+
+  p {
+    color: #555;
+    text-align: center;
+    font-style: italic;
+  }
+
+  cite {
+    display: block;
+    border-top: 1px solid #808080;
+    padding-top: 10px;
+    font-size: 0.8rem;
+    text-align: center;
+    font-style: italic;
+    color: #777;
+  }
+}
+
+.blockquote-default {
+  position: relative;
+  padding: 30px 15px 8px 15px;
+  box-sizing: border-box;
+  font-style: italic;
+  background: #efefef;
+  color: #555;
+  border-radius: 5px;
+  border-left: 3px solid #40c4ff;;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10);
+
+  &:before {
+    display: inline-block;
+    position: absolute;
+    top: 13px;
+    left: 15px;
+    font-family: "Material Icons";
+    content: "format_quote";
+    color: #40c4ff;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  p {
+    padding: 0;
+    margin: 10px 0;
+    line-height: 1.7;
+  }
+
+  cite {
+    display: block;
+    text-align: right;
+    color: #888888;
+    font-size: 0.9em;
+  }
+}

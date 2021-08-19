@@ -19,7 +19,7 @@
       </v-btn-toggle>
       <ContentOrderListType
         :contents="contents"
-        :order="order"
+        :order="sidemenuOrder"
         v-if="toggleNone === 0"
       />
       
@@ -32,11 +32,17 @@
   </div>
 </template>
 <script>
+// const Swiper = () => import('~/components/blog/ui/carousel/swiper.vue');
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import Navi from "~/components/blog/ui/nav/navbar.vue";
 import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
+
+// const Navi = () => import('~/components/blog/ui/nav/navbar.vue');
+// const PaginationVuetify = () => import('~/components/blog/ui/pagination/pagination-from-vuetify.vue');
+// const ContentOrderListType = () => import('~/components/blog/post/order/list/content-order-list-type.vue');
+// const ContentOrderCardType = () => import('~/components/blog/post/order/card/content-order-card-type.vue');
 
 import axios from "axios";
 
@@ -53,6 +59,7 @@ export default {
       pageNum: 1,
       toggleNone: 0,
       order: [],
+      sidemenuOrder: [],
     };
   },
   head() {
@@ -158,7 +165,7 @@ export default {
     async getOrdersContentData(order) {
       try {
         const { data } = await axios.get(
-          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=${order}&limit=5`,
+          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=${order}&limit=100`,
           {
             headers: {
               "X-API-KEY": process.env.MICRO_CMS_API_KEY,
@@ -166,6 +173,7 @@ export default {
           }
         );
         this.order = data.contents;
+        this.sidemenuOrder = data.contents.splice(0, 5);
       } catch (err) {
         console.log(err);
       }

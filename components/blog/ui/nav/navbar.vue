@@ -80,7 +80,7 @@ export default {
         },
         {
           name: "日記",
-          iconName: "auto_stories",
+          iconName: "menu_book",
           link: "/blog?category=日記",
           categoryQueryValue: "日記",
         },

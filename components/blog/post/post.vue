@@ -1,7 +1,7 @@
 <template>
    <v-container class="pa-4 post">
       <h1>{{title}}</h1>
-      <div style="margin: 50px 0; border: solid; background-color: #f4f4f4;padding: 10px">
+      <div style="margin: 50px 0;padding: 10px">
           <h2>目次</h2>
           <Toc :tocList="tocList" />
       </div>
@@ -22,6 +22,9 @@ export default {
   components: {
     Toc,
   },
+  create() {
+
+  },
   mounted: function () {
     // https://github.com/google/code-prettify/issues/578
     this.$nextTick(function () {
@@ -29,8 +32,7 @@ export default {
       var pre = document.getElementsByTagName("pre");
       for (let i = 0; i < pre.length; i++) {
         pre[i].style.overflow = "auto";
-        // pre[i].style.whiteSpace = "normal";
-      }
+      };
     });
   },
 };
@@ -50,4 +52,5 @@ img {
   overflow: auto;
   white-space: nomal !important;
 }
+
 </style>

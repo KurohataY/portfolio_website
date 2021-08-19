@@ -12,7 +12,7 @@
           <nuxt-link :to="item.to" :key="`first-${i}`">
             <v-list-item>
               <v-list-item-action>
-                <v-icon>{{ item.icon }}</v-icon>
+                <i class="material-icons">{{ item.icon }}</i>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title v-text="item.title" />
@@ -51,29 +51,29 @@ export default {
       drawer: false,
       items: [
         {
-          icon: "mdi-home-account",
+          icon: "home",
           title: "ホーム",
           to: "/",
         },
         {
-          icon: "mdi-clipboard-file-outline",
+          icon: "account_circle",
           title: "プロフィール",
           to: "#profile",
         },
         {
-          icon: "mdi-electron-framework",
+          icon: "web",
           title: "制作物",
           to: "#product",
         },
       ],
       out_site_item: [
         {
-          icon: "mdi-post-outline",
+          icon: "code",
           title: "開発ブログ",
           url: "/blog",
         },
         {
-          icon: "mdi-controller-classic",
+          icon: "sports_esports",
           title: "趣味ブログ",
           url: "https://izanagi-craft.com/",
         },
