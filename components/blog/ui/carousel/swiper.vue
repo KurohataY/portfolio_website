@@ -1,22 +1,18 @@
 <template>
   <client-only>
     <swiper :options="swiperOption">
-      <swiper-slide v-for="content in contents" :key="content.id">
-        <!-- <v-img v-if="'thumbnail' in content" :src="content.thumbnail.url" width="250px" height="200px"></v-img> -->
-        <v-card v-if="'thumbnail' in content">
-          <nuxt-link :to="'/blog/' + content.id">
-            <v-img
-              :src="content.thumbnail.url"
-              width="100%"
-              height="250px"
-              class="white--text align-end"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            >
-              <v-card-title>{{ content.title }}</v-card-title>
-            </v-img>
-          </nuxt-link>
-        </v-card>
-      </swiper-slide>
+      <template v-for="content in contents">
+        <swiper-slide :key="content.id" v-if="'thumbnail' in content">
+          <!-- <v-img v-if="'thumbnail' in content" :src="content.thumbnail.url" width="250px" height="200px"></v-img> -->
+
+            <nuxt-link :to="'/blog/' + content.id">
+              <img :src="content.thumbnail.url" />
+              <p>{{ content.title }}</p>
+            </nuxt-link>
+
+        </swiper-slide>
+      </template>
+
       <div slot="button-prev" class="swiper-button-prev" />
       <div slot="button-next" class="swiper-button-next" />
     </swiper>
@@ -41,14 +37,14 @@ export default {
             slidesPerView: 1,
           },
         },
-        speed: 1000, //スライドの切り替わりスピード
+        speed: 1500, //スライドの切り替わりスピード
         // spaceBetween: 30, //各スライドの余白
         centeredSlides: true, //スライダーを真ん中に
         loop: true, //無限ループ
 
         autoplay: {
           //スライドの自動切り替え
-          delay: 2500, //スライドの自動切り替えの秒数
+          delay: 1000, //スライドの自動切り替えの秒数
           disableOnInteraction: false, //何らかのアクション後の自動切り替えを再開
         },
         navigation: {
@@ -58,8 +54,54 @@ export default {
         },
         lazy: true,
         preloadImages: false,
+        // on: {
+        //   slideChange: function () {
+        //     if (this.activeIndex === 0) {
+        //       this.lazy.loadInSlide(this.slides.length - 4);
+        //     }
+        //   },
+        // },
+        initialSlide: 5,
+        preloadImages: false,
+        lazy: {
+          loadPrevNext: true,
+        },
+        updateOnImagesReady: true,
       },
     };
   },
 };
 </script>
+
+<style lang="scss" scoped>
+img {
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+
+p{
+  position: absolute;
+  color: white;
+  top: 75%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(80, 194, 247, 0.5);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 600px) {
+   p{
+     top: 85%;
+     -webkit-line-clamp: 1;
+   }
+
+}
+
+// class="white--text align-end"
+</style>
