@@ -1,6 +1,16 @@
 <template>
   <div>
     <Navi @categoryValue="emitGetCategoryEvent" />
+
+    <div>
+      <v-parallax src="images/profile_bg.webp" height="500" class="mask">
+        <v-row align="center" justify="center">
+          <v-col class="text-center" cols="12">
+            <h1>Izanagi's Develop Blog</h1>
+          </v-col>
+        </v-row>
+      </v-parallax>
+    </div>
     <div>
       <Swiper :contents="order" />
     </div>
@@ -22,7 +32,7 @@
         :order="sidemenuOrder"
         v-if="toggleNone === 0"
       />
-      
+
       <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
     </v-container>
     <PaginationVuetify
@@ -65,70 +75,72 @@ export default {
   head() {
     return {
       title: "Izanagi's Develop Blog",
-      meta: [{
-          hid: 'description',
-          name: 'description',
-          content: "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。"
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
         },
         {
-          hid: 'og:type',
-          property: 'og:type',
-          content:  "article",
+          hid: "og:type",
+          property: "og:type",
+          content: "article",
         },
         {
-          hid: 'og:title',
-          property: 'og:title',
-          content: "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。"
+          hid: "og:title",
+          property: "og:title",
+          content:
+            "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
         },
         {
-          hid: 'og:url',
-          property: 'og:url',
-          content: process.env.HOMEPAGE_ROOT_URL + '/blog/'
+          hid: "og:url",
+          property: "og:url",
+          content: process.env.HOMEPAGE_ROOT_URL + "/blog/",
         },
         {
-          hid: 'og:description',
-          property: 'og:description',
-          content: "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。"
+          hid: "og:description",
+          property: "og:description",
+          content:
+            "こちら温泉、ラーメンが大好きなIzanagiのブログページです。Nuxt＋JamStackで構成しています。開発中に気になったことなどをメモしていくブログになります。",
         },
         {
-          hid: 'og:image',
-          property: 'og:image',
-          content: "/favicon.ico"
+          hid: "og:image",
+          property: "og:image",
+          content: "/favicon.ico",
         },
         {
-          hid: 'og:site_name',
-          property: 'og:site_name',
-          content: "Izanagi's Develop Blog"
+          hid: "og:site_name",
+          property: "og:site_name",
+          content: "Izanagi's Develop Blog",
         },
         {
-          hid: 'twitter:card',
-          property: 'twitter:card',
-          content: "summary"
+          hid: "twitter:card",
+          property: "twitter:card",
+          content: "summary",
         },
         {
-          hid: 'twitter:site',
-          property: 'twitter:site',
-          content: process.env.TWITTER_MY_USER_ID
+          hid: "twitter:site",
+          property: "twitter:site",
+          content: process.env.TWITTER_MY_USER_ID,
         },
       ],
-    }
+    };
   },
   async asyncData({ query }) {
     const category = query.category;
-    const url = category !== undefined ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}` : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
-    const { data } = await axios.get(
-      encodeURI(
-        url
-      ),
-      {
-        headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
-      }
-    );
-    
+    const url =
+      category !== undefined
+        ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}`
+        : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
+    const { data } = await axios.get(encodeURI(url), {
+      headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
+    });
+
     return {
       contents: data.contents,
       paginationNums: [...Array((data.totalCount / 10) | 0)].map((_, i) => i),
-      paginationNum: (data.totalCount / 10) + 1 | 0,
+      paginationNum: (data.totalCount / 10 + 1) | 0,
       category: query.category,
     };
   },
@@ -146,17 +158,17 @@ export default {
     },
     async getContentData() {
       const offset = this.pageNum * 10 - 9;
-      const url = this.category !== undefined ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}` : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
+      const url =
+        this.category !== undefined
+          ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}`
+          : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
       try {
-        const { data } = await axios.get(
-          url,
-          {
-            headers: {
-              "X-API-KEY": process.env.MICRO_CMS_API_KEY,
-            },
-          }
-        );
-        this.paginationNum = (data.totalCount / 10) + 1 | 0;
+        const { data } = await axios.get(url, {
+          headers: {
+            "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+          },
+        });
+        this.paginationNum = (data.totalCount / 10 + 1) | 0;
         this.contents = data.contents;
       } catch (err) {
         console.log(err);
@@ -189,5 +201,31 @@ export default {
 }
 .container {
   max-width: 90%;
+}
+.v-parallax__image {
+  bottom: 60%;
+  max-width: 100%;
+  vertical-align: middle;
+  filter: grayscale(100%) contrast(0.9);
+}
+
+.mask {
+  background-image: linear-gradient(
+    180deg,
+    rgba(129, 212, 250, 1) 0%,
+    rgba(178, 255, 89, 1) 100%
+  );
+  opacity: 0.4;
+  div {
+    div {
+      h1 {
+        font-family: lust-script, sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 7vw;
+        color: black;
+      }
+    }
+  }
 }
 </style>

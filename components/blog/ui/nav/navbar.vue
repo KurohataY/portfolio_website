@@ -154,7 +154,7 @@ body {
   @include transition(all 0.3s ease 0.6s);
   z-index: 10;
   padding: 1em;
-  position: relative;
+  position: absolute;
 }
 .nav-z-index-change {
   z-index: 0;
@@ -250,7 +250,7 @@ nav {
   position: fixed;
   top: 0;
   color: black;
-  z-index: 5;
+  z-index: 20;
   width: 100%;
   text-align: center;
 
