@@ -79,10 +79,7 @@ export default {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
-    }, {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
-    }],
+    }, ],
     script: [{
       src: 'https://sdk.form.run/js/v2/formrun.js'
     }, {
@@ -103,8 +100,8 @@ export default {
     src: '~/plugins/swiper.js',
     ssr: false
   }, {
-    src: '~plugins/vue-scrollto',
-  }],
+    src: '~/plugins/vue-scrollto',
+  }, ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -113,6 +110,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    'nuxt-material-design-icons-iconfont',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
