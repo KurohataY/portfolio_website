@@ -22,9 +22,6 @@ export default {
   components: {
     Toc,
   },
-  create() {
-
-  },
   mounted: function () {
     // https://github.com/google/code-prettify/issues/578
     this.$nextTick(function () {
@@ -32,6 +29,7 @@ export default {
       var pre = document.getElementsByTagName("pre");
       for (let i = 0; i < pre.length; i++) {
         pre[i].style.overflow = "auto";
+        pre[i].style.border = "outset white";
       };
     });
   },
@@ -47,10 +45,6 @@ img {
 .toc_lists li a {
   text-decoration: none;
   color: black;
-}
-.prettyprint {
-  overflow: auto;
-  white-space: nomal !important;
 }
 
 </style>

@@ -29,9 +29,9 @@
             height="150px"
             max-width="344px"
           ></v-img>
-          <v-card-title>
-            {{ content.title }}
-          </v-card-title>
+          <v-card flat>
+            <v-card-title v-text="content.title"> </v-card-title>
+          </v-card>
         </nuxt-link>
       </v-card>
       <v-card
@@ -79,5 +79,5 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

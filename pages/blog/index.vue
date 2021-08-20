@@ -1,7 +1,6 @@
 <template>
   <div>
     <Navi @categoryValue="emitGetCategoryEvent" />
-
     <v-parallax src="images/profile_bg.webp" height="500" class="mask">
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
@@ -13,8 +12,15 @@
       <Swiper :contents="order" />
     </div>
     <v-container>
+      <div class="d-flex justify-end mt-3 mb-5">
+        <v-switch
+          v-model="theme"
+          :prepend-icon="themeIcon"
+          class="d-flex justify-end mt-3 mb-5"
+        ></v-switch>
+      </div>
       <v-btn-toggle
-        mandatory
+        background-color="transparent"
         class="d-flex justify-end mt-3 mb-5"
         v-model="toggleNone"
       >
@@ -25,6 +31,7 @@
           <v-icon>mdi-card-text</v-icon>
         </v-btn>
       </v-btn-toggle>
+
       <ContentOrderListType
         :contents="contents"
         :order="sidemenuOrder"
@@ -64,6 +71,7 @@ export default {
   },
   data() {
     return {
+      theme: this.$store.state.theme,
       pageNum: 1,
       toggleNone: 0,
       order: [],
@@ -187,6 +195,17 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+  },
+  computed: {
+    themeIcon() {
+      return this.$store.state.theme ? "mdi-weather-night" : "mdi-weather-sunny";
+    },
+  },
+  watch: {
+    theme() {
+      this.$store.dispatch('theme', this.theme)
+      this.$vuetify.theme.dark = this.theme;
     },
   },
 };

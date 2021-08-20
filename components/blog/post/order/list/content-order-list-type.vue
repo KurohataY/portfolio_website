@@ -19,11 +19,11 @@
               ></v-img>
               <v-img v-else :src="noImageUrl"></v-img>
             </v-avatar>
-            <div>
-              <v-card-title class="text-h5" v-text="content.title">
+            <v-card flat>
+              <v-card-title v-text="content.title" :style="{color: $vuetify.theme.themes[theme].text}">
               </v-card-title>
               <v-card-subtitle v-text="content.description"></v-card-subtitle>
-            </div>
+            </v-card>
           </nuxt-link>
         </div>
       </v-card>
@@ -45,6 +45,11 @@ export default {
     return {
       noImageUrl: process.env.NO_IMAGE_URL,
     };
+  },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ?  "light" : "dark";
+    },
   },
 };
 </script>

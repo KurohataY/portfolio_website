@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navi :menuClick="menuClick" />
+    <Navi />
     <v-container>
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
@@ -12,6 +12,7 @@
         </v-col>
         <v-spacer></v-spacer>
         <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
+          <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
           <SideMenu :order="orderpublishedAtContents" />
         </v-col>
         <v-col cols="10" v-else>
@@ -131,6 +132,7 @@ export default {
   },
   data() {
     return {
+      theme :this.$store.state.theme,
       orderpublishedAtContents: [],
       toc: [],
       items: [],
@@ -208,14 +210,28 @@ export default {
       return toc;
     },
   },
+  computed: {
+    themeIcon() {
+      return this.$store.state.theme ? "mdi-weather-night" : "mdi-weather-sunny";
+    },
+  },
+  watch: {
+    theme() {
+      this.$store.dispatch('theme', this.theme)
+      this.$vuetify.theme.dark = this.theme;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .v-application a {
   display: contents;
   text-decoration: none;
+  color: #4fc3f7;
 }
 .container {
   max-width: 90%;
 }
+
+
 </style>
