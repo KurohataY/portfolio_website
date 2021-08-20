@@ -217,7 +217,7 @@ export default {
   },
   watch: {
     theme() {
-      this.$store.dispatch('theme', this.theme)
+      this.$store.dispatch('theme', this.theme);
       this.$vuetify.theme.dark = this.theme;
     },
   },

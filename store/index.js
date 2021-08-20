@@ -1,5 +1,5 @@
 export const state = () => ({
-  theme: true,
+  theme: false,
 });
 
 export const mutations = {

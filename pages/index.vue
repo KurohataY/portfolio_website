@@ -58,6 +58,9 @@ export default {
       },
     };
   },
+  created() {
+    this.$vuetify.theme.dark = false;
+  }
 };
 </script>
 
