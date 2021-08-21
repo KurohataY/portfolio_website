@@ -7,7 +7,8 @@
           <Post
             :title="title"
             :blogContent="content.blogContent"
-            :tocList="items"
+            :tocList="tocList"
+            :tocCount="tocCount"
           />
         </v-col>
         <v-spacer></v-spacer>
@@ -132,15 +133,15 @@ export default {
   },
   data() {
     return {
-      theme :this.$store.state.theme,
+      theme: this.$store.state.theme,
       orderpublishedAtContents: [],
-      toc: [],
-      items: [],
+      tocCount: 0,
+      tocList: [],
     };
   },
   created() {
     this.getOrdersContentData();
-    this.toc = this.tableOfContents();
+    this.tableOfContents();
   },
   methods: {
     createElementFromHTML(html) {
@@ -163,30 +164,24 @@ export default {
         console.log(err);
       }
     },
-    tableOfContents() {
+    searchHeadingTags(contentList, contentListCount) {
       var body = "";
-      var toc;
+      for (let i = 0; i < contentListCount; i++) {
+        body = body + contentList[i].content;
+      }
+      const $ = cheerio.load(body);
+      return $("h2, h3").toArray();
+    },
+    tableOfContents() {
       const contentList = this.content.blogContent;
       const contentListCount = contentList !== null ? contentList.length : 0;
+
+      const headings = this.searchHeadingTags(contentList, contentListCount);
       if (contentListCount !== 0) {
-        for (let i = 0; i < contentListCount; i++) {
-          body = body + contentList[i].content;
-        }
-        // const $ = cheerio.load(body);
-        const $ = cheerio.load(body);
-        const headings = $("h2, h3").toArray();
-
-        toc = headings.map((data) => ({
-          text: data.children[0].data,
-          id: data.attribs.id,
-          name: data.name,
-        }));
-        toc = toc.length !== 1 ? toc : [];
-
-        var flag = 0;
-        var flag2 = 0;
+        var h2Flag = 0;
+        var h3Flag = 0;
         var result = [];
-        toc.forEach(function (t, i) {
+        headings.forEach(function (t) {
           var item = {
             id: "",
             name: "",
@@ -194,30 +189,32 @@ export default {
           };
 
           if (t.name === "h2") {
-            item.id = t.id;
-            item.name = t.text;
-            flag++;
+            item.id = t.attribs.id;
+            item.name = t.children[0].data;
+            h2Flag++;
             result.push(item);
           } else if (t.name === "h3") {
-            item.id = t.id;
-            item.name = t.text;
-            result[flag - 1].children[flag2] = item;
-            flag2 += 1;
+            item.id = t.attribs.id;
+            item.name = t.children[0].data;
+            result[h2Flag - 1].children[h3Flag] = item;
+            h3Flag += 1;
           }
         });
-      }
-      this.items = result;
-      return toc;
+      };
+      this.tocCount = h2Flag;
+      this.tocList = result;
     },
   },
   computed: {
     themeIcon() {
-      return this.$store.state.theme ? "mdi-weather-night" : "mdi-weather-sunny";
+      return this.$store.state.theme
+        ? "mdi-weather-night"
+        : "mdi-weather-sunny";
     },
   },
   watch: {
     theme() {
-      this.$store.dispatch('theme', this.theme);
+      this.$store.dispatch("theme", this.theme);
       this.$vuetify.theme.dark = this.theme;
     },
   },
@@ -232,6 +229,4 @@ export default {
 .container {
   max-width: 90%;
 }
-
-
 </style>
