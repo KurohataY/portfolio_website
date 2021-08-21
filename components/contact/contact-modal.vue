@@ -104,10 +104,6 @@ section.section {
 }
 
 /* Modal */
-.modal {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
-    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-}
 
 .modal__overlay {
   display: flex;
