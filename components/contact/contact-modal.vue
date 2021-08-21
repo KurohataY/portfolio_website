@@ -61,11 +61,9 @@ export default {
         awaitOpenAnimation: true,
         awaitCloseAnimation: true,
         onShow: (modal) => {
-          console.info(`${modal.id} is shown`);
           this.modalButtonShow = false;
         }, // [1]
         onClose: (modal) => {
-          console.info(`${modal.id} is hidden`);
           this.modalButtonShow = true;
         }, // [2]
         // openTrigger: 'data-custom-open', // [3]
@@ -90,7 +88,7 @@ section.section {
     width: 100%;
     height: 100%;
     // padding: 10px 16px;
-    color: #000000;
+    // color: #000000;
     font-weight: 700;
     font-size: 55px;
     transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -141,6 +139,7 @@ section.section {
 
 .modal__close::before {
   content: "\2715";
+  color: #81d4fa;
 }
 
 .modal__content {
