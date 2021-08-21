@@ -74,6 +74,7 @@ export default {
       theme: this.$store.state.theme,
       pageNum: 1,
       toggleNone: 0,
+      beforeToggleNum: 0,
       order: [],
       sidemenuOrder: [],
     };
@@ -199,19 +200,37 @@ export default {
   },
   computed: {
     themeIcon() {
-      return this.$store.state.theme ? "mdi-weather-night" : "mdi-weather-sunny";
+      return this.$store.state.theme
+        ? "mdi-weather-night"
+        : "mdi-weather-sunny";
     },
   },
   watch: {
     theme() {
-      this.$store.dispatch('theme', this.theme)
+      this.$store.dispatch("theme", this.theme);
       this.$vuetify.theme.dark = this.theme;
+    },
+    toggleNone() {
+      this.toggleNone !== undefined
+        ? (this.toggleNone = this.toggleNone)
+        : (this.toggleNone = this.beforeToggleNum);
+      this.beforeToggleNum = this.toggleNone;
     },
   },
 };
 </script>
 <style lang="scss">
-.v-application a {
+#app
+  div
+  main
+  div
+  div
+  div.container
+  div.row.no-gutters
+  div.col-sm-12.col-md-8.col-lg-8.col-xl-8.col-12
+  div
+  div
+  a {
   display: contents;
   text-decoration: none;
   color: black !important;
