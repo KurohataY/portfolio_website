@@ -43,17 +43,25 @@
         </a>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-spacer></v-spacer>
+      <v-switch
+        v-model="theme"
+        :prepend-icon="themeIcon"
+        hide-details="false"
+        v-if="darkButtonShow"
+      ></v-switch>
     </v-app-bar>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["categories", "external_link"],
+  props: ["categories", "external_link", "darkButtonShow"],
   data() {
     return {
+      theme: this.$store.state.theme,
       clipped: false,
       drawer: false,
       miniVariant: false,
@@ -62,6 +70,19 @@ export default {
   methods: {
     sentCategory(categoryValue) {
       this.$emit("categoryValue", categoryValue);
+    },
+  },
+  computed: {
+    themeIcon() {
+      return this.$store.state.theme
+        ? "mdi-weather-night"
+        : "mdi-weather-sunny";
+    },
+  },
+  watch: {
+    theme() {
+      this.$store.dispatch("theme", this.theme);
+      this.$vuetify.theme.dark = this.theme;
     },
   },
 };

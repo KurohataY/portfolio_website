@@ -1,6 +1,6 @@
 <template>
   <article>
-    <Navi :categories="categories" :external_link="external_link" />
+    <Navi :categories="categories" :external_link="external_link" :darkButtonShow="false" />
     <Top />
     <div class="under-water">
       <v-container>

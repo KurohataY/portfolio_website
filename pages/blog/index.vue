@@ -8,6 +8,7 @@
     <SPNavi
       @categoryValue="emitGetCategoryEvent"
       :categories="categories"
+      :darkButtonShow="true"
       v-else
     />
     <v-parallax src="images/profile_bg.webp" height="500" class="mask">
@@ -26,6 +27,7 @@
           v-model="theme"
           :prepend-icon="themeIcon"
           class="d-flex justify-end mt-3 mb-5"
+          v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
         ></v-switch>
       </div>
       <v-btn-toggle
@@ -48,11 +50,13 @@
       />
 
       <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
+      <PaginationVuetify
+        :paginationNum="paginationNum"
+        @pageNum="emitPaginationEvent"
+        style="margin-top: 50px"
+      />
+      <Profile style="margin-top: 50px" v-if="toggleNone === 1" />
     </v-container>
-    <PaginationVuetify
-      :paginationNum="paginationNum"
-      @pageNum="emitPaginationEvent"
-    />
   </div>
 </template>
 <script>
@@ -63,6 +67,7 @@ import SPNavi from "~/components/nav/navbar.vue";
 import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
+import Profile from "~/components/blog/ui/profile/profile.vue";
 
 // const Navi = () => import('~/components/blog/ui/nav/navbar.vue');
 // const PaginationVuetify = () => import('~/components/blog/ui/pagination/pagination-from-vuetify.vue');
@@ -76,6 +81,7 @@ export default {
     Swiper,
     PCNavi,
     SPNavi,
+    Profile,
     ContentOrderListType,
     ContentOrderCardType,
     PaginationVuetify,
