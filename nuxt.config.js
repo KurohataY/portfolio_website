@@ -152,7 +152,8 @@ export default {
     TWITTER_MY_USER_ID: process.env.TWITTER_MY_USER_ID,
     HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
     NO_IMAGE_URL: process.env.NO_IMAGE_URL,
-    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    TWITTER_URL: process.env.TWITTER_URL,
   },
 
   build: {
