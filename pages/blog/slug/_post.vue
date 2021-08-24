@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Navi />
-    <v-container>
+    <PCNavi
+      v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
+      :categories="categories"
+    />
+    <SPNavi v-else :categories="categories"  />
+    <v-container style="margin-top: 50px">
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
           <Post
@@ -11,21 +15,22 @@
             :tocCount="tocCount"
           />
         </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
+        <!-- <v-spacer></v-spacer> -->
+        <!-- <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
           <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
           <SideMenu :order="orderpublishedAtContents" />
         </v-col>
         <v-col cols="10" v-else>
           <SideMenu :order="orderpublishedAtContents" />
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
   </div>
 </template>
 <script>
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
-import Navi from "~/components/blog/ui/nav/navbar.vue";
+import SPNavi from "~/components/nav/navbar.vue";
+import PCNavi from "~/components/blog/ui/nav/navbar.vue";
 import Post from "~/components/blog/post/post.vue";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
@@ -35,7 +40,8 @@ import cheerio from "cheerio";
 export default {
   components: {
     Swiper,
-    Navi,
+    SPNavi,
+    PCNavi,
     Post,
     SideMenu,
   },
@@ -137,6 +143,39 @@ export default {
       orderpublishedAtContents: [],
       tocCount: 0,
       tocList: [],
+      categories: [
+        {
+          name: "トップページ",
+          iconName: "home",
+          link: "/",
+          categoryQueryValue: undefined,
+        },
+        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
+        {
+          name: "プログラミング",
+          iconName: "code",
+          link: "/blog?category=プログラミング",
+          categoryQueryValue: "プログラミング",
+        },
+        {
+          name: "IT",
+          iconName: "computer",
+          link: "/blog?category=IT",
+          categoryQueryValue: "IT",
+        },
+        {
+          name: "日記",
+          iconName: "menu_book",
+          link: "/blog?category=日記",
+          categoryQueryValue: "日記",
+        },
+        {
+          name: "プライバシーポリシー",
+          iconName: "policy",
+          link: "/blog/privacy-policy",
+          categoryQueryValue: undefined,
+        },
+      ],
     };
   },
   created() {
@@ -200,7 +239,7 @@ export default {
             h3Flag += 1;
           }
         });
-      };
+      }
       this.tocCount = h2Flag;
       this.tocList = result;
     },

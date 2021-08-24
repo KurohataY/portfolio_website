@@ -1,6 +1,6 @@
 <template>
   <article>
-    <Navi />
+    <Navi :categories="categories" :external_link="external_link" />
     <Top />
     <div class="under-water">
       <v-container>
@@ -56,6 +56,40 @@ export default {
         type: "website",
         site_name: "Izanagi' Home Page",
       },
+      categories: [
+        {
+          name: "ホーム",
+          iconName: "home",
+          link: "/",
+          categoryQueryValue: undefined,
+        },
+        {
+          name: "プロフィール",
+          iconName: "account_circle",
+          link: "#profile",
+          categoryQueryValue: undefined,
+        },
+        {
+          name: "制作物",
+          iconName: "web",
+          link: "#product",
+          categoryQueryValue: undefined,
+        },
+        {
+          name: "開発ブログ",
+          iconName: "code",
+          link: "/blog",
+          categoryQueryValue: undefined,
+        },
+      ],
+      external_link: [
+        {
+          name: "趣味ブログ",
+          iconName: "sports_esports",
+          link: "//izanagi-craft.com/",
+          categoryQueryValue: undefined,
+        },
+      ],
     };
   },
   created() {

@@ -55,42 +55,13 @@
 </template>
 <script>
 export default {
+  props:[
+    "categories"
+  ],
   data() {
     return {
       menuClick: false,
-      categories: [
-        {
-          name: "トップページ",
-          iconName: "home",
-          link: "/",
-          categoryQueryValue: undefined,
-        },
-        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
-        {
-          name: "プログラミング",
-          iconName: "code",
-          link: "/blog?category=プログラミング",
-          categoryQueryValue: "プログラミング",
-        },
-        {
-          name: "IT",
-          iconName: "computer",
-          link: "/blog?category=IT",
-          categoryQueryValue: "IT",
-        },
-        {
-          name: "日記",
-          iconName: "menu_book",
-          link: "/blog?category=日記",
-          categoryQueryValue: "日記",
-        },
-        {
-          name: "プライバシーポリシー",
-          iconName: "policy",
-          link: "/blog/privacy-policy",
-          categoryQueryValue: undefined,
-        },
-      ],
+      
     };
   },
   methods: {
@@ -180,6 +151,7 @@ body {
 
 @media screen and (max-width: 900px) and (min-width: 521px) {
   .nav-container.nav-open {
+    background-color: blanchedalmond;
     margin-top: 11em;
   }
 }

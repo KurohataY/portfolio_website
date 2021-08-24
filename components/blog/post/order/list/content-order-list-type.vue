@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters>
+  <v-row justify="center" no-gutters>
     <v-col
       cols="12"
       xs="12"
@@ -12,7 +12,7 @@
       <v-card v-for="content in contents" :key="content.id">
         <div class="d-flex flex-no-wrap">
           <nuxt-link :to="'/blog/' + content.id">
-            <v-avatar class="ma-3" size="125" tile v-if="$vuetify.breakpoint.mdAndUp">
+            <v-avatar class="ma-3" size="125" tile v-if="$vuetify.breakpoint.smAndUp">
               <v-img
                 v-if="'thumbnail' in content"
                 :src="content.thumbnail.url"

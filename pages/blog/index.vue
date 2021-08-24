@@ -1,6 +1,15 @@
 <template>
   <div>
-    <Navi @categoryValue="emitGetCategoryEvent" />
+    <PCNavi
+      @categoryValue="emitGetCategoryEvent"
+      :categories="categories"
+      v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
+    />
+    <SPNavi
+      @categoryValue="emitGetCategoryEvent"
+      :categories="categories"
+      v-else
+    />
     <v-parallax src="images/profile_bg.webp" height="500" class="mask">
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
@@ -49,7 +58,8 @@
 <script>
 // const Swiper = () => import('~/components/blog/ui/carousel/swiper.vue');
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
-import Navi from "~/components/blog/ui/nav/navbar.vue";
+import PCNavi from "~/components/blog/ui/nav/navbar.vue";
+import SPNavi from "~/components/nav/navbar.vue";
 import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
@@ -64,7 +74,8 @@ import axios from "axios";
 export default {
   components: {
     Swiper,
-    Navi,
+    PCNavi,
+    SPNavi,
     ContentOrderListType,
     ContentOrderCardType,
     PaginationVuetify,
@@ -77,6 +88,39 @@ export default {
       beforeToggleNum: 0,
       order: [],
       sidemenuOrder: [],
+      categories: [
+        {
+          name: "トップページ",
+          iconName: "home",
+          link: "/",
+          categoryQueryValue: undefined,
+        },
+        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
+        {
+          name: "プログラミング",
+          iconName: "code",
+          link: "/blog?category=プログラミング",
+          categoryQueryValue: "プログラミング",
+        },
+        {
+          name: "IT",
+          iconName: "computer",
+          link: "/blog?category=IT",
+          categoryQueryValue: "IT",
+        },
+        {
+          name: "日記",
+          iconName: "menu_book",
+          link: "/blog?category=日記",
+          categoryQueryValue: "日記",
+        },
+        {
+          name: "プライバシーポリシー",
+          iconName: "policy",
+          link: "/blog/privacy-policy",
+          categoryQueryValue: undefined,
+        },
+      ],
     };
   },
   head() {
@@ -152,7 +196,7 @@ export default {
     };
   },
   mounted() {
-    this.getOrdersContentData("publishedAt");
+    this.getOrdersContentData("updatedAt");
   },
   methods: {
     emitPaginationEvent(pageNum) {
@@ -184,7 +228,7 @@ export default {
     async getOrdersContentData(order) {
       try {
         const { data } = await axios.get(
-          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=${order}&limit=100`,
+          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=-${order}&limit=100`,
           {
             headers: {
               "X-API-KEY": process.env.MICRO_CMS_API_KEY,

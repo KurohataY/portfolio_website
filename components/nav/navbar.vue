@@ -8,30 +8,36 @@
       app
     >
       <v-list nav dense>
-        <template v-for="(item, i) in items">
-          <nuxt-link :to="item.to" :key="`first-${i}`">
+        <template v-for="(category, i) in categories">
+          <nuxt-link
+            :to="category.link"
+            :key="`first-${i}`"
+            @click.native="sentCategory(category.categoryQueryValue)"
+          >
             <v-list-item>
               <v-list-item-action>
-                <i class="material-icons">{{ item.icon }}</i>
+                <i class="material-icons">{{ category.iconName }}</i>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title v-text="item.title" />
+                <v-list-item-title v-text="category.name" />
               </v-list-item-content>
             </v-list-item>
           </nuxt-link>
         </template>
         <a
-          v-for="(item, i) in out_site_item"
+          v-for="(external, i) in external_link"
           :key="`second-${i}`"
-          :href="item.url"
+          :href="external.link"
+          target="_blank"
+          rel="noopener noreferrer"
           style="text-decoration: none"
         >
           <v-list-item nuxt>
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>{{ external.iconName }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
+              <v-list-item-title v-text="external.name" />
             </v-list-item-content>
           </v-list-item>
         </a>
@@ -45,41 +51,18 @@
 
 <script>
 export default {
+  props: ["categories", "external_link"],
   data() {
     return {
       clipped: false,
       drawer: false,
-      items: [
-        {
-          icon: "home",
-          title: "ホーム",
-          to: "/",
-        },
-        {
-          icon: "account_circle",
-          title: "プロフィール",
-          to: "#profile",
-        },
-        {
-          icon: "web",
-          title: "制作物",
-          to: "#product",
-        },
-      ],
-      out_site_item: [
-        {
-          icon: "code",
-          title: "開発ブログ",
-          url: "/blog",
-        },
-        {
-          icon: "sports_esports",
-          title: "趣味ブログ",
-          url: "https://izanagi-craft.com/",
-        },
-      ],
       miniVariant: false,
     };
+  },
+  methods: {
+    sentCategory(categoryValue) {
+      this.$emit("categoryValue", categoryValue);
+    },
   },
 };
 </script>

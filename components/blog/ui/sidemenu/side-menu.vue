@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Profile />
     <v-card class="mx-auto">
       <v-list three-line>
         <template v-for="(content, index) in order">
@@ -25,9 +26,13 @@
   </div>
 </template>
 <script>
+import Profile from "~/components/blog/ui/profile/profile.vue"
 import a8 from "~/assets/affiliate/a8.json";
 export default {
   props: ["content", "order"],
+  components:{
+    Profile
+  },
   data() {
     return {
       a8: a8,
