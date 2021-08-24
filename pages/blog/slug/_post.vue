@@ -4,7 +4,7 @@
       v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
       :categories="categories"
     />
-    <SPNavi v-else :categories="categories"  />
+    <SPNavi v-else :categories="categories" />
     <v-container style="margin-top: 50px">
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
@@ -24,6 +24,9 @@
           <SideMenu :order="orderpublishedAtContents" />
         </v-col> -->
       </v-row>
+      <v-btn text :ripple="false" class="back-wrapper" @click.native="backTo">
+        <i class="material-icons">arrow_back</i>
+        </v-btn>
     </v-container>
   </div>
 </template>
@@ -183,6 +186,9 @@ export default {
     this.tableOfContents();
   },
   methods: {
+    backTo() {
+      this.$router.go(-1);
+    },
     createElementFromHTML(html) {
       const tempEl = document.createElement("div");
       tempEl.innerHTML = html;
