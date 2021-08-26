@@ -21,6 +21,7 @@
     "nuxt": "^2.15.8",
     "nuxt-material-design-icons-iconfont": "^1.0.2",
     "swiper": "5.x",
+    "three": "^0.131.3",
     "vue-awesome-swiper": "^4.1.1",
     "vue-scrollto": "^2.20.0",
     "vuetify": "^2.5.8"
