@@ -87,6 +87,7 @@ p{
   width: 100%;
   margin: 0;
   padding: 0;
+  height: 22%;
   background-color: rgba(129,212,250, 0.5);
   display: -webkit-box;
   -webkit-box-orient: vertical;

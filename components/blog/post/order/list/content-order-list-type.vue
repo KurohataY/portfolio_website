@@ -12,7 +12,12 @@
       <v-card v-for="content in contents" :key="content.id">
         <div class="d-flex flex-no-wrap">
           <nuxt-link :to="'/blog/' + content.id">
-            <v-avatar class="ma-3" size="125" tile v-if="$vuetify.breakpoint.smAndUp">
+            <v-avatar
+              class="ma-3"
+              size="125"
+              tile
+              v-if="$vuetify.breakpoint.smAndUp"
+            >
               <v-img
                 v-if="'thumbnail' in content"
                 :src="content.thumbnail.url"
@@ -20,9 +25,28 @@
               <v-img v-else :src="noImageUrl"></v-img>
             </v-avatar>
             <v-card flat>
-              <v-card-title v-text="content.title" :style="{color: $vuetify.theme.themes[theme].text}">
+              <v-card-title
+                v-text="content.title"
+                :style="{ color: $vuetify.theme.themes[theme].text }"
+              >
               </v-card-title>
-              <v-card-subtitle v-text="content.description"></v-card-subtitle>
+              <v-card-subtitle
+                v-text="content.description"
+                v-if="content.description"
+              ></v-card-subtitle>
+              <v-card-subtitle
+                v-text="cutText(content.blogContent[0].content)"
+                v-else-if="
+                  typeof content.blogContent !== 'undefined' &&
+                  content.blogContent !== null &&
+                  typeof content.blogContent[0] !== 'undefined' &&
+                  !('content' in content.blogContent)
+                "
+              ></v-card-subtitle>
+              <v-card-subtitle
+                v-text="cutText(content.contents)"
+                v-else
+              ></v-card-subtitle>
             </v-card>
           </nuxt-link>
         </div>
@@ -35,7 +59,9 @@
   </v-row>
 </template>
 <script>
+import cheerio from "cheerio";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
+
 export default {
   props: ["contents", "order"],
   components: {
@@ -48,9 +74,15 @@ export default {
   },
   computed: {
     theme() {
-      return this.$vuetify.theme.dark ?  "light" : "dark";
+      return this.$vuetify.theme.dark ? "light" : "dark";
     },
   },
+  methods: {
+    cutText(text) {
+      const $ = cheerio.load;
+      return $(text).text().substr(0, 100) + "...";
+    }
+  }
 };
 </script>
 <style lang="">

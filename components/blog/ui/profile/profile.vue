@@ -1,13 +1,13 @@
 
 <template>
   <v-card class="mx-auto" style="text-align: center">
-    <v-avatar class="profile" color="grey" size="164" rounded>
+    <v-avatar class="profile" size="164" rounded>
       <v-img :src="imgUrl"></v-img>
     </v-avatar>
 
     <v-card-title style="display: block"> {{ profileName }} </v-card-title>
 
-    <v-card-subtitle> 趣味：漫画、アニメ鑑賞、温泉旅行 </v-card-subtitle>
+    <v-card-subtitle>{{ profileSubText }}</v-card-subtitle>
     <v-btn
       icon
       color="light-blue"
@@ -38,8 +38,9 @@ export default {
   data() {
     return {
       show: false,
-      imgUrl: "/favicon.ico",
+      imgUrl: "/images/profile/profile_image.png",
       profileName: "イザナギ",
+      profileSubText: " 趣味：漫画、アニメ鑑賞、温泉旅行 ",
       profileText:
         "日々学習したことや気になったことを気まぐれに投稿しています。<br>趣味ブログ：https://izanagi-craft.com/",
       twitterUrl: process.env.TWITTER_URL,

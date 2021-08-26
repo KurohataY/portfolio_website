@@ -11,7 +11,7 @@
       :darkButtonShow="true"
       v-else
     />
-    <v-parallax src="images/profile_bg.webp" height="500" class="mask">
+    <v-parallax height="500" class="mask">
       <v-row align="center" justify="center">
         <v-col class="text-center" cols="12">
           <h1>Izanagi's Develop Blog</h1>
@@ -214,7 +214,7 @@ export default {
       this.getContentData();
     },
     async getContentData() {
-      const offset = this.pageNum * 10 - 9;
+      const offset = this.pageNum * 10 - 10;
       const url =
         this.category !== undefined
           ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}`
