@@ -224,7 +224,7 @@ export default {
         body = body + contentList[i].content;
       }
       const $ = cheerio.load(body);
-      return $("h2, h3").toArray();
+      return $("h2, h3, h4").toArray();
     },
     tableOfContents() {
       const contentList = this.content.blogContent;
@@ -234,6 +234,7 @@ export default {
       if (contentListCount !== 0) {
         var h2Flag = 0;
         var h3Flag = 0;
+        var h4Flag = 0;
         var result = [];
         headings.forEach(function (t) {
           var item = {
@@ -242,16 +243,17 @@ export default {
             children: [],
           };
 
+          item.id = t.attribs.id;
+          item.name = t.children[0].data;
           if (t.name === "h2") {
-            item.id = t.attribs.id;
-            item.name = t.children[0].data;
             h2Flag++;
             result.push(item);
           } else if (t.name === "h3") {
-            item.id = t.attribs.id;
-            item.name = t.children[0].data;
             result[h2Flag - 1].children[h3Flag] = item;
             h3Flag += 1;
+          } else if (t.name === "h4") {
+            result[h2Flag - 1].children[h3Flag - 1].children[h4Flag] = item;
+            h4Flag += 1;
           }
         });
       }
