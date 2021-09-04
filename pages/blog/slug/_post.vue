@@ -17,25 +17,17 @@
         </v-col>
         <v-col cols="2" sm="2" md="2" lg="2">
           <v-switch
-          v-model="theme"
-          :prepend-icon="themeIcon"
-          class="d-flex justify-end mt-3 mb-5"
-          v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
-        ></v-switch>
+            v-model="theme"
+            :prepend-icon="themeIcon"
+            class="d-flex justify-end mt-3 mb-5"
+            v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
+          ></v-switch>
         </v-col>
-        
-        <!-- <v-spacer></v-spacer> -->
-        <!-- <v-col cols="4" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
-          <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
-          <SideMenu :order="orderpublishedAtContents" />
-        </v-col>
-        <v-col cols="10" v-else>
-          <SideMenu :order="orderpublishedAtContents" />
-        </v-col> -->
       </v-row>
+      <ReleteDocList />
       <v-btn text :ripple="false" class="back-wrapper" @click.native="backTo">
         <i class="material-icons">arrow_back</i>
-        </v-btn>
+      </v-btn>
     </v-container>
   </div>
 </template>
@@ -45,6 +37,7 @@ import SPNavi from "~/components/nav/navbar.vue";
 import PCNavi from "~/components/blog/ui/nav/navbar.vue";
 import Post from "~/components/blog/post/post.vue";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
+import ReleteDocList from "~/components/blog/post/relete-doc-list.vue";
 
 import axios from "axios";
 import cheerio from "cheerio";
@@ -56,6 +49,7 @@ export default {
     PCNavi,
     Post,
     SideMenu,
+    ReleteDocList,
   },
   async asyncData({ params }) {
     const { data } = await axios.get(
@@ -152,7 +146,6 @@ export default {
   data() {
     return {
       theme: this.$store.state.theme,
-      orderpublishedAtContents: [],
       tocCount: 0,
       tocList: [],
       categories: [
@@ -191,7 +184,6 @@ export default {
     };
   },
   created() {
-    this.getOrdersContentData();
     this.tableOfContents();
   },
   methods: {
@@ -202,21 +194,6 @@ export default {
       const tempEl = document.createElement("div");
       tempEl.innerHTML = html;
       return tempEl;
-    },
-    async getOrdersContentData(order) {
-      try {
-        const { data } = await axios.get(
-          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=${order}&limit=5`,
-          {
-            headers: {
-              "X-API-KEY": process.env.MICRO_CMS_API_KEY,
-            },
-          }
-        );
-        this.orderpublishedAtContents = data.contents;
-      } catch (err) {
-        console.log(err);
-      }
     },
     searchHeadingTags(contentList, contentListCount) {
       var body = "";

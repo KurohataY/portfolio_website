@@ -45,7 +45,7 @@
 
       <ContentOrderListType
         :contents="contents"
-        :order="sidemenuOrder"
+        :order="sidemenuContents"
         v-if="toggleNone === 0"
       />
 
@@ -60,7 +60,6 @@
   </div>
 </template>
 <script>
-// const Swiper = () => import('~/components/blog/ui/carousel/swiper.vue');
 import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import PCNavi from "~/components/blog/ui/nav/navbar.vue";
 import SPNavi from "~/components/nav/navbar.vue";
@@ -68,11 +67,6 @@ import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-v
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
 import Profile from "~/components/blog/ui/profile/profile.vue";
-
-// const Navi = () => import('~/components/blog/ui/nav/navbar.vue');
-// const PaginationVuetify = () => import('~/components/blog/ui/pagination/pagination-from-vuetify.vue');
-// const ContentOrderListType = () => import('~/components/blog/post/order/list/content-order-list-type.vue');
-// const ContentOrderCardType = () => import('~/components/blog/post/order/card/content-order-card-type.vue');
 
 import axios from "axios";
 
@@ -92,8 +86,6 @@ export default {
       pageNum: 1,
       toggleNone: 0,
       beforeToggleNum: 0,
-      order: [],
-      sidemenuOrder: [],
       categories: [
         {
           name: "トップページ",
@@ -190,19 +182,34 @@ export default {
       category !== undefined
         ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}`
         : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
-    const { data } = await axios.get(encodeURI(url), {
-      headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
-    });
+
+    const res = await Promise.all([
+      axios.get(encodeURI(url), {
+        headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
+      }),
+      axios.get(
+        `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=100`,
+        {
+          headers: {
+            "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+          },
+        }
+      ),
+    ]);
+
+    const mainContents = res[0].data;
+    const orderContents = res[1].data;
 
     return {
-      contents: data.contents,
-      paginationNums: [...Array((data.totalCount / 10) | 0)].map((_, i) => i),
-      paginationNum: (data.totalCount / 10 + 1) | 0,
+      contents: mainContents.contents,
+      paginationNums: [...Array((mainContents.totalCount / 10) | 0)].map(
+        (_, i) => i
+      ),
+      paginationNum: (mainContents.totalCount / 10 + 1) | 0,
       category: query.category,
+      order: orderContents.contents,
+      sidemenuContents: orderContents.contents.splice(0, 5),
     };
-  },
-  mounted() {
-    this.getOrdersContentData("updatedAt");
   },
   methods: {
     emitPaginationEvent(pageNum) {
@@ -227,22 +234,6 @@ export default {
         });
         this.paginationNum = (data.totalCount / 10 + 1) | 0;
         this.contents = data.contents;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    async getOrdersContentData(order) {
-      try {
-        const { data } = await axios.get(
-          `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?orders=-${order}&limit=100`,
-          {
-            headers: {
-              "X-API-KEY": process.env.MICRO_CMS_API_KEY,
-            },
-          }
-        );
-        this.order = data.contents;
-        this.sidemenuOrder = data.contents.splice(0, 5);
       } catch (err) {
         console.log(err);
       }

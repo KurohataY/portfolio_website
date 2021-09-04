@@ -154,6 +154,7 @@ export default {
     NO_IMAGE_URL: process.env.NO_IMAGE_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
     TWITTER_URL: process.env.TWITTER_URL,
+    RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
   },
 
   build: {
@@ -178,6 +179,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
     '@nuxtjs/google-gtag',
+    '@nuxtjs/proxy',
   ],
   sitemap: {
     path: '/sitemap.xml',
@@ -201,7 +203,10 @@ export default {
   'google-gtag': {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },
-  axios: {},
+  proxy: {},
+  axios: {
+    proxy: true
+  },
   generate: {
     async routes() {
       const pages = await axios
