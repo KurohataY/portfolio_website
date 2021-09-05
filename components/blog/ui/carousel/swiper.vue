@@ -5,11 +5,13 @@
         <swiper-slide :key="content.id" v-if="'thumbnail' in content">
           <!-- <v-img v-if="'thumbnail' in content" :src="content.thumbnail.url" width="250px" height="200px"></v-img> -->
 
-            <nuxt-link :to="'/blog/' + content.id">
+          <nuxt-link :to="'/blog/' + content.id">
+            <picture>
+              <source :srcset="content.thumbnail.url + '?fm=webp'" />
               <img :src="content.thumbnail.url" />
-              <p>{{ content.title }}</p>
-            </nuxt-link>
-
+            </picture>
+            <p>{{ content.title }}</p>
+          </nuxt-link>
         </swiper-slide>
       </template>
 
@@ -80,7 +82,7 @@ img {
   position: relative;
 }
 
-p{
+p {
   position: absolute;
   color: white;
   top: 75%;
@@ -88,7 +90,7 @@ p{
   margin: 0;
   padding: 0;
   height: 22%;
-  background-color: rgba(129,212,250, 0.5);
+  background-color: rgba(129, 212, 250, 0.5);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -97,11 +99,10 @@ p{
 }
 
 @media screen and (max-width: 600px) {
-   p{
-     top: 85%;
-     -webkit-line-clamp: 1;
-   }
-
+  p {
+    top: 85%;
+    -webkit-line-clamp: 1;
+  }
 }
 
 // class="white--text align-end"

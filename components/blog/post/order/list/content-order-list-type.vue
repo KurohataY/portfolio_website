@@ -18,11 +18,16 @@
               tile
               v-if="$vuetify.breakpoint.smAndUp"
             >
-              <v-img
-                v-if="'thumbnail' in content"
-                :src="content.thumbnail.url"
-              ></v-img>
-              <v-img v-else :src="noImageUrl"></v-img>
+              <picture v-if="'thumbnail' in content">
+                <source
+                  :srcset="content.thumbnail.url + '?fm=webp'"
+                />
+                <img
+                  :src="content.thumbnail.url"
+                  style="height: 125px"
+                />
+              </picture>
+              <img v-else :src="noImageUrl">
             </v-avatar>
             <v-card flat>
               <v-card-title
@@ -81,8 +86,8 @@ export default {
     cutText(text) {
       const $ = cheerio.load;
       return $(text).text().substr(0, 100) + "...";
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="">
