@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-4 post">
     <h1>{{ title }}</h1>
-    <Toc :tocList="tocList" :tocCount="tocCount" />
+    <Toc :blogContent="blogContent" />
     <div v-for="(bc, index) in blogContent" :key="index + bc.fieldId">
       <div v-html="bc.content"></div>
       <div v-html="bc.html"></div>
@@ -14,8 +14,6 @@ export default {
   props: {
     title: String,
     blogContent: Array,
-    tocList: Array,
-    tocCount: Number,
   },
   components: {
     Toc,
