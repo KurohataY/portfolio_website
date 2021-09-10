@@ -41,6 +41,7 @@ export default {
       .get(`${process.env.RELETE_DOC_API_URL}/${this.$route.params.p}`)
       .then((res) => {
         this.relete = res.data;
+        console.log(res)
       })
       .catch((error) => {
         console.log(error);

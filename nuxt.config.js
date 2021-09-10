@@ -203,7 +203,11 @@ export default {
   'google-gtag': {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },
-  proxy: {},
+  proxy: {
+    '/related_doc_list/': {
+      target: 'http://localhost:5000',
+    }
+  },
   axios: {
     proxy: true
   },
