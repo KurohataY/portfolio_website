@@ -180,7 +180,25 @@ export default {
     '@nuxtjs/sitemap',
     '@nuxtjs/google-gtag',
     '@nuxtjs/proxy',
+    '@nuxtjs/pwa',
   ],
+  pwa: {
+    icon: {},
+    meta: {
+      // mobileAppIOSオプションを有効にする前に、以下記事を一読すること。
+      // https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb
+      // mobileAppIOS: true
+    },
+    manifest: {
+      name: 'Izanagi-portfolio-site',
+      lang: 'ja',
+      short_name: 'portfolio',
+      title: 'Izanagi-portfolio-site',
+      description: 'ポートフォリオサイトです',
+      theme_color: '#212121',
+      background_color: '#212121'
+    }
+  },
   sitemap: {
     path: '/sitemap.xml',
     hostname: process.env.HOMEPAGE_ROOT_URL,

@@ -57,8 +57,8 @@
         </div>
       </v-card>
     </v-col>
-    <v-spacer></v-spacer>
-    <v-col cols="12" xs="12" sm="12" md="3" lg="3" xl="3">
+    <v-spacer v-if="sideMenu"></v-spacer>
+    <v-col cols="12" xs="12" sm="12" md="3" lg="3" xl="3" v-if="sideMenu">
       <SideMenu :order="order" />
     </v-col>
   </v-row>
@@ -68,7 +68,7 @@ import cheerio from "cheerio";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 export default {
-  props: ["contents", "order"],
+  props: ["contents", "order", "sideMenu"],
   components: {
     SideMenu,
   },

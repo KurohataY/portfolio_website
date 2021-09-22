@@ -33,7 +33,7 @@
       <v-btn-toggle
         background-color="transparent"
         class="d-flex justify-end mt-3 mb-5"
-        v-model="toggleNone"
+        v-model="toggle"
       >
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
@@ -46,16 +46,17 @@
       <ContentOrderListType
         :contents="contents"
         :order="sidemenuContents"
-        v-if="toggleNone === 0"
+        :sideMenu="sideMenu"
+        v-if="toggle === 0"
       />
 
-      <ContentOrderCardType :contents="contents" v-if="toggleNone === 1" />
+      <ContentOrderCardType :contents="contents" v-if="toggle === 1" />
       <PaginationVuetify
         :paginationNum="paginationNum"
         @pageNum="emitPaginationEvent"
         style="margin-top: 50px"
       />
-      <Profile style="margin-top: 50px" v-if="toggleNone === 1" />
+      <Profile style="margin-top: 50px" v-if="toggle === 1" />
     </v-container>
   </div>
 </template>
@@ -67,6 +68,8 @@ import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-v
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
 import Profile from "~/components/blog/ui/profile/profile.vue";
+
+import gMenuList from "~/assets/menu/g-menu.json";
 
 import axios from "axios";
 
@@ -84,41 +87,10 @@ export default {
     return {
       theme: this.$store.state.theme,
       pageNum: 1,
-      toggleNone: 0,
+      toggle: 0,
       beforeToggleNum: 0,
-      categories: [
-        {
-          name: "トップページ",
-          iconName: "home",
-          link: "/",
-          categoryQueryValue: undefined,
-        },
-        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
-        {
-          name: "プログラミング",
-          iconName: "code",
-          link: "/blog?category=プログラミング",
-          categoryQueryValue: "プログラミング",
-        },
-        {
-          name: "IT",
-          iconName: "computer",
-          link: "/blog?category=IT",
-          categoryQueryValue: "IT",
-        },
-        {
-          name: "日記",
-          iconName: "menu_book",
-          link: "/blog?category=日記",
-          categoryQueryValue: "日記",
-        },
-        {
-          name: "プライバシーポリシー",
-          iconName: "policy",
-          link: "/blog/privacy-policy",
-          categoryQueryValue: undefined,
-        },
-      ],
+      sideMenu: true,
+      categories: gMenuList,
     };
   },
   head() {
@@ -251,11 +223,11 @@ export default {
       this.$store.dispatch("theme", this.theme);
       this.$vuetify.theme.dark = this.theme;
     },
-    toggleNone() {
-      this.toggleNone !== undefined
-        ? (this.toggleNone = this.toggleNone)
-        : (this.toggleNone = this.beforeToggleNum);
-      this.beforeToggleNum = this.toggleNone;
+    toggle() {
+      this.toggle !== undefined
+        ? (this.toggle = this.toggle)
+        : (this.toggle = this.beforeToggleNum);
+      this.beforeToggleNum = this.toggle;
     },
   },
 };
@@ -280,10 +252,7 @@ export default {
   max-width: 90%;
 }
 .v-parallax__image {
-  bottom: 60%;
-  max-width: 100%;
-  vertical-align: middle;
-  filter: grayscale(100%) contrast(0.9);
+  display: none;
 }
 
 .mask {

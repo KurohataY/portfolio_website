@@ -87,6 +87,9 @@
 <script>
 import SPNavi from "~/components/nav/navbar.vue";
 import PCNavi from "~/components/blog/ui/nav/navbar.vue";
+
+import gMenuList from "~/assets/menu/g-menu.json";
+
 import cheerio from "cheerio";
 
 export default {
@@ -146,39 +149,7 @@ export default {
       theme: this.$store.state.theme,
       tocCount: 0,
       tocList: [],
-      categories: [
-        {
-          name: "トップページ",
-          iconName: "home",
-          link: "/",
-          categoryQueryValue: undefined,
-        },
-        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
-        {
-          name: "プログラミング",
-          iconName: "code",
-          link: "/blog?category=プログラミング",
-          categoryQueryValue: "プログラミング",
-        },
-        {
-          name: "IT",
-          iconName: "computer",
-          link: "/blog?category=IT",
-          categoryQueryValue: "IT",
-        },
-        {
-          name: "日記",
-          iconName: "menu_book",
-          link: "/blog?category=日記",
-          categoryQueryValue: "日記",
-        },
-        {
-          name: "プライバシーポリシー",
-          iconName: "policy",
-          link: "/blog/privacy-policy",
-          categoryQueryValue: undefined,
-        },
-      ],
+      categories: gMenuList,
     };
   },
   methods: {

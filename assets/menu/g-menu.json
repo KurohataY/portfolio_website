@@ -1,0 +1,44 @@
+[
+    {
+        "name": "トップページ",
+        "iconName": "home",
+        "link": "/",
+        "categoryQueryValue": "undefined"
+    },
+    {
+        "name": "ブログトップ",
+        "iconName": "library_books",
+        "link": "/blog",
+        "categoryQueryValue": "undefined"
+    },
+    {
+        "name": "プログラミング",
+        "iconName": "code",
+        "link": "/blog?category=プログラミング",
+        "categoryQueryValue": "プログラミング"
+    },
+    {
+        "name": "IT",
+        "iconName": "computer",
+        "link": "/blog?category=IT",
+        "categoryQueryValue": "IT"
+    },
+    {
+        "name": "日記",
+        "iconName": "menu_book",
+        "link": "/blog?category=日記",
+        "categoryQueryValue": "日記"
+    },
+    {
+        "name": "プライバシーポリシー",
+        "iconName": "policy",
+        "link": "/blog/privacy-policy",
+        "categoryQueryValue": "undefined"
+    },
+    {
+        "name": "サイト内検索",
+        "iconName": "search",
+        "link": "/blog/search",
+        "categoryQueryValue": "undefined"
+    }
+]
