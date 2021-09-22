@@ -38,6 +38,22 @@
         name="コメント"
         required
       ></v-textarea>
+      <v-text-field
+        background-color="#e1f5fe"
+        v-model="nowUrl"
+        :value="nowUrl"
+        label="フォーム送信時URL"
+        name="フォーム送信時URL"
+        style="display: none;"
+      ></v-text-field>
+      <v-text-field
+        background-color="#e1f5fe"
+        v-model="beforeUrl"
+        :value="beforeUrl"
+        label="遷移元"
+        name="遷移元"
+        style="display: none;"
+      ></v-text-field>
       <v-row align="center" justify="space-between">
         <v-btn color="success" type="submit"> 送信 </v-btn>
         <v-btn color="error" @click="reset"> リセット </v-btn>
@@ -79,6 +95,8 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
       text: "",
+      nowUrl: "",
+      beforeUrl: "",
       select: null,
       formRunUrl: "https://form.run/api/v1/r/" + process.env.FORM_RUN_URL,
     };
@@ -105,5 +123,14 @@ export default {
       this.$refs.form.reset();
     },
   },
+  created() {
+    this.nowUrl = process.env.HOMEPAGE_ROOT_URL + this.$route.fullPath.slice(1);
+  },
+  watch: {
+      $route(to, from) {
+        this.nowUrl = process.env.HOMEPAGE_ROOT_URL + to.fullPath.slice(1);
+        this.beforeUrl = process.env.HOMEPAGE_ROOT_URL + from.fullPath.slice(1);
+      },
+    },
 };
 </script>

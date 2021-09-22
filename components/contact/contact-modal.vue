@@ -65,6 +65,7 @@ export default {
         // openClass: 'is-open', // [5]
         disableFocus: false, // [7]
         debugMode: true, // [10]
+        passive: false,
       });
     },
   },
