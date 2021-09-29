@@ -21,8 +21,11 @@
             v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
           ></v-switch>
         </v-col>
+        <v-col cols="12" sm="12" md="12" lg="11">
+          <ReleteDocList />
+        </v-col>
       </v-row>
-      <ReleteDocList />
+      
       <v-btn text :ripple="false" class="back-wrapper" @click.native="backTo">
         <i class="material-icons">arrow_back</i>
       </v-btn>

@@ -67,7 +67,7 @@
   font-size: 20px;
   font-family: lust-script, sans-serif;
   font-style: normal;
-  color: #4fc3f7;
+  color: black;
   font-weight: 700;
   text-shadow: #fff 2px 0, #fff -2px 0, #fff 0 -2px, #fff 0 2px, #fff 2px 2px,
     #fff -2px 2px, #fff 2px -2px, #fff -2px -2px, #fff 1px 2px, #fff -1px 2px,

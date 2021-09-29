@@ -106,7 +106,6 @@ section.section {
   top: 30%;
   right: 0;
   bottom: 0;
-  left: 80vw;
   z-index: 5;
   // background: rgba(0, 0, 0, 0.6);
 }
@@ -118,6 +117,7 @@ section.section {
   overflow-y: auto;
   border-radius: 20px;
   padding: 10px;
+  border: solid 3px #eee;
 }
 
 .modal__header {
@@ -212,10 +212,6 @@ section.section {
 @media screen and (max-width: 640px) {
   section.section {
     left: 80%;
-  }
-  .modal__overlay {
-    top: 30%;
-    left: 40%;
   }
 }
 </style>

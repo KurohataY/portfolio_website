@@ -2,7 +2,7 @@
   <v-container>
     <v-row dense>
       <v-col cols="12">
-        <v-card color="#385F73" dark>
+        <v-card color="#29b6f6" dark>
           <v-card-title class="text-h5"> 関連記事(AI判定作成中)</v-card-title>
         </v-card>
       </v-col>
