@@ -6,10 +6,9 @@
           <button
             type="button"
             data-micromodal-trigger="modal-1"
-            class="button material-icons"
-            v-show="modalButtonShow"
+            class="button material-icons modal__open"
           >
-            help_outline
+            <v-icon>help_outline</v-icon>
           </button>
         </div>
       </div>
@@ -45,11 +44,6 @@ export default {
   mounted() {
     this.init();
   },
-  data() {
-    return {
-      modalButtonShow: true,
-    };
-  },
   component: {
     ContactForm,
   },
@@ -60,12 +54,10 @@ export default {
         disableScroll: true,
         awaitOpenAnimation: true,
         awaitCloseAnimation: true,
-        onShow: (modal) => {
-          console.info(`${modal.id} is shown`);
+        onShow: modal => {
           this.modalButtonShow = false;
         }, // [1]
-        onClose: (modal) => {
-          console.info(`${modal.id} is hidden`);
+        onClose: modal => {
           this.modalButtonShow = true;
         }, // [2]
         // openTrigger: 'data-custom-open', // [3]
@@ -73,6 +65,7 @@ export default {
         // openClass: 'is-open', // [5]
         disableFocus: false, // [7]
         debugMode: true, // [10]
+        passive: false,
       });
     },
   },
@@ -86,36 +79,33 @@ section.section {
   z-index: 5;
 }
 .button {
-  width: 100%;
-  height: 100%;
-  // padding: 10px 16px;
-  color: #000000;
-  font-weight: 700;
-  font-size: 55px;
-  transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
-}
-
-.button:hover,
-.button:focus {
-  background: transparent;
-  color: #000;
+  i {
+    width: 100%;
+    height: 100%;
+    // padding: 10px 16px;
+    // color: #000000;
+    font-weight: 700;
+    font-size: 55px;
+    transition: 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    font-size: 55px;
+  }
+  &:hover,
+  &:focus {
+    background: transparent;
+    color: #000;
+  }
 }
 
 /* Modal */
-.modal {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
-    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-}
 
 .modal__overlay {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 20%;
+  top: 30%;
   right: 0;
   bottom: 0;
-  left: 70%;
   z-index: 5;
   // background: rgba(0, 0, 0, 0.6);
 }
@@ -127,6 +117,7 @@ section.section {
   overflow-y: auto;
   border-radius: 20px;
   padding: 10px;
+  border: solid 3px #eee;
 }
 
 .modal__header {
@@ -143,6 +134,7 @@ section.section {
 
 .modal__close::before {
   content: "\2715";
+  color: #81d4fa;
 }
 
 .modal__content {
@@ -220,10 +212,6 @@ section.section {
 @media screen and (max-width: 640px) {
   section.section {
     left: 80%;
-  }
-  .modal__overlay {
-    top: 30%;
-    left: 40%;
   }
 }
 </style>

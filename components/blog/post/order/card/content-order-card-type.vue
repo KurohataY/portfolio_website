@@ -15,13 +15,17 @@
         :key="index"
       >
         <nuxt-link color="orange lighten-2" :to="'/blog/' + content.id">
-          <v-img
-            :src="content.thumbnail.url"
-            v-if="'thumbnail' in content"
-            class="white--text align-end"
-            height="150px"
-            max-width="344px"
-          ></v-img>
+          <picture v-if="'thumbnail' in content">
+            <source
+              :srcset="content.thumbnail.url + '?fm=webp'"
+              class="white--text align-end"
+            />
+            <img
+              :src="content.thumbnail.url"
+              class="white--text align-end"
+              style="height: 150px; max-width: 344px"
+            />
+          </picture>
           <v-img
             v-else
             :src="noImageUrl"
@@ -29,9 +33,9 @@
             height="150px"
             max-width="344px"
           ></v-img>
-          <v-card-title>
-            {{ content.title }}
-          </v-card-title>
+          <v-card flat>
+            <v-card-title v-text="content.title"> </v-card-title>
+          </v-card>
         </nuxt-link>
       </v-card>
       <v-card
@@ -79,5 +83,5 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

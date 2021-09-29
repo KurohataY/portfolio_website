@@ -8,83 +8,82 @@
       app
     >
       <v-list nav dense>
-        <template v-for="(item, i) in items">
-          <nuxt-link :to="item.to" :key="`first-${i}`">
+        <template v-for="(category, i) in categories">
+          <nuxt-link
+            :to="category.link"
+            :key="`first-${i}`"
+            @click.native="sentCategory(category.categoryQueryValue)"
+          >
             <v-list-item>
               <v-list-item-action>
-                <v-icon>{{ item.icon }}</v-icon>
+                <i class="material-icons">{{ category.iconName }}</i>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title v-text="item.title" />
+                <v-list-item-title v-text="category.name" />
               </v-list-item-content>
             </v-list-item>
           </nuxt-link>
         </template>
         <a
-          v-for="(item, i) in out_site_item"
+          v-for="(external, i) in external_link"
           :key="`second-${i}`"
-          :href="item.url"
+          :href="external.link"
+          target="_blank"
+          rel="noopener noreferrer"
           style="text-decoration: none"
         >
           <v-list-item nuxt>
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>{{ external.iconName }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
+              <v-list-item-title v-text="external.name" />
             </v-list-item-content>
           </v-list-item>
         </a>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-spacer></v-spacer>
+      <v-switch
+        v-model="theme"
+        :prepend-icon="themeIcon"
+        hide-details="false"
+        v-if="darkButtonShow"
+      ></v-switch>
     </v-app-bar>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["categories", "external_link", "darkButtonShow"],
   data() {
     return {
+      theme: this.$store.state.theme,
       clipped: false,
       drawer: false,
-      items: [
-        {
-          icon: "mdi-home-account",
-          title: "ホーム",
-          to: "/",
-        },
-        {
-          icon: "mdi-clipboard-file-outline",
-          title: "プロフィール",
-          to: "#profile",
-        },
-        {
-          icon: "mdi-electron-framework",
-          title: "制作物",
-          to: "#product",
-        },
-        {
-          icon: "mdi-file-question",
-          title: "お問い合わせ",
-          to: "#form",
-        },
-      ],
-      out_site_item: [
-        {
-          icon: "mdi-post-outline",
-          title: "開発ブログ",
-          url: "/blog",
-        },
-        {
-          icon: "mdi-controller-classic",
-          title: "趣味ブログ",
-          url: "https://izanagi-craft.com/",
-        },
-      ],
       miniVariant: false,
     };
+  },
+  methods: {
+    sentCategory(categoryValue) {
+      this.$emit("categoryValue", categoryValue);
+    },
+  },
+  computed: {
+    themeIcon() {
+      return this.$store.state.theme
+        ? "mdi-weather-night"
+        : "mdi-weather-sunny";
+    },
+  },
+  watch: {
+    theme() {
+      this.$store.dispatch("theme", this.theme);
+      this.$vuetify.theme.dark = this.theme;
+    },
   },
 };
 </script>

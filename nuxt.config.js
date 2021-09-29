@@ -79,10 +79,7 @@ export default {
       rel: 'icon',
       type: 'image/x-icon',
       href: '/favicon.ico'
-    }, {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
-    }],
+    }, ],
     script: [{
       src: 'https://sdk.form.run/js/v2/formrun.js'
     }, {
@@ -103,8 +100,8 @@ export default {
     src: '~/plugins/swiper.js',
     ssr: false
   }, {
-    src: '~plugins/vue-scrollto',
-  }],
+    src: '~/plugins/vue-scrollto',
+  }, ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -113,6 +110,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    'nuxt-material-design-icons-iconfont',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -129,6 +127,19 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
+        },
+        light: {
+          primary: colors.blue.darken2,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        },
+        /*以下追加*/
+        options: {
+          customProperties: true
         }
       }
     }
@@ -141,7 +152,9 @@ export default {
     TWITTER_MY_USER_ID: process.env.TWITTER_MY_USER_ID,
     HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
     NO_IMAGE_URL: process.env.NO_IMAGE_URL,
-    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    TWITTER_URL: process.env.TWITTER_URL,
+    RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
   },
 
   build: {
@@ -152,9 +165,6 @@ export default {
         }]
       ]
     },
-    // vendor: [
-    //   'vue-awesome-swiper',
-    // ],
   },
   router: {
     extendRoutes(routes, resolve) {
@@ -169,7 +179,26 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
     '@nuxtjs/google-gtag',
+    '@nuxtjs/proxy',
+    '@nuxtjs/pwa',
   ],
+  pwa: {
+    icon: {},
+    meta: {
+      // mobileAppIOSオプションを有効にする前に、以下記事を一読すること。
+      // https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb
+      // mobileAppIOS: true
+    },
+    manifest: {
+      name: 'Izanagi-portfolio-site',
+      lang: 'ja',
+      short_name: 'portfolio',
+      title: 'Izanagi-portfolio-site',
+      description: 'ポートフォリオサイトです',
+      theme_color: '#212121',
+      background_color: '#212121'
+    }
+  },
   sitemap: {
     path: '/sitemap.xml',
     hostname: process.env.HOMEPAGE_ROOT_URL,
@@ -192,7 +221,14 @@ export default {
   'google-gtag': {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },
-  axios: {},
+  proxy: {
+    '/related_doc_list/': {
+      target: 'http://localhost:5000',
+    }
+  },
+  axios: {
+    proxy: true
+  },
   generate: {
     async routes() {
       const pages = await axios

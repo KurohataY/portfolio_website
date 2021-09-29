@@ -55,42 +55,13 @@
 </template>
 <script>
 export default {
+  props:[
+    "categories"
+  ],
   data() {
     return {
       menuClick: false,
-      categories: [
-        {
-          name: "トップページ",
-          iconName: "home",
-          link: "/",
-          categoryQueryValue: undefined,
-        },
-        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
-        {
-          name: "プログラミング",
-          iconName: "code",
-          link: "/blog?category=プログラミング",
-          categoryQueryValue: "プログラミング",
-        },
-        {
-          name: "IT",
-          iconName: "computer",
-          link: "/blog?category=IT",
-          categoryQueryValue: "IT",
-        },
-        {
-          name: "日記",
-          iconName: "auto_stories",
-          link: "/blog?category=日記",
-          categoryQueryValue: "日記",
-        },
-        {
-          name: "プライバシーポリシー",
-          iconName: "policy",
-          link: "/blog/privacy-policy",
-          categoryQueryValue: undefined,
-        },
-      ],
+      
     };
   },
   methods: {
@@ -149,19 +120,19 @@ body {
 
 .nav-container {
   width: 100%;
-  height: 100%;
+  // height: 100%;
   margin: 0 auto;
   @include transition(all 0.3s ease 0.6s);
   z-index: 10;
   padding: 1em;
-  position: relative;
+  position: fixed;
+  opacity: 0.4;
 }
 .nav-z-index-change {
-  z-index: 0;
+  z-index:0;
 }
 
 .nav-container.nav-open {
-  margin-top: 5em;
   opacity: 0;
   @include transition(all 0.3s ease);
 }
@@ -180,16 +151,18 @@ body {
 
 @media screen and (max-width: 900px) and (min-width: 521px) {
   .nav-container.nav-open {
+    background-color: blanchedalmond;
     margin-top: 11em;
   }
 }
 
 .menu-icon {
-  position: relative;
+  position: fixed;
   display: block;
   width: 2.5em;
   height: 2.5em;
   cursor: pointer;
+  top: 20px;
 
   &:hover span {
     background: #222;
@@ -250,7 +223,7 @@ nav {
   position: fixed;
   top: 0;
   color: black;
-  z-index: 5;
+  z-index: 11;
   width: 100%;
   text-align: center;
 

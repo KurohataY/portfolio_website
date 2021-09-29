@@ -1,15 +1,12 @@
 <template>
-   <v-container class="pa-4 post">
-      <h1>{{title}}</h1>
-      <div style="margin: 50px 0; border: solid; background-color: #f4f4f4;padding: 10px">
-          <h2>目次</h2>
-          <Toc :tocList="tocList" />
-      </div>
-      <div v-for="(bc, index) in blogContent" :key="index + bc.fieldId">
-          <div v-html="bc.content"></div>
-          <div v-html="bc.html"> </div>
-      </div>
-    </v-container>
+  <v-container class="pa-4 post">
+    <h1>{{ title }}</h1>
+    <Toc :blogContent="blogContent" />
+    <div v-for="(bc, index) in blogContent" :key="index + bc.fieldId">
+      <div v-html="bc.content"></div>
+      <div v-html="bc.html"></div>
+    </div>
+  </v-container>
 </template>
 <script>
 import Toc from "~/components/blog/ui/toc/toc.vue";
@@ -17,7 +14,6 @@ export default {
   props: {
     title: String,
     blogContent: Array,
-    tocList: Array,
   },
   components: {
     Toc,
@@ -29,7 +25,7 @@ export default {
       var pre = document.getElementsByTagName("pre");
       for (let i = 0; i < pre.length; i++) {
         pre[i].style.overflow = "auto";
-        // pre[i].style.whiteSpace = "normal";
+        pre[i].style.border = "outset white";
       }
     });
   },
@@ -45,9 +41,5 @@ img {
 .toc_lists li a {
   text-decoration: none;
   color: black;
-}
-.prettyprint {
-  overflow: auto;
-  white-space: nomal !important;
 }
 </style>

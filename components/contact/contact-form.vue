@@ -14,6 +14,7 @@
       lazy-validation
     >
       <v-text-field
+        background-color="#e1f5fe"
         v-model="name"
         :counter="10"
         :rules="nameRules"
@@ -22,6 +23,7 @@
         required
       ></v-text-field>
       <v-text-field
+        background-color="#e1f5fe"
         v-model="email"
         :rules="emailRules"
         label="メールアドレス"
@@ -29,16 +31,33 @@
         required
       ></v-text-field>
       <v-textarea
+        background-color="#e1f5fe"
         rows="2"
         v-model="text"
         label="コメント"
         name="コメント"
         required
       ></v-textarea>
-      <v-btn color="error" class="mr-4" @click="reset">
-        フォームリセット
-      </v-btn>
-      <v-btn color="success" type="submit"> 送信 </v-btn>
+      <v-text-field
+        background-color="#e1f5fe"
+        v-model="nowUrl"
+        :value="nowUrl"
+        label="フォーム送信時URL"
+        name="フォーム送信時URL"
+        style="display: none"
+      ></v-text-field>
+      <v-text-field
+        background-color="#e1f5fe"
+        v-model="beforeUrl"
+        :value="beforeUrl"
+        label="遷移元"
+        name="遷移元"
+        style="display: none"
+      ></v-text-field>
+      <v-row align="center" justify="space-between">
+        <v-btn color="success" type="submit"> 送信 </v-btn>
+        <v-btn color="error" @click="reset"> リセット </v-btn>
+      </v-row>
     </v-form>
   </v-container>
 </template>
@@ -48,11 +67,15 @@
   font-size: 20px;
   font-family: lust-script, sans-serif;
   font-style: normal;
+  color: black;
   font-weight: 700;
   text-shadow: #fff 2px 0, #fff -2px 0, #fff 0 -2px, #fff 0 2px, #fff 2px 2px,
     #fff -2px 2px, #fff 2px -2px, #fff -2px -2px, #fff 1px 2px, #fff -1px 2px,
     #fff 1px -2px, #fff -1px -2px, #fff 2px 1px, #fff -2px 1px, #fff 2px -1px,
     #fff -2px -1px, rgba(0, 0, 0, 0.5) 3px 3px 3px;
+}
+.v-label {
+  color: black !important;
 }
 </style>
 
@@ -72,6 +95,8 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
       text: "",
+      nowUrl: "",
+      beforeUrl: "",
       select: null,
       formRunUrl: "https://form.run/api/v1/r/" + process.env.FORM_RUN_URL,
     };
@@ -96,6 +121,15 @@ export default {
     },
     reset() {
       this.$refs.form.reset();
+    },
+  },
+  created() {
+    this.nowUrl = process.env.HOMEPAGE_ROOT_URL + this.$route.fullPath.slice(1);
+  },
+  watch: {
+    $route(to, from) {
+      this.nowUrl = process.env.HOMEPAGE_ROOT_URL + to.fullPath.slice(1);
+      this.beforeUrl = process.env.HOMEPAGE_ROOT_URL + from.fullPath.slice(1);
     },
   },
 };
