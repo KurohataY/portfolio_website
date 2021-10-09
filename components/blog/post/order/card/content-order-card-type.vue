@@ -38,24 +38,30 @@
           </v-card>
         </nuxt-link>
       </v-card>
+      <client-only>
+        <v-card
+          class="pa-2 affiliate"
+          max-width="344"
+          height="300"
+          tile
+          v-show="index === ramdom1 || index === ramdom2"
+          v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
+          :key="index + 'rondom'"
+        >
+        </v-card>
+      </client-only>
+    </template>
+    <client-only>
       <v-card
         class="pa-2 affiliate"
         max-width="344"
         height="300"
         tile
-        v-if="index === ramdom1 || index === ramdom2"
+        v-show="ramdom1 === ramdom2"
         v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
-        :key="index + 'rondom'"
-      ></v-card>
-    </template>
-    <v-card
-      class="pa-2 affiliate"
-      max-width="344"
-      height="300"
-      tile
-      v-if="ramdom1 === ramdom2"
-      v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
-    ></v-card>
+      >
+      </v-card>
+    </client-only>
   </v-card>
 </template>
 <script>
