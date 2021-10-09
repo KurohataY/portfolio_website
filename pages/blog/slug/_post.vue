@@ -5,7 +5,7 @@
       :categories="categories"
     />
     <SPNavi v-else :categories="categories" :darkButtonShow="true" />
-    <div style="margin-top: 50px">
+    <div style="margin-top: 100px">
       <v-row justify="center" no-gutters>
         <v-col cols="12" sm="12" md="8" lg="8">
           <Post
