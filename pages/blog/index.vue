@@ -34,6 +34,7 @@
         background-color="transparent"
         class="d-flex justify-end mt-3 mb-5"
         v-model="toggle"
+        v-if="$vuetify.breakpoint.mdAndUp "
       >
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
@@ -47,10 +48,10 @@
         :contents="contents"
         :order="sidemenuContents"
         :sideMenu="sideMenu"
-        v-if="toggle === 0"
+        v-if="toggle === 0 && $vuetify.breakpoint.mdAndUp "
       />
 
-      <ContentOrderCardType :contents="contents" v-if="toggle === 1" />
+      <ContentOrderCardType :contents="contents" v-if="toggle === 1 || $vuetify.breakpoint.sm || $vuetify.breakpoint.xs" />
       <PaginationVuetify
         :paginationNum="paginationNum"
         @pageNum="emitPaginationEvent"

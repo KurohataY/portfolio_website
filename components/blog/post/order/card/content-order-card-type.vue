@@ -39,10 +39,9 @@
         </nuxt-link>
       </v-card>
       <v-card
-        class="pa-2"
+        class="pa-2 affiliate"
         max-width="344"
         height="300"
-        outlined
         tile
         v-if="index === ramdom1 || index === ramdom2"
         v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
@@ -50,10 +49,9 @@
       ></v-card>
     </template>
     <v-card
-      class="pa-2"
+      class="pa-2 affiliate"
       max-width="344"
       height="300"
-      outlined
       tile
       v-if="ramdom1 === ramdom2"
       v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
@@ -84,4 +82,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media screen and(max-width: 960px) {
+  .affiliate {
+    padding: 40px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
 </style>
