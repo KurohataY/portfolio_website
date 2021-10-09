@@ -5,20 +5,19 @@
       :categories="categories"
     />
     <SPNavi v-else :categories="categories" :darkButtonShow="true" />
-    <v-container style="margin-top: 50px">
+    <div style="margin-top: 50px">
       <v-row justify="center" no-gutters>
-        <v-col cols="10" sm="10" md="8" lg="8">
+        <v-col cols="12" sm="12" md="8" lg="8">
           <Post
             :title="title"
             :blogContent="content.blogContent"
           />
         </v-col>
-        <v-col cols="2" sm="2" md="2" lg="2">
+        <v-col cols="2" md="2" lg="2" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
           <v-switch
             v-model="theme"
             :prepend-icon="themeIcon"
             class="d-flex justify-end mt-3 mb-5"
-            v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
           ></v-switch>
         </v-col>
         <v-col cols="12" sm="12" md="12" lg="11">
@@ -29,7 +28,7 @@
       <v-btn text :ripple="false" class="back-wrapper" @click.native="backTo">
         <i class="material-icons">arrow_back</i>
       </v-btn>
-    </v-container>
+    </div>
   </div>
 </template>
 <script>
