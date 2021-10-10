@@ -51,11 +51,11 @@ export default {
     SideMenu,
     ReleteDocList,
   },
-  async asyncData({ params }) {
+  async asyncData({ params, $config }) {
     const { data } = await axios.get(
-      `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog/${params.p}`,
+      `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog/${params.p}`,
       {
-        headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
+        headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
       }
     );
 
@@ -72,8 +72,6 @@ export default {
     ) {
       description =
         $(data.blogContent[0].content).text().substr(0, 100) + "...";
-    } else if (data.contents !== undefined) {
-      description = $(data.contents).text().substr(0, 100) + "...";
     } else {
       description = "No create description...";
     }
@@ -81,7 +79,7 @@ export default {
     if ("thumbnail" in data && "url" in data.thumbnail) {
       thumbnailUrl = data.thumbnail.url;
     } else {
-      thumbnailUrl = process.env.NO_IMAGE_URL;
+      thumbnailUrl = $config.NO_IMAGE_URL;
     }
 
     return {
@@ -113,7 +111,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: process.env.HOMEPAGE_ROOT_URL + "/blog/" + this.content.id,
+          content: this.$config.HOMEPAGE_ROOT_URL + "/blog/" + this.content.id,
         },
         {
           hid: "og:description",
@@ -138,7 +136,7 @@ export default {
         {
           hid: "twitter:site",
           property: "twitter:site",
-          content: process.env.TWITTER_MY_USER_ID,
+          content: this.$config.TWITTER_MY_USER_ID,
         },
       ],
     };

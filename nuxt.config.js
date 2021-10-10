@@ -144,8 +144,7 @@ export default {
       }
     }
   },
-
-  env: {
+  privateRuntimeConfig: {
     FORM_RUN_URL: process.env.FORM_RUN_URL,
     MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
     MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
@@ -156,7 +155,17 @@ export default {
     TWITTER_URL: process.env.TWITTER_URL,
     RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
   },
-
+  publicRuntimeConfig: {
+    FORM_RUN_URL: process.env.FORM_RUN_URL,
+    MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
+    MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
+    TWITTER_MY_USER_ID: process.env.TWITTER_MY_USER_ID,
+    HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
+    NO_IMAGE_URL: process.env.NO_IMAGE_URL,
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    TWITTER_URL: process.env.TWITTER_URL,
+    RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
+  },
   build: {
     babel: {
       plugins: [

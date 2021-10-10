@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       show: false,
-      noImageUrl: process.env.NO_IMAGE_URL,
+      noImageUrl: this.$config.NO_IMAGE_URL,
       a8: a8,
       ramdom1: this.getRandomInt(10),
       ramdom2: this.getRandomInt(10),

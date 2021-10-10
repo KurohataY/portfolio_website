@@ -20,26 +20,21 @@
       <v-form v-model="valid" @submit.prevent>
         <v-container>
           <v-row>
-            <v-col cols="11">
               <v-text-field
                 v-model="searchWord"
                 :counter="100"
                 label="検索フォーム"
                 required
               ></v-text-field>
-            </v-col>
-            <v-col cols="1">
               <v-btn
                 :disabled="!valid"
                 class="mr-4"
                 @click="submit"
-                absolute
-                style="top: 24%"
+                style="margin-top: 15px"
                 icon
               >
                 <v-icon>mdi-magnify</v-icon>
               </v-btn>
-            </v-col>
           </v-row>
         </v-container>
       </v-form>
@@ -81,17 +76,17 @@ export default {
     paginationNum: 0,
     sideMenu: null,
   }),
-  async asyncData({ query }) {
+  async asyncData({ query, $config }) {
     const searchWord = query.word;
     const url =
       searchWord !== undefined
-        ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?q=${searchWord}`
-        : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
+        ? `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?q=${searchWord}`
+        : `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
 
     try {
       const { data } = await axios.get(url, {
         headers: {
-          "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+          "X-API-KEY": this.$config.MICRO_CMS_API_KEY,
         },
       });
 
@@ -114,13 +109,13 @@ export default {
       const searchWord = this.searchWord;
       const url =
         searchWord !== undefined
-          ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&q=${searchWord}`
-          : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
+          ? `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&q=${searchWord}`
+          : `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
 
       try {
         const { data } = await axios.get(url, {
           headers: {
-            "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+            "X-API-KEY": this.$config.MICRO_CMS_API_KEY,
           },
         });
 

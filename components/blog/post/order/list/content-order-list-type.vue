@@ -48,10 +48,6 @@
                   !('content' in content.blogContent)
                 "
               ></v-card-subtitle>
-              <v-card-subtitle
-                v-text="cutText(content.contents)"
-                v-else
-              ></v-card-subtitle>
             </v-card>
           </nuxt-link>
         </div>
@@ -74,7 +70,7 @@ export default {
   },
   data() {
     return {
-      noImageUrl: process.env.NO_IMAGE_URL,
+      noImageUrl: this.$config.NO_IMAGE_URL,
     };
   },
   computed: {
