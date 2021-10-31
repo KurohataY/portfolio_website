@@ -7,8 +7,8 @@
 
           <nuxt-link :to="'/blog/articles/' + content.id">
             <picture>
-              <source :srcset="content.thumbnail.url + '?fm=webp'" />
-              <img :src="content.thumbnail.url" />
+              <source :srcset="content.thumbnail.url + '?fm=webp&h=200'" />
+              <img :src="content.thumbnail.url + '?h=200'" />
             </picture>
             <p>{{ content.title }}</p>
           </nuxt-link>
