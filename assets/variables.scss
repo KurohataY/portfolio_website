@@ -94,3 +94,12 @@ blockquote {
 p {
   line-height: 2.5;
 }
+
+.a8 {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
+}
