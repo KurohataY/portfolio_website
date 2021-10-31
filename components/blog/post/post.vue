@@ -28,8 +28,12 @@ export default {
         pre[i].style.border = "outset white";
       }
       var img = document.getElementsByTagName("img");
-      for (let i = 0; i < img.length; i++) {
-        img[i].classList.add("post-img");
+      for (let n = 0; n < img.length; n++) {
+        console.log(img[n]);
+        img[n].style.display = "block";
+        img[n].style.textAlign = "center";
+        img[n].style.margin = "0 auto";
+        img[n].style.maxWidth = "80%";
       }
     });
   },
