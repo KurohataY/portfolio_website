@@ -190,6 +190,17 @@ export default {
     '@nuxtjs/google-gtag',
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
+    [
+      'nuxt-compress',
+      {
+        gzip: {
+          cache: true,
+        },
+        brotli: {
+          threshold: 10240,
+        },
+      },
+    ],
   ],
   pwa: {
     icon: {},

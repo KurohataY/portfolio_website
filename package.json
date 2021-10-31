@@ -29,6 +29,7 @@
     "vuetify": "^2.5.10"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.1"
+    "@nuxtjs/vuetify": "^1.12.1",
+    "nuxt-compress": "^5.0.0"
   }
 }
