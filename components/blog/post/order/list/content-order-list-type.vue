@@ -21,9 +21,11 @@
               <picture v-if="'thumbnail' in content">
                 <source
                   :srcset="content.thumbnail.url + '?fm=webp&w=150&h=150'"
+                  loading="lazy"
                 />
                 <img
-                  :src="content.thumbnail.url + '?w=150&h=150'"
+                  :srcset="content.thumbnail.url + '?w=150&h=150'"
+                  loading="lazy"
                 />
               </picture>
               <img v-else :src="noImageUrl">

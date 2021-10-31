@@ -17,13 +17,16 @@
         <nuxt-link color="orange lighten-2" :to="'/blog/articles/' + content.id">
           <picture v-if="'thumbnail' in content">
             <source
-              :srcset="content.thumbnail.url  + '?fm=webp&h=150'"
+              :srcset="content.thumbnail.url  + '?fm=webp'"
               class="white--text align-end"
+              style="max-width: 344px;max-height:200px"
+              loading="lazy"
             />
             <img
-              :src="content.thumbnail.url  + '?h=150'"
+              :srcset="content.thumbnail.url"
               class="white--text align-end"
-              style="max-width: 344px"
+              style="max-width: 344px;max-height:200px"
+              loading="lazy"
             />
           </picture>
           <v-img
@@ -34,7 +37,7 @@
             max-width="344px"
           ></v-img>
           <v-card flat>
-            <v-card-title v-text="content.title"> </v-card-title>
+            <v-card-title v-text="content.title" style="padding:0"> </v-card-title>
           </v-card>
         </nuxt-link>
       </v-card>
