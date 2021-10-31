@@ -14,30 +14,34 @@
         tile
         :key="index"
       >
-        <nuxt-link color="orange lighten-2" :to="'/blog/articles/' + content.id">
+        <nuxt-link
+          color="orange lighten-2"
+          :to="'/blog/articles/' + content.id"
+        >
           <picture v-if="'thumbnail' in content">
             <source
-              :srcset="content.thumbnail.url  + '?fm=webp'"
+              :srcset="content.thumbnail.url + '?fm=webp'"
               class="white--text align-end"
-              style="max-width: 344px;max-height:200px"
+              style="width: 328px; max-height: 200px"
               loading="lazy"
             />
             <img
               :srcset="content.thumbnail.url"
               class="white--text align-end"
-              style="max-width: 344px;max-height:200px"
+              style="width: 328px; max-height: 200px"
               loading="lazy"
             />
           </picture>
-          <v-img
+          <img
             v-else
-            :src="noImageUrl"
+            :srcset="noImageUrl"
             class="white--text align-end"
-            height="150px"
-            max-width="344px"
-          ></v-img>
+            style="width: 328px; max-height: 200px"
+            loading="lazy"
+          />
           <v-card flat>
-            <v-card-title v-text="content.title" style="padding:0"> </v-card-title>
+            <v-card-title v-text="content.title" style="padding: 0">
+            </v-card-title>
           </v-card>
         </nuxt-link>
       </v-card>
