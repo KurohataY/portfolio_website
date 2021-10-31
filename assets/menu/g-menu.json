@@ -34,11 +34,5 @@
         "iconName": "policy",
         "link": "/blog/privacy-policy",
         "categoryQueryValue": "undefined"
-    },
-    {
-        "name": "サイト内検索",
-        "iconName": "search",
-        "link": "/blog/search",
-        "categoryQueryValue": "undefined"
     }
 ]

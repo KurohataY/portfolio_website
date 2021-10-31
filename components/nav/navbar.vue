@@ -24,23 +24,6 @@
             </v-list-item>
           </nuxt-link>
         </template>
-        <a
-          v-for="(external, i) in external_link"
-          :key="`second-${i}`"
-          :href="external.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="text-decoration: none"
-        >
-          <v-list-item nuxt>
-            <v-list-item-icon>
-              <v-icon>{{ external.iconName }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="external.name" />
-            </v-list-item-content>
-          </v-list-item>
-        </a>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar fixed app>
@@ -58,7 +41,7 @@
 
 <script>
 export default {
-  props: ["categories", "external_link", "darkButtonShow"],
+  props: ["categories", "darkButtonShow"],
   data() {
     return {
       theme: this.$store.state.theme,

@@ -55,7 +55,7 @@
       <PaginationVuetify
         :paginationNum="paginationNum"
         @pageNum="emitPaginationEvent"
-        style="margin-top: 50px"
+        style="margin-top: 100px"
       />
       <Profile style="margin-top: 50px" v-if="toggle === 1" />
     </v-container>

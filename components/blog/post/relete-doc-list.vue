@@ -8,7 +8,7 @@
       </v-col>
 
       <v-col v-for="(item, i) in relete" :key="i" cols="12">
-        <nuxt-link color="orange lighten-2" :to="'/blog/' + item.id">
+        <nuxt-link color="orange lighten-2" :to="'/blog/articles/' + item.id">
           <v-card>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>

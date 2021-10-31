@@ -111,7 +111,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: this.$config.HOMEPAGE_ROOT_URL + "/blog/" + this.content.id,
+          content: this.$config.HOMEPAGE_ROOT_URL + "/blog/articles/" + this.content.id,
         },
         {
           hid: "og:description",
