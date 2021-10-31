@@ -3,11 +3,11 @@
 // The variables you want to modify
 // $font-size-root: 20px;
 blockquote {
- word-break: break-all;
+  word-break: break-all;
 
- cite::before {
-   content: "参照先：";
- }
+  cite::before {
+    content: "参照先：";
+  }
 }
 
 .blockquote-info {
@@ -61,7 +61,8 @@ blockquote {
   background: #efefef;
   color: #555;
   border-radius: 5px;
-  border-left: 3px solid #40c4ff;;
+  border-left: 3px solid #40c4ff;
+  ;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10);
 
   &:before {
@@ -102,4 +103,16 @@ p {
   height: -webkit-fill-available;
   height: -moz-available;
   height: stretch;
+}
+
+.post-img {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+@media screen and (max-width: 640px) {
+  .post-img {
+    width: 80%;
+  }
 }

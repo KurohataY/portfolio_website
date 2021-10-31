@@ -27,17 +27,15 @@ export default {
         pre[i].style.overflow = "auto";
         pre[i].style.border = "outset white";
       }
+      var img = document.getElementsByTagName("img");
+      for (let i = 0; i < img.length; i++) {
+        img[i].classList.add("post-img");
+      }
     });
   },
 };
 </script>
 <style lang="scss" scoped>
-img {
-  width: 80%;
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-}
 .toc_lists li a {
   text-decoration: none;
   color: black;
