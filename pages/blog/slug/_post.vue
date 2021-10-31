@@ -11,6 +11,7 @@
           <Post
             :title="title"
             :blogContent="content.blogContent"
+            :tags="content.tags"
           />
         </v-col>
         <v-col cols="2" md="2" lg="2" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">

@@ -6,17 +6,21 @@
       <div v-html="bc.content"></div>
       <div v-html="bc.html"></div>
     </div>
+    <Tags :tags="tags" />
   </v-container>
 </template>
 <script>
 import Toc from "~/components/blog/ui/toc/toc.vue";
+import Tags from "~/components/blog/ui/tags.vue";
 export default {
   props: {
     title: String,
     blogContent: Array,
+    tags: String,
   },
   components: {
     Toc,
+    Tags,
   },
   mounted: function () {
     // https://github.com/google/code-prettify/issues/578
