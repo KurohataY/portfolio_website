@@ -14,16 +14,16 @@
         tile
         :key="index"
       >
-        <nuxt-link color="orange lighten-2" :to="'/blog/' + content.id">
+        <nuxt-link color="orange lighten-2" :to="'/blog/articles/' + content.id">
           <picture v-if="'thumbnail' in content">
             <source
-              :srcset="content.thumbnail.url + '?fm=webp'"
+              :srcset="content.thumbnail.url  + '?fm=webp&h=150'"
               class="white--text align-end"
             />
             <img
-              :src="content.thumbnail.url"
+              :src="content.thumbnail.url  + '?h=150'"
               class="white--text align-end"
-              style="height: 150px; max-width: 344px"
+              style="max-width: 344px"
             />
           </picture>
           <v-img

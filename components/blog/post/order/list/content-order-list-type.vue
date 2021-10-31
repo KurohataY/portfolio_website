@@ -11,7 +11,7 @@
     >
       <v-card v-for="content in contents" :key="content.id">
         <div class="d-flex flex-no-wrap">
-          <nuxt-link :to="'/blog/' + content.id">
+          <nuxt-link :to="'/blog/articles/' + content.id">
             <v-avatar
               class="ma-3"
               size="125"
@@ -20,11 +20,10 @@
             >
               <picture v-if="'thumbnail' in content">
                 <source
-                  :srcset="content.thumbnail.url + '?fm=webp'"
+                  :srcset="content.thumbnail.url + '?fm=webp&w=150&h=150'"
                 />
                 <img
-                  :src="content.thumbnail.url"
-                  style="height: 125px"
+                  :src="content.thumbnail.url + '?w=150&h=150'"
                 />
               </picture>
               <img v-else :src="noImageUrl">
