@@ -13,3 +13,4 @@ services:
     # Hot Module Replacement (HMR) is enable for virtual box.
     environment:
       - CHOKIDAR_USEPOLLING=true
+    # platform: linux/x86_64
