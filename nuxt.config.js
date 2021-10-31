@@ -178,7 +178,7 @@ export default {
   router: {
     extendRoutes(routes, resolve) {
       routes.push({
-        path: '/blog/:p',
+        path: '/blog/articles/:p',
         component: resolve(__dirname, 'pages/blog/slug/_post.vue'),
         name: 'contents',
       })
@@ -233,7 +233,7 @@ export default {
   proxy: {
     '/related_doc_list/': {
       target: 'http://localhost:5000',
-    }
+    },
   },
   axios: {
     proxy: true
@@ -248,7 +248,7 @@ export default {
         })
         .then((res) =>
           res.data.contents.map((content) => ({
-            route: `/blog/${content.id}`,
+            route: `/blog/articles/${content.id}`,
             payload: content
           }))
         )
