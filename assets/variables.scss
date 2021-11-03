@@ -2,6 +2,14 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+blockquote {
+  word-break: break-all;
+
+  cite::before {
+    content: "参照先：";
+  }
+}
+
 .blockquote-info {
   position: relative;
   background: #bef5f7;
@@ -39,7 +47,7 @@
     border-top: 1px solid #808080;
     padding-top: 10px;
     font-size: 0.8rem;
-    text-align: center;
+    text-align: left;
     font-style: italic;
     color: #777;
   }
@@ -53,7 +61,8 @@
   background: #efefef;
   color: #555;
   border-radius: 5px;
-  border-left: 3px solid #40c4ff;;
+  border-left: 3px solid #40c4ff;
+  ;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10);
 
   &:before {
@@ -77,12 +86,21 @@
 
   cite {
     display: block;
-    text-align: right;
     color: #888888;
     font-size: 0.9em;
+    text-align: left;
   }
 }
 
 p {
   line-height: 2.5;
+}
+
+.a8 {
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
 }

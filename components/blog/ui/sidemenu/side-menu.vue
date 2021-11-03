@@ -5,7 +5,7 @@
     <v-card class="mx-auto">
       <v-list three-line>
         <template v-for="(content, index) in order">
-          <nuxt-link :to="'/blog/' + content.id" :key="index + content.id">
+          <nuxt-link :to="'/blog/articles/' + content.id" :key="index + content.id">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title v-html="content.title"></v-list-item-title>

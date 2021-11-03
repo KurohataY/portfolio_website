@@ -98,7 +98,7 @@ export default {
       nowUrl: "",
       beforeUrl: "",
       select: null,
-      formRunUrl: "https://form.run/api/v1/r/" + process.env.FORM_RUN_URL,
+      formRunUrl: "https://form.run/api/v1/r/" + this.$config.FORM_RUN_URL,
     };
   },
   methods: {
@@ -124,12 +124,12 @@ export default {
     },
   },
   created() {
-    this.nowUrl = process.env.HOMEPAGE_ROOT_URL + this.$route.fullPath.slice(1);
+    this.nowUrl = this.$config.HOMEPAGE_ROOT_URL + this.$route.fullPath.slice(1);
   },
   watch: {
     $route(to, from) {
-      this.nowUrl = process.env.HOMEPAGE_ROOT_URL + to.fullPath.slice(1);
-      this.beforeUrl = process.env.HOMEPAGE_ROOT_URL + from.fullPath.slice(1);
+      this.nowUrl = this.$config.HOMEPAGE_ROOT_URL + to.fullPath.slice(1);
+      this.beforeUrl = this.$config.HOMEPAGE_ROOT_URL + from.fullPath.slice(1);
     },
   },
 };

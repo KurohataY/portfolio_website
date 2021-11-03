@@ -34,6 +34,7 @@
         background-color="transparent"
         class="d-flex justify-end mt-3 mb-5"
         v-model="toggle"
+        v-if="$vuetify.breakpoint.mdAndUp "
       >
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
@@ -47,14 +48,14 @@
         :contents="contents"
         :order="sidemenuContents"
         :sideMenu="sideMenu"
-        v-if="toggle === 0"
+        v-if="toggle === 0 && $vuetify.breakpoint.mdAndUp "
       />
 
-      <ContentOrderCardType :contents="contents" v-if="toggle === 1" />
+      <ContentOrderCardType :contents="contents" v-if="toggle === 1 || $vuetify.breakpoint.sm || $vuetify.breakpoint.xs" />
       <PaginationVuetify
         :paginationNum="paginationNum"
         @pageNum="emitPaginationEvent"
-        style="margin-top: 50px"
+        style="margin-top: 100px"
       />
       <Profile style="margin-top: 50px" v-if="toggle === 1" />
     </v-container>
@@ -117,7 +118,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: process.env.HOMEPAGE_ROOT_URL + "/blog/",
+          content: this.$config.HOMEPAGE_ROOT_URL + "/blog/",
         },
         {
           hid: "og:description",
@@ -143,27 +144,27 @@ export default {
         {
           hid: "twitter:site",
           property: "twitter:site",
-          content: process.env.TWITTER_MY_USER_ID,
+          content: this.$config.TWITTER_MY_USER_ID,
         },
       ],
     };
   },
-  async asyncData({ query }) {
+  async asyncData({ query, $config }) {
     const category = query.category;
     const url =
       category !== undefined
-        ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}`
-        : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
+        ? `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}`
+        : `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
 
     const res = await Promise.all([
       axios.get(encodeURI(url), {
-        headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
+        headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
       }),
       axios.get(
-        `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=100`,
+        `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=100`,
         {
           headers: {
-            "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+            "X-API-KEY": $config.MICRO_CMS_API_KEY,
           },
         }
       ),
@@ -196,12 +197,12 @@ export default {
       const offset = this.pageNum * 10 - 10;
       const url =
         this.category !== undefined
-          ? `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}`
-          : `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
+          ? `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}`
+          : `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
       try {
         const { data } = await axios.get(url, {
           headers: {
-            "X-API-KEY": process.env.MICRO_CMS_API_KEY,
+            "X-API-KEY": this.$config.MICRO_CMS_API_KEY,
           },
         });
         this.paginationNum = (data.totalCount / 10 + 1) | 0;

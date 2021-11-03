@@ -144,8 +144,7 @@ export default {
       }
     }
   },
-
-  env: {
+  privateRuntimeConfig: {
     FORM_RUN_URL: process.env.FORM_RUN_URL,
     MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
     MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
@@ -156,7 +155,17 @@ export default {
     TWITTER_URL: process.env.TWITTER_URL,
     RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
   },
-
+  publicRuntimeConfig: {
+    FORM_RUN_URL: process.env.FORM_RUN_URL,
+    MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
+    MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
+    TWITTER_MY_USER_ID: process.env.TWITTER_MY_USER_ID,
+    HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
+    NO_IMAGE_URL: process.env.NO_IMAGE_URL,
+    GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+    TWITTER_URL: process.env.TWITTER_URL,
+    RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
+  },
   build: {
     babel: {
       plugins: [
@@ -169,7 +178,7 @@ export default {
   router: {
     extendRoutes(routes, resolve) {
       routes.push({
-        path: '/blog/:p',
+        path: '/blog/articles/:p',
         component: resolve(__dirname, 'pages/blog/slug/_post.vue'),
         name: 'contents',
       })
@@ -181,6 +190,17 @@ export default {
     '@nuxtjs/google-gtag',
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
+    [
+      'nuxt-compress',
+      {
+        gzip: {
+          cache: true,
+        },
+        brotli: {
+          threshold: 10240,
+        },
+      },
+    ],
   ],
   pwa: {
     icon: {},
@@ -224,7 +244,7 @@ export default {
   proxy: {
     '/related_doc_list/': {
       target: 'http://localhost:5000',
-    }
+    },
   },
   axios: {
     proxy: true
@@ -239,7 +259,7 @@ export default {
         })
         .then((res) =>
           res.data.contents.map((content) => ({
-            route: `/blog/${content.id}`,
+            route: `/blog/articles/${content.id}`,
             payload: content
           }))
         )

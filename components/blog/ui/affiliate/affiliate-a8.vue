@@ -28,12 +28,4 @@ export default {
 </script>
 
 <style lang="scss">
-img {
-  width: -webkit-fill-available;
-  width: -moz-available;
-  width: stretch;
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: stretch;
-}
 </style>

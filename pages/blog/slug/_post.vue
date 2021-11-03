@@ -5,20 +5,20 @@
       :categories="categories"
     />
     <SPNavi v-else :categories="categories" :darkButtonShow="true" />
-    <v-container style="margin-top: 50px">
+    <div style="margin-top: 100px">
       <v-row justify="center" no-gutters>
-        <v-col cols="10" sm="10" md="8" lg="8">
+        <v-col cols="12" sm="12" md="8" lg="8">
           <Post
             :title="title"
             :blogContent="content.blogContent"
+            :tags="content.tags"
           />
         </v-col>
-        <v-col cols="2" sm="2" md="2" lg="2">
+        <v-col cols="2" md="2" lg="2" v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
           <v-switch
             v-model="theme"
             :prepend-icon="themeIcon"
             class="d-flex justify-end mt-3 mb-5"
-            v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
           ></v-switch>
         </v-col>
         <v-col cols="12" sm="12" md="12" lg="11">
@@ -29,7 +29,7 @@
       <v-btn text :ripple="false" class="back-wrapper" @click.native="backTo">
         <i class="material-icons">arrow_back</i>
       </v-btn>
-    </v-container>
+    </div>
   </div>
 </template>
 <script>
@@ -52,11 +52,11 @@ export default {
     SideMenu,
     ReleteDocList,
   },
-  async asyncData({ params }) {
+  async asyncData({ params, $config }) {
     const { data } = await axios.get(
-      `https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog/${params.p}`,
+      `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog/${params.p}`,
       {
-        headers: { "X-API-KEY": process.env.MICRO_CMS_API_KEY },
+        headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
       }
     );
 
@@ -73,8 +73,6 @@ export default {
     ) {
       description =
         $(data.blogContent[0].content).text().substr(0, 100) + "...";
-    } else if (data.contents !== undefined) {
-      description = $(data.contents).text().substr(0, 100) + "...";
     } else {
       description = "No create description...";
     }
@@ -82,7 +80,7 @@ export default {
     if ("thumbnail" in data && "url" in data.thumbnail) {
       thumbnailUrl = data.thumbnail.url;
     } else {
-      thumbnailUrl = process.env.NO_IMAGE_URL;
+      thumbnailUrl = $config.NO_IMAGE_URL;
     }
 
     return {
@@ -114,7 +112,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: process.env.HOMEPAGE_ROOT_URL + "/blog/" + this.content.id,
+          content: this.$config.HOMEPAGE_ROOT_URL + "/blog/articles/" + this.content.id,
         },
         {
           hid: "og:description",
@@ -139,7 +137,7 @@ export default {
         {
           hid: "twitter:site",
           property: "twitter:site",
-          content: process.env.TWITTER_MY_USER_ID,
+          content: this.$config.TWITTER_MY_USER_ID,
         },
       ],
     };

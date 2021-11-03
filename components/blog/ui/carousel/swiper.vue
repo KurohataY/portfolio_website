@@ -5,10 +5,10 @@
         <swiper-slide :key="content.id" v-if="'thumbnail' in content">
           <!-- <v-img v-if="'thumbnail' in content" :src="content.thumbnail.url" width="250px" height="200px"></v-img> -->
 
-          <nuxt-link :to="'/blog/' + content.id">
+          <nuxt-link :to="'/blog/articles/' + content.id">
             <picture>
-              <source :srcset="content.thumbnail.url + '?fm=webp'" />
-              <img :src="content.thumbnail.url" />
+              <source :srcset="content.thumbnail.url + '?fm=webp&h=200'" />
+              <img :src="content.thumbnail.url + '?h=200'" />
             </picture>
             <p>{{ content.title }}</p>
           </nuxt-link>

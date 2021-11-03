@@ -1,4 +1,4 @@
-FROM centos:8
+FROM almalinux:latest
 
 WORKDIR /portfolio_web_site
 
@@ -6,7 +6,7 @@ RUN dnf -y update
 
 RUN dnf -y install epel-release
 
-RUN curl -sL https://rpm.nodesource.com/setup_15.x | bash -
+RUN curl -sL https://rpm.nodesource.com/setup_16.x | bash -
 RUN dnf install -y gcc-c++
 RUN dnf install -y nodejs
 

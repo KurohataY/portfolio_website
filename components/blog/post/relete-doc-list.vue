@@ -8,7 +8,7 @@
       </v-col>
 
       <v-col v-for="(item, i) in relete" :key="i" cols="12">
-        <nuxt-link color="orange lighten-2" :to="'/blog/' + item.id">
+        <nuxt-link color="orange lighten-2" :to="'/blog/articles/' + item.id">
           <v-card>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -17,7 +17,7 @@
                   v-text="item.title"
                 ></v-card-title>
 
-                <v-card-subtitle>関連度：{{ item.score }}</v-card-subtitle>
+                <!-- <v-card-subtitle>関連度：{{ item.score }}</v-card-subtitle> -->
               </div>
             </div>
           </v-card>
@@ -38,10 +38,9 @@ export default {
   },
   mounted() {
     axios
-      .get(`${process.env.RELETE_DOC_API_URL}/${this.$route.params.p}`)
+      .get(`${this.$config.RELETE_DOC_API_URL}/${this.$route.params.p}`)
       .then((res) => {
         this.relete = res.data;
-        console.log(res)
       })
       .catch((error) => {
         console.log(error);

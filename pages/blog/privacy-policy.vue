@@ -119,7 +119,7 @@ export default {
         {
           hid: "og:url",
           property: "og:url",
-          content: process.env.HOMEPAGE_ROOT_URL + "/blog/privacy-policy",
+          content: this.$config.HOMEPAGE_ROOT_URL + "/blog/privacy-policy",
         },
         {
           hid: "og:description",
@@ -139,7 +139,7 @@ export default {
         {
           hid: "twitter:site",
           property: "twitter:site",
-          content: process.env.TWITTER_MY_USER_ID,
+          content: this.$config.TWITTER_MY_USER_ID,
         },
       ],
     };

@@ -14,50 +14,61 @@
         tile
         :key="index"
       >
-        <nuxt-link color="orange lighten-2" :to="'/blog/' + content.id">
+        <nuxt-link
+          color="orange lighten-2"
+          :to="'/blog/articles/' + content.id"
+        >
           <picture v-if="'thumbnail' in content">
             <source
               :srcset="content.thumbnail.url + '?fm=webp'"
               class="white--text align-end"
+              style="width: 328px; max-height: 200px"
+              loading="lazy"
             />
             <img
-              :src="content.thumbnail.url"
+              :srcset="content.thumbnail.url"
               class="white--text align-end"
-              style="height: 150px; max-width: 344px"
+              style="width: 328px; max-height: 200px"
+              loading="lazy"
             />
           </picture>
-          <v-img
+          <img
             v-else
-            :src="noImageUrl"
+            :srcset="noImageUrl"
             class="white--text align-end"
-            height="150px"
-            max-width="344px"
-          ></v-img>
+            style="width: 328px; max-height: 200px"
+            loading="lazy"
+          />
           <v-card flat>
-            <v-card-title v-text="content.title"> </v-card-title>
+            <v-card-title v-text="content.title" style="padding: 0">
+            </v-card-title>
           </v-card>
         </nuxt-link>
       </v-card>
+      <client-only>
+        <v-card
+          class="pa-2 affiliate"
+          max-width="344"
+          height="300"
+          tile
+          v-show="index === ramdom1 || index === ramdom2"
+          v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
+          :key="index + 'rondom'"
+        >
+        </v-card>
+      </client-only>
+    </template>
+    <client-only>
       <v-card
-        class="pa-2"
+        class="pa-2 affiliate"
         max-width="344"
         height="300"
-        outlined
         tile
-        v-if="index === ramdom1 || index === ramdom2"
+        v-show="ramdom1 === ramdom2"
         v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
-        :key="index + 'rondom'"
-      ></v-card>
-    </template>
-    <v-card
-      class="pa-2"
-      max-width="344"
-      height="300"
-      outlined
-      tile
-      v-if="ramdom1 === ramdom2"
-      v-html="a8[getRandomInt(countJsonData(a8))].html.pc"
-    ></v-card>
+      >
+      </v-card>
+    </client-only>
   </v-card>
 </template>
 <script>
@@ -67,7 +78,7 @@ export default {
   data() {
     return {
       show: false,
-      noImageUrl: process.env.NO_IMAGE_URL,
+      noImageUrl: this.$config.NO_IMAGE_URL,
       a8: a8,
       ramdom1: this.getRandomInt(10),
       ramdom2: this.getRandomInt(10),
@@ -84,4 +95,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@media screen and(max-width: 960px) {
+  .affiliate {
+    padding: 40px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
 </style>

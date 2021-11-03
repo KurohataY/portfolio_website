@@ -1,6 +1,6 @@
 <template>
   <article>
-    <Navi :categories="categories" :external_link="external_link" :darkButtonShow="false" />
+    <Navi :categories="categories" :darkButtonShow="false" />
     <Top />
     <div class="under-water">
       <v-container>
@@ -79,14 +79,6 @@ export default {
           name: "開発ブログ",
           iconName: "code",
           link: "/blog",
-          categoryQueryValue: undefined,
-        },
-      ],
-      external_link: [
-        {
-          name: "趣味ブログ",
-          iconName: "sports_esports",
-          link: "//izanagi-craft.com/",
           categoryQueryValue: undefined,
         },
       ],
