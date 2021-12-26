@@ -42,7 +42,7 @@ export default {
       profileName: "イザナギ",
       profileSubText: " 趣味：漫画、アニメ鑑賞、温泉旅行 ",
       profileText:
-        "日々学習したことや気になったことを気まぐれに投稿しています。<br>趣味ブログ：https://izanagi-craft.com/",
+        "日々学習したことや気になったことを気まぐれに投稿しています。",
       twitterUrl: this.$config.TWITTER_URL,
     };
   },
