@@ -231,7 +231,7 @@ export default {
         })
         .then((res) => {
           const routes = res.data.contents.map((content) => {
-            return `/blog/${content.id}`
+            return `/blog/articles/${content.id}`
           })
           callback(null, routes)
         })

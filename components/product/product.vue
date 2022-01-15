@@ -41,7 +41,7 @@ export default {
         title: "Japanese Middle Name",
         subtitle:
           "日本古来の名前制度を試すことができます！初めての制作物なので、たまにデザイン直したりしてます。しかし、戒めのために残してます。",
-        url: "https://middle-name.herokuapp.com/",
+        url: "/app/middle_name/",
         target: "_blank",
       },
       {
