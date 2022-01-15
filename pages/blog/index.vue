@@ -196,7 +196,7 @@ export default {
     async getContentData() {
       const offset = this.pageNum * 10 - 10;
       const url =
-        this.category !== undefined
+        this.category !== "undefined"
           ? `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}`
           : `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
       try {
