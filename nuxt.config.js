@@ -164,7 +164,7 @@ export default {
     NO_IMAGE_URL: process.env.NO_IMAGE_URL,
     GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
     TWITTER_URL: process.env.TWITTER_URL,
-    RELETE_DOC_API_URL: process.env.RELETE_DOC_API_URL,
+    RELETE_TITLES_API_URL: process.env.RELETE_TITLES_API_URL,
   },
   build: {
     babel: {
@@ -242,8 +242,8 @@ export default {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },
   proxy: {
-    '/related_doc_list/': {
-      target: 'http://localhost:5000',
+    '/releted_title': {
+      target: 'http://localhost:8000',
     },
   },
   axios: {

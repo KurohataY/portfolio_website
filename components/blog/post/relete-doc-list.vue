@@ -38,7 +38,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`${this.$config.RELETE_DOC_API_URL}/${this.$route.params.p}`)
+      .get(`http://localhost:8000/api/v1/releted_title/${this.$route.params.p}`)
       .then((res) => {
         this.relete = res.data;
       })
