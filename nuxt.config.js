@@ -242,8 +242,11 @@ export default {
     id: process.env.GOOGLE_ANALYTICS_ID,
   },
   proxy: {
-    '/releted_title': {
-      target: 'http://localhost:8000',
+    '/api': {
+      target: 'http://[::1]:5000',
+      pathRewrite: {
+        '^/api': '/'
+      }
     },
   },
   axios: {
