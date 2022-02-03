@@ -4,7 +4,7 @@
     <AffiliateA8 />
     <v-card class="mx-auto">
       <v-list three-line>
-        <template v-for="(content, index) in order">
+        <template v-for="(content, index) in sideMenuContents">
           <nuxt-link :to="'/blog/articles/' + content.id" :key="index + content.id">
             <v-list-item>
               <v-list-item-content>
@@ -26,7 +26,7 @@
 import Profile from "~/components/blog/ui/profile/profile.vue"
 import AffiliateA8 from "~/components/blog/ui/affiliate/affiliate-a8.vue";
 export default {
-  props: ["content", "order"],
+  props: ["content", "sideMenuContents"],
   components:{
     Profile,
     AffiliateA8

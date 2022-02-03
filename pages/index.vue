@@ -78,7 +78,7 @@ export default {
         {
           name: "開発ブログ",
           iconName: "code",
-          link: "/blog",
+          link: "/blog/pages/1",
           categoryQueryValue: undefined,
         },
       ],

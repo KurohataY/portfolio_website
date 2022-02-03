@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "HOST=localhost PORT=3000 nuxt",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -16,9 +16,9 @@
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sitemap": "^2.4.0",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "cheerio": "^1.0.0-rc.10",
-    "core-js": "^3.20.1",
+    "core-js": "^3.21.0",
     "express": "^4.17.2",
     "micromodal": "^0.4.10",
     "nuxt": "^2.15.8",
@@ -26,7 +26,7 @@
     "swiper": "5.x",
     "vue-awesome-swiper": "^4.1.1",
     "vue-scrollto": "^2.20.0",
-    "vuetify": "^2.6.1"
+    "vuetify": "^2.6.3"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.3",

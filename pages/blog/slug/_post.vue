@@ -154,23 +154,23 @@ export default {
           link: "/",
           categoryQueryValue: undefined,
         },
-        { name: "ブログトップ", iconName: "library_books", link: "/blog" },
+        { name: "ブログトップ", iconName: "library_books", link: "/blog/pages/1" },
         {
           name: "プログラミング",
           iconName: "code",
-          link: "/blog?category=プログラミング",
+          link: "/blog/category/programming/pages/1",
           categoryQueryValue: "プログラミング",
         },
         {
           name: "IT",
           iconName: "computer",
-          link: "/blog?category=IT",
+          link: "/blog/category/it/pages/1",
           categoryQueryValue: "IT",
         },
         {
           name: "日記",
           iconName: "menu_book",
-          link: "/blog?category=日記",
+          link: "/blog/category/daily/pages/1",
           categoryQueryValue: "日記",
         },
         {

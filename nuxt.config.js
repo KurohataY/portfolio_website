@@ -181,6 +181,16 @@ export default {
         path: '/blog/articles/:p',
         component: resolve(__dirname, 'pages/blog/slug/_post.vue'),
         name: 'contents',
+      });
+      routes.push({
+        path: '/blog/pages/:p',
+        component: resolve(__dirname, 'pages/blog/slug/_pages.vue'),
+        name: 'pages',
+      });
+      routes.push({
+        path: '/blog/category/:categoryId/pages/:p',
+        component: resolve(__dirname, 'pages/blog/slug/_pages.vue'),
+        name: 'category',
       })
     },
   },
@@ -222,21 +232,24 @@ export default {
   sitemap: {
     path: '/sitemap.xml',
     hostname: process.env.HOMEPAGE_ROOT_URL,
-    routes(callback) {
-      axios
-        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
-          headers: {
-            'X-API-KEY': process.env.MICRO_CMS_API_KEY
-          }
-        })
-        .then((res) => {
-          const routes = res.data.contents.map((content) => {
-            return `/blog/articles/${content.id}`
-          })
-          callback(null, routes)
-        })
-        .catch(callback)
-    }
+    // routes(callback) {
+    //   axios
+    //     .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
+    //       headers: {
+    //         'X-API-KEY': process.env.MICRO_CMS_API_KEY
+    //       }
+    //     })
+    //     .then((res) => {
+    //       const routes = res.data.contents.map((content) => {
+    //         return `/blog/articles/${content.id}`
+    //       })
+    //       callback(null, routes)
+    //     })
+    //     .catch(callback)
+    // }
+    exclude: ['/404', '/app/middle_name'],
+    gzip: true,
+    trailingSlash: true,
   },
   'google-gtag': {
     id: process.env.GOOGLE_ANALYTICS_ID,
@@ -254,7 +267,7 @@ export default {
   },
   generate: {
     async routes() {
-      const pages = await axios
+      const articles = await axios
         .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
           headers: {
             'X-API-KEY': process.env.MICRO_CMS_API_KEY
@@ -263,10 +276,56 @@ export default {
         .then((res) =>
           res.data.contents.map((content) => ({
             route: `/blog/articles/${content.id}`,
-            payload: content
           }))
         )
-      return pages
+      const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i)
+      const limit = 10
+
+      const pages = await axios
+        .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0`, {
+          headers: {
+            'X-API-KEY': process.env.MICRO_CMS_API_KEY
+          }
+        })
+        .then((res) =>
+          range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
+            route: `/blog/pages/${p}`,
+          }))
+        )
+
+      const categories = ["日記", "IT", "プログラミング"]
+      const categoriesPath = [{
+        "name": "日記",
+        "path": "daily"
+      }, {
+        "name": "IT",
+        "path": "it"
+      }, {
+        "name": "プログラミング",
+        "path": "programming"
+      }]
+      // ["daily" : {"daily", "it", " programming"}]
+
+      const categoryPages = await Promise.all(
+        categoriesPath.map((category) =>
+          axios.get(
+            encodeURI(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0&filters=categories[contains]${category.name}`), {
+              headers: {
+                'X-MICROCMS-API-KEY': process.env.MICRO_CMS_API_KEY
+              }
+            }
+          )
+          .then((res) =>
+            range(1, Math.ceil(res.data.totalCount / 10)).map((p) => ({
+              route: `/category/${category.path}/pages/${p}`,
+            })))
+        )
+      )
+
+      const flattenCategoryPages = [].concat.apply([], categoryPages)
+      return [
+        ...articles, ...pages, ...flattenCategoryPages
+      ]
     }
   },
 }

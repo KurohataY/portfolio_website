@@ -4,22 +4,38 @@
     <v-pagination
       v-model="page"
       :length="paginationNum"
-      @input="sentNowPageNum"
+      @input="goToPage"
     ></v-pagination>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["paginationNum"],
+  props: {
+    paginationNum: {
+      type: Number,
+      required: false,
+      default: () => [],
+    },
+    pageNum: {
+      type: Number,
+      required: false,
+      default: () => [],
+    },
+    category: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
-      page: 1,
+      page: this.pageNum,
     };
   },
   methods: {
-    sentNowPageNum(number) {
-      this.$emit("pageNum", number);
+    goToPage(number) {
+      const categoryPath = this.category === undefined ? "/" : `/category/${this.category}/`
+      this.$router.push({ path: `/blog${categoryPath}pages/${number}` });
     },
   },
 };
