@@ -19,7 +19,7 @@
       </v-row>
     </v-parallax>
     <div>
-      <Swiper :contents="order" />
+      <Swiper :contents="contents" />
     </div>
     <v-container>
       <div class="d-flex justify-end mt-3 mb-5">
@@ -34,7 +34,7 @@
         background-color="transparent"
         class="d-flex justify-end mt-3 mb-5"
         v-model="toggle"
-        v-if="$vuetify.breakpoint.mdAndUp "
+        v-if="$vuetify.breakpoint.mdAndUp"
       >
         <v-btn>
           <v-icon>mdi-format-list-text</v-icon>
@@ -46,17 +46,27 @@
 
       <ContentOrderListType
         :contents="contents"
-        :order="sidemenuContents"
+        :sideMenuContents="sideMenuContents"
         :sideMenu="sideMenu"
-        v-if="toggle === 0 && $vuetify.breakpoint.mdAndUp "
+        v-if="toggle === 0 && $vuetify.breakpoint.mdAndUp"
       />
 
-      <ContentOrderCardType :contents="contents" v-if="toggle === 1 || $vuetify.breakpoint.sm || $vuetify.breakpoint.xs" />
-      <PaginationVuetify
-        :paginationNum="paginationNum"
-        @pageNum="emitPaginationEvent"
-        style="margin-top: 100px"
+      <ContentOrderCardType
+        :contents="contents"
+        v-if="toggle === 1 || $vuetify.breakpoint.sm || $vuetify.breakpoint.xs"
       />
+      <!-- <PaginationVuetify
+        :paginationNum="Number(paginationNum)"
+        :pageNum="Number(page)"
+        :category="category"
+        @emitPaginationEvent="emitPaginationEvent"
+        style="margin-top: 100px"
+      /> -->
+      <Pagination
+        :pager="pager"
+        :current="Number(page)"
+        :category="category"
+        />
       <Profile style="margin-top: 50px" v-if="toggle === 1" />
     </v-container>
   </div>
@@ -66,6 +76,7 @@ import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import PCNavi from "~/components/blog/ui/nav/navbar.vue";
 import SPNavi from "~/components/nav/navbar.vue";
 import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
+import Pagination from "~/components/blog/ui/pagination/pagination.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
 import Profile from "~/components/blog/ui/profile/profile.vue";
@@ -83,15 +94,17 @@ export default {
     ContentOrderListType,
     ContentOrderCardType,
     PaginationVuetify,
+    Pagination,
   },
   data() {
     return {
       theme: this.$store.state.theme,
-      pageNum: 1,
       toggle: 0,
       beforeToggleNum: 0,
       sideMenu: true,
       categories: gMenuList,
+      tocCount: 0,
+      tocList: [],
     };
   },
   head() {
@@ -149,19 +162,37 @@ export default {
       ],
     };
   },
-  async asyncData({ query, $config }) {
-    const category = query.category;
-    const url =
-      category !== undefined
-        ? `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?filters=categories[contains]${category}`
-        : `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`;
+  async asyncData({ params, $config }) {
+    const page = params.p || "1";
+    const limit = 10;
+    let category = params.categoryId;
+    let categoryName = "";
+
+    if (category == "it") {
+      categoryName = "IT";
+    } else if (category == "daily") {
+      categoryName = "日記";
+    } else if (category == "programming") {
+      categoryName = "プログラミング";
+    } else {
+      category = undefined;
+    }
 
     const res = await Promise.all([
-      axios.get(encodeURI(url), {
-        headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
-      }),
       axios.get(
-        `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=100`,
+        encodeURI(`https://${
+          $config.MICRO_CMS_SERVICE_DOMAIN
+        }.microcms.io/api/v1/blog?limit=${limit}${
+          category === undefined
+            ? ""
+            : `&filters=categories[contains]${categoryName}`
+        }&offset=${(page - 1) * limit}`),
+        {
+          headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
+        }
+      ),
+      axios.get(
+        `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`,
         {
           headers: {
             "X-API-KEY": $config.MICRO_CMS_API_KEY,
@@ -170,46 +201,25 @@ export default {
       ),
     ]);
 
-    const mainContents = res[0].data;
-    const orderContents = res[1].data;
+    const contents = res[0].data.contents;
+    const sideMenuContents = res[1].data.contents.splice(0, 5);
 
+    const paginationNum = (res[0].data.totalCount / 10 + 1) | 0;
     return {
-      contents: mainContents.contents,
-      paginationNums: [...Array((mainContents.totalCount / 10) | 0)].map(
-        (_, i) => i
-      ),
-      paginationNum: (mainContents.totalCount / 10 + 1) | 0,
-      category: query.category,
-      order: orderContents.contents,
-      sidemenuContents: orderContents.contents.splice(0, 5),
+      contents,
+      paginationNum,
+      page,
+      sideMenuContents,
+      category,
+      pager: [...Array(Math.ceil(res[0].data.totalCount / limit)).keys()],
     };
   },
   methods: {
     emitPaginationEvent(pageNum) {
-      this.pageNum = pageNum;
-      this.getContentData();
+      this.page = pageNum;
     },
     emitGetCategoryEvent(categoryValue) {
       this.category = categoryValue;
-      this.getContentData();
-    },
-    async getContentData() {
-      const offset = this.pageNum * 10 - 10;
-      const url =
-        this.category !== "undefined"
-          ? `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}&filters=categories[contains]${this.category}`
-          : `https://${this.$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?offset=${offset}`;
-      try {
-        const { data } = await axios.get(url, {
-          headers: {
-            "X-API-KEY": this.$config.MICRO_CMS_API_KEY,
-          },
-        });
-        this.paginationNum = (data.totalCount / 10 + 1) | 0;
-        this.contents = data.contents;
-      } catch (err) {
-        console.log(err);
-      }
     },
   },
   computed: {
@@ -233,6 +243,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 #app
   div

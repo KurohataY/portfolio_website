@@ -1,83 +1,111 @@
 <template>
-  <div class="nav">
-    <span class="prev" @click="clickPrevNewsPage()">前へ</span>
-    <ul>
+  <div class="wrapper">
+    <ul class="pager">
+      <li v-if="current > 1" class="page arrow">
+        <nuxt-link :to="getPath(current - 1)">
+          <span class="material-icons"> chevron_left </span>
+        </nuxt-link>
+      </li>
+      <li v-if="3 < current" class="page">
+        <nuxt-link :to="getPath(1)"> 1 </nuxt-link>
+      </li>
+      <li v-if="4 < current" class="omission">...</li>
       <li
-        v-for="(_, index) in paginationNums"
-        :key="index"
-        @click="clickNowPage(index)"
+        v-for="p in pager"
+        v-show="current - 3 <= p && p <= current + 1"
+        :key="p"
+        class="page"
+        :class="{ active: current === p + 1 }"
       >
-        <div :class="{ selected: newsSection.nav.now === index }">
-          {{ index + 1 }}
-        </div>
+        <nuxt-link :to="getPath(p + 1)">
+          {{ p + 1 }}
+        </nuxt-link>
+      </li>
+      <li v-if="current + 3 < pager.length" class="omission">...</li>
+      <li v-if="current + 2 < pager.length" class="page">
+        <nuxt-link :to="getPath(pager.length)">
+          {{ pager.length }}
+        </nuxt-link>
+      </li>
+      <li v-if="current < pager.length" class="page arrow">
+        <nuxt-link :to="getPath(current + 1)">
+          <span class="material-icons"> chevron_right </span>
+        </nuxt-link>
       </li>
     </ul>
-    <span class="next" @click="clickNextNewsPage()">次へ</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["paginationNums"],
-  data() {
-    return {
-      newsSection: {
-        nav: {
-          now: 0,
-          last: 10,
-        },
-      },
-    };
+  props: {
+    pager: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
+    current: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
   },
   methods: {
-    clickPrevNewsPage() {
-      this.newsSection.nav.now =
-        this.newsSection.nav.now - 1 < 0
-          ? this.newsSection.nav.now
-          : this.newsSection.nav.now - 1;
-      this.sentNowPageNum();
-    },
-    clickNextNewsPage() {
-      this.newsSection.nav.now =
-        this.newsSection.nav.now + 1 > this.newsSection.nav.last - 1
-          ? this.newsSection.nav.now
-          : this.newsSection.nav.now + 1;
-      this.sentNowPageNum();
-    },
-    clickNowPage(index) {
-      this.newsSection.nav.now = index;
-      this.sentNowPageNum();
-    },
-    sentNowPageNum() {
-      this.$emit("pageNum", this.newsSection.nav.now + 1);
+    getPath(p) {
+      const categoryPath =
+        this.category !== undefined
+          ? `/blog/category/${this.category}/`
+          : "/blog/";
+      return categoryPath + `pages/${p}`;
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.nav {
-  width: 80%;
-  margin: 0 auto;
-  //   max-width: 500px;
-  text-align: center;
-  ul {
-    display: inline-block;
-    padding-left: 0 !important;
-    li {
-      list-style-type: none;
-      display: inline-block;
-      margin: 0 10px;
-      div {
-        text-align: center;
-        padding: 3px 5px;
-        border: 1px solid #4b4b4b;
-        width: 30px;
-        &.selected {
-          border: 2px solid #4b4b4b;
-        }
-      }
+<style lang="scss" scoped >
+.wrapper {
+  padding: 16px 0;
+}
+li {
+  list-style-type: none;
+}
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0 0;
+}
+.omission {
+  color: var(--color-text-off);
+  margin: 4px 12px;
+}
+.page {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  margin: 4px;
+  background-color: #fff;
+  box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+    0 1px 5px 0 rgb(0 0 0 / 12%);
+  &.arrow {
+    margin: 4px 12px;
+  }
+  &.active {
+    background-color: #03a9f4;
+    a {
+      color: white;
     }
+  }
+  a {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 }
 </style>
