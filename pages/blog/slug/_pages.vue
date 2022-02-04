@@ -55,13 +55,18 @@
         :contents="contents"
         v-if="toggle === 1 || $vuetify.breakpoint.sm || $vuetify.breakpoint.xs"
       />
-      <PaginationVuetify
+      <!-- <PaginationVuetify
         :paginationNum="Number(paginationNum)"
         :pageNum="Number(page)"
         :category="category"
         @emitPaginationEvent="emitPaginationEvent"
         style="margin-top: 100px"
-      />
+      /> -->
+      <Pagination
+        :pager="pager"
+        :current="Number(page)"
+        :category="category"
+        />
       <Profile style="margin-top: 50px" v-if="toggle === 1" />
     </v-container>
   </div>
@@ -71,6 +76,7 @@ import Swiper from "~/components/blog/ui/carousel/swiper.vue";
 import PCNavi from "~/components/blog/ui/nav/navbar.vue";
 import SPNavi from "~/components/nav/navbar.vue";
 import PaginationVuetify from "~/components/blog/ui/pagination/pagination-from-vuetify.vue";
+import Pagination from "~/components/blog/ui/pagination/pagination.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
 import Profile from "~/components/blog/ui/profile/profile.vue";
@@ -88,6 +94,7 @@ export default {
     ContentOrderListType,
     ContentOrderCardType,
     PaginationVuetify,
+    Pagination,
   },
   data() {
     return {
@@ -204,6 +211,7 @@ export default {
       page,
       sideMenuContents,
       category,
+      pager: [...Array(Math.ceil(res[0].data.totalCount / limit)).keys()],
     };
   },
   methods: {

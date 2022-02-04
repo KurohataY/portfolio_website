@@ -3,6 +3,20 @@ import axios from 'axios'
 
 require('dotenv').config();
 
+const CATEGORY_PATH = [{
+  "name": "日記",
+  "path": "daily"
+}, {
+  "name": "IT",
+  "path": "it"
+}, {
+  "name": "プログラミング",
+  "path": "programming"
+}]
+
+const RANGE = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i)
+const LIMIT = 10
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   target: 'static',
@@ -232,21 +246,58 @@ export default {
   sitemap: {
     path: '/sitemap.xml',
     hostname: process.env.HOMEPAGE_ROOT_URL,
-    // routes(callback) {
-    //   axios
-    //     .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
-    //       headers: {
-    //         'X-API-KEY': process.env.MICRO_CMS_API_KEY
-    //       }
-    //     })
-    //     .then((res) => {
-    //       const routes = res.data.contents.map((content) => {
-    //         return `/blog/articles/${content.id}`
-    //       })
-    //       callback(null, routes)
-    //     })
-    //     .catch(callback)
-    // }
+    routes(callback) {
+      Promise.all([
+          axios
+          .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
+            headers: {
+              'X-API-KEY': process.env.MICRO_CMS_API_KEY
+            },
+          }),
+          axios.get(
+            encodeURI(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0&filters=categories[contains]IT`), {
+              headers: {
+                'X-MICROCMS-API-KEY': process.env.MICRO_CMS_API_KEY
+              }
+            }
+          ),
+          axios.get(
+            encodeURI(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0&filters=categories[contains]日記`), {
+              headers: {
+                'X-MICROCMS-API-KEY': process.env.MICRO_CMS_API_KEY
+              }
+            }
+          ),
+          axios.get(
+            encodeURI(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0&filters=categories[contains]プログラミング`), {
+              headers: {
+                'X-MICROCMS-API-KEY': process.env.MICRO_CMS_API_KEY
+              }
+            }
+          )
+        ])
+        .then((res) => {
+          const urls = []
+          res[0].data.contents.map((content) => {
+            urls.push(`/blog/articles/${content.id}`)
+          })
+          RANGE(1, Math.ceil(res[0].data.totalCount / LIMIT)).map((p) => {
+            urls.push(`/blog/pages/${p}`)
+          })
+
+          RANGE(1, Math.ceil(res[1].data.totalCount / LIMIT)).map((p) => {
+            urls.push(`/category/it/pages/${p}`)
+          })
+          RANGE(1, Math.ceil(res[2].data.totalCount / LIMIT)).map((p) => {
+            urls.push(`/category/daily/pages/${p}`)
+          })
+          RANGE(1, Math.ceil(res[3].data.totalCount / LIMIT)).map((p) => {
+            urls.push(`/category/programming/pages/${p}`)
+          })
+          callback(null, urls)
+        })
+        .catch(callback)
+    },
     exclude: ['/404', '/app/middle_name'],
     gzip: true,
     trailingSlash: true,
@@ -266,6 +317,7 @@ export default {
     proxy: true
   },
   generate: {
+    interval: 100,
     async routes() {
       const articles = await axios
         .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=200`, {
@@ -278,8 +330,7 @@ export default {
             route: `/blog/articles/${content.id}`,
           }))
         )
-      const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i)
-      const limit = 10
+
 
       const pages = await axios
         .get(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0`, {
@@ -288,43 +339,12 @@ export default {
           }
         })
         .then((res) =>
-          range(1, Math.ceil(res.data.totalCount / limit)).map((p) => ({
+          RANGE(1, Math.ceil(res.data.totalCount / LIMIT)).map((p) => ({
             route: `/blog/pages/${p}`,
           }))
         )
-
-      const categories = ["日記", "IT", "プログラミング"]
-      const categoriesPath = [{
-        "name": "日記",
-        "path": "daily"
-      }, {
-        "name": "IT",
-        "path": "it"
-      }, {
-        "name": "プログラミング",
-        "path": "programming"
-      }]
-      // ["daily" : {"daily", "it", " programming"}]
-
-      const categoryPages = await Promise.all(
-        categoriesPath.map((category) =>
-          axios.get(
-            encodeURI(`https://${process.env.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=0&filters=categories[contains]${category.name}`), {
-              headers: {
-                'X-MICROCMS-API-KEY': process.env.MICRO_CMS_API_KEY
-              }
-            }
-          )
-          .then((res) =>
-            range(1, Math.ceil(res.data.totalCount / 10)).map((p) => ({
-              route: `/category/${category.path}/pages/${p}`,
-            })))
-        )
-      )
-
-      const flattenCategoryPages = [].concat.apply([], categoryPages)
       return [
-        ...articles, ...pages, ...flattenCategoryPages
+        ...articles, ...pages,
       ]
     }
   },
