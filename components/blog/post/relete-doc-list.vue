@@ -41,7 +41,6 @@ export default {
       .get(`${this.$config.HOMEPAGE_ROOT_URL}api/related_title/${this.$route.params.p}`)
       .then((res) => {
         this.relete = res.data;
-        console.log(this.relete)
       })
       .catch((error) => {
         console.log(error);

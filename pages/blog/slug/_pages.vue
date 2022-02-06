@@ -22,7 +22,22 @@
       <Swiper :contents="contents" />
     </div>
     <v-container>
-      <div class="d-flex justify-end mt-3 mb-5">
+      <Marquee :propsTextList="sideMenuContents" :time="marqueeTime" :title="marqueeTitle" />
+      <div class="d-flex mt-3 mb-5">
+        <v-btn-toggle
+          background-color="transparent"
+          class="d-flex mt-3 mb-5"
+          v-model="toggle"
+          v-if="$vuetify.breakpoint.mdAndUp"
+          style="flex: auto;"
+        >
+          <v-btn>
+            <v-icon>mdi-format-list-text</v-icon>
+          </v-btn>
+          <v-btn>
+            <v-icon>mdi-card-text</v-icon>
+          </v-btn>
+        </v-btn-toggle>
         <v-switch
           v-model="theme"
           :prepend-icon="themeIcon"
@@ -30,19 +45,6 @@
           v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
         ></v-switch>
       </div>
-      <v-btn-toggle
-        background-color="transparent"
-        class="d-flex justify-end mt-3 mb-5"
-        v-model="toggle"
-        v-if="$vuetify.breakpoint.mdAndUp"
-      >
-        <v-btn>
-          <v-icon>mdi-format-list-text</v-icon>
-        </v-btn>
-        <v-btn>
-          <v-icon>mdi-card-text</v-icon>
-        </v-btn>
-      </v-btn-toggle>
 
       <ContentOrderListType
         :contents="contents"
@@ -55,18 +57,7 @@
         :contents="contents"
         v-if="toggle === 1 || $vuetify.breakpoint.sm || $vuetify.breakpoint.xs"
       />
-      <!-- <PaginationVuetify
-        :paginationNum="Number(paginationNum)"
-        :pageNum="Number(page)"
-        :category="category"
-        @emitPaginationEvent="emitPaginationEvent"
-        style="margin-top: 100px"
-      /> -->
-      <Pagination
-        :pager="pager"
-        :current="Number(page)"
-        :category="category"
-        />
+      <Pagination :pager="pager" :current="Number(page)" :category="category" />
       <Profile style="margin-top: 50px" v-if="toggle === 1" />
     </v-container>
   </div>
@@ -80,6 +71,7 @@ import Pagination from "~/components/blog/ui/pagination/pagination.vue";
 import ContentOrderListType from "~/components/blog/post/order/list/content-order-list-type.vue";
 import ContentOrderCardType from "~/components/blog/post/order/card/content-order-card-type.vue";
 import Profile from "~/components/blog/ui/profile/profile.vue";
+import Marquee from "~/components/blog/ui/marquee.vue";
 
 import gMenuList from "~/assets/menu/g-menu.json";
 
@@ -95,6 +87,7 @@ export default {
     ContentOrderCardType,
     PaginationVuetify,
     Pagination,
+    Marquee,
   },
   data() {
     return {
@@ -105,6 +98,8 @@ export default {
       categories: gMenuList,
       tocCount: 0,
       tocList: [],
+      marqueeTime: 10000,
+      marqueeTitle: "最新記事",
     };
   },
   head() {
@@ -180,13 +175,15 @@ export default {
 
     const res = await Promise.all([
       axios.get(
-        encodeURI(`https://${
-          $config.MICRO_CMS_SERVICE_DOMAIN
-        }.microcms.io/api/v1/blog?limit=${limit}${
-          category === undefined
-            ? ""
-            : `&filters=categories[contains]${categoryName}`
-        }&offset=${(page - 1) * limit}`),
+        encodeURI(
+          `https://${
+            $config.MICRO_CMS_SERVICE_DOMAIN
+          }.microcms.io/api/v1/blog?limit=${limit}${
+            category === undefined
+              ? ""
+              : `&filters=categories[contains]${categoryName}`
+          }&offset=${(page - 1) * limit}`
+        ),
         {
           headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
         }

@@ -50,22 +50,17 @@ export default {
   methods: {
     init() {
       MicroModal.init({
-        // ここにオプションを書いていく
         disableScroll: true,
         awaitOpenAnimation: true,
         awaitCloseAnimation: true,
         onShow: modal => {
           this.modalButtonShow = false;
-        }, // [1]
+        },
         onClose: modal => {
           this.modalButtonShow = true;
-        }, // [2]
-        // openTrigger: 'data-custom-open', // [3]
-        // closeTrigger: 'data-custom-close', // [4]
-        // openClass: 'is-open', // [5]
-        disableFocus: false, // [7]
-        debugMode: true, // [10]
-        passive: false,
+        },
+        disableFocus: false,
+        debugMode: true,
       });
     },
   },
