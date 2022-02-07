@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main id="top">
       <nuxt />
-      <ContactModal />
+      <!-- <ContactModal /> -->
+      <GoToTopButton :target="'#top'" />
     </v-main>
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -13,9 +14,11 @@
 
 <script>
 import ContactModal from '~/components/contact/contact-modal.vue'
+import GoToTopButton from "~/components/ui/goToTopButton.vue";
 export default {
   components: {
-    ContactModal,
+    // ContactModal,
+    GoToTopButton,
   },
   data() {
     return {

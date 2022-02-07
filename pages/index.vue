@@ -21,23 +21,18 @@
         <Products id="product" />
       </v-container>
     </div>
-    <ContactModal />
   </article>
 </template>
 
 <script>
-import Meta from '~/assets/mixin/headMeta'
-
 import Navi from "~/components/nav/navbar.vue";
 import Top from "~/components/profile/profile-top-image.vue";
 import Profile from "~/components/profile/profile-contents.vue";
 import Products from "~/components/product/product.vue";
 import SkillsCarousel from "~/components/skill/skills-carousel.vue";
 import BlogCard from "~/components/profile/profile-blog-card.vue";
-import ContactModal from "~/components/contact/contact-modal.vue";
 
 export default {
-  mixins: [Meta],
   components: {
     Navi,
     Top,
@@ -45,7 +40,6 @@ export default {
     Products,
     SkillsCarousel,
     BlogCard,
-    ContactModal,
   },
   data() {
     return {
@@ -86,7 +80,7 @@ export default {
   },
   created() {
     this.$vuetify.theme.dark = false;
-  }
+  },
 };
 </script>
 
