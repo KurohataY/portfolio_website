@@ -33,7 +33,6 @@ export default {
       }
       var img = document.getElementsByTagName("img");
       for (let n = 0; n < img.length; n++) {
-        console.log(img[n]);
         img[n].style.display = "block";
         img[n].style.textAlign = "center";
         img[n].style.margin = "0 auto";

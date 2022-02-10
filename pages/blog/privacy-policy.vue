@@ -87,9 +87,7 @@
 <script>
 import SPNavi from "~/components/nav/navbar.vue";
 import PCNavi from "~/components/blog/ui/nav/navbar.vue";
-
 import gMenuList from "~/assets/menu/g-menu.json";
-
 import cheerio from "cheerio";
 
 export default {

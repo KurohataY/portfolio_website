@@ -5,7 +5,10 @@
     <v-card class="mx-auto">
       <v-list three-line>
         <template v-for="(content, index) in sideMenuContents">
-          <nuxt-link :to="'/blog/articles/' + content.id" :key="index + content.id">
+          <nuxt-link
+            :to="'/blog/articles/' + content.id"
+            :key="index + content.id"
+          >
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title v-html="content.title"></v-list-item-title>
@@ -20,17 +23,27 @@
       </v-list>
     </v-card>
     <AffiliateA8 />
+
+    <Tags :tags="tags" :fontSize="fontSize" />
   </div>
 </template>
 <script>
-import Profile from "~/components/blog/ui/profile/profile.vue"
+import Profile from "~/components/blog/ui/profile/profile.vue";
 import AffiliateA8 from "~/components/blog/ui/affiliate/affiliate-a8.vue";
+import Tags from "~/components/blog/ui/tags.vue";
+
 export default {
-  props: ["content", "sideMenuContents"],
-  components:{
+  props: ["content", "sideMenuContents", "tags"],
+  components: {
     Profile,
-    AffiliateA8
+    AffiliateA8,
+    Tags,
   },
+  data() {
+    return {
+      fontSize: 10,
+    }
+  }
 };
 </script>
 <style lang="scss">
