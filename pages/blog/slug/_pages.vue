@@ -19,17 +19,21 @@
       </v-row>
     </v-parallax>
     <div>
-      <Swiper :contents="contents" />
+      <Swiper :contents="swiperContents" />
     </div>
     <v-container>
-      <Marquee :propsTextList="sideMenuContents" :time="marqueeTime" :title="marqueeTitle" />
+      <Marquee
+        :propsTextList="topContents"
+        :time="marqueeTime"
+        :title="marqueeTitle"
+      />
       <div class="d-flex mt-3 mb-5">
         <v-btn-toggle
           background-color="transparent"
           class="d-flex mt-3 mb-5"
           v-model="toggle"
           v-if="$vuetify.breakpoint.mdAndUp"
-          style="flex: auto;"
+          style="flex: auto"
         >
           <v-btn>
             <v-icon>mdi-format-list-text</v-icon>
@@ -48,8 +52,9 @@
 
       <ContentOrderListType
         :contents="contents"
-        :sideMenuContents="sideMenuContents"
+        :sideMenuContents="topContents"
         :sideMenu="sideMenu"
+        :tags="tags"
         v-if="toggle === 0 && $vuetify.breakpoint.mdAndUp"
       />
 
@@ -173,23 +178,45 @@ export default {
       category = undefined;
     }
 
+    let tag = params.tagId;
+
     const res = await Promise.all([
+      axios.get(
+        `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=1000`,
+        {
+          headers: {
+            "X-API-KEY": $config.MICRO_CMS_API_KEY,
+          },
+        }
+      ),
       axios.get(
         encodeURI(
           `https://${
             $config.MICRO_CMS_SERVICE_DOMAIN
-          }.microcms.io/api/v1/blog?limit=${limit}${
-            category === undefined
-              ? ""
-              : `&filters=categories[contains]${categoryName}`
-          }&offset=${(page - 1) * limit}`
+          }.microcms.io/api/v1/blog?limit=${limit}&filters=categories[contains]${categoryName}&offset=${
+            (page - 1) * limit
+          }`
         ),
         {
           headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
         }
       ),
       axios.get(
-        `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`,
+        encodeURI(
+          `https://${
+            $config.MICRO_CMS_SERVICE_DOMAIN
+          }.microcms.io/api/v1/blog?limit=${limit}&filters=tags[contains]${tag}&offset=${
+            (page - 1) * limit
+          }`
+        ),
+        {
+          headers: { "X-API-KEY": $config.MICRO_CMS_API_KEY },
+        }
+      ),
+      axios.get(
+        `https://${$config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=${limit}&offset=${
+            (page - 1) * limit
+          }`,
         {
           headers: {
             "X-API-KEY": $config.MICRO_CMS_API_KEY,
@@ -198,17 +225,40 @@ export default {
       ),
     ]);
 
-    const contents = res[0].data.contents;
-    const sideMenuContents = res[1].data.contents.splice(0, 5);
+    let contents = "";
+    let paginationNum = 0;
 
-    const paginationNum = (res[0].data.totalCount / 10 + 1) | 0;
+    const swiperContents = res[0].data.contents;
+
+    let tags = "";
+    res[0].data.contents.forEach((element) => tags += element.tags);
+    tags = Array.from(new Set(tags.split(","))).join(",");
+
+    if (category == undefined && tag == undefined) {
+      contents = res[3].data.contents;
+      paginationNum = (res[3].data.totalCount / 10 + 1) | 0;
+    } else if (category !== undefined && tag == undefined) {
+      contents = res[1].data.contents;
+      paginationNum = (res[1].data.totalCount / 10 + 1) | 0;
+    } else if (tag !== undefined && category == undefined) {
+      contents = res[2].data.contents;
+      paginationNum = (res[2].data.totalCount / 10 + 1) | 0;
+    } else {
+      contents = res[3].data.contents;
+      paginationNum = (res[3].data.totalCount / 10 + 1) | 0;
+    }
+
+    const topContents = res[0].data.contents.splice(0, 5);
+
     return {
       contents,
+      swiperContents,
+      tags,
       paginationNum,
       page,
-      sideMenuContents,
+      topContents,
       category,
-      pager: [...Array(Math.ceil(res[0].data.totalCount / limit)).keys()],
+      pager: [...Array(Math.ceil(res[1].data.totalCount / limit)).keys()],
     };
   },
   methods: {

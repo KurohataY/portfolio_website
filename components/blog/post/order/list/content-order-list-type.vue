@@ -56,7 +56,7 @@
     </v-col>
     <v-spacer v-if="sideMenu"></v-spacer>
     <v-col cols="12" xs="12" sm="12" md="3" lg="3" xl="3" v-if="sideMenu">
-      <SideMenu :sideMenuContents="sideMenuContents" />
+      <SideMenu :sideMenuContents="sideMenuContents" :tags="tags" />
     </v-col>
   </v-row>
 </template>
@@ -65,7 +65,7 @@ import cheerio from "cheerio";
 import SideMenu from "~/components/blog/ui/sidemenu/side-menu.vue";
 
 export default {
-  props: ["contents", "sideMenuContents", "sideMenu"],
+  props: ["contents", "sideMenuContents", "sideMenu", "tags"],
   components: {
     SideMenu,
   },
