@@ -349,43 +349,6 @@ export default {
           }))
         )
 
-      const tags = await client
-        .get({
-          endpoint: 'tags',
-          queries: {
-            fields: 'id',
-            limit: 1000,
-          },
-        })
-        .then(({
-          contents
-        }) => {
-          return contents.map((content) => content.id);
-        });
-
-      // // タグページ
-      // const tagPages = await Promise.all(
-      //   tags.map((tag) =>
-      //     client
-      //     .get({
-      //       endpoint: 'blog',
-      //       queries: {
-      //         limit: 0,
-      //         filters: `tag[contains]${tag}`,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       return range(1, Math.ceil(res.totalCount / 10)).map((p) => ({
-      //         route: `/tag/${tag}/page/${p}`,
-      //         payload: {
-      //           popularArticles,
-      //           banner
-      //         },
-      //       }));
-      //     })
-      //   )
-      // );
-      // const flattenTagPages = [].concat.apply([], tagPages);
 
       return [
         ...articles, ...pages,
