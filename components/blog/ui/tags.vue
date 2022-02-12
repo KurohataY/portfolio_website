@@ -35,9 +35,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-// a {
-//   font-size: val(--font-size);
-// }
-
 </style>

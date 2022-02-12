@@ -175,7 +175,7 @@ export default {
     } else if (category == "programming") {
       categoryName = "プログラミング";
     } else {
-      category = undefined;
+      category = "";
     }
 
     let tag = params.tagId;
@@ -205,7 +205,7 @@ export default {
         encodeURI(
           `https://${
             $config.MICRO_CMS_SERVICE_DOMAIN
-          }.microcms.io/api/v1/blog?limit=${limit}&filters=tags[contains]${tag}&offset=${
+          }.microcms.io/api/v1/blog?limit=${limit}&filters=tags[contains]${decodeURI(tag)}&offset=${
             (page - 1) * limit
           }`
         ),
@@ -227,6 +227,7 @@ export default {
 
     let contents = "";
     let paginationNum = 0;
+    let pager = [];
 
     const swiperContents = res[0].data.contents;
 
@@ -234,18 +235,22 @@ export default {
     res[0].data.contents.forEach((element) => tags += element.tags);
     tags = Array.from(new Set(tags.split(","))).join(",");
 
-    if (category == undefined && tag == undefined) {
+    if (!category && !tag) {
       contents = res[3].data.contents;
       paginationNum = (res[3].data.totalCount / 10 + 1) | 0;
-    } else if (category !== undefined && tag == undefined) {
+      pager = [...Array(Math.ceil(res[3].data.totalCount / limit)).keys()];
+    } else if (!!category && !tag) {
       contents = res[1].data.contents;
       paginationNum = (res[1].data.totalCount / 10 + 1) | 0;
-    } else if (tag !== undefined && category == undefined) {
+      pager = [...Array(Math.ceil(res[1].data.totalCount / limit)).keys()];
+    } else if (!!tag && !category) {
       contents = res[2].data.contents;
       paginationNum = (res[2].data.totalCount / 10 + 1) | 0;
+      pager = [...Array(Math.ceil(res[2].data.totalCount / limit)).keys()];
     } else {
       contents = res[3].data.contents;
       paginationNum = (res[3].data.totalCount / 10 + 1) | 0;
+      pager = [...Array(Math.ceil(res[3].data.totalCount / limit)).keys()];
     }
 
     const topContents = res[0].data.contents.splice(0, 5);
@@ -258,7 +263,7 @@ export default {
       page,
       topContents,
       category,
-      pager: [...Array(Math.ceil(res[1].data.totalCount / limit)).keys()],
+      pager,
     };
   },
   methods: {

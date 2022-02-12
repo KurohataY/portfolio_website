@@ -57,9 +57,7 @@ export default {
   methods: {
     getPath(p) {
       const categoryPath =
-        this.category !== undefined
-          ? `/blog/category/${this.category}/`
-          : "/blog/";
+        !!this.category ? `/blog/category/${this.category}/` : "/blog/";
       return categoryPath + `pages/${p}`;
     },
   },
