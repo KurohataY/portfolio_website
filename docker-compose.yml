@@ -1,16 +1,16 @@
 version: "3"
 services:
-  portfolio_web_site:
-    container_name: portfolio_web_site
+  ssg:
+    container_name: portfolio_website
     build:
       context: ./
     ports:
       - 3000:3000
     volumes:
-      - .:/portfolio_web_site
+      - .:/portfolio_website
     tty: true
     stdin_open: true
     # Hot Module Replacement (HMR) is enable for virtual box.
     environment:
       - CHOKIDAR_USEPOLLING=true
-    # platform: linux/x86_64
+    platform: linux/x86_64
