@@ -1,0 +1,16 @@
+version: "3"
+services:
+  ssg:
+    container_name: portfolio_website_nuxt3
+    build:
+      context: ./
+    ports:
+      - 3000:3000
+      - '24678:24678' 
+    volumes:
+      - .:/portfolio_website_nuxt3
+    tty: true
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    platform: linux/x86_64
