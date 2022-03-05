@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import axios from 'axios'
+import config from '#config'
 
 const zeroPadding = ((num, len) => {
   return (Array(len).join('0') + num).slice(-len);
@@ -19,7 +20,7 @@ const today = new Date();
 const year = today.getFullYear();
 const month = zeroPadding(today.getMonth() + 1, 2);
 
-const ENDPOINT = "https://connpass.com/api/v1/event/?nickname="+ process.env.CONNPASS_NICKNAME + "&ym=" + year + month
+const ENDPOINT = `https://connpass.com/api/v1/event/?nickname=${config.CONNPASS_NICKNAME}&ym=` + year + month
 const API_HEAD = {
   headers: {
     'accept': "application/json"
