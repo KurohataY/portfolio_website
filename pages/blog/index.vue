@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="blog">
         <v-layout>
             <TheHeader />
             <BlogMain />
@@ -7,3 +7,9 @@
         <TheFooter />
     </div>
 </template>
+
+<style lang="scss" scoped>
+#blog {
+    background-color: #EDF2F6;
+}
+</style>
