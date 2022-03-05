@@ -4,3 +4,7 @@
     <TopUiGoToTopButton :target="'#top'" />
   </div>
 </template>
+
+<script setup>
+
+</script>
