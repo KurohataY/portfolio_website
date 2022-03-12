@@ -6,7 +6,7 @@
             :slides-per-view="views"
             :autoplay="{ disableOnInteraction: false, }"
         >
-            <swiper-slide v-for="content in blogData" :key="content.id">
+            <swiper-slide v-for="content in blogData.contents" :key="content.id">
                 <nuxt-link :to="`/blog/articles/${content.id}`" custom v-slot="{ href }">
                     <a :href="href">
                         <picture>
