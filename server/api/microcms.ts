@@ -25,9 +25,6 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
   const post_fields = !!useQuery(req).fields ? useQuery(req).fields : "";
   const post_filters = useQuery(req).filters ? useQuery(req).filters : "";
 
-  console.log(!!useQuery(req).limit)
-
-
   const parameters = `${post_id}?fields=${post_fields}&filters=${post_filters}&limit=${post_limit}&offset=${post_offset}&orders=${post_order}`;
   const ENDPOINT = url + parameters;
 
