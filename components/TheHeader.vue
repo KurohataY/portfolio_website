@@ -15,8 +15,11 @@
         <v-spacer></v-spacer>
 
         <v-btn v-for="(nav, index) in headerData.nav" :key="index">
-            <NuxtLink :to="nav.to" custom v-slot="{ href }">
+            <!-- <NuxtLink :to="nav.to" custom v-slot="{ href }">
                 <a :href="href">{{ nav.text }}</a>
+            </NuxtLink> -->
+            <NuxtLink :to="nav.to">
+                {{ nav.text }}
             </NuxtLink>
         </v-btn>
     </v-app-bar>

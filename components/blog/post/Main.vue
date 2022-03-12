@@ -1,0 +1,46 @@
+<template>
+    <v-main>
+        <div id="post_box">
+            <h1>{{ data.title }}</h1>
+            <article v-for="c in data.blogContent">
+                <div v-html="c.content"></div>
+                <div v-html="c.html"></div>
+            </article>
+        </div>
+    </v-main>
+</template>
+
+
+<script setup>
+const route = useRoute()
+
+const { data } = await useFetch("/api/microcms", {
+    params: { id: route.params.post_id },
+});
+
+
+onMounted(() => {
+    Prism.highlightAll();
+})
+// nextTick(() => Prism.highlightAll());
+
+</script>
+
+<style lang="scss">
+#post_box {
+    padding: 100px 15vw;
+    h1 {
+        margin-bottom: 75px;
+    }
+    h2 {
+        margin: 45px 0;
+    }
+    h3,
+    h4 {
+        margin: 30px 0;
+    }
+    p {
+        line-height: 3.5;
+    }
+}
+</style>

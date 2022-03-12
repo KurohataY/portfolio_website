@@ -2,6 +2,7 @@
     <v-main style="width: 80%;">
        <TopTitleView />
        <TopContentLinks />
+       <TopSwiperCaloucel />
        <TopSkils />
        <TopInformation />
     </v-main>

@@ -1,19 +1,24 @@
 <template>
-    <swiper
-        :modules="modules"
-        :slides-per-view="views"
-        :autoplay="{disableOnInteraction: false,}"
-    >
-        <swiper-slide v-for="content in blogData" :key="content.id">
-            <nuxt-link :to="`${path}/articles/${content.id}`">
-                <picture>
-                    <source :srcset="content.thumbnail.url + '?fm=webp&h=200'" />
-                    <img :src="content.thumbnail.url + '?h=200'" />
-                </picture>
-                <p>{{ content.title }}</p>
-            </nuxt-link>
-        </swiper-slide>
-    </swiper>
+    <v-container id="blog_caloucel_box" class="mx-auto">
+        <h2 class="text-center text-h2">Latest Article</h2>
+        <swiper
+            :modules="modules"
+            :slides-per-view="views"
+            :autoplay="{ disableOnInteraction: false, }"
+        >
+            <swiper-slide v-for="content in blogData" :key="content.id">
+                <nuxt-link :to="`/blog/articles/${content.id}`" custom v-slot="{ href }">
+                    <a :href="href">
+                        <picture>
+                            <source :srcset="`${content.thumbnail.url}?fm=webp&h=${imageWidth}`" />
+                            <img :src="`${content.thumbnail.url}?h=${imageWidth}`" />
+                        </picture>
+                        <p>{{ content.title }}</p>
+                    </a>
+                </nuxt-link>
+            </swiper-slide>
+        </swiper>
+    </v-container>
 </template>
 
 <script>
@@ -43,19 +48,13 @@ export default {
         //     console.log('slide change');
         // };
 
-        const route = useRoute()
-        const path = route.path;
+
+        const imageWidth = ref(300);
 
 
         const calculateWindowWidth = () => {
             let windowWidth = window.innerWidth
-            if (windowWidth < 640) {
-                views.value = 1
-            } else if (windowWidth < 1130) {
-                views.value = 3
-            } else {
-                views.value = 4
-            }
+            views.value = Math.floor(windowWidth / imageWidth.value)
         }
 
         onMounted(() => {
@@ -74,7 +73,7 @@ export default {
             modules: [A11y, Autoplay],
             blogData,
             views,
-            path,
+            imageWidth,
         };
     },
 };
@@ -110,5 +109,16 @@ p {
     }
 }
 
-// class="white--text align-end"
+h2 {
+    margin-bottom: 10vw;
+    font-family: Great Vibes !important;
+}
+
+#blog_caloucel_box {
+    // max-width: 80%;
+    // margin: 0 auto;
+    padding: 0 10px;
+    margin-bottom: 100px;
+    margin-top: 20vw;
+}
 </style>
