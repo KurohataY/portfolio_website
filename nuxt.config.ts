@@ -112,7 +112,7 @@ export default defineNuxtConfig({
     },
     privateRuntimeConfig: {
         FORM_RUN_URL: process.env.FORM_RUN_URL,
-        MICRO_CMS_API_KEY:  process.env.MICRO_CMS_API_KEY,
+        MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
         MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
 
     },

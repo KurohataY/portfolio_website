@@ -9,12 +9,13 @@
     "@mdi/font": "^6.5.95",
     "@mdi/js": "^6.5.95",
     "@vuetify/vite-plugin": "^1.0.0-alpha.10",
-    "nuxt3": "^3.0.0-27439932.78761c2"
+    "nuxt3": "^3.0.0-27450445.3e68433"
   },
   "dependencies": {
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "fibe": "^1.1.1",
     "moment": "^2.29.1",
+    "prismjs": "^1.27.0",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "swiper": "^8.0.7",
