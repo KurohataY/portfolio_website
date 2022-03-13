@@ -18,8 +18,8 @@
             <!-- <NuxtLink :to="nav.to" custom v-slot="{ href }">
                 <a :href="href">{{ nav.text }}</a>
             </NuxtLink> -->
-            <NuxtLink :to="nav.to">
-                {{ nav.text }}
+            <NuxtLink :to="nav.to" custom v-slot="{ href }">
+                 <a :href="href">{{ nav.text }}</a>
             </NuxtLink>
         </v-btn>
     </v-app-bar>
