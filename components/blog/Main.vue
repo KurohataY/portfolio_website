@@ -3,33 +3,34 @@
         <div id="blog_title_box">
             <BlogTitleView />
         </div>
-        <v-card class="mx-auto" id="blog_box">
-            <v-container fluid>
-                <v-row dense>
-                    <v-col
-                        v-for="(content, index) in data.contents"
-                        :key="content.title"
-                        :cols="index !== 0 ? 6 : 12"
-                    >
-                        <NuxtLink :to="`/blog/articles/${content.id}`" custom v-slot="{ href }">
-                            <a :href="href">
-                                <v-card>
-                                    <v-img
-                                        :src="content.thumbnail.url + '?fm=webp&h=200'"
-                                        class="white--text align-end"
-                                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                        height="200px"
-                                        cover
-                                    >
-                                        <v-card-title class="text-white" v-text="content.title"></v-card-title>
-                                    </v-img>
-                                </v-card>
-                            </a>
-                        </NuxtLink>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-card>
+        <div class="mx-auto" id="blog_box">
+            <div
+                class="d-flex flex-wrap justify-space-around"
+                style="background-color: #EDF2F6;"
+            >
+                <NuxtLink
+                    v-for="(content, index) in data.contents"
+                    :key="content.title"
+                    :to="`/blog/articles/${content.id}`"
+                    custom
+                    v-slot="{ href }"
+                >
+                    <a :href="href">
+                        <v-card style="margin: 20px 5px" width="350px">
+                            <v-img
+                                :src="content.thumbnail.url + '?fm=webp&h=200'"
+                                class="white--text align-end"
+                                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                                height="200px"
+                                cover
+                            >
+                                <v-card-title class="text-white" v-text="content.title"></v-card-title>
+                            </v-img>
+                        </v-card>
+                    </a>
+                </NuxtLink>
+            </div>
+        </div>
         <NuxtLink :to="prevLink" v-if="prevButtonShow">
             <v-icon large color="green darken-2">mdi-chevron-left</v-icon>
         </NuxtLink>

@@ -17,7 +17,7 @@ onMounted(async () => {
         const { default: RINGS } = await import("vanta/dist/vanta.rings.min");
         window.THREE = THREE;
 
-        RINGS({
+        await RINGS({
             el: "#rings",
             mouseControls: true,
             touchControls: true,
@@ -28,7 +28,14 @@ onMounted(async () => {
             scaleMobile: 1.00,
             THREE: window.THREE
         });
+
     }
+
+
+
+})
+
+onUpdated(async () => {
 
 })
 
