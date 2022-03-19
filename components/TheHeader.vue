@@ -6,18 +6,13 @@
         scroll-target="#scrolling-techniques-2"
         style="padding-right: 10px;box-shadow: none !important"
     >
-        <v-app-bar-title style="font-family: Great Vibes ">
-            <NuxtLink to="/" custom v-slot="{ href }">
-                <a :href="href">{{ headerData.title }}</a>
-            </NuxtLink>
+        <v-app-bar-title style="font-family: Great Vibes ">       
+            <a href="/">{{ headerData.title }}</a>
         </v-app-bar-title>
 
         <v-spacer></v-spacer>
 
         <v-btn v-for="(nav, index) in headerData.nav" :key="index">
-            <!-- <NuxtLink :to="nav.to" custom v-slot="{ href }">
-                <a :href="href">{{ nav.text }}</a>
-            </NuxtLink> -->
             <NuxtLink :to="nav.to" custom v-slot="{ href }">
                  <a :href="href">{{ nav.text }}</a>
             </NuxtLink>
