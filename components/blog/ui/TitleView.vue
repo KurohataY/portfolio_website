@@ -1,8 +1,10 @@
 <template>
-    <v-layout>
-        <div id="main_title">{{ title }}</div>
-        <div id="rings" style="height: 99%;width: 100%;position:absolute;"></div>
-    </v-layout>
+    <div id="blog_title_box">
+        <v-layout>
+            <div id="main_title">{{ title }}</div>
+            <div id="rings" style="height: 99%;width: 100%;position:absolute;"></div>
+        </v-layout>
+    </div>
 </template>
 
 
@@ -43,6 +45,9 @@ onUpdated(async () => {
 </script>
 
 <style lang="scss" scoped>
+#blog_title_box {
+    margin-bottom: 100px;
+}
 #main_title {
     position: relative;
     z-index: 1;
