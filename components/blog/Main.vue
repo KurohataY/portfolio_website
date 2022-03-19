@@ -6,14 +6,14 @@
     </v-main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 const route = useRoute()
 
-const limit = 12;
+const limit: number= 12;
 
-const nowPageNum = route.params.page_num
-const offset = (Number(nowPageNum) - 1) * limit;
+const nowPageNum: number = Number(route.params.page_num)
+const offset: number = (nowPageNum - 1) * limit;
 
 
 let { data } = await useFetch("/api/microcms", {
@@ -23,7 +23,7 @@ let { data } = await useFetch("/api/microcms", {
     },
 });
 
-const pageMaxNum = Math.ceil(Number(data.value.totalCount) / limit)
+const pageMaxNum: number = Math.ceil(data.value["totalCount"] / limit)
 
 
 </script>
