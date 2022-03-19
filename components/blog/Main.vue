@@ -4,10 +4,7 @@
             <BlogTitleView />
         </div>
         <div class="mx-auto" id="blog_box">
-            <div
-                class="d-flex flex-wrap justify-space-around"
-                style="background-color: #EDF2F6;"
-            >
+            <div class="d-flex flex-wrap justify-space-around" style="background-color: #EDF2F6;">
                 <NuxtLink
                     v-for="(content, index) in data.contents"
                     :key="content.title"
@@ -31,13 +28,7 @@
                 </NuxtLink>
             </div>
         </div>
-        <NuxtLink :to="prevLink" v-if="prevButtonShow">
-            <v-icon large color="green darken-2">mdi-chevron-left</v-icon>
-        </NuxtLink>
-        <NuxtLink v-for="num in pageMaxNum " :to="`/blog/pages/${num}`">{{ num }}</NuxtLink>
-        <NuxtLink :to="nextLink" v-if="nextButtonShow">
-            <v-icon large color="green darken-2">mdi-chevron-right</v-icon>
-        </NuxtLink>
+        <BlogUiPagenation :nowPageNum="nowPageNum" :pageMaxNum="pageMaxNum" />
     </v-main>
 </template>
 
@@ -45,14 +36,10 @@
 
 const route = useRoute()
 
-const limit = 9;
-const offset = (Number(route.params.page_num) - 1) * limit;
+const limit = 12;
 
-const nextPageNum = Number(route.params.page_num) + 1
-const prevPageNum = Number(route.params.page_num) - 1
-
-const nextLink = route.fullPath.slice(0, -1) + nextPageNum;
-const prevLink = route.fullPath.slice(0, -1) + prevPageNum;
+const nowPageNum = route.params.page_num
+const offset = (Number(nowPageNum) - 1) * limit;
 
 
 let { data } = await useFetch("/api/microcms", {
@@ -65,10 +52,6 @@ let { data } = await useFetch("/api/microcms", {
 const pageMaxNum = Math.ceil(Number(data.value.totalCount) / limit)
 
 
-const prevButtonShow = Number(route.params.page_num) > 1 ? true : false;
-const nextButtonShow = Number(route.params.page_num) <= pageMaxNum ? true : false;
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -77,5 +60,26 @@ const nextButtonShow = Number(route.params.page_num) <= pageMaxNum ? true : fals
 }
 #blog_box {
     max-width: 80%;
+}
+#pagenation_box {
+    text-align: center;
+    margin: 50px;
+    ul#pagenation_list {
+        li {
+            display: inline-block;
+        }
+        li.pagenation {
+            border-radius: 30%;
+            box-shadow: 0 0 2px grey;
+            height: 30px;
+            line-height: 30px;
+            margin: 0 10px;
+            text-align: center;
+            width: 30px;
+            a.router-link-active {
+                font-weight: bold;
+            }
+        }
+    }
 }
 </style>
