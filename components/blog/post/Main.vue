@@ -22,7 +22,7 @@ const { data } = await useFetch("/api/microcms", {
 onMounted(() => {
     Prism.highlightAll();
 })
-// nextTick(() => Prism.highlightAll());
+// nextTick(async() => await Prism.highlightAll());
 
 </script>
 

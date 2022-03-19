@@ -7,15 +7,13 @@
             :autoplay="{ disableOnInteraction: false, }"
         >
             <swiper-slide v-for="content in blogData.contents" :key="content.id">
-                <nuxt-link :to="`/blog/articles/${content.id}`" custom v-slot="{ href }">
-                    <a :href="href">
-                        <picture>
-                            <source :srcset="`${content.thumbnail.url}?fm=webp&h=${imageWidth}`" />
-                            <img :src="`${content.thumbnail.url}?h=${imageWidth}`" />
-                        </picture>
-                        <p>{{ content.title }}</p>
-                    </a>
-                </nuxt-link>
+                <a :href="`/blog/articles/${content.id}`">
+                    <picture>
+                        <source :srcset="`${content.thumbnail.url}?fm=webp&h=${imageWidth}`" />
+                        <img :src="`${content.thumbnail.url}?h=${imageWidth}`" />
+                    </picture>
+                    <p>{{ content.title }}</p>
+                </a>
             </swiper-slide>
         </swiper>
     </v-container>
@@ -41,13 +39,6 @@ export default {
         let views = ref(0);
         const { data: blogData } = useFetch("/api/microcms")
 
-        // const onSwiper = (swiper) => {
-        //     console.log(swiper);
-        // };
-        // const onSlideChange = () => {
-        //     console.log('slide change');
-        // };
-
 
         const imageWidth = ref(300);
 
@@ -68,8 +59,6 @@ export default {
 
 
         return {
-            // onSwiper,
-            // onSlideChange,
             modules: [A11y, Autoplay],
             blogData,
             views,

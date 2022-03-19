@@ -15,21 +15,21 @@ const title = "Izanagi's Site";
 
 onMounted(async () => {
 
-    if (process.client) {
-        const { default: FOG } = await import("vanta/dist/vanta.fog.min");
-        window.THREE = THREE;
 
-        FOG({
-            el: "#fog",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            speed: 5.00,
-            THREE: window.THREE
-        });
-    }
+    const { default: FOG } = await import("vanta/dist/vanta.fog.min");
+    window.THREE = THREE;
+
+    FOG({
+        el: "#fog",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        speed: 5.00,
+        THREE: window.THREE
+    });
+
 
 })
 

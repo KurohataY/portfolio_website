@@ -1,14 +1,14 @@
 <template>
     <div class="mx-auto" id="blog_box">
         <div class="d-flex flex-wrap justify-space-around" style="background-color: #EDF2F6;">
-            <NuxtLink
+            <!-- <NuxtLink
                 v-for="content in data.contents"
                 :key="content.title"
                 :to="`/blog/articles/${content.id}`"
                 custom
                 v-slot="{ href }"
-            >
-                <a :href="href">
+            > -->
+                <a v-for="content in data.contents" :href="`/blog/articles/${content.id}`">
                     <v-card style="margin: 20px 5px" width="350px">
                         <v-img
                             :src="content.thumbnail.url + '?fm=webp&h=200'"
@@ -21,7 +21,7 @@
                         </v-img>
                     </v-card>
                 </a>
-            </NuxtLink>
+            <!-- </NuxtLink> -->
         </div>
     </div>
 </template>
