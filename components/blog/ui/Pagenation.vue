@@ -25,8 +25,8 @@ const props = defineProps({
     pageMaxNum: Number
 })
 
-const nowPageNum:number  =props.nowPageNum;
-const pageMaxNum:number = props.pageMaxNum
+const nowPageNum: number = props.nowPageNum;
+const pageMaxNum: number = props.pageMaxNum
 
 const prevButtonShow = nowPageNum > 1 ? true : false;
 const nextButtonShow = nowPageNum <= pageMaxNum ? true : false;
@@ -46,11 +46,16 @@ const nextButtonShow = nowPageNum <= pageMaxNum ? true : false;
             box-shadow: 0 0 2px grey;
             height: 30px;
             line-height: 30px;
-            margin: 0 10px;
+            margin: 0 15px;
             text-align: center;
             width: 30px;
             a.router-link-active {
                 font-weight: bold;
+            }
+        }
+        @media screen and (max-width: 640px) {
+            li.pagenation {
+                margin: 5px !important;
             }
         }
     }
