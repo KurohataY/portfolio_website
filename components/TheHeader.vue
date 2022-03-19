@@ -6,8 +6,8 @@
         scroll-target="#scrolling-techniques-2"
         style="padding-right: 10px;box-shadow: none !important"
     >
-        <v-app-bar-title style="font-family: Great Vibes ">       
-            <a href="/">{{ headerData.title }}</a>
+        <v-app-bar-title tag="div">       
+            <a href="/" id="header_title">{{ headerData.title }}</a>
         </v-app-bar-title>
 
         <v-spacer></v-spacer>
@@ -20,7 +20,7 @@
     </v-app-bar>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 const headerData = {
     title: "Izanagi's site",
@@ -39,6 +39,9 @@ const headerData = {
 </script>
 
 <style lang="scss">
+#header_title {
+    font-family: Great Vibes;
+}
 a {
     color: black;
     text-decoration: none;

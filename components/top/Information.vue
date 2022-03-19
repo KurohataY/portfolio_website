@@ -34,12 +34,6 @@
     </v-container>
 </template>
 
-<script setup>
-
-
-
-</script>
-
 <style lang="scss" scoped>
 #skils_box {
     margin-top: 20vw;

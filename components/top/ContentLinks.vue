@@ -26,11 +26,35 @@
         </v-row>
     </v-container>
 </template>
-<script setup>
+<script setup lang="ts">
 
-const cards = [
-    { title: 'Develop blog', src: '/images/product/developBlog.webp', flex: 4, height: 250, width: 400, href: "/blog" },
-    { title: 'Japanese MIddle Name', src: '/images/product/japaneseMidleName.webp', flex: 4,height: 250, width: 400, href: "/app/middle_name/" },
+type CardDataType = {
+    title: string;
+    src: string;
+    flex: number;
+    height: number;
+    width: number;
+    href: string;
+}
+
+
+const cards: Array<CardDataType> = [
+    {
+        title: 'Develop blog',
+        src: '/images/product/developBlog.webp',
+        flex: 4,
+        height: 250,
+        width: 400,
+        href: "/blog"
+    },
+    {
+        title: 'Japanese MIddle Name',
+        src: '/images/product/japaneseMidleName.webp',
+        flex: 4,
+        height: 250,
+        width: 400,
+        href: "/app/middle_name/"
+    },
 ]
 
 </script>

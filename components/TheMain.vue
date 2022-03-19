@@ -8,10 +8,6 @@
     </v-main>
 </template>
 
-
-<script setup>
-</script>
-
 <style lang="scss" scoped>
 #main_title {
     position: relative;

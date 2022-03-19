@@ -2,25 +2,41 @@ import type { IncomingMessage, ServerResponse } from "http";
 import axios from 'axios'
 import config from '#config'
 
-const zeroPadding = ((num, len) => {
+type eventsDataType = {
+  name: string,
+  start: string,
+  end: string,
+  color: string,
+  url: string
+}
+
+const zeroPadding = ((num: number, len: number) => {
   return (Array(len).join('0') + num).slice(-len);
 })
 
 const calendarFormatter = ((data, color) => {
-  let events = []
+  let events: Array<eventsDataType> = []
   data.events.forEach((event) => {
-    events.push({ name: event.title, start: event.started_at.toString().split("T")[0], end: event.ended_at.toString().split("T")[0], color: color, url: event.event_url })
+    events.push({
+      name: event.title,
+      start: event.started_at.toString().split("T")[0],
+      end: event.ended_at.toString().split("T")[0],
+      color: color,
+      url: event.event_url
+    })
   })
 
   return events;
 })
 
 
-const today = new Date();
-const year = today.getFullYear();
-const month = zeroPadding(today.getMonth() + 1, 2);
+const today: Date = new Date();
+const year: string = String(today.getFullYear());
+const month: string = zeroPadding(today.getMonth() + 1, 2);
 
-const ENDPOINT = `https://connpass.com/api/v1/event/?nickname=${config.CONNPASS_NICKNAME}&ym=` + year + month
+const nickname: string = config.CONNPASS_NICKNAME;
+
+const ENDPOINT = `https://connpass.com/api/v1/event/?nickname=${nickname}&ym=` + year + month;
 const API_HEAD = {
   headers: {
     'accept': "application/json"

@@ -8,10 +8,10 @@
         </v-row>
     </v-footer>
 </template>
-<script setup>
+<script setup lang="ts">
 
-const nowYear = new Date().getFullYear();
+const nowYear: number = new Date().getFullYear();
 
-const footerText = "Izanagi's Site";
+const footerText: string = "Izanagi's Site";
 
 </script>

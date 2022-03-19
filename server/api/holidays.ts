@@ -1,17 +1,25 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import axios from 'axios'
 
-const zeroPadding = ((num, len) => {
-    return (Array(len).join('0') + num).slice(-len);
-  })
+type holidatData = {
+    name: string,
+    start: string,
+    end: string,
+    color: string,
+    url: string,
+}
 
-const today = new Date();
-const year = today.getFullYear();
-const month = zeroPadding(today.getMonth() + 1, 2);
+const zeroPadding = ((num: number, len: number) => {
+    return (Array(len).join('0') + num).slice(-len);
+})
+
+const today: Date = new Date();
+const year: string = String(today.getFullYear());
+const month: string = zeroPadding(today.getMonth() + 1, 2);
 
 const calendarFormatter = ((data, color) => {
-    let events = []
-    const yearMonthFormat = year + "-" + month;
+    let events: Array<holidatData> = []
+    const yearMonthFormat: string = year + "-" + month;
     Object.keys(data).forEach((key) => {
         if (key.includes(yearMonthFormat)) {
             events.push({ name: data[key], start: key, end: key, color: color, url: "" })
@@ -22,7 +30,7 @@ const calendarFormatter = ((data, color) => {
 })
 
 
-const ENDPOINT = "https://holidays-jp.github.io/api/v1/" + year + "/date.json"
+const ENDPOINT: string = "https://holidays-jp.github.io/api/v1/" + year + "/date.json"
 const API_HEAD = {
     headers: {
         'accept': "application/json"
