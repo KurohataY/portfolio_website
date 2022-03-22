@@ -1,7 +1,7 @@
 <template>
     <v-layout>
         <div id="main_title">{{ title }}</div>
-        <div id="fog" style="height: 99%;width: 100%;position:absolute;">
+        <div id="bc_gradation">
             <TopUiScrolldownButton />
         </div>
     </v-layout>
@@ -9,30 +9,8 @@
 
 
 <script setup>
-import * as THREE from "three";
 
 const title = "Izanagi's Site";
-
-onMounted(async () => {
-
-
-    const { default: FOG } = await import("vanta/dist/vanta.fog.min");
-    window.THREE = THREE;
-
-    FOG({
-        el: "#fog",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        speed: 5.00,
-        THREE: window.THREE
-    });
-
-
-})
-
 
 </script>
 
@@ -50,5 +28,26 @@ onMounted(async () => {
     font-weight: bold;
     font-family: Great Vibes;
     letter-spacing: 0.12em;
+}
+
+#bc_gradation {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(89, 173, 241, 1), rgba(207, 253, 157, 1));
+    background-size: 200% 200%;
+    animation: bggradient 20s ease infinite;
+    position:absolute;
+}
+
+@keyframes bggradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 </style>

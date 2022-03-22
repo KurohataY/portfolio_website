@@ -8,7 +8,7 @@
     >
         <v-app-bar-title tag="div">
             <!-- <a href="/" id="header_title">{{ headerData.title }}</a> -->
-            <NuxtLink to="/" id="header_title">{{ headerData.title }}</NuxtLink>
+            <a href="/" id="header_title">{{ headerData.title }}</a>
         </v-app-bar-title>
 
         <v-spacer></v-spacer>

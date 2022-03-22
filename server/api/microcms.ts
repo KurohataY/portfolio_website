@@ -34,11 +34,12 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     `${ENDPOINT}`,
     API_HEAD
   ).then(res => {
-    if (!!post_id) {
-      data = res.data;
-    } else {
-      data = res.data;
-    }
+    // if (!!post_id) {
+    //   data = res.data;
+    // } else {
+    //   data = res.data;
+    // }
+    data = res.data;
 
   });
   const json = JSON.stringify(data)

@@ -6,7 +6,7 @@
             :slides-per-view="views"
             :autoplay="{ disableOnInteraction: false, }"
         >
-            <swiper-slide v-for="content in blogData.contents" :key="content.id">
+            <swiper-slide v-for="content in data['contents']" :key="content.id">
                 <a :href="`/blog/articles/${content.id}`">
                     <picture>
                         <source :srcset="`${content.thumbnail.url}?fm=webp&h=${imageWidth}`" />
@@ -37,8 +37,7 @@ export default {
     },
     setup() {
         let views = ref(0);
-        const { data: blogData } = useFetch("/api/microcms")
-
+        let { data } = useFetch("/api/microcms")
 
         const imageWidth = ref(300);
 
@@ -60,7 +59,7 @@ export default {
 
         return {
             modules: [A11y, Autoplay],
-            blogData,
+            data,
             views,
             imageWidth,
         };

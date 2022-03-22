@@ -2,39 +2,24 @@
     <div id="blog_title_box">
         <v-layout>
             <div id="main_title">{{ title }}</div>
-            <div id="rings" style="height: 99%;width: 100%;position:absolute;"></div>
+            <!-- <div id="rings" style="height: 99%;width: 100%;position:absolute;"></div> -->
+            <div id="bc_animetion">
+                <lottie-animation
+                    ref="anim"
+                    :animationData="animationData"
+                    :loop="true"
+                    :autoPlay="true"
+                    :speed="2"
+                />
+            </div>
         </v-layout>
     </div>
 </template>
 
-
-<script setup>
-import * as THREE from "three";
+<script setup lamg="ts">
+import animationData from "@/assets/json/78255-background-looping-animation.json";
 
 const title = "Blog";
-
-onMounted(async () => {
-
-    const { default: RINGS } = await import("vanta/dist/vanta.rings.min");
-    window.THREE = THREE;
-
-    await RINGS({
-        el: "#rings",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        THREE: window.THREE
-    });
-})
-
-onUpdated(async () => {
-
-})
-
 
 </script>
 
@@ -54,5 +39,11 @@ onUpdated(async () => {
     font-family: Great Vibes;
     letter-spacing: 0.12em;
     color: white;
+}
+#bc_animetion {
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    background-color: #263238;
 }
 </style>

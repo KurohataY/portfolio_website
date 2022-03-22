@@ -51,13 +51,6 @@ const skils: Array<skilsDataType> = [
         width: 128
     },
     {
-        title: 'go',
-        src: '/images/skills/go.svg',
-        flex: 2,
-        height: 128,
-        width: 128
-    },
-    {
         title: 'vue',
         src: '/images/skills/vue.svg',
         flex: 2,
