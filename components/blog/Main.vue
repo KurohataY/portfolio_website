@@ -2,7 +2,11 @@
     <v-main>
         <BlogUiTitleView />
         <BlogUiContents :data="data" />
-        <BlogUiPagenation :nowPageNum="nowPageNum" :pageMaxNum="pageMaxNum" />
+        <BlogUiPagenation
+            :nowPageNum="nowPageNum"
+            :pageMaxNum="pageMaxNum"
+            :visibleNum="visibleNum"
+        />
     </v-main>
 </template>
 
@@ -10,7 +14,8 @@
 
 const route = useRoute()
 
-const limit: number= 12;
+const limit: number = 12;
+const visibleNum: number = 4;
 
 const nowPageNum: number = Number(route.params.page_num)
 const offset: number = (nowPageNum - 1) * limit;
