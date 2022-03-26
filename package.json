@@ -7,9 +7,9 @@
   },
   "devDependencies": {
     "@mdi/font": "^6.5.95",
-    "@mdi/js": "^6.5.95",
+    "@mdi/js": "^6.6.95",
     "@vuetify/vite-plugin": "^1.0.0-alpha.10",
-    "nuxt3": "^3.0.0-27465767.70f067a"
+    "nuxt3": "^3.0.0-27470397.9ebea90"
   },
   "dependencies": {
     "axios": "^0.26.1",
@@ -20,7 +20,7 @@
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "swiper": "^8.0.7",
-    "three": "^0.138.3",
+    "three": "^0.139.0",
     "vanta": "^0.5.21",
     "vuetify": "3.0.0-beta.0"
   }
