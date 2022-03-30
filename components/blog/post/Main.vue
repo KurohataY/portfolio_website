@@ -1,5 +1,7 @@
 <template>
     <v-main>
+        <BlogUiBreadcrumb :breadcrumbs="breadcrumbs" />
+
         <div id="post_box">
             <h1>{{ data.title }}</h1>
             <article v-for="c in data.blogContent">
@@ -18,6 +20,23 @@ const { data } = await useFetch("/api/microcms", {
     params: { id: route.params.post_id },
 });
 
+const breadcrumbs = [
+    {
+        text: 'TOP',
+        disabled: false,
+        href: '/',
+    },
+    {
+        text: '記事一覧',
+        disabled: false,
+        href: '/blog/pages/1',
+    },
+    {
+        text: data.value.title,
+        disabled: true,
+    },
+];
+
 
 onMounted(() => {
     Prism.highlightAll();
@@ -27,8 +46,24 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
+#breadcrumbs_box {
+    padding: 50px 15vw 0 15vw;
+    ul#breadcrumbs_list {
+        padding-left: 0 !important;
+        font-size: 12px;
+        li.breadcrumbs_item {
+            display: inline-block;
+            i {
+                padding: 0 10px;
+            }
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+}
 #post_box {
-    padding: 100px 15vw;
+    padding: 50px 15vw;
     h1 {
         margin-bottom: 75px;
     }
