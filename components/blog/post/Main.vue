@@ -46,22 +46,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-#breadcrumbs_box {
-    padding: 50px 15vw 0 15vw;
-    ul#breadcrumbs_list {
-        padding-left: 0 !important;
-        font-size: 12px;
-        li.breadcrumbs_item {
-            display: inline-block;
-            i {
-                padding: 0 10px;
-            }
-            span {
-                font-weight: bold;
-            }
-        }
-    }
-}
 #post_box {
     padding: 50px 15vw;
     h1 {
