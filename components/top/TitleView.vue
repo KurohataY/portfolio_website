@@ -2,8 +2,9 @@
     <v-layout>
         <div id="main_title">{{ title }}</div>
         <div id="bc_gradation">
-            <TopUiScrolldownButton />
+           
         </div>
+         <TopUiScrolldownButton />
     </v-layout>
 </template>
 
@@ -21,13 +22,19 @@ const title = "Izanagi's Site";
     font-size: 13vw;
     text-align: center;
     width: 100%;
-    height: 75vw;
-    line-height: 400%;
+    height: 65vw;
+    line-height: 300%;
     background-color: #fff;
     mix-blend-mode: lighten;
     font-weight: bold;
     font-family: Great Vibes;
     letter-spacing: 0.12em;
+}
+
+@media (max-width: 768px) {
+    #main_title{
+        line-height: 500%;
+    }
 }
 
 #bc_gradation {

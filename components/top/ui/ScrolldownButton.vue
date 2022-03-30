@@ -4,6 +4,9 @@
     </div>
 </template>
 
+<script setup>
+</script>
+
 <style lang="scss" scoped>
 /*========= スクロールダウンのためのCSS ===============*/
 
@@ -17,6 +20,14 @@
     right: 50%;
     /*マウスの動き1.6秒かけて動く永遠にループ*/
     animation: mousemove 1.6s ease-in-out infinite;
+    z-index: 10;
+
+}
+
+@media (max-width: 768px) {
+    .scrolldown3 {
+        display: none;
+    }
 }
 
 /*下からの距離が変化して上から下に動く*/

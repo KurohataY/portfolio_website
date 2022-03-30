@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-
 const route = useRoute()
 
 const limit: number = 12;

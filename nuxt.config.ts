@@ -113,13 +113,13 @@ export default defineNuxtConfig({
     privateRuntimeConfig: {
         MICRO_CMS_API_KEY: process.env.MICRO_CMS_API_KEY,
         MICRO_CMS_SERVICE_DOMAIN: process.env.MICRO_CMS_SERVICE_DOMAIN,
-
     },
     publicRuntimeConfig: {
         FORM_RUN_URL: process.env.FORM_RUN_URL,
         TWITTER_MY_USER_ID: process.env.TWITTER_MY_USER_ID,
         HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
         CONNPASS_NICKNAME: process.env.CONNPASS_NICKNAME,
+        GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
     },
     // components: {
     //     global: true,
