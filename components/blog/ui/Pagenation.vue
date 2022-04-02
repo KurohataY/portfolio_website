@@ -7,11 +7,11 @@
                 </NuxtLink>
             </li>
             <template v-for="(num, index) in pager ">
-                <li v-if="index < visibleNum" class="pagenation">
+                <li v-if="index < visibleNum || (index > visibleNum && (num === pageMaxNum))" class="pagenation">
                     <NuxtLink :to="`/blog/pages/${num}`">{{ num }}</NuxtLink>
                 </li>
-                <li v-else-if="index === visibleNum">...</li>
-                <li v-if="index > visibleNum && (num === pageMaxNum)" class="pagenation">
+                <li v-else-if="index === visibleNum && (num !== pageMaxNum)">...</li>
+                <li v-else class="pagenation">
                     <NuxtLink :to="`/blog/pages/${num}`">{{ num }}</NuxtLink>
                 </li>
             </template>
@@ -41,7 +41,14 @@ const nextButtonShow = nowPageNum <= pageMaxNum ? true : false;
 
 const pageOffset: number = Math.sign(nowPageNum - 2) === 1 && nowPageNum - 2 !== 0 ? nowPageNum - 2 : 1
 
-const pager = [...Array(pageMaxNum)].map((_, i) => i + pageOffset).filter(element => !(element > pageMaxNum));
+let pager;
+
+if (nowPageNum + 1 < pageMaxNum) {
+    pager = [...Array(pageMaxNum)].map((_, i) => i + pageOffset).filter(element => !(element > pageMaxNum));
+} else {
+    pager = [...Array(pageMaxNum)].map((_, i) => i + pageOffset - 1).filter(element => !(element > pageMaxNum));
+}
+
 
 
 </script>
