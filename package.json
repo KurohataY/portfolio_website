@@ -9,7 +9,7 @@
     "@mdi/font": "^6.6.96",
     "@mdi/js": "^6.6.96",
     "@vuetify/vite-plugin": "^1.0.0-alpha.10",
-    "nuxt3": "^3.0.0-27477342.43007c6",
+    "nuxt3": "^3.0.0-27480376.fdd38f9",
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {
@@ -18,10 +18,10 @@
     "lottie-web-vue": "^2.0.6",
     "moment": "^2.29.1",
     "prismjs": "^1.27.0",
-    "sass": "^1.49.9",
+    "sass": "^1.49.11",
     "sass-loader": "^12.6.0",
     "swiper": "^8.0.7",
-    "three": "^0.139.0",
+    "three": "^0.139.2",
     "vanta": "^0.5.21",
     "vuetify": "3.0.0-beta.0"
   }
