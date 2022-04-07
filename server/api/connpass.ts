@@ -1,6 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import axios from 'axios'
-import config from '#config'
 
 type eventsDataType = {
   name: string,
@@ -33,7 +32,7 @@ const calendarFormatter = ((data, color) => {
 const today: Date = new Date();
 const year: string = String(today.getFullYear());
 const month: string = zeroPadding(today.getMonth() + 1, 2);
-
+const config = useRuntimeConfig();
 const nickname: string = config.CONNPASS_NICKNAME;
 
 const ENDPOINT = `https://connpass.com/api/v1/event/?nickname=${nickname}&ym=` + year + month;

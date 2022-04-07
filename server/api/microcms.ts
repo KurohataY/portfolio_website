@@ -1,7 +1,7 @@
-import type { IncomingMessage, ServerResponse } from "http";
 import axios from 'axios'
-import config from '#config'
 import { useQuery } from 'h3'
+
+const config = useRuntimeConfig();
 
 let url: string = `https://${config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1/blog`
 const API_HEAD = {
@@ -10,7 +10,7 @@ const API_HEAD = {
   }
 }
 
-export default async (req: IncomingMessage, res: ServerResponse) => {
+export default async (req, res) => {
   if (req.method != 'GET') {
     console.log(req.method)
     res.statusCode = 500
@@ -34,13 +34,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     `${ENDPOINT}`,
     API_HEAD
   ).then(res => {
-    // if (!!post_id) {
-    //   data = res.data;
-    // } else {
-    //   data = res.data;
-    // }
     data = res.data;
-
   });
   const json = JSON.stringify(data)
 
