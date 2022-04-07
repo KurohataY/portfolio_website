@@ -39,6 +39,5 @@ const data: Object = props.data
 
 <style lang="scss" scoped>
 #blog_box {
-    max-width: 80%;
 }
 </style>

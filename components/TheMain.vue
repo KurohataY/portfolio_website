@@ -1,10 +1,12 @@
 <template>
-    <v-main style="width: 80%;">
-       <TopTitleView />
-       <TopContentLinks />
-       <TopSwiperCaloucel />
-       <TopSkils />
-       <TopInformation />
+    <v-main>
+        <v-container fluid>
+            <TopTitleView />
+            <TopContentLinks />
+            <TopSwiperCaloucel />
+            <TopSkils />
+            <TopInformation />
+        </v-container>
     </v-main>
 </template>
 

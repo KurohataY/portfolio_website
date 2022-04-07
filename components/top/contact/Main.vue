@@ -21,7 +21,4 @@ h2 {
 #contact_title {
     margin-top: 100px;
 }
-main {
-    width: 80%;
-}
 </style>

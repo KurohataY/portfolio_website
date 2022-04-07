@@ -2,7 +2,6 @@
     <div id="blog_title_box">
         <v-layout>
             <div id="main_title">{{ title }}</div>
-            <!-- <div id="rings" style="height: 99%;width: 100%;position:absolute;"></div> -->
             <div id="bc_animetion">
                 <lottie-animation
                     ref="anim"

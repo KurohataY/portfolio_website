@@ -1,30 +1,36 @@
 <template>
     <v-app-bar
+        app
         absolute
         color="white"
         shrink-on-scroll
         scroll-target="#scrolling-techniques-2"
         style="padding-right: 10px;box-shadow: none !important"
+        id="menu"
     >
-        <v-app-bar-title tag="div">
-            <!-- <a href="/" id="header_title">{{ headerData.title }}</a> -->
-            <a href="/" id="header_title">{{ headerData.title }}</a>
-        </v-app-bar-title>
-
+        <a class="menu_link_style" href="/" id="header_title">
+            <v-app-bar-title tag="div">{{ headerData.title }}</v-app-bar-title>
+        </a>
         <v-spacer></v-spacer>
-
-        <v-btn v-for="(nav, index) in headerData.nav" :key="index">
-            <!-- <NuxtLink :to="nav.to">{{ nav.text }}</NuxtLink> -->
-           <!-- <NuxtLink :to="nav.to" custom v-slot="{ href }">
-                <a :href="href">{{ nav.text }}</a>
-            </NuxtLink> -->
-            <a :href="nav.to">{{ nav.text }}</a> 
+        <v-btn v-if="display.width.value <= 640" @click="overlay = !overlay" icon="mdi-menu"></v-btn>
+        <v-btn v-else v-for="(nav, index) in headerData.nav" :key="index">
+            <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
         </v-btn>
+        <v-overlay
+            v-model="overlay"
+            scrim="#fff"
+            id="overlay_box"
+            class="align-center justify-center"
+        >
+            <v-btn class="overlay_buttons" v-for="(nav, index) in headerData.nav" :key="index">
+                <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
+            </v-btn>
+        </v-overlay>
     </v-app-bar>
 </template>
 
 <script setup lang="ts">
-
+import { useDisplay } from 'vuetify'
 const headerData = {
     title: "Izanagi's site",
     nav: [{
@@ -39,14 +45,32 @@ const headerData = {
     }]
 };
 
+const display = useDisplay()
+const overlay = ref(false);
+
+watch(
+    () => overlay,
+    (overlay) => {
+        overlay.value = !overlay.value
+    }
+)
 </script>
 
 <style lang="scss">
 #header_title {
     font-family: Great Vibes;
 }
-a {
-    color: black;
-    text-decoration: none;
+#overlay_box {
+    .v-overlay__scrim {
+        opacity: 95% !important;
+    }
+    .v-overlay__content {
+        display: grid;
+        .overlay_buttons {
+            margin: 20px 0;
+            border-radius: 0% !important;
+            border-bottom: double;
+        }
+    }
 }
 </style>

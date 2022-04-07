@@ -12,7 +12,7 @@
                     <a :href="card.href">
                         <v-img
                             :src="card.src"
-                            class="white--text align-end img_wrap"
+                            class="white--text align-end img_wrap menu_link_style"
                             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                             :height="card.height"
                             :width="card.width"

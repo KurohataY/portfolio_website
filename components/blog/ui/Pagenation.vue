@@ -2,23 +2,23 @@
     <div id="pagenation_box">
         <ul id="pagenation_list">
             <li id="pagenation_prev">
-                <NuxtLink :to="`/blog/pages/${nowPageNum - 1}`" v-if="prevButtonShow">
+                <a :href = "`/blog/pages/${nowPageNum - 1}`" v-if="prevButtonShow">
                     <v-icon large color="green darken-2">mdi-chevron-left</v-icon>
-                </NuxtLink>
+                </a>
             </li>
             <template v-for="(num, index) in pager ">
                 <li v-if="index < visibleNum || (index > visibleNum && (num === pageMaxNum))" class="pagenation">
-                    <NuxtLink :to="`/blog/pages/${num}`">{{ num }}</NuxtLink>
+                    <a :href = "`/blog/pages/${num}`">{{ num }}</a>
                 </li>
                 <li v-else-if="index === visibleNum && (num !== pageMaxNum)">...</li>
                 <li v-else class="pagenation">
-                    <NuxtLink :to="`/blog/pages/${num}`">{{ num }}</NuxtLink>
+                    <a :href = "`/blog/pages/${num}`">{{ num }}</a>
                 </li>
             </template>
             <li id="pagenation_next">
-                <NuxtLink :to="`/blog/pages/${nowPageNum + 1}`" v-if="nextButtonShow">
+                <a :href = "`/blog/pages/${nowPageNum + 1}`" v-if="nextButtonShow">
                     <v-icon large color="green darken-2">mdi-chevron-right</v-icon>
-                </NuxtLink>
+                </a>
             </li>
         </ul>
     </div>
@@ -37,7 +37,7 @@ const pageMaxNum: number = props.pageMaxNum;
 const visibleNum: number = props.visibleNum;
 
 const prevButtonShow = nowPageNum > 1 ? true : false;
-const nextButtonShow = nowPageNum <= pageMaxNum ? true : false;
+const nextButtonShow = nowPageNum < pageMaxNum ? true : false;
 
 const pageOffset: number = Math.sign(nowPageNum - 2) === 1 && nowPageNum - 2 !== 0 ? nowPageNum - 2 : 1
 

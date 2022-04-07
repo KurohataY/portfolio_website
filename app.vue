@@ -1,8 +1,8 @@
 <template>
-  <div id="top">
+  <v-app id="top" style="display: inherit !important;">
     <NuxtPage />
     <TopUiGoToTopButton :target="'#top'" />
-  </div>
+  </v-app>
 </template>
 
 <script setup>

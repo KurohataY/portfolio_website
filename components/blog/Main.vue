@@ -1,12 +1,14 @@
 <template>
-    <v-main>
+    <v-main id="blog">
         <BlogUiTitleView />
-        <BlogUiContents :data="data" />
-        <BlogUiPagenation
-            :nowPageNum="nowPageNum"
-            :pageMaxNum="pageMaxNum"
-            :visibleNum="visibleNum"
-        />
+        <v-container>
+            <BlogUiContents :data="data" />
+            <BlogUiPagenation
+                :nowPageNum="nowPageNum"
+                :pageMaxNum="pageMaxNum"
+                :visibleNum="visibleNum"
+            />
+        </v-container>
     </v-main>
 </template>
 
@@ -16,8 +18,8 @@ const route = useRoute()
 const limit: number = 12;
 const visibleNum: number = 4;
 
-const nowPageNum: number = Number(route.params.page_num)
-const offset: number = (nowPageNum - 1) * limit;
+let nowPageNum: number = Number(route.params.page_num)
+let offset: number = (nowPageNum - 1) * limit;
 
 
 let { data } = await useFetch("/api/microcms", {
@@ -33,4 +35,7 @@ const pageMaxNum: number = Math.ceil(data.value["totalCount"] / limit)
 </script>
 
 <style lang="scss" scoped>
+#blog {
+    background-color: #edf2f6;
+}
 </style>

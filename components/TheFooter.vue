@@ -1,5 +1,5 @@
 <template>
-    <v-footer class="bg-grey-lighten-1">
+    <v-footer app width="100%" class="bg-grey-lighten-1">
         <v-row justify="center" no-gutters>
             <v-col class="text-center text-white" cols="12">
                 {{ nowYear }} -
