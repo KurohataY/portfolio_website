@@ -1,32 +1,21 @@
 <template>
-    <v-app-bar
-        app
-        absolute
-        color="white"
-        shrink-on-scroll
-        scroll-target="#scrolling-techniques-2"
-        style="padding-right: 10px;box-shadow: none !important"
-        id="menu"
-    >
-        <a class="menu_link_style" href="/" id="header_title">
-            <v-app-bar-title tag="div">{{ headerData.title }}</v-app-bar-title>
-        </a>
-        <v-spacer></v-spacer>
-        <v-btn v-if="display.width.value <= 640" @click="overlay = !overlay" icon="mdi-menu"></v-btn>
-        <v-btn v-else v-for="(nav, index) in headerData.nav" :key="index">
-            <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
-        </v-btn>
-        <v-overlay
-            v-model="overlay"
-            scrim="#fff"
-            id="overlay_box"
-            class="align-center justify-center"
-        >
-            <v-btn class="overlay_buttons" v-for="(nav, index) in headerData.nav" :key="index">
+    <header app>
+        <div class="flex_box">
+            <a class="menu_link_style" href="/" id="header_title">
+                <div>{{ headerData.title }}</div>
+            </a>
+            <div style="flex-grow: 1;"></div>
+            <span class="mdi mdi-menu" v-show="display.width.value <= 640" @click="onClickLink"></span>
+            <v-btn
+                v-show="display.width.value > 640"
+                v-for="(nav, index) in headerData.nav"
+                :key="index"
+                class="menu_button"
+            >
                 <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
             </v-btn>
-        </v-overlay>
-    </v-app-bar>
+        </div>
+    </header>
 </template>
 
 <script setup lang="ts">
@@ -46,31 +35,34 @@ const headerData = {
 };
 
 const display = useDisplay()
-const overlay = ref(false);
 
-watch(
-    () => overlay,
-    (overlay) => {
-        overlay.value = !overlay.value
-    }
-)
+const { overlayStateValue, updateOverlay } = useOverlay();
+
+let overlay = ref(overlayStateValue.value);
+
+const onClickLink = () => {
+    updateOverlay(!overlay.value);
+};
+
+
 </script>
 
 <style lang="scss">
-#header_title {
-    font-family: Great Vibes;
-}
-#overlay_box {
-    .v-overlay__scrim {
-        opacity: 95% !important;
-    }
-    .v-overlay__content {
-        display: grid;
-        .overlay_buttons {
-            margin: 20px 0;
-            border-radius: 0% !important;
-            border-bottom: double;
+header {
+    background-color: #fff;
+    font-size: 25px;
+    padding: 20px 0 10px 0;
+    .flex_box {
+        display: flex;
+        #header_title {
+            font-family: Great Vibes;
         }
     }
+}
+
+.menu_button {
+    border-radius: 0% !important;
+    border-bottom: double;
+    box-shadow: none !important;
 }
 </style>

@@ -25,7 +25,7 @@
                     </v-card-actions>
                 </v-card>
             </v-col>
-            <v-col>
+            <v-col v-show="display.width.value > 960">
                 <v-card class="mx-auto text-center" max-width="500" height="500">
                     <TopUiCalendar />
                 </v-card>
@@ -33,6 +33,11 @@
         </v-row>
     </v-container>
 </template>
+
+<script lang="ts" setup>
+import { useDisplay } from 'vuetify'
+const display = useDisplay();
+</script>
 
 <style lang="scss" scoped>
 #skils_box {
