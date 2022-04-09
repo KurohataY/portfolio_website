@@ -1,7 +1,9 @@
 <template>
-    <TheHeader />
-    <BlogMain />
-    <TheFooter />
+    <div id="page">
+        <TheHeader />
+        <BlogMain />
+        <TheFooter />
+    </div>
 </template>
 
 <style lang="scss" scoped>

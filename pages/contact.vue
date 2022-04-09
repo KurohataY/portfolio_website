@@ -1,5 +1,7 @@
 <template>
-    <TheHeader />
-    <TopContactMain />
-    <TheFooter />
+    <div id="contact_page">
+        <TheHeader />
+        <TopContactMain />
+        <TheFooter />
+    </div>
 </template>

@@ -1,9 +1,7 @@
 <template>
     <div id="post">
-        <v-layout>
-            <TheHeader />
-            <BlogPostMain />
-        </v-layout>
+        <TheHeader />
+        <BlogPostMain />
         <TheFooter />
     </div>
 </template>
@@ -14,7 +12,4 @@ console.log(route.params.post_id)
 </script> -->
 
 <style lang="scss" scoped>
-#post {
-    background-color: #EDF2F6;
-}
 </style>

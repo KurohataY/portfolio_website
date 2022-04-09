@@ -1,5 +1,7 @@
 <template>
-    <TheHeader />
-    <TheMain />
-    <TheFooter />
+    <div id="top">
+        <TheHeader />
+        <TheMain />
+        <TheFooter />
+    </div>
 </template>
