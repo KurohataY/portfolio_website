@@ -16,7 +16,7 @@
         </form>
         <v-card max-width="900" class="mx-auto">
             <v-row dense>
-                <v-col cols="12" v-if="resultShow" v-for="content in data.contents">
+                <v-col cols="12" v-if="resultShow" v-for="content in data['contents']">
                     <a :href="`/blog/articles/${content.id}`">
                         <v-card color="#1F7087" theme="dark">
                             <div class="d-flex flex-no-wrap">
