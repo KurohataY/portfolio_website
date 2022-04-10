@@ -9,7 +9,7 @@
     "@mdi/font": "^6.6.96",
     "@mdi/js": "^6.6.96",
     "@vuetify/vite-plugin": "^1.0.0-alpha.10",
-    "nuxt3": "^3.0.0-27490192.4253d2e",
+    "nuxt3": "^3.0.0-27491748.3186841",
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {
