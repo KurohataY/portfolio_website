@@ -30,6 +30,20 @@
                     <TopUiCalendar />
                 </v-card>
             </v-col>
+            <v-col v-show="display.width.value > 960">
+                <form method="get">
+                    <input name="search" type="text" required v-model="word" />
+                    <v-btn
+                        icon="mdi-magnify"
+                        color="light-blue"
+                        @click="navigate"
+                        rel="noopener noreferrer"
+                        size="small"
+                    ></v-btn>
+                </form>
+
+                <TopUiTags />
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -37,6 +51,18 @@
 <script lang="ts" setup>
 import { useDisplay } from 'vuetify'
 const display = useDisplay();
+
+const word = ref('');
+
+const navigate = (() => {
+    return navigateTo({
+        path: '/blog/search',
+        query: {
+            word: word.value,
+        }
+    })
+})
+
 </script>
 
 <style lang="scss" scoped>

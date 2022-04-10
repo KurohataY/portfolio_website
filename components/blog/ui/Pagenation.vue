@@ -2,21 +2,24 @@
     <div id="pagenation_box">
         <ul id="pagenation_list">
             <li id="pagenation_prev">
-                <a :href = "`/blog/pages/${nowPageNum - 1}`" v-if="prevButtonShow">
+                <a :href="prevLink" v-if="prevButtonShow">
                     <v-icon large color="green darken-2">mdi-chevron-left</v-icon>
                 </a>
             </li>
             <template v-for="(num, index) in pager ">
-                <li v-if="index < visibleNum || (index > visibleNum && (num === pageMaxNum))" class="pagenation">
-                    <a :href = "`/blog/pages/${num}`">{{ num }}</a>
+                <li
+                    v-if="index < visibleNum || (index > visibleNum && (num === pageMaxNum))"
+                    class="pagenation"
+                >
+                    <a :href="`${path}${num}`">{{ num }}</a>
                 </li>
                 <li v-else-if="index === visibleNum && (num !== pageMaxNum)">...</li>
                 <li v-else class="pagenation">
-                    <a :href = "`/blog/pages/${num}`">{{ num }}</a>
+                    <a :href="`${path}${num}`">{{ num }}</a>
                 </li>
             </template>
             <li id="pagenation_next">
-                <a :href = "`/blog/pages/${nowPageNum + 1}`" v-if="nextButtonShow">
+                <a :href="nextLink" v-if="nextButtonShow">
                     <v-icon large color="green darken-2">mdi-chevron-right</v-icon>
                 </a>
             </li>
@@ -30,11 +33,17 @@ const props = defineProps({
     nowPageNum: Number,
     pageMaxNum: Number,
     visibleNum: Number,
+    path: String,
+    query: String,
+    queryString: String
 })
+
 
 const nowPageNum: number = props.nowPageNum;
 const pageMaxNum: number = props.pageMaxNum;
 const visibleNum: number = props.visibleNum;
+
+let path: string = props.path;
 
 const prevButtonShow = nowPageNum > 1 ? true : false;
 const nextButtonShow = nowPageNum < pageMaxNum ? true : false;
@@ -43,12 +52,14 @@ const pageOffset: number = Math.sign(nowPageNum - 2) === 1 && nowPageNum - 2 !==
 
 let pager;
 
-if (nowPageNum + 1 < pageMaxNum) {
+if (nowPageNum + 1 <= pageMaxNum || pageMaxNum < visibleNum) {
     pager = [...Array(pageMaxNum)].map((_, i) => i + pageOffset).filter(element => !(element > pageMaxNum));
 } else {
     pager = [...Array(pageMaxNum)].map((_, i) => i + pageOffset - 1).filter(element => !(element > pageMaxNum));
 }
 
+let prevLink = `${path}${nowPageNum - 1}`;
+let nextLink = `${path}${nowPageNum + 1}`;
 
 
 </script>
