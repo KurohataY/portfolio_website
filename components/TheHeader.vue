@@ -51,7 +51,7 @@ const onClickLink = () => {
 header {
     background-color: #fff;
     font-size: 25px;
-    padding: 20px 0 10px 0;
+    padding: 20px 0 20px 10px;
     .flex_box {
         display: flex;
         #header_title {

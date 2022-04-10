@@ -1,7 +1,7 @@
 <template>
   <v-app id="top">
     <NuxtPage />
-    <TopUiGoToTopButton :target="'#top'" />
+    <UiGoToTopButton :target="'#top'" />
     <div app v-show="overlay" @click="updateOverlay(!overlay)" id="overlay_box">
       <ul>
         <li v-for="(nav, index) in headerData.nav" :key="index">
