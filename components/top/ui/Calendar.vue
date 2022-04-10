@@ -167,6 +167,7 @@ const getStartedEvents = ((stackIndex, startedEvents, dayEvents) => {
     border-right: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     margin-right: -1px;
+    width: 70px;
 }
 .calendar-day {
     text-align: center;
