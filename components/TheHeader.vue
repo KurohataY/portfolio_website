@@ -22,31 +22,19 @@
 </template>
 
 <script setup lang="ts">
-import { useDisplay } from 'vuetify'
-const headerData = {
-    title: "Izanagi's site",
-    nav: [{
-        text: "ブログ",
-        to: "/blog/pages/1"
-    }, {
-        text: "プライバシーポリシー",
-        to: "/privacy-policy"
-    }, {
-        text: "お問合せ先",
-        to: "/contact"
-    }]
-};
+import { useDisplay } from 'vuetify';
+import headerData from "assets/json/global_menu.json";
 
 const placeholder = ""
 
 const display = useDisplay()
 
-const { overlayStateValue, updateOverlay } = useOverlay();
+const { stateValue, updateState } = useOverlayMenu();
 
-let overlay = ref(overlayStateValue.value);
+let overlay = ref(stateValue.value);
 
 const onClickLink = () => {
-    updateOverlay(!overlay.value);
+    updateState(!overlay.value);
 };
 
 const isActive = ref(false)
@@ -91,6 +79,7 @@ header {
         top: 0;
     }
 }
+
 .close_button {
     border: none;
     // border-radius: 20% 20% 0 0 ;

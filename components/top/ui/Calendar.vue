@@ -1,5 +1,5 @@
 <template>
-    <div class="content">
+    <div class="content pa-4">
         <div class="calendar">
             <div class="calendar-weekly" v-for="(week, index) in calendars" :key="index">
                 <div class="calendar-daily" :class="{ outside: !currentMonth.includes(day.month) }"
@@ -31,7 +31,14 @@ const { data: holiday } = await useFetch("/api/holidays");
 
 let events = ref([])
 
-events.value = connpass.value.concat(holiday.value);
+
+
+if (!!connpass.value && !!holiday.value) {
+    events.value = connpass.value.concat(holiday.value);
+} else if (!!connpass.value) {
+    events.value = connpass.value
+}
+
 // Today
 events.value.push({ name: "Today", start: currentDate.value, end: currentDate.value, color: "skyblue", url: "" })
 
@@ -134,6 +141,7 @@ const getStartedEvents = ((stackIndex, startedEvents, dayEvents) => {
 <style lang="scss">
 .content {
     width: 500px;
+    background-color: #fff;
 }
 
 .button-area {

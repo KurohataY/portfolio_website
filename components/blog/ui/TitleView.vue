@@ -3,13 +3,7 @@
         <v-layout>
             <div id="main_title">{{ title }}</div>
             <div id="bc_animetion">
-                <lottie-animation
-                    ref="anim"
-                    :animationData="animationData"
-                    :loop="true"
-                    :autoPlay="true"
-                    :speed="2"
-                />
+                <div ref="lottie_ref" :animationData="animationData" />
             </div>
         </v-layout>
     </div>
@@ -17,8 +11,21 @@
 
 <script setup lamg="ts">
 import animationData from "@/assets/json/78255-background-looping-animation.json";
+import lottie from 'lottie-web';
 
 const title = "Blog";
+
+const lottie_ref = ref()
+
+onMounted(() => {
+    lottie.loadAnimation({
+        container: lottie_ref.value, // the dom element
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: animationData, // the animation data
+    });
+})
 
 </script>
 
@@ -26,6 +33,7 @@ const title = "Blog";
 #blog_title_box {
     margin-bottom: 100px;
 }
+
 #main_title {
     position: relative;
     z-index: 1;
@@ -39,6 +47,7 @@ const title = "Blog";
     letter-spacing: 0.12em;
     color: white;
 }
+
 #bc_animetion {
     width: 100vw;
     height: 100%;

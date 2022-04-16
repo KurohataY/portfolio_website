@@ -3,6 +3,7 @@
     <NuxtPage />
     <UiGoToTopButton :target="'#top'" />
     <UiOverlayMenu />
+    <UiOverlayCalendar />
   </v-app>
 </template>
 

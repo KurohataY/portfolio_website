@@ -13,6 +13,21 @@
 
 
 <script setup>
+import Prism from "prismjs"
+import "prismjs/themes/prism-okaidia.css"
+import 'prismjs/components/prism-javascript' 
+import 'prismjs/components/prism-json' 
+import 'prismjs/components/prism-markup' 
+import 'prismjs/components/prism-css' 
+import 'prismjs/components/prism-scss' 
+import 'prismjs/components/prism-python' 
+import 'prismjs/components/prism-nginx' 
+import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-docker'
+import 'prismjs/components/prism-properties'
+import 'prismjs/components/prism-swift'
+import 'prismjs/components/prism-ruby'
+
 const route = useRoute()
 
 const { data } = await useFetch("/api/microcms", {

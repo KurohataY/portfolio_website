@@ -16,18 +16,9 @@
                     <v-card-actions>
                         <v-btn icon="mdi-twitter" color="light-blue" href="https://twitter.com/izanagiblog"
                             target="_blank" rel="noopener noreferrer" size="small"></v-btn>
-                        <div class="text-center">
-                            <v-dialog v-model="dialog" max-height="500px">
-                                <template v-slot:activator="{ props }">
-                                    <v-btn icon="mdi-calendar-account" size="small" v-bind="props">
-                                        予定表
-                                    </v-btn>
-                                </template>
-                                <v-card class="pa-4">
-                                    <TopUiCalendar />
-                                </v-card>
-                            </v-dialog>
-                        </div>
+                        <v-btn icon="mdi-calendar-account" size="small" @click="onClickLink">
+                            予定表
+                        </v-btn>
 
                     </v-card-actions>
                 </v-card>
@@ -43,11 +34,15 @@
 </template>
 
 <script lang="ts" setup>
-import { useDisplay } from 'vuetify'
+const { stateValue, updateState } = useOverlayCalendar();
 
-const dialog = ref(false)
-const display = useDisplay();
 const placeholder = "ブログ内を検索"
+
+let overlay = ref(stateValue.value);
+
+const onClickLink = () => {
+    updateState(!overlay.value);
+};
 
 </script>
 

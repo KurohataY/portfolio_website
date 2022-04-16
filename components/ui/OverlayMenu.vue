@@ -1,39 +1,30 @@
 <template>
-    <div app v-show="overlay" @click="updateOverlay(!overlay)" id="overlay_menu_box">
-        <ul>
-            <li v-for="(nav, index) in headerData.nav" :key="index">
-                <v-btn class="overlay_buttons">
-                    <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
-                </v-btn>
-            </li>
-        </ul>
+    <div app id="overlay_menu_box" v-if="overlay" @click="updateState(!overlay)">
+        <teleport to="body">
+            <div id="dialog">
+                <ul>
+                    <li v-for="(nav, index) in headerData.nav" :key="index">
+                        <v-btn class="overlay_buttons">
+                            <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
+                        </v-btn>
+                    </li>
+                </ul>
+            </div>
+        </teleport>
     </div>
 </template>
 
 <script lang="ts" setup>
-const headerData = {
-    title: "Izanagi's site",
-    nav: [{
-        text: "ブログ",
-        to: "/blog/pages/1"
-    }, {
-        text: "プライバシーポリシー",
-        to: "/privacy-policy"
-    }, {
-        text: "お問合せ先",
-        to: "/contact"
-    }]
-};
+import headerData from "assets/json/global_menu.json";
 
-const { overlayStateValue, updateOverlay } = useOverlay();
+const { stateValue, updateState } = useOverlayMenu();
 
-const overlay = ref(overlayStateValue)
+const overlay = ref(stateValue)
 
 watch(
-    () => overlayStateValue.value,
+    () => stateValue.value,
     (overlayStateValue) => {
         overlay.value = overlayStateValue
-        console.log(overlay.value)
     }
 )
 
@@ -50,11 +41,18 @@ watch(
     opacity: 95% !important;
     z-index: 2147483647;
     text-align: center;
-
+}
+#dialog {
+    z-index: 2147483647;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2147483647;
+    text-align: center;
     ul {
-        margin-top: 35vh;
-
         li {
+            list-style-type: none;
             .overlay_buttons {
                 margin: 20px 0;
                 border-radius: 0% !important;
