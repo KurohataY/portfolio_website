@@ -34,13 +34,7 @@
             </v-col>
             <v-col>
                 <v-card class="mx-auto text-center" max-width="300" height="500">
-                    <div id="search_box">
-                        <form method="get">
-                            <input name="search" type="text" required v-model="word" placeholder="ブログ内を検索" />
-                            <v-btn icon="mdi-magnify" color="light-blue" @click="navigate" rel="noopener noreferrer"
-                                size="small"></v-btn>
-                        </form>
-                    </div>
+                    <UiSearchForm :placeholder="placeholder" />
                     <TopUiTags />
                 </v-card>
             </v-col>
@@ -53,17 +47,7 @@ import { useDisplay } from 'vuetify'
 
 const dialog = ref(false)
 const display = useDisplay();
-
-const word = ref('');
-
-const navigate = (() => {
-    return navigateTo({
-        path: '/blog/search',
-        query: {
-            word: word.value,
-        }
-    })
-})
+const placeholder = "ブログ内を検索"
 
 </script>
 
@@ -75,32 +59,6 @@ const navigate = (() => {
 h2 {
     margin-bottom: 10vw;
     font-family: Great Vibes !important;
-}
-
-#search_box {
-    // height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px 5px;
-
-    form {
-
-        input {
-            width: 85%;
-            height: 40px;
-            border-style: double !important;
-
-            &:focus {
-                outline: 0;
-
-            }
-        }
-
-        button {
-            top: -3px;
-        }
-    }
 }
 
 .v-overlay__content {
