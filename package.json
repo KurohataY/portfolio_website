@@ -15,7 +15,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "fibe": "^1.1.1",
-    "lottie-web-vue": "^2.0.6",
+    "lottie-web": "^5.9.2",
     "moment": "^2.29.2",
     "prismjs": "^1.27.0",
     "sass": "^1.50.0",
