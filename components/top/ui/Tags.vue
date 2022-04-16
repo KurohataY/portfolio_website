@@ -1,5 +1,5 @@
 <template>
-    <v-card v-scroll.self="onScroll" class="overflow-y-auto" max-height="300">
+    <v-card v-scroll.self="onScroll" class="overflow-y-auto pa-4" max-height="440">
         <v-chip-group column active-class="primary--text">
             <template v-for="tag in tags.split(',')">
                 <v-chip

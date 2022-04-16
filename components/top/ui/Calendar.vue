@@ -2,35 +2,24 @@
     <div class="content">
         <div class="calendar">
             <div class="calendar-weekly" v-for="(week, index) in calendars" :key="index">
-                <div
-                    class="calendar-daily"
-                    :class="{ outside: !currentMonth.includes(day.month) }"
-                    v-for="(day, index) in week"
-                    :key="index"
-                >
+                <div class="calendar-daily" :class="{ outside: !currentMonth.includes(day.month) }"
+                    v-for="(day, index) in week" :key="index">
                     <span class="calendar-day">{{ day.day }}</span>
                     <div v-for="(dayEvent, dayEventIndex) in day.dayEvents" :key="dayEventIndex">
-                        <a
-                            v-if="!!dayEvent.url"
-                            class="calendar-event"
+                        <a v-if="!!dayEvent.url" class="calendar-event"
+                            :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`" :href="dayEvent.url"
+                            style="display: block;overflow: hidden;" target="_blank">{{
+                                dayEvent.name
+                            }}</a>
+                        <div v-else class="calendar-event"
                             :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`"
-                            :href="dayEvent.url"
-                            style="display: block;overflow: hidden;"
-                            target="_blank"
-                        >{{ dayEvent.name }}</a>
-                        <div
-                            v-else
-                            class="calendar-event"
-                            :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`"
-                            style="overflow: hidden;"
-                        >{{ dayEvent.name }}</div>
+                            style="overflow: hidden;">{{ dayEvent.name }}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 <script setup>
 
 let calendars = ref([])
@@ -146,32 +135,39 @@ const getStartedEvents = ((stackIndex, startedEvents, dayEvents) => {
 .content {
     width: 500px;
 }
+
 .button-area {
     margin: 0.5em 0;
 }
+
 .button {
     padding: 4px 8px;
     margin-right: 8px;
 }
+
 .calendar {
     border-top: 1px solid #e0e0e0;
     font-size: 0.8em;
 }
+
 .calendar-weekly {
     display: flex;
     border-left: 1px solid #e0e0e0;
 }
+
 .calendar-daily {
     flex: 1;
-    min-height: 100px;
+    min-height: 90px;
     border-right: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     margin-right: -1px;
     width: 70px;
 }
+
 .calendar-day {
     text-align: center;
 }
+
 .outside {
     .calendar-day {
         opacity: 0.2;
@@ -186,6 +182,7 @@ const getStartedEvents = ((stackIndex, startedEvents, dayEvents) => {
     position: relative;
     z-index: 1;
     border-radius: 4px;
+
     div {
         height: 25px;
     }

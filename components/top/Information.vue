@@ -14,35 +14,35 @@
                     </v-card-text>
 
                     <v-card-actions>
-                        <v-btn
-                            icon="mdi-twitter"
-                            color="light-blue"
-                            href="https://twitter.com/izanagiblog"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            size="small"
-                        ></v-btn>
+                        <v-btn icon="mdi-twitter" color="light-blue" href="https://twitter.com/izanagiblog"
+                            target="_blank" rel="noopener noreferrer" size="small"></v-btn>
+                        <div class="text-center">
+                            <v-dialog v-model="dialog" max-height="500px">
+                                <template v-slot:activator="{ props }">
+                                    <v-btn icon="mdi-calendar-account" size="small" v-bind="props">
+                                        予定表
+                                    </v-btn>
+                                </template>
+                                <v-card class="pa-4">
+                                    <TopUiCalendar />
+                                </v-card>
+                            </v-dialog>
+                        </div>
+
                     </v-card-actions>
                 </v-card>
             </v-col>
-            <v-col v-show="display.width.value > 960">
-                <v-card class="mx-auto text-center" max-width="500" height="500">
-                    <TopUiCalendar />
+            <v-col>
+                <v-card class="mx-auto text-center" max-width="300" height="500">
+                    <div id="search_box">
+                        <form method="get">
+                            <input name="search" type="text" required v-model="word" placeholder="ブログ内を検索" />
+                            <v-btn icon="mdi-magnify" color="light-blue" @click="navigate" rel="noopener noreferrer"
+                                size="small"></v-btn>
+                        </form>
+                    </div>
+                    <TopUiTags />
                 </v-card>
-            </v-col>
-            <v-col v-show="display.width.value > 960">
-                <form method="get">
-                    <input name="search" type="text" required v-model="word" />
-                    <v-btn
-                        icon="mdi-magnify"
-                        color="light-blue"
-                        @click="navigate"
-                        rel="noopener noreferrer"
-                        size="small"
-                    ></v-btn>
-                </form>
-
-                <TopUiTags />
             </v-col>
         </v-row>
     </v-container>
@@ -50,6 +50,8 @@
 
 <script lang="ts" setup>
 import { useDisplay } from 'vuetify'
+
+const dialog = ref(false)
 const display = useDisplay();
 
 const word = ref('');
@@ -69,8 +71,39 @@ const navigate = (() => {
 #skils_box {
     margin-top: 20vw;
 }
+
 h2 {
     margin-bottom: 10vw;
     font-family: Great Vibes !important;
+}
+
+#search_box {
+    // height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 5px;
+
+    form {
+
+        input {
+            width: 85%;
+            height: 40px;
+            border-style: double !important;
+
+            &:focus {
+                outline: 0;
+
+            }
+        }
+
+        button {
+            top: -3px;
+        }
+    }
+}
+
+.v-overlay__content {
+    max-width: 500px;
 }
 </style>
