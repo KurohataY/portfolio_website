@@ -14,6 +14,13 @@
             >
                 <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
             </v-btn>
+            <v-btn
+                v-show="display.width.value > 640"
+                class="menu_button"
+                icon="mdi-magnify"
+                small
+            >
+            </v-btn>
         </div>
     </header>
 </template>
@@ -64,5 +71,6 @@ header {
     border-radius: 0% !important;
     border-bottom: double;
     box-shadow: none !important;
+    height: calc(var(--v-btn-height)) !important;
 }
 </style>
