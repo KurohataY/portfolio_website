@@ -21,7 +21,8 @@
                         <v-card color="#1F7087" theme="dark">
                             <div class="d-flex flex-no-wrap">
                                 <div class="pa-3">
-                                    <v-img :height="150" :width="200" :src="content.thumbnail.url"></v-img>
+                                    <img :src="content.thumbnail.url" :height="150" :width="200" style="width:200px" />
+                                    <!-- <v-img :height="150" :width="200" :src="content.thumbnail.url" :lazy-src="content.thumbnail.url"></v-img> -->
                                 </div>
                                 <div class="flex_box">
                                     <v-card-title class="text-h5">{{ content.title }}</v-card-title>
