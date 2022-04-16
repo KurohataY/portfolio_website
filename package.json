@@ -9,7 +9,7 @@
     "@mdi/font": "^6.6.96",
     "@mdi/js": "^6.6.96",
     "@vuetify/vite-plugin": "^1.0.0-alpha.10",
-    "nuxt3": "^3.0.0-27491748.3186841",
+    "nuxt3": "^3.0.0-27501460.04a72f8",
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "prismjs": "^1.27.0",
     "sass": "^1.50.0",
     "sass-loader": "^12.6.0",
-    "swiper": "^8.1.0",
+    "swiper": "^8.1.1",
     "three": "^0.139.2",
     "vanta": "^0.5.21",
     "vuetify": "3.0.0-beta.0"
