@@ -58,6 +58,7 @@ watch(
                 border-radius: 0% !important;
                 border-bottom: double;
                 box-shadow: none !important;
+                background: inherit !important;
             }
         }
     }
