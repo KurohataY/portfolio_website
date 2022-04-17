@@ -8,6 +8,9 @@
                             <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
                         </v-btn>
                     </li>
+                    <li>
+                        <UiSearchForm />
+                    </li>
                 </ul>
             </div>
         </teleport>
@@ -52,6 +55,7 @@ watch(
     text-align: center;
     ul {
         li {
+            width: 300px;
             list-style-type: none;
             .overlay_buttons {
                 margin: 20px 0;

@@ -25,8 +25,8 @@
             </v-col>
             <v-col>
                 <v-card class="mx-auto text-center" max-width="300" height="500">
-                    <UiSearchForm :placeholder="placeholder" />
-                    <TopUiTags />
+                    <UiSearchForm :placeholder="placeholder" :tagsList="tagsList" />
+                    <TopUiTags :tagsList="tagsList" />
                 </v-card>
             </v-col>
         </v-row>
@@ -43,6 +43,22 @@ let overlay = ref(stateValue.value);
 const onClickLink = () => {
     updateState(!overlay.value);
 };
+
+const props = defineProps({
+    tagsList: Object
+})
+
+const tagsList = props.tagsList;
+
+// let { data } = await useFetch("/api/microcms", {
+//     params: {
+//         limit: 1000,
+//     },
+// });
+
+// let tags = "";
+// data.value["contents"].forEach((element) => tags += element.tags)
+// const tagsList = Array.from(new Set(tags.split(","))).join(",").split(",");
 
 </script>
 

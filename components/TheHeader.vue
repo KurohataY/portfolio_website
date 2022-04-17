@@ -15,7 +15,7 @@
             </v-btn>
         </div>
         <div id="menu_search_box" :class="{ 'active': isActive }">
-            <UiSearchForm :placeholder="placeholder" />
+            <UiSearchForm :placeholder="placeholder" :tagsList="tagsList" />
             <button class="mdi mdi-close" @click="isActive = false"></button>
         </div>
     </header>
@@ -39,6 +39,11 @@ const onClickLink = () => {
 
 const isActive = ref(false)
 
+const props = defineProps({
+    tagsList: Object
+})
+
+const tagsList = props.tagsList;
 
 </script>
 

@@ -5,10 +5,20 @@
             <TopContentLinks />
             <TopSwiperCaloucel />
             <TopSkils />
-            <TopInformation />
+            <TopInformation :tagsList="tagsList" />
         </v-container>
     </v-main>
 </template>
+
+<script lang="ts" setup>
+
+const props = defineProps({
+    tagsList: Object
+})
+
+const tagsList = props.tagsList;
+
+</script>
 
 <style lang="scss" scoped>
 #main_title {

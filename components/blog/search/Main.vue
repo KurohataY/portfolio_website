@@ -3,18 +3,18 @@
         <form method="get" action="/blog/search" id="search_form">
             <div class="cp_iptxt">
                 <input class="ef" name="word" type="text" required v-model="word" />
-                <v-btn
-                    icon="mdi-magnify"
-                    color="light-blue"
-                    @click.native="search"
-                    rel="noopener noreferrer"
-                    size="small"
-                ></v-btn>
+                <v-btn icon="mdi-magnify" color="light-blue" @click.native="search" rel="noopener noreferrer"
+                    size="small"></v-btn>
 
                 <span class="focus_line"></span>
             </div>
         </form>
-        <v-card max-width="900" class="mx-auto">
+        <div class="suggest_box">
+            <UiSuggest :tagsList="suggest_list" v-model="word" v-if="componentShow" @submit="submit"
+                style="width: 80%;" />
+            <div class="opacity_block"></div>
+        </div>
+        <v-card max-width="900" class="mx-auto" id="search_result_box">
             <v-row dense>
                 <v-col cols="12" v-if="resultShow" v-for="content in data['contents']">
                     <a :href="`/blog/articles/${content.id}`">
@@ -27,9 +27,9 @@
                                 <div class="flex_box">
                                     <v-card-title class="text-h5">{{ content.title }}</v-card-title>
 
-                                    <v-card-subtitle
-                                        v-if="!!content.description"
-                                    >{{ content.description.substr(0, 50) }}</v-card-subtitle>
+                                    <v-card-subtitle v-if="!!content.description">{{
+                                        content.description.substr(0, 50)
+                                    }}</v-card-subtitle>
                                 </div>
                             </div>
                         </v-card>
@@ -40,14 +40,8 @@
                 </v-col>
             </v-row>
         </v-card>
-        <BlogUiPagenation
-            :nowPageNum="nowPageNum"
-            :pageMaxNum="pageMaxNum"
-            :visibleNum="visibleNum"
-            :path="path"
-            :usePathNumber="true"
-            v-if="componentShow"
-        />
+        <BlogUiPagenation :nowPageNum="nowPageNum" :pageMaxNum="pageMaxNum" :visibleNum="visibleNum" :path="path"
+            :usePathNumber="true" v-if="componentShow" />
     </v-main>
 </template>
 
@@ -56,8 +50,35 @@
 import axios from 'axios';
 const route = useRoute()
 
+const props = defineProps({
+    tagsList: Object
+})
+
+
+const tagsList = props.tagsList
+let suggest_list = ref([])
+
 let word = ref()
 word.value = route.query.word
+
+const submit = (word) => {
+    event.preventDefault();
+}
+
+watch(
+    () => word.value,
+    (word) => {
+        suggest_list.value = []
+        if (!!word) {
+            tagsList.forEach(element => {
+                if (element.toLowerCase().includes(word.toLowerCase()) || word.toLowerCase().includes(element.toLowerCase())) {
+                    suggest_list.value.push(element);
+                }
+            })
+        }
+        reload()
+    }
+)
 
 const resultShow = ref(true)
 resultShow.value = !!word.value
@@ -78,8 +99,8 @@ let { data } = !!word.value ? await useFetch("/api/microcms", {
     },
 }) : undefined;
 
-let path =  !!word.value ? ref(`/blog/search?word=${word.value}&page=`) : ref("");
-let pageMaxNum = !!word.value ?  ref(Math.ceil(data.value["totalCount"] / limit)) : ref("");
+let path = !!word.value ? ref(`/blog/search?word=${word.value}&page=`) : ref("");
+let pageMaxNum = !!word.value ? ref(Math.ceil(data.value["totalCount"] / limit)) : ref("");
 
 
 
@@ -87,7 +108,6 @@ const reload = (() => {
     componentShow.value = false
     nextTick(() => {
         componentShow.value = true
-        console.log(componentShow.value)
     })
 
 })
@@ -129,9 +149,10 @@ const search = (async () => {
     flex-direction: column;
     justify-content: center;
 }
+
 #search_form {
     text-align: center;
-    padding: 70px;
+    padding: 70px 70px 0 70px; 
 }
 
 .cp_iptxt {
@@ -139,19 +160,38 @@ const search = (async () => {
     display: flex;
     justify-content: center;
 }
+
 .cp_iptxt input {
     font: 15px/24px sans-serif;
     box-sizing: border-box;
     width: 80%;
     letter-spacing: 1px;
 }
+
 .cp_iptxt input:focus {
     outline: none;
 }
+
 .ef {
     padding: 4px 0;
     border: 0;
     border-bottom: 1px solid #1b2538;
     background-color: transparent;
+}
+
+.suggest_box {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    padding: 0 70px;
+}
+
+.opacity_block {
+    width: 40px;
+}
+
+#search_result_box {
+    margin-top: 70px;
 }
 </style>
