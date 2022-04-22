@@ -1,4 +1,4 @@
-# portfolio_web_spa
+# portfolio_website
 
 ## Build Setup
 
@@ -18,4 +18,3 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-# portfolio_web_spa

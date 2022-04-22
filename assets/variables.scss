@@ -104,3 +104,23 @@ p {
   height: -moz-available;
   height: stretch;
 }
+
+.post {
+  div {
+    div {
+      line-height: 3.5;
+      p {
+        line-height: 3.5;
+      }
+      ul {
+        line-height: 2;
+      }
+    }
+  }
+}
+
+code {
+  border-radius: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}

@@ -1,6 +1,6 @@
 FROM almalinux:latest
 
-WORKDIR /portfolio_web_site
+WORKDIR /portfolio_website
 
 RUN dnf -y update
 
