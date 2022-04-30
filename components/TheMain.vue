@@ -3,7 +3,7 @@
         <v-container fluid>
             <TopTitleView />
             <TopContentLinks />
-            <TopSwiperCaloucel />
+            <!-- <TopSwiperCaloucel /> -->
             <TopSkils />
             <TopInformation :tagsList="tagsList" />
         </v-container>
