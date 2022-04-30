@@ -1,5 +1,5 @@
 <template>
-    <div id="top">
+    <div id="top_page">
         <TheHeader :tagsList="tagsList"  />
         <TheMain :tagsList="tagsList" />
         <TheFooter />
