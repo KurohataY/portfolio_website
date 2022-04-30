@@ -1,5 +1,4 @@
-import { defineNuxtConfig } from "nuxt3";
-import vuetify from "@vuetify/vite-plugin";
+import { defineNuxtConfig } from "nuxt";
 
 declare module "vite" {
     interface UserConfig {
@@ -17,36 +16,15 @@ export default defineNuxtConfig({
     typescript: {
         shim: false,
     },
-    css: ["vuetify/styles", "@/assets/css/default.scss"],
-    vite: {
-        plugins: [
-            vuetify(),
-            {
-                // https://github.com/nuxt/framework/issues/2798
-                configResolved(config) {
-                    const vuetifyIdx = config.plugins.findIndex(
-                        (plugin) => plugin.name === "vuetify:import"
-                    );
-                    const vueIdx = config.plugins.findIndex(
-                        (plugin) => plugin.name === "vite:vue"
-                    );
-                    if (~vuetifyIdx && vuetifyIdx < vueIdx) {
-                        const vuetifyPlugin = config.plugins[vuetifyIdx];
-                        // @ts-ignore
-                        config.plugins.splice(vuetifyIdx, 1);
-                        // @ts-ignore
-                        config.plugins.splice(vueIdx, 0, vuetifyPlugin);
-                    }
-                },
-            },
-        ],
-        ssr: {
-            noExternal: ["vuetify"],
-        },
-        define: {
-            "process.env.DEBUG": "false",
-        },
+    build: {
+        transpile: ['vuetify']
     },
+    vite: {
+        define: {
+            "process.env.DEBUG": "false"
+        }
+    },
+    css: ['vuetify/lib/styles/main.sass', "@/assets/css/default.scss"],
     meta: {
         meta: [
             {
@@ -107,7 +85,11 @@ export default defineNuxtConfig({
             },
         ],
         link: [
-            { rel: 'icon', href: '/favicon.ico' }
+            { rel: 'icon', href: '/favicon.ico' },
+            {
+                rel: 'stylesheet',
+                href: 'https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css'
+            }
         ],
     },
     privateRuntimeConfig: {

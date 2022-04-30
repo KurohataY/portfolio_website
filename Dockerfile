@@ -6,7 +6,7 @@ RUN dnf -y update
 
 RUN dnf -y install epel-release
 
-RUN curl -sL https://rpm.nodesource.com/setup_17.x | bash -
+RUN curl -sL https://rpm.nodesource.com/setup_18.x | bash -
 RUN dnf install -y gcc-c++
 RUN dnf install -y nodejs
 
