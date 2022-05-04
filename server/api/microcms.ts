@@ -7,7 +7,12 @@ let url: string = `https://${config.MICRO_CMS_SERVICE_DOMAIN}.microcms.io/api/v1
 const API_HEAD = {
   headers: {
     "X-MICROCMS-API-KEY": config.MICRO_CMS_API_KEY,
+    'Content-Type': 'application/json',
+    'Accept-Encoding': 'gzip',
+    'Accept-Charset': 'utf-8',
+    'Content-Encoding':'gzip',
   }
+
 }
 
 export default async (req, res) => {
