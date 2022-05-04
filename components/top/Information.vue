@@ -15,8 +15,8 @@
 
                     <v-card-actions>
                         <v-btn icon="mdi-twitter" color="light-blue" href="https://twitter.com/izanagiblog"
-                            target="_blank" rel="noopener noreferrer" size="small"></v-btn>
-                        <v-btn icon="mdi-calendar-account" size="small" @click="onClickLink">
+                            target="_blank" rel="noopener noreferrer" size="small" aria-label="Twitter Link"></v-btn>
+                        <v-btn icon="mdi-calendar-account" size="small" @click="onClickLink" aria-label="Carender">
                             予定表
                         </v-btn>
 

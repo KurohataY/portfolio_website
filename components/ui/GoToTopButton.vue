@@ -9,6 +9,7 @@
             class="button material-icons modal__open"
             @click="scrollTop"
             :class="{ 'show-scroll': scrollHeader }"
+            aria-label="Go To Top"
           >
             <v-icon>mdi-chevron-up</v-icon>
           </button>

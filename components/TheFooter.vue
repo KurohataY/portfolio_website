@@ -1,7 +1,7 @@
 <template>
-    <v-footer app width="100%" class="bg-grey-lighten-1">
+    <v-footer app width="100%" style="background: linear-gradient(90deg,#59adf1,#cffd9d);">
         <v-row justify="center" no-gutters>
-            <v-col class="text-center text-white" cols="12">
+            <v-col class="text-center text-black" cols="12">
                 {{ nowYear }} -
                 <strong>{{ footerText }}</strong>
             </v-col>

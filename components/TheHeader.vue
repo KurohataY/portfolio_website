@@ -5,18 +5,18 @@
                 <div>{{ headerData.title }}</div>
             </a>
             <div style="flex-grow: 1;"></div>
-            <span class="mdi mdi-menu" v-show="display.width.value <= 640" @click="onClickLink"></span>
+            <span class="mdi mdi-menu" v-show="display.width.value <= 640" @click="onClickLink" aria-label="Menu Open"></span>
             <v-btn v-show="display.width.value > 640" v-for="(nav, index) in headerData.nav" :key="index"
                 class="menu_button">
                 <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
             </v-btn>
             <v-btn v-show="display.width.value > 640" class="menu_button" icon="mdi-magnify" small
-                @click="isActive = !isActive">
+                @click="isActive = !isActive" aria-label="Serach box Open">
             </v-btn>
         </div>
         <div id="menu_search_box" :class="{ 'active': isActive }">
             <UiSearchForm :placeholder="placeholder" :tagsList="tagsList" />
-            <button class="mdi mdi-close" @click="isActive = false"></button>
+            <button class="mdi mdi-close" @click="isActive = false" aria-label="Serach box Close"></button>
         </div>
     </header>
 </template>

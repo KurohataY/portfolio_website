@@ -2,8 +2,8 @@
     <div>
         <div class="search_box">
             <form method="get" action="/blog/search">
-                <input name="word" type="text" required v-model="word" :placeholder="placeholder" autocomplete="off">
-                <v-btn icon="mdi-magnify" color="light-blue" rel="noopener noreferrer" size="small" type="submit">
+                <input name="word" type="text" required v-model="word" :placeholder="placeholder" autocomplete="off" title="Search Form">
+                <v-btn icon="mdi-magnify" color="light-blue" rel="noopener noreferrer" size="small" type="submit" aria-label="Submit">
                 </v-btn>
             </form>
         </div>

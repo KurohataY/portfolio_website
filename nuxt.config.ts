@@ -26,10 +26,11 @@ export default defineNuxtConfig({
     },
     css: ['vuetify/lib/styles/main.sass', "@/assets/css/default.scss"],
     meta: {
+        title: "Izanagi's site",
+        htmlAttrs: {
+            lang: "ja"
+        },
         meta: [
-            {
-                charset: 'utf-8'
-            },
             {
                 name: 'viewport',
                 content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0'
