@@ -14,7 +14,7 @@
                     </v-card-text>
 
                     <v-card-actions>
-                        <v-btn icon="mdi-twitter" color="light-blue" href="https://twitter.com/izanagiblog"
+                        <v-btn icon="mdi-twitter" color="light-blue" :href="'https://twitter.com/' + twitterUrl"
                             target="_blank" rel="noopener noreferrer" size="small" aria-label="Twitter Link"></v-btn>
                         <v-btn icon="mdi-calendar-account" size="small" @click="onClickLink" aria-label="Carender">
                             予定表
@@ -38,6 +38,7 @@ const { stateValue, updateState } = useOverlayCalendar();
 
 const placeholder = "ブログ内を検索"
 
+
 let overlay = ref(stateValue.value);
 
 const onClickLink = () => {
@@ -50,15 +51,9 @@ const props = defineProps({
 
 const tagsList = props.tagsList;
 
-// let { data } = await useFetch("/api/microcms", {
-//     params: {
-//         limit: 1000,
-//     },
-// });
+const config = useRuntimeConfig();
 
-// let tags = "";
-// data.value["contents"].forEach((element) => tags += element.tags)
-// const tagsList = Array.from(new Set(tags.split(","))).join(",").split(",");
+const twitterUrl = config.TWITTER_MY_USER_ID
 
 </script>
 
