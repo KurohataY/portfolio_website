@@ -7,7 +7,7 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "^3.0.0-rc.1",
+    "nuxt": "^3.0.0-rc.3",
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {
@@ -18,7 +18,7 @@
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
     "swiper": "^8.1.4",
-    "three": "^0.140.0",
+    "three": "^0.140.2",
     "vuetify": "3.0.0-beta.1"
   }
 }
