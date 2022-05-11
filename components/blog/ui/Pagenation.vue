@@ -2,7 +2,7 @@
     <div id="pagenation_box">
         <ul id="pagenation_list">
             <li id="pagenation_prev">
-                <a :href="prevLink" v-if="prevButtonShow">
+                <a :href="prevLink" v-if="prevButtonShow" aria-label="Prev Page">
                     <v-icon large color="green darken-2">mdi-chevron-left</v-icon>
                 </a>
             </li>
@@ -19,7 +19,7 @@
                 </li>
             </template>
             <li id="pagenation_next">
-                <a :href="nextLink" v-if="nextButtonShow">
+                <a :href="nextLink" v-if="nextButtonShow" aria-label="Next Page">
                     <v-icon large color="green darken-2">mdi-chevron-right</v-icon>
                 </a>
             </li>

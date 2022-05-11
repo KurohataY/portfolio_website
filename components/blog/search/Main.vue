@@ -22,7 +22,6 @@
                             <div class="d-flex flex-no-wrap">
                                 <div class="pa-3">
                                     <img :src="content.thumbnail.url" :height="150" :width="200" style="width:200px" />
-                                    <!-- <v-img :height="150" :width="200" :src="content.thumbnail.url" :lazy-src="content.thumbnail.url"></v-img> -->
                                 </div>
                                 <div class="flex_box">
                                     <v-card-title class="text-h5">{{ content.title }}</v-card-title>
@@ -92,12 +91,12 @@ const componentShow = ref(true)
 let nowPageNum: number = Number(route.query.page)
 let offset: number = (nowPageNum - 1) * limit;
 
-let { data } = !!word.value ? await useFetch("/api/microcms", {
+let { data } = await useFetch("/api/microcms", {
     params: {
         query: word.value,
         offset: offset !== 0 ? offset : "",
     },
-}) : undefined;
+});
 
 let path = !!word.value ? ref(`/blog/search?word=${word.value}&page=`) : ref("");
 let pageMaxNum = !!word.value ? ref(Math.ceil(data.value["totalCount"] / limit)) : ref("");
@@ -141,7 +140,7 @@ const search = (async () => {
 
 
 
-</script>]
+</script>
 
 <style lang="scss" scoped>
 .flex_box {

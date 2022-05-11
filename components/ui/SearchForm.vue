@@ -8,7 +8,7 @@
             </form>
         </div>
         <div class="suggest_box">
-            <UiSuggest :tagsList="suggest_list" v-model="word" v-if="componentShow" @submit="submit" style="width: 85%;"/>
+            <UiSuggest :tagsList="suggest_list" v-model="word" v-if="componentShow" style="width: 85%;"/>
             <div class="opacity_block"></div>
         </div>
     </div>
@@ -38,9 +38,9 @@ const reload = (() => {
 
 })
 
-const submit = (word) => {
-    event.preventDefault();
-}
+// const submit = (word) => {
+//     event.preventDefault();
+// }
 
 watch(
     () => word.value,

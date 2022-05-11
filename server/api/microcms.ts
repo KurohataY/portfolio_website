@@ -29,7 +29,7 @@ export default async (req, res) => {
   const post_order = !!useQuery(req).order ? useQuery(req).order : "";
   const post_fields = !!useQuery(req).fields ? useQuery(req).fields : "";
   const filter = useQuery(req).filter ? `${useQuery(req).filterKeyName}[contains]${useQuery(req).filter}` : "";
-  const query = useQuery(req).query ? useQuery(req).query : "";
+  const query = !!useQuery(req).query ? useQuery(req).query : "";
 
   const parameters: string = `${post_id}?fields=${post_fields}&filters=${filter}&limit=${post_limit}&offset=${post_offset}&orders=${post_order}&q=${query}`;
   const ENDPOINT: string = url + encodeURI(parameters);

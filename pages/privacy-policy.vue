@@ -1,6 +1,6 @@
 <template>
     <div id="privacy_page">
-        <TheHeader />
+        <TheHeader :tagsList="tagsList" />
         <v-main>
             <v-container>
                 <h2>
@@ -54,6 +54,19 @@
     </div>
 </template>
 
+<script lang="ts" setup>
+let { data } = await useFetch("/api/microcms", {
+    params: {
+        limit: 1000,
+    },
+});
+
+let tags = "";
+data.value["contents"].forEach((element) => tags += element.tags)
+const tagsList = Array.from(new Set(tags.split(","))).join(",").split(",");
+</script>
+
+
 <style lang="scss" scoped>
 h2 {
     margin: 30px 0;
@@ -63,3 +76,4 @@ a {
     color: #00e !important;
 }
 </style>
+
