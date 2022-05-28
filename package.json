@@ -15,10 +15,10 @@
     "lottie-web": "^5.9.4",
     "moment": "^2.29.3",
     "prismjs": "^1.28.0",
-    "sass": "^1.51.0",
-    "sass-loader": "^12.6.0",
-    "swiper": "^8.1.4",
-    "three": "^0.140.2",
+    "sass": "^1.52.1",
+    "sass-loader": "^13.0.0",
+    "swiper": "^8.1.6",
+    "three": "^0.141.0",
     "vuetify": "3.0.0-beta.1"
   }
 }
