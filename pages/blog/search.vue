@@ -1,7 +1,8 @@
 <template>
     <div id="contact_page">
         <TheHeader />
-        <BlogSearchMain :tagsList="tagsList" />
+        <!-- <BlogSearchMain :tagsList="tagsList" /> -->
+         <BlogSearchOriginal :tagsList="tagsList" />
         <TheFooter />
     </div>
 </template>
