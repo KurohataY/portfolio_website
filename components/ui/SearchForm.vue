@@ -38,10 +38,6 @@ const reload = (() => {
 
 })
 
-// const submit = (word) => {
-//     event.preventDefault();
-// }
-
 watch(
     () => word.value,
     (word) => {
