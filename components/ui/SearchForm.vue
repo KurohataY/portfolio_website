@@ -72,7 +72,7 @@ watch(
         input {
             width: 85%;
             height: 40px;
-            border-style: double !important;
+            border-bottom: double !important;
 
             &:focus {
                 outline: 0;
