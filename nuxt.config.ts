@@ -17,7 +17,7 @@ export default defineNuxtConfig({
         shim: false,
     },
     build: {
-        transpile: ['vuetify']
+        transpile: ['vuetify', 'swiper']
     },
     vite: {
         define: {
