@@ -3,20 +3,14 @@
         <v-container fluid>
             <TopTitleView />
             <TopContentLinks />
-            <!-- <TopSwiperCaloucel /> -->
+            <TopSwiperCaloucel />
             <TopSkils />
-            <TopInformation :tagsList="tagsList" />
+            <TopInformation />
         </v-container>
     </v-main>
 </template>
 
 <script lang="ts" setup>
-
-const props = defineProps({
-    tagsList: Object
-})
-
-const tagsList = props.tagsList;
 
 </script>
 
@@ -34,8 +28,5 @@ const tagsList = props.tagsList;
     font-weight: bold;
     font-family: Great Vibes;
     letter-spacing: 0.12em;
-}
-main {
-    margin-bottom: 5vw;
 }
 </style>
