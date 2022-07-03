@@ -29,6 +29,11 @@
                     <TopUiTags :tagsList="tagsList" />
                 </v-card>
             </v-col>
+            <v-col>
+                <v-card class="mx-auto text-center" max-width="300" height="500">
+                    <TopUiLatestBlogs />
+                </v-card>
+            </v-col>
         </v-row>
     </v-container>
 </template>
