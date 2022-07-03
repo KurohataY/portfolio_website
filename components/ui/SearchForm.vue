@@ -2,30 +2,34 @@
     <div>
         <div class="search_box">
             <form method="get" action="/blog/search">
-                <input name="word" type="text" required v-model="word" :placeholder="placeholder" autocomplete="off" title="Search Form">
-                <v-btn icon="mdi-magnify" color="light-blue" rel="noopener noreferrer" size="small" type="submit" aria-label="Submit">
+                <input name="word" type="text" required v-model="word" :placeholder="placeholder" autocomplete="off"
+                    title="Search Form">
+                <v-btn icon="mdi-magnify" color="light-blue" rel="noopener noreferrer" size="small" type="submit"
+                    aria-label="Submit">
                 </v-btn>
             </form>
         </div>
         <div class="suggest_box">
-            <UiSuggest :tagsList="suggest_list" v-model="word" v-if="componentShow" style="width: 85%;"/>
+            <UiSuggest :tagsList="suggest_list" :num="suggest_num" v-model="word" v-if="componentShow"
+                style="width: 85%;" />
             <div class="opacity_block"></div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import axios from "axios"
 
 const props = defineProps({
     placeholder: String,
-    tagsList: Object
+    suggest_num: Number,
 })
 
 const placeholder = props.placeholder;
+const suggest_num = props.suggest_num;
 
 const word = ref('');
 
-let tagsList = props.tagsList;
 let suggest_list = ref([])
 
 const componentShow = ref(true)
@@ -40,15 +44,17 @@ const reload = (() => {
 
 watch(
     () => word.value,
-    (word) => {
-        suggest_list.value = []
-        if (!!word) {
-            tagsList.forEach(element => {
-                if (element.toLowerCase().includes(word.toLowerCase()) || word.toLowerCase().includes(element.toLowerCase())) {
-                    suggest_list.value.push(element);
-                }
-            })
-        }
+    async (word) => {
+        await axios.get(`http://localhost/yomotsuhirasaka/suggest`, {
+            params: {
+                word: word,
+                limit: 5
+            }
+        }).then(function (response) {
+            suggest_list.value = [];
+            response.data.forEach((element) => { if (!!element) { suggest_list.value.push(element["Word"]) } })
+        });
+
         reload()
     }
 )

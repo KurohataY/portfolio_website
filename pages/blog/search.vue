@@ -1,8 +1,7 @@
 <template>
-    <div id="contact_page">
+    <div id="search_page">
         <TheHeader />
-        <!-- <BlogSearchMain :tagsList="tagsList" /> -->
-         <BlogSearchOriginal :tagsList="tagsList" />
+        <BlogSearchMain />
         <TheFooter />
     </div>
 </template>
@@ -13,13 +12,4 @@ useHead({
         { name: 'robots', content: 'noindex,nofollow' }
     ],
 })
-let { data } = await useFetch("/api/microcms", {
-    params: {
-        limit: 1000,
-    },
-});
-
-let tags = "";
-data.value["contents"].forEach((element) => tags += element.tags)
-const tagsList = Array.from(new Set(tags.split(","))).join(",").split(",");
 </script>

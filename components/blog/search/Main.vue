@@ -1,107 +1,82 @@
 <template>
     <v-main>
-        <form method="get" action="/blog/search" id="search_form">
+        <form method="get" action="/blog/search" id="search_form" @submit.prevent="submit">
             <div class="cp_iptxt">
                 <input class="ef" name="word" type="text" required v-model="word" />
-                <v-btn icon="mdi-magnify" color="light-blue" @click.native="search" rel="noopener noreferrer"
-                    size="small"></v-btn>
+                <v-btn icon="mdi-magnify" color="light-blue" type="submit" rel="noopener noreferrer" size="small">
+                </v-btn>
 
                 <span class="focus_line"></span>
             </div>
         </form>
         <div class="suggest_box">
-            <UiSuggest :tagsList="suggest_list" v-model="word" v-if="componentShow" @submit="submit"
-                style="width: 80%;" />
+            <UiSuggest  :tagsList="suggest_list" :num="5" v-model="word" v-if="componentShow" style="width: 80%;" />
             <div class="opacity_block"></div>
         </div>
         <v-card max-width="900" class="mx-auto" id="search_result_box">
             <v-row dense>
-                <v-col cols="12" v-if="resultShow" v-for="content in data['contents']">
-                    <a :href="`/blog/articles/${content.id}`">
+                <v-col cols="12" v-if="dataFlag" v-for="content in data">
+                    <a :href="`/blog/articles/${content['contents_id']}`">
                         <v-card color="#1F7087" theme="dark">
                             <div class="d-flex flex-no-wrap">
                                 <div class="pa-3">
-                                    <img :src="content.thumbnail.url" :height="150" :width="200" style="width:200px" />
+                                    <img :src="content['img_url']" :height="150" :width="200"
+                                        style="max-width: none;object-fit: fill;" />
                                 </div>
                                 <div class="flex_box">
-                                    <v-card-title class="text-h5">{{ content.title }}</v-card-title>
-
-                                    <v-card-subtitle v-if="!!content.description">{{
-                                        content.description.substr(0, 50)
-                                    }}</v-card-subtitle>
+                                    <v-card-title class="text-h5">{{ content["title"] }}</v-card-title>
                                 </div>
                             </div>
                         </v-card>
                     </a>
                 </v-col>
-                <v-col cols="12" v-else>
-                    <div>単語を入力してください</div>
+                <v-col cols="12" v-else style="padding: 70px 70px 0;">
+                    <div id="no_contents_text">記事が見つかりませんでした。他の検索単語をお試しください。</div>
                 </v-col>
             </v-row>
         </v-card>
-        <BlogUiPagenation :nowPageNum="nowPageNum" :pageMaxNum="pageMaxNum" :visibleNum="visibleNum" :path="path"
-            :usePathNumber="true" v-if="componentShow" />
     </v-main>
 </template>
 
 
 <script lang="ts" setup>
-import axios from 'axios';
+
+import axios from "axios"
 const route = useRoute()
 
-const props = defineProps({
-    tagsList: Object
-})
+const word = ref(route.query.word)
 
+let data = ref([])
 
-const tagsList = props.tagsList
-let suggest_list = ref([])
+let dataFlag = ref()
 
-let word = ref()
-word.value = route.query.word
-
-const submit = (word) => {
-    event.preventDefault();
-}
-
-watch(
-    () => word.value,
-    (word) => {
-        suggest_list.value = []
-        if (!!word) {
-            tagsList.forEach(element => {
-                if (element.toLowerCase().includes(word.toLowerCase()) || word.toLowerCase().includes(element.toLowerCase())) {
-                    suggest_list.value.push(element);
-                }
-            })
-        }
-        reload()
-    }
-)
-
-const resultShow = ref(true)
-resultShow.value = !!word.value
-
-const limit: number = 12;
-const visibleNum: number = 4;
-
-const componentShow = ref(true)
-
-
-let nowPageNum: number = Number(route.query.page)
-let offset: number = (nowPageNum - 1) * limit;
-
-let { data } = await useFetch("/api/microcms", {
+await axios.get("http://localhost/yomotsuhirasaka/search", {
     params: {
-        query: word.value,
-        offset: offset !== 0 ? offset : "",
-    },
+        word: word.value
+    }
+}).then(function (response) {
+    data.value = [];
+    dataFlag.value = true;
+    response.data.forEach((element) => { if (!!element) { data.value.push(element) } })
+}).catch(err => {
+    console.log('err:', err);
+    dataFlag.value = false;
 });
 
-let path = !!word.value ? ref(`/blog/search?word=${word.value}&page=`) : ref("");
-let pageMaxNum = !!word.value ? ref(Math.ceil(data.value["totalCount"] / limit)) : ref("");
 
+function submit() {
+    return navigateTo({
+        path: '/blog/search',
+        query: {
+            word: word.value,
+        }
+    })
+}
 
+watch(() => route.query, () => location.reload())
+
+const suggest_list = ref([])
+const componentShow = ref(false)
 
 const reload = (() => {
     componentShow.value = false
@@ -111,34 +86,22 @@ const reload = (() => {
 
 })
 
-
-const search = (async () => {
-    if (!!word.value) {
-        await axios.get(`/api/microcms`, {
+watch(
+    () => word.value,
+    async (word) => {
+        await axios.get(`http://localhost/yomotsuhirasaka/suggest`, {
             params: {
-                query: word.value
+                word: word,
+                limit: 5
             }
-        }).then(function (response) {
-            data.value = response.data;
-            pageMaxNum.value = Math.ceil(data.value["totalCount"] / limit)
-            path.value = `/blog/search?word=${word.value}&page=`
-            resultShow.value = true;
-            // コンポーネントリロード
-            reload()
+        }).then(function (res) {
+            suggest_list.value = [];
+            res.data.forEach((element) => { if (!!element) { suggest_list.value.push(element["Word"]) } })
         });
 
-        return navigateTo({
-            path: path.value,
-            query: {
-                word: word.value,
-            }
-        })
-    } else {
-        resultShow.value = false;
+        reload()
     }
-})
-
-
+)
 
 </script>
 
@@ -151,7 +114,7 @@ const search = (async () => {
 
 #search_form {
     text-align: center;
-    padding: 70px 70px 0 70px; 
+    padding: 70px 70px 0 70px;
 }
 
 .cp_iptxt {
@@ -191,6 +154,12 @@ const search = (async () => {
 }
 
 #search_result_box {
-    margin-top: 70px;
+    margin: 70px 0;
+    box-shadow: none !important;
+
+}
+
+#no_contents_text {
+    text-align: center;
 }
 </style>
