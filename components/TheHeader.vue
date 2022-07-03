@@ -5,7 +5,8 @@
                 <div>{{ headerData.title }}</div>
             </a>
             <div style="flex-grow: 1;"></div>
-            <span class="mdi mdi-menu" v-show="display.width.value <= 640" @click="onClickLink" aria-label="Menu Open"></span>
+            <span class="mdi mdi-menu" v-show="display.width.value <= 640" @click="onClickLink"
+                aria-label="Menu Open"></span>
             <v-btn v-show="display.width.value > 640" v-for="(nav, index) in headerData.nav" :key="index"
                 class="menu_button">
                 <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
@@ -15,8 +16,10 @@
             </v-btn>
         </div>
         <div id="menu_search_box" :class="{ 'active': isActive }">
-            <UiSearchForm :placeholder="placeholder" :tagsList="tagsList" />
+            <UiSearchForm :placeholder="placeholder" :suggest_num="5" />
             <button class="mdi mdi-close" @click="isActive = false" aria-label="Serach box Close"></button>
+            <!-- generateのクロール用リンク -->
+            <a href="/blog/search" style="display: none"></a>
         </div>
     </header>
 </template>
@@ -39,12 +42,6 @@ const onClickLink = () => {
 
 const isActive = ref(false)
 
-const props = defineProps({
-    tagsList: Object
-})
-
-const tagsList = props.tagsList;
-
 </script>
 
 <style lang="scss">
@@ -52,6 +49,8 @@ header {
     background-color: #fff;
     font-size: 25px;
     padding: 20px 0 20px 10px;
+    width: 100vw;
+    height:77.5px;
 
     .flex_box {
         display: flex;
