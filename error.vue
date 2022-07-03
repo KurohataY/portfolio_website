@@ -1,7 +1,7 @@
 <template>
     <v-app id="top">
         <div id="error_page">
-            <TheHeader :tagsList="tagsList" />
+            <TheHeader />
             <v-main>
                 <div id="error_box">
                     <h1>404</h1>
@@ -12,21 +12,14 @@
                     </div>
                 </div>
             </v-main>
+            <TheFooter />
         </div>
     </v-app>
 </template>
 
 
 <script lang="ts" setup>
-let { data } = await useFetch("/api/microcms", {
-    params: {
-        limit: 1000,
-    },
-});
 
-let tags = "";
-data.value["contents"].forEach((element) => tags += element.tags)
-const tagsList = Array.from(new Set(tags.split(","))).join(",").split(",");
 </script>
 
 
