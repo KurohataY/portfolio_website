@@ -8,7 +8,11 @@
 </template>
 
 <script lang="ts" setup>
-
+useHead({
+    titleTemplate: (titleChunk) => {
+      return titleChunk ? `${titleChunk} - Izanagi's site` : `Izanagi's site`;
+    }
+  })
 </script>
 
 <style lang="scss">

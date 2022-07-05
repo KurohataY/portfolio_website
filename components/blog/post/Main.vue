@@ -15,13 +15,13 @@
 <script setup>
 import Prism from "prismjs"
 import "prismjs/themes/prism-okaidia.css"
-import 'prismjs/components/prism-javascript' 
-import 'prismjs/components/prism-json' 
-import 'prismjs/components/prism-markup' 
-import 'prismjs/components/prism-css' 
-import 'prismjs/components/prism-scss' 
-import 'prismjs/components/prism-python' 
-import 'prismjs/components/prism-nginx' 
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-css'
+import 'prismjs/components/prism-scss'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-nginx'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-docker'
 import 'prismjs/components/prism-properties'
@@ -29,10 +29,18 @@ import 'prismjs/components/prism-swift'
 import 'prismjs/components/prism-ruby'
 
 const route = useRoute()
+const config = useRuntimeConfig()
 
 const { data } = await useFetch("/api/microcms", {
     params: { id: route.params.post_id },
 });
+
+const title = data.value.title;
+const description = !!data.value.description ? data.value.description : data.value.blogContent[0].content.replace(/(<([^>]+)>)/gi, '').substr(0, 150) + "...";
+const thumbnail = data.value.thumbnail.url;
+
+
+const url = config.HOMEPAGE_ROOT_URL + route.fullPath;
 
 const breadcrumbs = [
     {
@@ -51,6 +59,19 @@ const breadcrumbs = [
     },
 ];
 
+console.log(useRoute())
+
+useHead({
+    title: title,
+    meta: [
+        { property: 'og:title', hid: 'og:title', content: title },
+        { name: 'description', hid: 'description', content: description },
+        { property: 'og:description', hid: 'og:description', content: description },
+        { property: 'og:image', hid: 'og:image', content: thumbnail },
+        { property: 'og:url', hid: 'og:url', content: url},
+    ],
+})
+
 
 onMounted(() => {
     Prism.highlightAll();
@@ -63,16 +84,20 @@ onMounted(() => {
 #post_box {
     padding: 50px 15vw;
     background-color: #edf2f6;
+
     h1 {
         margin-bottom: 75px;
     }
+
     h2 {
         margin: 45px 0;
     }
+
     h3,
     h4 {
         margin: 30px 0;
     }
+
     p {
         line-height: 3.5;
     }
