@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     },
     css: ['vuetify/lib/styles/main.sass', "@/assets/css/default.scss"],
     meta: {
-        title: "Izanagi's site",
+        // title: "Izanagi's site",
         htmlAttrs: {
             lang: "ja"
         },

@@ -70,7 +70,7 @@ watch(
 
     form {
         input {
-            width: 85%;
+            width: 83%;
             height: 40px;
             border-bottom: double !important;
 

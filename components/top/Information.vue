@@ -4,8 +4,8 @@
         <h2 class="text-center text-h2">Information</h2>
         <v-row justify="space-around">
             <v-col>
-                <v-card class="mx-auto" width="300" height="500">
-                    <v-img src="/images/profile/profile_image.png" height="300px"></v-img>
+                <v-card class="mx-auto" max-width="250" height="500">
+                    <v-img src="/images/profile/profile_image.png" height="250px" width="250px"></v-img>
 
                     <v-card-title class="pt-4">プロフィール</v-card-title>
                     <v-card-text>
@@ -19,18 +19,17 @@
                         <v-btn icon="mdi-calendar-account" size="small" @click="onClickLink" aria-label="Carender">
                             予定表
                         </v-btn>
-
                     </v-card-actions>
                 </v-card>
             </v-col>
             <v-col>
-                <v-card class="mx-auto text-center" max-width="300" height="500">
+                <v-card class="mx-auto text-center" max-width="250" height="500">
                     <UiSearchForm :placeholder="placeholder" :suggest_num="5" />
                     <TopUiTags :tagsList="tagsList" />
                 </v-card>
             </v-col>
             <v-col>
-                <v-card class="mx-auto text-center" max-width="300" height="500">
+                <v-card class="mx-auto text-center" max-width="250" height="500">
                     <TopUiLatestBlogs />
                 </v-card>
             </v-col>
