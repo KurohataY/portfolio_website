@@ -2,7 +2,8 @@
     <header app>
         <div class="flex_box">
             <a class="menu_link_style" href="/" id="header_title">
-                <div>{{ headerData.title }}</div>
+                <!-- <div>{{ headerData.title }}</div> -->
+                <img src="/images/rogo.png" alt="" height="36">
             </a>
             <div style="flex-grow: 1;"></div>
             <span class="mdi mdi-menu" v-show="display.width.value <= 640" @click="onClickLink"
