@@ -3,7 +3,12 @@
         <h2>最新記事</h2>
         <ol>
             <li v-for="c in data['contents']">
-                <a :href="`/blog/articles/${c.id}`">{{ c.title }}</a>
+                <v-tooltip location="top">
+                    <template v-slot:activator="{ props }">
+                        <a :href="`/blog/articles/${c.id}`" v-bind="props">{{ c.title }}</a>
+                    </template>
+                    <span>{{ c.title }}</span>
+                </v-tooltip>
             </li>
         </ol>
     </div>
@@ -22,6 +27,7 @@ let { data } = useFetch("/api/microcms", {
     h2 {
         padding-top: 10px;
     }
+
     ol {
         counter-reset: num;
         list-style-type: none !important;
@@ -34,7 +40,7 @@ let { data } = useFetch("/api/microcms", {
             padding-left: 30px;
             line-height: 1.5em;
             padding: 0.5em 0.5em 0 30px;
-            
+
 
             &:first-child {
                 margin-top: 45px;
@@ -50,7 +56,7 @@ let { data } = useFetch("/api/microcms", {
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 color: inherit;
-                
+
 
                 &:before {
                     position: absolute;
@@ -71,7 +77,10 @@ let { data } = useFetch("/api/microcms", {
                     text-align: center;
                     top: 10px;
                 }
-                &:visited, &:hover, &:active {
+
+                &:visited,
+                &:hover,
+                &:active {
                     color: inherit;
                 }
             }

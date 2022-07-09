@@ -17,20 +17,20 @@
                         <v-btn icon="mdi-twitter" color="light-blue" :href="'https://twitter.com/' + twitterUrl"
                             target="_blank" rel="noopener noreferrer" size="small" aria-label="Twitter Link"></v-btn>
                         <v-btn icon="mdi-calendar-account" size="small" @click="onClickLink" aria-label="Carender">
-                            予定表
+
                         </v-btn>
                     </v-card-actions>
+                </v-card>
+            </v-col>
+            <v-col class="d-none d-md-flex d-lg-none">
+                <v-card class="mx-auto text-center" max-width="250" height="500">
+                    <TopUiLatestBlogs />
                 </v-card>
             </v-col>
             <v-col>
                 <v-card class="mx-auto text-center" max-width="250" height="500">
                     <UiSearchForm :placeholder="placeholder" :suggest_num="5" />
                     <TopUiTags :tagsList="tagsList" />
-                </v-card>
-            </v-col>
-            <v-col>
-                <v-card class="mx-auto text-center" max-width="250" height="500">
-                    <TopUiLatestBlogs />
                 </v-card>
             </v-col>
         </v-row>

@@ -54,12 +54,10 @@ const breadcrumbs = [
         href: '/blog/pages/1',
     },
     {
-        text: data.value.title,
+        text: title,
         disabled: true,
     },
 ];
-
-console.log(useRoute())
 
 useHead({
     title: title,

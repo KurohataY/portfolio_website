@@ -69,6 +69,10 @@ watch(
     padding: 10px 5px 0 5px;
 
     form {
+
+        display: inline-flex;
+        justify-content: center;
+
         input {
             width: 83%;
             height: 40px;
@@ -80,7 +84,7 @@ watch(
         }
 
         button {
-            top: -3px;
+            top: 5px;
         }
     }
 }
