@@ -17,7 +17,7 @@
                             height="200px"
                             cover
                         >
-                            <v-card-title class="text-white" v-text="content.title"></v-card-title>
+                            <div class="text-white text-h6" v-text="content.title"></div>
                         </v-img>
                     </v-card>
                 </a>
@@ -39,5 +39,6 @@ const data: Object = props.data
 
 <style lang="scss" scoped>
 #blog_box {
+    
 }
 </style>
