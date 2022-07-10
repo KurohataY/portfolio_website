@@ -45,7 +45,7 @@ const cards: Array<CardDataType> = [
         flex: 4,
         height: 250,
         width: 400,
-        href: "/blog"
+        href: "/blog/pages/1"
     },
     {
         title: 'Japanese MIddle Name',

@@ -17,7 +17,7 @@
                             height="200px"
                             cover
                         >
-                            <div class="text-white text-h6" v-text="content.title"></div>
+                            <div class="text-white text-h6" v-text="content.title" style="padding: 0 10px;"></div>
                         </v-img>
                     </v-card>
                 </a>
