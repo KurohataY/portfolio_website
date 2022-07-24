@@ -24,7 +24,7 @@
             </v-col>
             <v-col class="d-none d-md-flex d-lg-none">
                 <v-card class="mx-auto text-center" max-width="250" height="500">
-                    <TopUiLatestBlogs />
+                    <TopUiLatestBlogs :contents="contents" />
                 </v-card>
             </v-col>
             <v-col>
@@ -38,6 +38,8 @@
 </template>
 
 <script lang="ts" setup>
+import { hash } from 'ohash'
+ 
 const { stateValue, updateState } = useOverlayCalendar();
 
 const placeholder = "ブログ内を検索"
@@ -54,11 +56,15 @@ let { data } = await useFetch("/api/microcms", {
     params: {
         limit: 1000,
     },
+    initialCache: false,
+    key : hash(['api-fetch', "/api/microcms", "Imformation"])
 });
 
 let tags = "";
 data.value["contents"].forEach((element) => tags += element.tags)
 const tagsList = Array.from(new Set(tags.split(","))).join(",").split(",");
+
+const contents = data.value["contents"].slice(0, 5)
 
 const config = useRuntimeConfig();
 

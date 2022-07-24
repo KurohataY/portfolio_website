@@ -2,7 +2,7 @@
     <div id="latestBlog">
         <h2>最新記事</h2>
         <ol>
-            <li v-for="c in data['contents']">
+            <li v-for="c in contents">
                 <v-tooltip location="top">
                     <template v-slot:activator="{ props }">
                         <a :href="`/blog/articles/${c.id}`" v-bind="props">{{ c.title }}</a>
@@ -15,11 +15,14 @@
 </template>
 
 <script setup>
-let { data } = useFetch("/api/microcms", {
-    params: {
-        limit: 5,
-    },
+
+const props = defineProps({
+    contents: Object
 })
+
+const contents = props.contents
+
+
 </script>
 
 <style lang="scss" scoped>

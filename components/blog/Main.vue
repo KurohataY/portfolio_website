@@ -14,6 +14,9 @@
 </template>
 
 <script setup lang="ts">
+import {hash} from "ohash"
+
+
 const route = useRoute()
 
 const limit: number = 12;
@@ -58,6 +61,8 @@ let { data } = await useFetch("/api/microcms", {
         filterKeyName: filterKeyName,
         filter: filter
     },
+    initialCache: false,
+    key : hash(['api-fetch', "/api/microcms", "Blog"])
 });
 
 

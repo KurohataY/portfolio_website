@@ -1,11 +1,7 @@
 <template>
     <v-container id="blog_caloucel_box" class="mx-auto">
         <h2 class="text-center text-h2">Latest Article</h2>
-        <swiper
-            :modules="modules"
-            :slides-per-view="views"
-            :autoplay="{ disableOnInteraction: false, }"
-        >
+        <swiper :modules="modules" :slides-per-view="views" :autoplay="{ disableOnInteraction: false, }">
             <swiper-slide v-for="content in data['contents']" :key="content.id">
                 <a :href="`/blog/articles/${content.id}`">
                     <picture>
@@ -29,6 +25,8 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 // Import Swiper styles
 import 'swiper/css';
 
+import { hash } from 'ohash'
+
 // Import Swiper styles
 export default {
     components: {
@@ -37,7 +35,10 @@ export default {
     },
     setup() {
         let views = ref(0);
-        let { data } = useFetch("/api/microcms")
+        let { data } = useFetch("/api/microcms", {
+            initialCache: false,
+            key : hash(['api-fetch', "/api/microcms", "Swiper"])
+        })
 
         const imageWidth = ref(300);
 

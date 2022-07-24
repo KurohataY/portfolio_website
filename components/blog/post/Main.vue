@@ -27,12 +27,15 @@ import 'prismjs/components/prism-docker'
 import 'prismjs/components/prism-properties'
 import 'prismjs/components/prism-swift'
 import 'prismjs/components/prism-ruby'
+import { hash } from "ohash"
 
 const route = useRoute()
 const config = useRuntimeConfig()
 
 const { data } = await useFetch("/api/microcms", {
     params: { id: route.params.post_id },
+    initialCache: false,
+    key: hash(['api-fetch', "/api/microcms", "BlogPost"])
 });
 
 const title = data.value.title;
@@ -66,7 +69,7 @@ useHead({
         { name: 'description', hid: 'description', content: description },
         { property: 'og:description', hid: 'og:description', content: description },
         { property: 'og:image', hid: 'og:image', content: thumbnail },
-        { property: 'og:url', hid: 'og:url', content: url},
+        { property: 'og:url', hid: 'og:url', content: url },
     ],
 })
 
