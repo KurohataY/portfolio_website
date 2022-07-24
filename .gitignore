@@ -91,3 +91,7 @@ sw.*
 
 .env
 assets/affiliate/*.json
+
+.output/
+assets/json/
+plugins/vue-gtag.client.js
