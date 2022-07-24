@@ -44,7 +44,7 @@ if (categoryPath == "it") {
     filterKeyName = "categories";
     filter = encodeURI("プログラミング");
 } else if (!!tag) {
-    path = `/blog/tags/${categoryPath}/`;
+    path = `/blog/tags/${tag}/`;
     filterKeyName = "tags";
     filter = tag;
 } else {
