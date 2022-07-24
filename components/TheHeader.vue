@@ -1,5 +1,5 @@
 <template>
-    <header app>
+    <header app :class='{ scroll: scroll }'>
         <div class="flex_box">
             <a class="menu_link_style" href="/" id="header_title">
                 <!-- <div>{{ headerData.title }}</div> -->
@@ -43,6 +43,21 @@ const onClickLink = () => {
 
 const isActive = ref(false)
 
+let scroll = ref(false)
+
+const showScrollTop = () => {
+    if (window.scrollY > 0) {
+        scroll.value = true
+    } else {
+        scroll.value = false
+    }
+}
+
+onMounted(() => {
+    window.addEventListener("scroll", showScrollTop, { passive: true })
+})
+
+
 </script>
 
 <style lang="scss">
@@ -51,7 +66,11 @@ header {
     font-size: 25px;
     padding: 20px 0 20px 10px;
     width: 100vw;
-    height:77.5px;
+    height: 77.5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100000;
 
     .flex_box {
         display: flex;
@@ -59,6 +78,15 @@ header {
         #header_title {
             font-family: Great Vibes;
         }
+
+            .mdi-menu {
+                &::before {
+                    margin-right: 15px;
+                    font-size: 30px;
+                    line-height: normal;
+                }
+            }
+        
     }
 }
 
@@ -70,7 +98,6 @@ header {
 
 #menu_search_box {
     padding-top: 10px;
-    border-bottom: 0.5px solid;
     text-align: center;
     position: fixed;
     z-index: 999;
@@ -83,12 +110,17 @@ header {
     &.active {
         top: 0;
     }
+
+    &:hover {
+        background-color: #ECEFF1;
+    }
 }
 
 .close_button {
     border: none;
-    // border-radius: 20% 20% 0 0 ;
-    // border-bottom: 0;
-    // margin-right: 5px;
+}
+
+.scroll {
+    border-bottom: 1px solid;
 }
 </style>

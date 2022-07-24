@@ -60,7 +60,6 @@ watch(
             .overlay_buttons {
                 margin: 20px 0;
                 border-radius: 0% !important;
-                border-bottom: double;
                 box-shadow: none !important;
                 background: inherit !important;
             }
