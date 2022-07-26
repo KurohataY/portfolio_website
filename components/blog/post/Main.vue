@@ -27,6 +27,14 @@ import 'prismjs/components/prism-docker'
 import 'prismjs/components/prism-properties'
 import 'prismjs/components/prism-swift'
 import 'prismjs/components/prism-ruby'
+
+import 'prismjs/plugins/show-language/prism-show-language'
+
+import 'clipboard'
+import 'prismjs/plugins/toolbar/prism-toolbar'
+import 'prismjs/plugins/toolbar/prism-toolbar.css'
+import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard'
+
 import { hash } from "ohash"
 
 const route = useRoute()
