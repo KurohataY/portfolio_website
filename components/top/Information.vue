@@ -5,7 +5,7 @@
         <v-row justify="space-around">
             <v-col>
                 <v-card class="mx-auto" max-width="250" height="500">
-                    <v-img src="/images/profile/profile_image.png" height="250px" width="250px"></v-img>
+                    <v-img src="/images/profile/profile_image.png" height="250px"></v-img>
 
                     <v-card-title class="pt-4">プロフィール</v-card-title>
                     <v-card-text>
@@ -22,7 +22,7 @@
                     </v-card-actions>
                 </v-card>
             </v-col>
-            <v-col class="d-none d-md-flex d-lg-none">
+            <v-col class="d-none d-md-flex">
                 <v-card class="mx-auto text-center" max-width="250" height="500">
                     <TopUiLatestBlogs :contents="contents" />
                 </v-card>
