@@ -7,6 +7,9 @@
                 <div v-html="c.content"></div>
                 <div v-html="c.html"></div>
             </article>
+            <!-- <div v-for="r in related_data">
+                <a :href="'/blog/articles/' + r.id">{{r.title}}</a>
+            </div> -->
         </div>
     </v-main>
 </template>
@@ -36,6 +39,7 @@ import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard'
 import 'prismjs/plugins/show-language/prism-show-language'
 
 import { hash } from "ohash"
+import axios from "axios"
 
 const route = useRoute()
 const config = useRuntimeConfig()
@@ -45,10 +49,19 @@ const { data } = await useFetch("/api/microcms", {
     initialCache: false,
     key: hash(['api-fetch', "/api/microcms", "BlogPost"])
 });
-
 const title = data.value.title;
 const description = !!data.value.description ? data.value.description : data.value.blogContent[0].content.replace(/(<([^>]+)>)/gi, '').substr(0, 150) + "...";
 const thumbnail = data.value.thumbnail.url;
+
+
+// let related_data = ref([])
+// axios.get("http://localhost/related_title_searcher/v1/related_title/" + data.value.id, {
+// }).then(function (response) {
+//     related_data.value = response.data;
+// }).catch(err => {
+//     console.log('err:', err);
+// });
+
 
 
 const url = config.HOMEPAGE_ROOT_URL + route.fullPath;
