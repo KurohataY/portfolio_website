@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <div class="search_box">
-            <form method="get" action="/blog/search">
-                <input name="word" type="text" required v-model="word" :placeholder="placeholder" autocomplete="off"
-                    title="Search Form">
-                <v-btn icon="mdi-magnify" color="light-blue" rel="noopener noreferrer" size="small" type="submit"
-                    aria-label="Submit">
-                </v-btn>
-            </form>
-        </div>
-        <div class="suggest_box">
-            <UiSuggest :tag-list="suggest_list" :num="suggestNum" v-model="word" v-if="componentShow"
-                style="width: 85%;" />
-            <div class="opacity_block"></div>
-        </div>
+    <div class="search_box">
+        <form method="get" action="/blog/search">
+            <input name="word" type="text" required v-model="word" :placeholder="placeholder" autocomplete="off"
+                title="Search Form" :style="inputWidth">
+            <v-btn icon="mdi-magnify" color="light-blue" rel="noopener noreferrer" size="small" type="submit"
+                 style="width: 32px !important; height: 32px !important"  aria-label="Submit">
+            </v-btn>
+            <div class="suggest_box">
+                <UiSuggest :tag-list="suggest_list" :num="suggestNum" v-model="word" v-if="componentShow" :suggest-width="suggestWidth" />
+                <div class="opacity_block"></div>
+            </div>
+        </form>
+
     </div>
 </template>
 
@@ -31,11 +29,28 @@ const props = defineProps({
         default: 5,
         required: false,
     },
+    word: {
+        type: String,
+        default: "",
+        required: false,
+    },
+    inputWidth: {
+        type: String,
+        required: true,
+    }
+})
+
+const suggestWidth: String= props.inputWidth;
+
+const inputWidth = computed(() => {
+    return {
+        "--input-width": props.inputWidth
+    }
+
 })
 
 const placeholder = props.placeholder;
 const suggestNum = props.suggestNum;
-
 
 const componentShow = ref(true)
 
@@ -47,8 +62,8 @@ const reload = (() => {
 
 })
 
-const word = ref('');
-let suggest_list = ref([])
+const word = ref(props.word);
+let suggest_list = ref([]);
 
 watch(
     () => word.value,
@@ -77,13 +92,12 @@ watch(
     padding: 10px 5px 0 5px;
 
     form {
-
         display: inline-flex;
         justify-content: center;
 
         input {
-            width: 83%;
             height: 40px;
+            width: var(--input-width);
             border-bottom: double !important;
 
             &:focus {
@@ -103,9 +117,10 @@ watch(
     padding: 0 7px;
     position: absolute;
     width: 100%;
+    margin-top:40px
 }
 
 .opacity_block {
-    width: 42px;
+    width: 32px;
 }
 </style>

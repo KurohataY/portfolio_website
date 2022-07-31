@@ -1,17 +1,7 @@
 <template>
     <v-main>
-        <form method="get" action="/blog/search" id="search_form" @submit.prevent="submit">
-            <div class="cp_iptxt">
-                <input class="ef" name="word" type="text" required v-model="word" />
-                <v-btn icon="mdi-magnify" color="light-blue" type="submit" rel="noopener noreferrer" size="small">
-                </v-btn>
-
-                <span class="focus_line"></span>
-            </div>
-        </form>
-        <div class="suggest_box">
-            <UiSuggest  :tagsList="suggest_list" :num="5" v-model="word" v-if="componentShow" style="width: 80%;" />
-            <div class="opacity_block"></div>
+        <div style="margin: 50px auto 0  auto;">
+            <UiSearchForm :placeholder="placeholder" :suggest_num="5" :inputWidth="'70vw'" :word="word" />
         </div>
         <v-card max-width="900" class="mx-auto" id="search_result_box">
             <v-row dense>
@@ -24,7 +14,7 @@
                                         style="max-width: none;object-fit: fill;" />
                                 </div>
                                 <div class="flex_box">
-                                    <v-card-title class="text-h5">{{ content["title"] }}</v-card-title>
+                                    <v-card-title class="text-h5" style="width: 600px;">{{ content["title"] }}</v-card-title>
                                 </div>
                             </div>
                         </v-card>
@@ -50,6 +40,8 @@ let data = ref([])
 
 let dataFlag = ref()
 
+const placeholder: String = "キーワードを入力"
+
 await axios.get("http://localhost/yomotsuhirasaka/search", {
     params: {
         word: word.value
@@ -62,16 +54,6 @@ await axios.get("http://localhost/yomotsuhirasaka/search", {
     console.log('err:', err);
     dataFlag.value = false;
 });
-
-
-function submit() {
-    return navigateTo({
-        path: '/blog/search',
-        query: {
-            word: word.value,
-        }
-    })
-}
 
 watch(() => route.query, () => location.reload())
 
@@ -156,7 +138,7 @@ watch(
 #search_result_box {
     margin: 70px 0;
     box-shadow: none !important;
-
+    width: 85vw;
 }
 
 #no_contents_text {
