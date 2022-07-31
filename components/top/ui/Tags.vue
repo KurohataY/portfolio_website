@@ -1,7 +1,7 @@
 <template>
     <v-card v-scroll.self="onScroll" class="overflow-y-auto pa-4" max-height="450">
         <v-chip-group column active-class="primary--text">
-            <template v-for="tag in props.tagsList">
+            <template v-for="tag in props.tagList">
                 <v-chip
                     nuxt
                     :to="'/blog/tags/' + tag + '/1'"
@@ -16,7 +16,10 @@
 <script lang="ts" setup>
 
 const props = defineProps({
-    tagsList: Object
+    tagList: {
+        type: Object,
+        required: true,
+    }
 })
 
 

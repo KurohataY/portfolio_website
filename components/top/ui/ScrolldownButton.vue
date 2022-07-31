@@ -1,10 +1,11 @@
 <template>
     <div class="scrolldown3">
-        <span>Scroll</span>
+        <span>{{ text }}</span>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+const text: string = "Scroll"
 </script>
 
 <style lang="scss" scoped>
@@ -35,9 +36,11 @@
     0% {
         bottom: 20vw;
     }
+
     50% {
         bottom: 19vw;
     }
+
     100% {
         bottom: 20vw;
     }
@@ -78,10 +81,12 @@
         top: 10px;
         opacity: 0;
     }
+
     50% {
         height: 15px;
         opacity: 1;
     }
+
     100% {
         height: 0;
         top: 30px;

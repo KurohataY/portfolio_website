@@ -1,12 +1,13 @@
 <template>
     <v-container id="blog_caloucel_box" class="mx-auto">
-        <h2 class="text-center text-h2">Latest Article</h2>
-        <swiper :modules="modules" :slides-per-view="views" :autoplay="{ disableOnInteraction: false, }">
+        <h2 class="text-center text-h2">{{ swiper.title }}</h2>
+        <swiper :modules="modules" :slides-per-view="swiper.views"
+            :autoplay="{ disableOnInteraction: swiper.autoPlay, }">
             <swiper-slide v-for="content in data['contents']" :key="content.id">
                 <a :href="`/blog/articles/${content.id}`">
                     <picture>
-                        <source :srcset="`${content.thumbnail.url}?fm=webp&h=${imageWidth}`" />
-                        <img :src="`${content.thumbnail.url}?h=${imageWidth}`" />
+                        <source :srcset="`${content.thumbnail.url}?fm=webp&h=${swiper.imageWidth}`" />
+                        <img :src="`${content.thumbnail.url}?h=${swiper.imageWidth}`" />
                     </picture>
                     <p>{{ content.title }}</p>
                 </a>
@@ -16,15 +17,9 @@
 </template>
 
 <script>
-// import Swiper core and required modules
 import { A11y, Autoplay } from 'swiper';
-
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
-// Import Swiper styles
 import 'swiper/css';
-
 import { hash } from 'ohash'
 
 // Import Swiper styles
@@ -34,35 +29,35 @@ export default {
         SwiperSlide,
     },
     setup() {
-        let views = ref(0);
-        let { data } = useFetch("/api/microcms", {
+        let swiper = ref({
+            title: "Latest Article",
+            views: 0,
+            imageWidth: 300,
+            autoPlay: false
+        })
+        const { data } = useFetch("/api/microcms", {
             initialCache: false,
-            key : hash(['api-fetch', "/api/microcms", "Swiper"])
+            key: hash(['api-fetch', "/api/microcms", "Swiper"])
         })
 
-        const imageWidth = ref(300);
-
-
         const calculateWindowWidth = () => {
-            let windowWidth = window.innerWidth
-            views.value = Math.floor(windowWidth / imageWidth.value)
+            let windowWidth = window.innerWidth;
+            swiper.value.views = Math.floor(windowWidth / swiper.value.imageWidth);
         }
 
         onMounted(() => {
             calculateWindowWidth();
-            window.addEventListener('resize', calculateWindowWidth)
+            window.addEventListener('resize', calculateWindowWidth);
         })
 
         onBeforeUnmount(() => {
-            window.addEventListener('resize', calculateWindowWidth)
+            window.addEventListener('resize', calculateWindowWidth);
         })
-
 
         return {
             modules: [A11y, Autoplay],
             data,
-            views,
-            imageWidth,
+            swiper,
         };
     },
 };

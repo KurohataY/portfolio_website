@@ -9,7 +9,7 @@
                         <a v-if="!!dayEvent.url" class="calendar-event"
                             :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`" :href="dayEvent.url"
                             style="display: block;overflow: hidden;" target="_blank">{{
-                                dayEvent.name
+                                    dayEvent.name
                             }}</a>
                         <div v-else class="calendar-event"
                             :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`"
@@ -26,11 +26,12 @@ let calendars = ref([])
 let currentDate = ref()
 let currentMonth = ref('')
 
-const { data: connpass } = await useFetch("/api/connpass");
-const { data: holiday } = await useFetch("/api/holidays");
 
+const [{ data: connpass }, { data: holiday }] = await Promise.all([
+    useFetch("/api/connpass"),
+    useFetch("/api/holidays"),
+])
 let events = ref([])
-
 
 
 if (!!connpass.value && !!holiday.value) {

@@ -10,7 +10,7 @@
             </form>
         </div>
         <div class="suggest_box">
-            <UiSuggest :tagsList="suggest_list" :num="suggest_num" v-model="word" v-if="componentShow"
+            <UiSuggest :tag-list="suggest_list" :num="suggestNum" v-model="word" v-if="componentShow"
                 style="width: 85%;" />
             <div class="opacity_block"></div>
         </div>
@@ -21,16 +21,21 @@
 import axios from "axios"
 
 const props = defineProps({
-    placeholder: String,
-    suggest_num: Number,
+    placeholder: {
+        type: String,
+        default: "",
+        required: false,
+    },
+    suggestNum: {
+        type: Number,
+        default: 5,
+        required: false,
+    },
 })
 
 const placeholder = props.placeholder;
-const suggest_num = props.suggest_num;
+const suggestNum = props.suggestNum;
 
-const word = ref('');
-
-let suggest_list = ref([])
 
 const componentShow = ref(true)
 
@@ -41,6 +46,9 @@ const reload = (() => {
     })
 
 })
+
+const word = ref('');
+let suggest_list = ref([])
 
 watch(
     () => word.value,

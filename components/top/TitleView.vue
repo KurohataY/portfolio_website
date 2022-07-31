@@ -1,10 +1,8 @@
 <template>
     <v-layout>
         <div id="main_title">{{ title }}</div>
-        <div id="bc_gradation">
-           
-        </div>
-         <TopUiScrolldownButton />
+        <div id="bc_gradation"></div>
+        <TopUiScrolldownButton />
     </v-layout>
 </template>
 
@@ -32,7 +30,7 @@ const title = "Izanagi's Site";
 }
 
 @media (max-width: 768px) {
-    #main_title{
+    #main_title {
         line-height: 500%;
     }
 }
@@ -43,16 +41,18 @@ const title = "Izanagi's Site";
     background: linear-gradient(90deg, rgba(89, 173, 241, 1), rgba(207, 253, 157, 1));
     background-size: 200% 200%;
     animation: bggradient 20s ease infinite;
-    position:absolute;
+    position: absolute;
 }
 
 @keyframes bggradient {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }

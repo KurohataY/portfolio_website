@@ -1,19 +1,9 @@
 <template>
     <v-container class="mx-auto" id="skils_box">
-        <h2 class="text-center text-h2">Skils</h2>
+        <h2 class="text-center text-h2">{{ title }}</h2>
         <v-row justify="space-around">
-            <v-col
-                v-for="card in skils"
-                :key="card.title"
-                :cols="card.flex"
-                style="max-width: 128px"
-            >
-                <v-img
-                    :src="card.src"
-                    class="white--text align-end"
-                    :height="card.height"
-                    :width="card.width"
-                ></v-img>
+            <v-col v-for="card in skils" :key="card.title" :cols="card.flex" style="max-width: 128px">
+                <v-img :src="card.src" class="white--text align-end" :height="card.height" :width="card.width"></v-img>
             </v-col>
         </v-row>
     </v-container>
@@ -27,6 +17,8 @@ type skilsDataType = {
     height: number,
     width: number
 }
+
+const title: String = "Skils"
 
 const skils: Array<skilsDataType> = [
     {
@@ -79,6 +71,7 @@ const skils: Array<skilsDataType> = [
 #skils_box {
     margin-top: 20vw;
 }
+
 h2 {
     margin-bottom: 20vw;
     font-family: Great Vibes !important;

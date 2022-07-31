@@ -1,6 +1,6 @@
 <template>
     <div id="latestBlog">
-        <h2>最新記事</h2>
+        <h2>{{ title }}</h2>
         <ol>
             <li v-for="c in contents">
                 <v-tooltip location="top">
@@ -14,13 +14,17 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 const props = defineProps({
-    contents: Object
+    contents: {
+        type: Object,
+        required: true,
+    }
 })
 
 const contents = props.contents
+const title: String = "最新記事"
 
 
 </script>

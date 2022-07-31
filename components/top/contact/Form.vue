@@ -1,6 +1,6 @@
 <template>
     <v-container fluid>
-        <form :action="formRunUrl" method="post">
+        <form :action="contact.formRunUrl" method="post">
             <v-row>
                 <v-col cols="4">
                     <div>Your Full Name</div>
@@ -46,38 +46,30 @@
     </v-container>
 </template>
 
-<script>
+<script setup lang="">
 import { useForm, useField } from 'vee-validate';
 import * as yup from 'yup';
-export default {
-    setup() {
-        const config = useRuntimeConfig()
 
-        const formRunUrl = "https://form.run/api/v1/r/" + config.FORM_RUN_URL;
+const config = useRuntimeConfig()
 
-        const schema = yup.object({
-            name: yup.string().required("入力必須項目です。").max(50, "50文字以下で入力してください。").label("Name"),
-            email: yup.string().required("入力必須項目です。").email('メールアドレスの形式で入力してください').label("Email"),
-            comment: yup.string().required("入力必須項目です。").max(512, "512文字以下で入力してください。").label("Comment")
-        })
-        const { validate } = useForm({ validationSchema: schema })
-        const { value: name, errorMessage: nameError } = useField('name')
-        const { value: email, errorMessage: emailError } = useField('email')
-        const { value: comment, errorMessage: commentError } = useField('comment')
-
-        return {
-            formRunUrl,
-            name,
-            nameError,
-            email,
-            emailError,
-            comment,
-            commentError,
-
-        };
-
+const contact = {
+    formRun: {
+        url: config.FORM_RUN_URL,
     },
+    schema: yup.object({
+        name: yup.string().required("入力必須項目です。").max(50, "50文字以下で入力してください。").label("Name"),
+        email: yup.string().required("入力必須項目です。").email('メールアドレスの形式で入力してください').label("Email"),
+        comment: yup.string().required("入力必須項目です。").max(512, "512文字以下で入力してください。").label("Comment")
+    })
+
 }
+
+const { validate } = useForm({ validationSchema: contact.schema })
+const { value: name, errorMessage: nameError } = useField('name')
+const { value: email, errorMessage: emailError } = useField('email')
+const { value: comment, errorMessage: commentError } = useField('comment')
+
+
 
 </script>
 

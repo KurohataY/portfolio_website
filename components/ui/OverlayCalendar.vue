@@ -12,12 +12,6 @@ const { stateValue, updateState } = useOverlayCalendar();
 
 const overlay = ref(stateValue)
 
-const isVisible = {
-    required: overlay,
-    type: Boolean,
-    default: false,
-}
-
 watch(
     () => stateValue.value,
     (overlayStateValue) => {
