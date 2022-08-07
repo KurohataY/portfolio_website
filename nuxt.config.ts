@@ -103,6 +103,9 @@ export default defineNuxtConfig({
         HOMEPAGE_ROOT_URL: process.env.HOMEPAGE_ROOT_URL,
         CONNPASS_NICKNAME: process.env.CONNPASS_NICKNAME,
         GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
+        RELETE_TITLES_API_URL: process.env.RELETE_TITLES_API_URL,
+        SUGGEST_API_URL: process.env.SUGGEST_API_URL,
+        SEARCH_API_URL: process.env.SEARCH_API_URL
     },
     // components: {
     //     global: true,

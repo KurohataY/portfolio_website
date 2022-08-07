@@ -14,7 +14,8 @@
                                         style="max-width: none;object-fit: fill;" />
                                 </div>
                                 <div class="flex_box">
-                                    <v-card-title class="text-h5" style="width: 600px;">{{ content["title"] }}</v-card-title>
+                                    <v-card-title class="text-h5" style="width: 600px;">{{ content["title"] }}
+                                    </v-card-title>
                                 </div>
                             </div>
                         </v-card>
@@ -30,19 +31,17 @@
 
 
 <script lang="ts" setup>
-
 import axios from "axios"
+
 const route = useRoute()
+const config = useRuntimeConfig()
 
 const word = ref(route.query.word)
-
 let data = ref([])
-
 let dataFlag = ref()
-
 const placeholder: String = "キーワードを入力"
 
-await axios.get("http://localhost/yomotsuhirasaka/search", {
+await axios.get(config.SEARCH_API_URL, {
     params: {
         word: word.value
     }
@@ -56,34 +55,6 @@ await axios.get("http://localhost/yomotsuhirasaka/search", {
 });
 
 watch(() => route.query, () => location.reload())
-
-const suggest_list = ref([])
-const componentShow = ref(false)
-
-const reload = (() => {
-    componentShow.value = false
-    nextTick(() => {
-        componentShow.value = true
-    })
-
-})
-
-watch(
-    () => word.value,
-    async (word) => {
-        await axios.get(`http://localhost/yomotsuhirasaka/suggest`, {
-            params: {
-                word: word,
-                limit: 5
-            }
-        }).then(function (res) {
-            suggest_list.value = [];
-            res.data.forEach((element) => { if (!!element) { suggest_list.value.push(element["Word"]) } })
-        });
-
-        reload()
-    }
-)
 
 </script>
 

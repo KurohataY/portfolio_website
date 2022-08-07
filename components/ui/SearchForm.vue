@@ -19,6 +19,8 @@
 <script lang="ts" setup>
 import axios from "axios"
 
+const config = useRuntimeConfig()
+
 const props = defineProps({
     placeholder: {
         type: String,
@@ -63,6 +65,8 @@ const reload = (() => {
 
 })
 
+
+
 const word = ref(props.word);
 let suggest_list = ref([]);
 
@@ -71,20 +75,42 @@ const bindInput = (w => {
     word.value = w.target.value;
 })
 
+const element = ref<HTMLDivElement | null>(null) // 対象の要素
+const clickOutside = (e: MouseEvent) => {
+    // [対象の要素]が[クリックされた要素]を含まない場合
+    if (e.target instanceof Node && !element.value?.contains(e.target)) {
+        suggest_list.value = []
+        reload();
+    }
+}
+
+// windowにセットしたイベントはremoveするのを忘れずに
+onMounted(() => {
+    addEventListener('click', clickOutside)
+})
+onBeforeUnmount(() => {
+    removeEventListener('click', clickOutside)
+})
+
+
 watch(
     () => word.value,
     async (word) => {
-        await axios.get(`http://localhost/yomotsuhirasaka/suggest`, {
-            params: {
-                word: word,
-                limit: 5
-            }
-        }).then(function (response) {
+        if (!!word) {
+            await axios.get(config.SUGGEST_API_URL, {
+                params: {
+                    word: word,
+                    limit: 5
+                }
+            }).then(function (response) {
+                suggest_list.value = [];
+                response.data.forEach((element) => { if (!!element) { suggest_list.value.push(element["Word"]) } })
+            });
+        } else {
             suggest_list.value = [];
-            response.data.forEach((element) => { if (!!element) { suggest_list.value.push(element["Word"]) } })
-        });
-
+        }
         reload()
+
     }
 )
 

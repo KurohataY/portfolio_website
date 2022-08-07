@@ -26,7 +26,9 @@ const props = defineProps({
     }
 })
 
-const num = props.tagList.length < props.num ? props.tagList.length : props.num;
+const tagList = props.tagList
+
+const num = tagList.length < props.num ? tagList.length : props.num;
 
 const suggestWidth = computed(() => {
     return {
@@ -34,7 +36,6 @@ const suggestWidth = computed(() => {
     }
 
 })
-
 
 </script>
 <style lang="scss" scoped>

@@ -7,9 +7,11 @@
                 <div v-html="c.content"></div>
                 <div v-html="c.html"></div>
             </article>
-            <!-- <div v-for="r in related_data">
-                <a :href="'/blog/articles/' + r.id">{{r.title}}</a>
-            </div> -->
+            <h2 id="realted_box_title">■関連記事(精度そんな良くないかもwww)</h2>
+            <ul id="related_title_list">
+                <li class="related_title" v-for="r in related_data"><a :href="'/blog/articles/' + r.id">{{ r.title
+                }}</a></li>
+            </ul>
         </div>
     </v-main>
 </template>
@@ -54,13 +56,13 @@ const description = !!data.value.description ? data.value.description : data.val
 const thumbnail = data.value.thumbnail.url;
 
 
-// let related_data = ref([])
-// axios.get("http://localhost/related_title_searcher/v1/related_title/" + data.value.id, {
-// }).then(function (response) {
-//     related_data.value = response.data;
-// }).catch(err => {
-//     console.log('err:', err);
-// });
+let related_data = ref([])
+axios.get(config.RELETE_TITLES_API_URL + data.value.id, {
+}).then(function (response) {
+    related_data.value = response.data;
+}).catch(err => {
+    console.log('err:', err);
+});
 
 
 
@@ -113,6 +115,18 @@ onMounted(() => {
 
     h2 {
         margin: 45px 0;
+
+        &#realted_box_title {
+            color: #59adf1;
+            font-weight: bold;
+        }
+
+    }
+
+    ul#related_title_list {
+        background: inherit;
+        border-radius: 0px;
+        box-shadow: none;
     }
 
     h3,
@@ -136,6 +150,10 @@ onMounted(() => {
     ol li {
         line-height: 1.5;
         padding: 0.5em 0;
+    }
+
+    a:visited {
+        color: #0707ED !important;
     }
 }
 </style>
