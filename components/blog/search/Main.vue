@@ -7,7 +7,7 @@
             <v-row dense>
                 <v-col cols="12" v-if="dataFlag" v-for="content in data">
                     <a :href="`/blog/articles/${content['contents_id']}`">
-                        <v-card color="#1F7087" theme="dark">
+                        <v-card height="180" color="#1F7087" theme="dark">
                             <div class="d-flex flex-no-wrap">
                                 <div class="pa-3">
                                     <img :src="content['img_url']" :height="150" :width="200"
@@ -16,6 +16,12 @@
                                 <div class="flex_box">
                                     <v-card-title class="text-h5" style="width: 600px;">{{ content["title"] }}
                                     </v-card-title>
+                                    <v-card-text v-if='!!content["excerpt_text"]'>
+                                        {{content["excerpt_text"]}}
+                                    </v-card-text>
+                                    <v-card-text v-else>
+                                        {{content["body"].substr(0, 100) + "..."}}
+                                    </v-card-text>
                                 </div>
                             </div>
                         </v-card>

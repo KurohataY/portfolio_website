@@ -49,7 +49,6 @@ const inputWidth = computed(() => {
     return {
         "--input-width": props.inputWidth
     }
-
 })
 
 const placeholder = props.placeholder;
@@ -110,7 +109,6 @@ watch(
             suggest_list.value = [];
         }
         reload()
-
     }
 )
 
