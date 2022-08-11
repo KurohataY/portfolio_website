@@ -70,6 +70,7 @@ const skils: Array<skilsDataType> = [
 <style lang="scss" scoped>
 #skils_box {
     margin-top: 20vw;
+    max-width: 1080px !important;
 }
 
 h2 {

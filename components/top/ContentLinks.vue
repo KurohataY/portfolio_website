@@ -55,4 +55,8 @@ h2 {
     margin-bottom: 10vw;
     font-family: Great Vibes !important;
 }
+
+#content_link_box {
+    max-width: 1080px !important;
+}
 </style>

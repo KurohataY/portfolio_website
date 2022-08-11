@@ -41,7 +41,7 @@ export default {
         })
 
         const calculateWindowWidth = () => {
-            let windowWidth = window.innerWidth;
+            let windowWidth = window.innerWidth < 1080 ? window.innerWidth : 1080;
             swiper.value.views = Math.floor(windowWidth / swiper.value.imageWidth);
         }
 
@@ -104,5 +104,6 @@ h2 {
     padding: 0 10px;
     margin-bottom: 100px;
     margin-top: 20vw;
+    max-width: 1080px !important;
 }
 </style>

@@ -1,6 +1,6 @@
 
 <template>
-    <v-container class="mx-auto" id="skils_box">
+    <v-container class="mx-auto" id="information_box">
         <h2 class="text-center text-h2">{{ information.title }}</h2>
         <v-row justify="space-around">
             <v-col>
@@ -84,8 +84,9 @@ const blogContents = data.value["contents"].slice(0, information.latestBlogConte
 </script>
 
 <style lang="scss" scoped>
-#skils_box {
+#information_box {
     margin-top: 20vw;
+    max-width: 1080px !important;
 }
 
 h2 {
@@ -96,4 +97,5 @@ h2 {
 .v-overlay__content {
     max-width: 500px;
 }
+
 </style>

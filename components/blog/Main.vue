@@ -3,18 +3,13 @@
         <BlogUiTitleView />
         <v-container>
             <BlogUiContents :data="data" />
-            <BlogUiPagenation
-                :nowPageNum="nowPageNum"
-                :pageMaxNum="pageMaxNum"
-                :visibleNum="visibleNum"
-                :path="path"
-            />
+            <BlogUiPagenation :nowPageNum="nowPageNum" :pageMaxNum="pageMaxNum" :visibleNum="visibleNum" :path="path" />
         </v-container>
     </v-main>
 </template>
 
 <script setup lang="ts">
-import {hash} from "ohash"
+import { hash } from "ohash"
 
 
 const route = useRoute()
@@ -62,7 +57,7 @@ let { data } = await useFetch("/api/microcms", {
         filter: filter
     },
     initialCache: false,
-    key : hash(['api-fetch', "/api/microcms", "Blog"])
+    key: hash(['api-fetch', "/api/microcms", "Blog"])
 });
 
 
@@ -74,5 +69,9 @@ const pageMaxNum: number = Math.ceil(data.value["totalCount"] / limit)
 <style lang="scss" scoped>
 #blog {
     background-color: #edf2f6;
+
+    .v-container {
+        max-width: 1296px !important;
+    }
 }
 </style>

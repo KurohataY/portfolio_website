@@ -106,8 +106,9 @@ onMounted(() => {
 
 <style lang="scss">
 #post_box {
-    padding: 50px 15vw;
+    padding: 50px 20vw;
     background-color: #edf2f6;
+
 
     h1 {
         margin-bottom: 75px;
