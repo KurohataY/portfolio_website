@@ -3682,10 +3682,10 @@ sass-loader@^13.0.2:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.54.3:
-  version "1.54.3"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.3.tgz#37baa2652f7f1fdadb73240ee9a2b9b81fabb5c4"
-  integrity sha512-fLodey5Qd41Pxp/Tk7Al97sViYwF/TazRc5t6E65O7JOk4XF8pzwIW7CvCxYVOfJFFI/1x5+elDyBIixrp+zrw==
+sass@^1.54.4:
+  version "1.54.4"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.4.tgz#803ff2fef5525f1dd01670c3915b4b68b6cba72d"
+  integrity sha512-3tmF16yvnBwtlPrNBHw/H907j8MlOX8aTBnlNX1yrKx24RKcJGPyLhFUwkoKBKesR3unP93/2z14Ll8NicwQUA==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -4243,10 +4243,10 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-vee-validate@^4.6.2:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.6.2.tgz#b6e02f3d565bd09968b67fa87d485f880cb987e2"
-  integrity sha512-DOOQn3lLgDQXuLogEaiv0WfaW7lNydODdmtB/RjkodioaJ1hjlwoM0zdsIGzMW/t35p04GdZfWM4UCd0gfTiLg==
+vee-validate@^4.6.4:
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.6.4.tgz#4e176b28d09e00fa61e089c05e17615b44bbe012"
+  integrity sha512-40l/fvtz450zTGf0b2/9pz6c6ADBAoC7EquhJ1Zq6fIknWmiLEz8K+a97WmvCkgR/q56H/Hww5T6iMDFp3lrkg==
   dependencies:
     "@vue/devtools-api" "^6.1.4"
 
