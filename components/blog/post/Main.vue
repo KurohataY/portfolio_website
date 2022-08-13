@@ -8,38 +8,18 @@
                 <div v-html="c.html"></div>
             </article>
             <h2 id="realted_box_title">■関連記事(精度そんな良くないかもwww)</h2>
-            <ul id="related_title_list">
-                <li class="related_title" v-for="r in related_data"><a :href="'/blog/articles/' + r.id">{{ r.title
-                }}</a></li>
-            </ul>
+            <client-only>
+                <ul id="related_title_list">
+                    <li class="related_title" v-for="r in related_data"><a :href="'/blog/articles/' + r.id">{{ r.title
+                    }}</a></li>
+                </ul>
+            </client-only>
         </div>
     </v-main>
 </template>
 
 
 <script setup>
-import Prism from "prismjs"
-import "prismjs/themes/prism-okaidia.css"
-import 'prismjs/components/prism-javascript'
-import 'prismjs/components/prism-json'
-import 'prismjs/components/prism-markup'
-import 'prismjs/components/prism-css'
-import 'prismjs/components/prism-scss'
-import 'prismjs/components/prism-python'
-import 'prismjs/components/prism-nginx'
-import 'prismjs/components/prism-yaml'
-import 'prismjs/components/prism-docker'
-import 'prismjs/components/prism-properties'
-import 'prismjs/components/prism-swift'
-import 'prismjs/components/prism-ruby'
-
-import 'clipboard'
-import 'prismjs/plugins/toolbar/prism-toolbar'
-import 'prismjs/plugins/toolbar/prism-toolbar.css'
-import 'prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard'
-
-import 'prismjs/plugins/show-language/prism-show-language'
-
 import { hash } from "ohash"
 import axios from "axios"
 
@@ -100,7 +80,6 @@ useHead({
 onMounted(() => {
     Prism.highlightAll();
 })
-// nextTick(async() => await Prism.highlightAll());
 
 </script>
 
