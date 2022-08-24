@@ -105,7 +105,8 @@ export default defineNuxtConfig({
         GOOGLE_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID,
         RELETE_TITLES_API_URL: process.env.RELETE_TITLES_API_URL,
         SUGGEST_API_URL: process.env.SUGGEST_API_URL,
-        SEARCH_API_URL: process.env.SEARCH_API_URL
+        SEARCH_API_URL: process.env.SEARCH_API_URL,
+        TOPIC_API_URL:  process.env.TOPIC_API_URL
     },
     // components: {
     //     global: true,
