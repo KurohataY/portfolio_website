@@ -31,7 +31,7 @@ const breadcrumbs: Object = props.breadcrumbs
 <style lang="scss">
 #breadcrumbs_box {
     background-color: #edf2f6;
-    padding: 50px 15vw 0 15vw;
+    padding: 50px 20vw 0 20vw;
     ul#breadcrumbs_list {
         padding-left: 0 !important;
         font-size: 12px;
