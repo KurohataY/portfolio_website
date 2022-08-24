@@ -14,6 +14,15 @@
                     }}</a></li>
                 </ul>
             </client-only>
+
+            <h2 id="topic_box_title">■関連トピック</h2>
+            <client-only>
+                <v-chip-group v-model="amenities" column multiple>
+                    <v-chip filter outlined v-for="topic in topic_list" :to="'/blog/search?word=' + topic">
+                        {{ topic }}
+                    </v-chip>
+                </v-chip-group>
+            </client-only>
         </div>
     </v-main>
 </template>
@@ -40,6 +49,14 @@ let related_data = ref([])
 axios.get(config.RELETE_TITLES_API_URL + data.value.id, {
 }).then(function (response) {
     related_data.value = response.data;
+}).catch(err => {
+    console.log('err:', err);
+});
+
+let topic_list = ref([])
+axios.get(config.TOPIC_API_URL + data.value.id, {
+}).then(function (response) {
+    topic_list.value = response.data["corpus"].split(",");
 }).catch(err => {
     console.log('err:', err);
 });
@@ -96,7 +113,8 @@ onMounted(() => {
     h2 {
         margin: 45px 0;
 
-        &#realted_box_title {
+        &#realted_box_title,
+        &#topic_box_title {
             color: #59adf1;
             font-weight: bold;
         }
