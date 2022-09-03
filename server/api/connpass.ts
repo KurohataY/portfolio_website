@@ -1,5 +1,4 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import axios from 'axios'
 
 type eventsDataType = {
   name: string,
@@ -49,13 +48,18 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     res.end()
   }
 
-  let data: Array<any>
-  await axios.get(
-    `${ENDPOINT}`,
-    API_HEAD
-  ).then(res => {
-    data = res.data;
-  });
+  let data: unknown
+
+  await $fetch(`${ENDPOINT}`, {
+    method: "GET",
+    headers: {
+      Accept: 'application/json',
+      'Cache-Control': 'no-cache'
+    }
+  }
+  ).then((response) => {
+    data = response
+  })
 
   const json = JSON.stringify(calendarFormatter(data, "orange"))
   res.statusCode = 200

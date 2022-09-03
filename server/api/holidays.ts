@@ -1,5 +1,4 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import axios from 'axios'
 
 type holidatData = {
     name: string,
@@ -31,11 +30,6 @@ const calendarFormatter = ((data, color) => {
 
 
 const ENDPOINT: string = "https://holidays-jp.github.io/api/v1/" + year + "/date.json"
-const API_HEAD = {
-    headers: {
-        'accept': "application/json"
-    }
-}
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
     if (req.method != 'GET') {
@@ -44,13 +38,17 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
         res.end()
     }
 
-    let data: Array<any>
-    await axios.get(
-        `${ENDPOINT}`,
-        API_HEAD
-    ).then(res => {
-        data = res.data;
-    });
+    let data: unknown
+    await $fetch(`${ENDPOINT}`, {
+        method: "GET",
+        headers: {
+            Accept: 'application/json',
+            'Cache-Control': 'no-cache'
+        }
+    }
+    ).then((response) => {
+        data = response
+    })
 
     const json = JSON.stringify(calendarFormatter(data, "red"))
     res.statusCode = 200
