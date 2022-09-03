@@ -3951,10 +3951,10 @@ sass-loader@^13.0.2:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.54.5:
-  version "1.54.5"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.5.tgz#93708f5560784f6ff2eab8542ade021a4a947b3a"
-  integrity sha512-p7DTOzxkUPa/63FU0R3KApkRHwcVZYC0PLnLm5iyZACyp15qSi32x7zVUhRdABAATmkALqgGrjCJAcWvobmhHw==
+sass@^1.54.8:
+  version "1.54.8"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.54.8.tgz#4adef0dd86ea2b1e4074f551eeda4fc5f812a996"
+  integrity sha512-ib4JhLRRgbg6QVy6bsv5uJxnJMTS2soVcCp9Y88Extyy13A8vV0G1fAwujOzmNkFQbR3LvedudAMbtuNRPbQww==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -4294,10 +4294,10 @@ terser@^5.0.0:
     commander "^2.20.0"
     source-map-support "~0.5.20"
 
-three@^0.143.0:
-  version "0.143.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.143.0.tgz#1455bca132cc2b20beb7f41d313e10c29e5ed9df"
-  integrity sha512-oKcAGYHhJ46TGEuHjodo2n6TY2R6lbvrkp+feKZxqsUL/WkH7GKKaeu6RHeyb2Xjfk2dPLRKLsOP0KM2VgT8Zg==
+three@^0.144.0:
+  version "0.144.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.144.0.tgz#2818517169f8ff94eea5f664f6ff1fcdcd436cc8"
+  integrity sha512-R8AXPuqfjfRJKkYoTQcTK7A6i3AdO9++2n8ubya/GTU+fEHhYKu1ZooRSCPkx69jbnzT7dD/xEo6eROQTt2lJw==
 
 through@^2.3.6:
   version "2.3.8"
@@ -4543,10 +4543,10 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-vee-validate@^4.6.6:
-  version "4.6.6"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.6.6.tgz#368604ef8f3742a0dc84d0dc06965c2630797e7d"
-  integrity sha512-juvuSvZlWvjdpe/3GL19mHi5p5xc7OcKgSMVI8v4YN8YtqezsSh3OKIqaSu1y3DhPZTY9y1LbMyJyuqa6g3cuA==
+vee-validate@^4.6.7:
+  version "4.6.7"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-4.6.7.tgz#d000b43033eb6e48e2b71bc26466f4dfd79e5fd4"
+  integrity sha512-8W9cR/EGqPuHJpodYriAlp5BndQf/IWFifZLyIWeNs7RGB+B0jr50TACjzgtwtp5qE6hgRskOToEhcfhWJdgyw==
   dependencies:
     "@vue/devtools-api" "^6.1.4"
 
