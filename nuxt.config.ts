@@ -1,16 +1,5 @@
 import { defineNuxtConfig } from "nuxt";
 
-declare module "vite" {
-    interface UserConfig {
-        // This is the missing options. Please see https://vitejs.dev/config/#ssr-options
-        ssr?: {
-            external?: string[];
-            noExternal?: string | RegExp | (string | RegExp)[] | true;
-            target?: "node" | "webworker";
-        };
-    }
-}
-
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
     typescript: {
@@ -106,10 +95,7 @@ export default defineNuxtConfig({
         RELETE_TITLES_API_URL: process.env.RELETE_TITLES_API_URL,
         SUGGEST_API_URL: process.env.SUGGEST_API_URL,
         SEARCH_API_URL: process.env.SEARCH_API_URL,
-        TOPIC_API_URL:  process.env.TOPIC_API_URL
+        TOPIC_API_URL:  process.env.TOPIC_API_URL,
+        RELETE_TITLES_API_URL_V2: process.env.RELETE_TITLES_API_URL_V2
     },
-    // components: {
-    //     global: true,
-    //     dirs: ['~/components']
-    // }
 });
