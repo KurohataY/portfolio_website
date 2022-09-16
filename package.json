@@ -7,22 +7,21 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "^3.0.0-rc.8",
+    "nuxt": "^3.0.0-rc.10",
     "vue-gtag-next": "^1.14.0"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "click-outside-vue3": "^4.0.1",
-    "clipboard": "^2.0.11",
+    "clipboard": "^2.0.11",  
     "lottie-web": "^5.9.6",
     "moment": "^2.29.4",
     "prismjs": "^1.29.0",
-    "sass": "^1.54.8",
+    "sass": "^1.54.9",
     "sass-loader": "^13.0.2",
-    "swiper": "^8.3.2",
+    "swiper": "^8.4.2",
     "three": "^0.144.0",
     "vee-validate": "^4.6.7",
-    "vuetify": "3.0.0-beta.6",
+    "vuetify": "3.0.0-beta.11",
     "yup": "^0.32.11"
   }
 }
