@@ -46,7 +46,7 @@
     </v-container>
 </template>
 
-<script setup lang="">
+<script setup>
 import { useForm, useField } from 'vee-validate';
 import * as yup from 'yup';
 

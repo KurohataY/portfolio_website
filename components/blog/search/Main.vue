@@ -5,7 +5,8 @@
         </div>
         <v-card max-width="900" class="mx-auto" id="search_result_box">
             <v-row dense>
-                <v-col cols="12" v-if="dataFlag" v-for="content in data">
+
+                <v-col cols="12" v-for="content in searchContents">
                     <a :href="`/blog/articles/${content['contents_id']}`">
                         <v-card height="180" color="#1F7087" theme="dark">
                             <div class="d-flex flex-no-wrap">
@@ -17,18 +18,15 @@
                                     <v-card-title class="text-h5" style="width: 600px;">{{ content["title"] }}
                                     </v-card-title>
                                     <v-card-text v-if='!!content["excerpt_text"]'>
-                                        {{content["excerpt_text"]}}
+                                        {{ content["excerpt_text"] }}
                                     </v-card-text>
                                     <v-card-text v-else>
-                                        {{content["body"].substr(0, 100) + "..."}}
+                                        {{ content["body"].substr(0, 100) + "..." }}
                                     </v-card-text>
                                 </div>
                             </div>
                         </v-card>
                     </a>
-                </v-col>
-                <v-col cols="12" v-else style="padding: 70px 70px 0;">
-                    <div id="no_contents_text">記事が見つかりませんでした。他の検索単語をお試しください。</div>
                 </v-col>
             </v-row>
         </v-card>
@@ -37,30 +35,32 @@
 
 
 <script lang="ts" setup>
-import axios from "axios"
 
 const route = useRoute()
 const config = useRuntimeConfig()
 
 const word = ref(route.query.word)
-let data = ref([])
-let dataFlag = ref()
-const placeholder: String = "キーワードを入力"
+const placeholder: string = "キーワードを入力"
 
-await axios.get(config.SEARCH_API_URL, {
-    params: {
-        word: word.value
-    }
-}).then(function (response) {
-    data.value = [];
-    dataFlag.value = true;
-    response.data.forEach((element) => { if (!!element) { data.value.push(element) } })
-}).catch(err => {
-    console.log('err:', err);
-    dataFlag.value = false;
-});
+const searchContents = ref()
 
-watch(() => route.query, () => location.reload())
+const yomotsuhirasaka = async () => {
+    await $fetch(config.SEARCH_API_URL, {
+        method: "get",
+        mode: "cors",
+        params: {
+            word: word.value
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Cache-Control': 'no-cache'
+        }
+    }).then((response) => {
+        searchContents.value = response;
+    })
+}
+yomotsuhirasaka()
+
 
 </script>
 

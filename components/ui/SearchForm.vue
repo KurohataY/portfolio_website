@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import axios from "axios"
 
 const config = useRuntimeConfig()
 
@@ -96,14 +95,16 @@ watch(
     () => word.value,
     async (word) => {
         if (!!word) {
-            await axios.get(config.SUGGEST_API_URL, {
+            await $fetch(config.SUGGEST_API_URL, {
                 params: {
                     word: word,
                     limit: 5
-                }
-            }).then(function (response) {
+                },
+            }).then((response) => {
                 suggest_list.value = [];
-                response.data.forEach((element) => { if (!!element) { suggest_list.value.push(element["Word"]) } })
+                for (const element of response) {
+                    if (!!element) { suggest_list.value.push(element["Word"]) }
+                }
             });
         } else {
             suggest_list.value = [];
