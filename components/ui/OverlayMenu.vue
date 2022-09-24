@@ -3,13 +3,13 @@
         <teleport to="body">
             <div id="dialog">
                 <ul>
+                    <li>
+                        <UiSearchForm :placeholder="placeholder" :suggest-num="5" input-width="85vw" />
+                    </li>
                     <li v-for="(nav, index) in headerData.nav" :key="index">
                         <v-btn class="overlay_buttons">
                             <a class="menu_link_style" :href="nav.to">{{ nav.text }}</a>
                         </v-btn>
-                    </li>
-                    <li>
-                        <UiSearchForm />
                     </li>
                 </ul>
             </div>
@@ -22,7 +22,9 @@ import headerData from "assets/json/global_menu.json";
 
 const { stateValue, updateState } = useOverlayMenu();
 
-const overlay = ref(stateValue)
+const placeholder:string = "検索";
+
+const overlay = ref(stateValue);
 
 watch(
     () => stateValue.value,

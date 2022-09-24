@@ -17,12 +17,11 @@ const text: string = "Scroll"
 .scrolldown3 {
     /*描画位置※位置は適宜調整してください*/
     position: absolute;
-    bottom: 20vw;
+    bottom: 0;
     right: 50%;
     /*マウスの動き1.6秒かけて動く永遠にループ*/
     animation: mousemove 1.6s ease-in-out infinite;
     z-index: 10;
-
 }
 
 @media (max-width: 768px) {
@@ -51,9 +50,9 @@ const text: string = "Scroll"
     /*描画位置*/
     position: absolute;
     left: -15px;
-    bottom: 45px;
+    top: 85px;
     /*テキストの形状*/
-    color: #000;
+    color: #fff;
     font-size: 0.7rem;
     letter-spacing: 0.05em;
 }
@@ -63,12 +62,11 @@ const text: string = "Scroll"
     content: "";
     /*描画位置*/
     position: absolute;
-    top: 10px;
     left: 17px;
     /*線の形状*/
     width: 1px;
     height: 15px;
-    background: #000;
+    background: #fff;
     /*線の動き1.4秒かけて動く。永遠にループ*/
     animation: mousepathmove 1.4s linear infinite;
     opacity: 0;
@@ -99,13 +97,13 @@ const text: string = "Scroll"
     content: "";
     /*描画位置*/
     position: absolute;
-    bottom: 0;
+    top: 115px;
     left: -10px;
     /*マウスの形状*/
     width: 25px;
     height: 37px;
     border-radius: 10px;
-    border: 1px solid #000;
+    border: 3px solid #fff;
 }
 
 /*マウスの中の丸の描写*/
@@ -113,12 +111,12 @@ const text: string = "Scroll"
     content: "";
     /*描画位置*/
     position: absolute;
-    bottom: 26px;
+    top: 120px;
     left: 0;
     /*丸の形状*/
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    border: 1px solid #000;
+    border: 3px solid #fff;
 }
 </style>

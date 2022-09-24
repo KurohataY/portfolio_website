@@ -27,10 +27,9 @@
                 </client-only>
             </div>
         </v-main>
-        <div id="toc_box">
+        <aside id="toc_box">
             <BlogUiToc :blogContent="text" />
-        </div>
-
+        </aside>
     </div>
 </template>
 
@@ -137,7 +136,8 @@ onMounted(() => {
     display: flex;
 
     main {
-        width: 80%;
+        width: 70%;
+        padding-left: 80px;
 
         #content_box {
             padding: 0 3vw;
@@ -187,13 +187,14 @@ onMounted(() => {
     }
 
     #toc_box {
-        padding-top: 80px;
-        width: 20%;
+        padding: 80px 20px 0 20px;
+        width: 30%;
     }
 
     @media screen and (max-width: 640px) {
         main {
             width: 100%;
+            padding-left: 0 !important;
         }
 
         #toc_box {

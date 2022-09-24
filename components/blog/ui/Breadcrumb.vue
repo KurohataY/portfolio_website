@@ -1,11 +1,11 @@
 <template>
     <div id="breadcrumbs_box">
-        <ul id="breadcrumbs_list" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <ul id="breadcrumbs_list" itemscope itemtype="https://schema.org/BreadcrumbList">
             <li
                 v-for="(item, index) in breadcrumbs"
                 class="breadcrumbs_item"
                 itemscope
-                itemtype="http://schema.org/ListItem"
+                itemtype="https://schema.org/ListItem"
             >
                 <a v-if="!item.disabled" itemprop="item" :href="item.href">{{ item.text }}</a>
                 <span v-else itemprop="item">{{ item.text }}</span>
@@ -28,7 +28,7 @@ const breadcrumbs: Object = props.breadcrumbs
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #breadcrumbs_box {
     background-color: #edf2f6;
     padding: 20px 0;

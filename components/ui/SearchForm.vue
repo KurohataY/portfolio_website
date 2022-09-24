@@ -42,7 +42,7 @@ const props = defineProps({
     }
 })
 
-const suggestWidth: String = props.inputWidth;
+const suggestWidth: string = props.inputWidth;
 
 const inputWidth = computed(() => {
     return {
@@ -102,7 +102,7 @@ watch(
                 },
             }).then((response) => {
                 suggest_list.value = [];
-                for (const element of response) {
+                for (const element of response[Symbol.iterator]()) {
                     if (!!element) { suggest_list.value.push(element["Word"]) }
                 }
             });

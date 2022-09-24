@@ -9,13 +9,13 @@
                 <v-col cols="12" v-for="content in searchContents">
                     <a :href="`/blog/articles/${content['contents_id']}`">
                         <v-card height="180" color="#1F7087" theme="dark">
-                            <div class="d-flex flex-no-wrap">
-                                <div class="pa-3">
+                            <div class="d-sm-flex flex-no-wrap">
+                                <div class="pa-3 search_contents_image">
                                     <img :src="content['img_url']" :height="150" :width="200"
                                         style="max-width: none;object-fit: fill;" />
                                 </div>
                                 <div class="flex_box">
-                                    <v-card-title class="text-h5" style="width: 600px;">{{ content["title"] }}
+                                    <v-card-title class="text-h5 search_contents_title">{{ content["title"] }}
                                     </v-card-title>
                                     <v-card-text v-if='!!content["excerpt_text"]'>
                                         {{ content["excerpt_text"] }}
@@ -120,5 +120,18 @@ yomotsuhirasaka()
 
 #no_contents_text {
     text-align: center;
+}
+
+.search_contents_title {
+    width: 600px;
+}
+
+@media screen and (max-width: 640px) {
+    .search_contents_image {
+        display: none;
+    }
+    .search_contents_title {
+        width: 100% !important;
+    }
 }
 </style>

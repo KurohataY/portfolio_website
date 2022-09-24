@@ -1,9 +1,20 @@
 <template>
-    <v-layout>
-        <div id="main_title">{{ title }}</div>
-        <div id="bc_gradation"></div>
-        <TopUiScrolldownButton />
+    <v-layout style="height: 100vh;">
+        <div id="bc_gradation">
+
+            <div id="main_title">
+                <div>
+                    <p>{{ title }}</p>
+                </div>
+            </div>
+            <TopUiScrolldownButton />
+            <video id="video" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
+                <source src="/movie/sea_1280x720.mp4" type="video/mp4" width="100vw">
+            </video>
+        </div>
+
     </v-layout>
+
 </template>
 
 
@@ -14,47 +25,58 @@ const title = "Izanagi's Site";
 </script>
 
 <style lang="scss" scoped>
-#main_title {
-    position: relative;
-    z-index: 1;
-    font-size: 13vw;
-    text-align: center;
-    width: 100%;
-    height: 65vw;
-    line-height: 300%;
-    background-color: #fff;
-    mix-blend-mode: lighten;
-    font-weight: bold;
-    font-family: Great Vibes;
-    letter-spacing: 0.12em;
-}
-
-@media (max-width: 768px) {
-    #main_title {
-        line-height: 500%;
-    }
-}
-
+/*背景動画にフィルタをかける*/
 #bc_gradation {
-    width: 100%;
+    position: relative;
     height: 100vh;
-    background: linear-gradient(90deg, rgba(89, 173, 241, 1), rgba(207, 253, 157, 1));
-    background-size: 200% 200%;
-    animation: bggradient 20s ease infinite;
-    position: absolute;
+    overflow: hidden;
+    opacity: 0.01;
+    animation: load 1.5s 0.8s ease-out forwards;
+    width: 100vw;
 }
 
-@keyframes bggradient {
-    0% {
-        background-position: 0% 50%;
-    }
+#bc_gradation #video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100vh;
+    z-index: -1000;
+    overflow: hidden;
+    transform: translate(-50%, -50%) scale(1.5);
+    // filter: grayscale(100%) contrast(60%);
+    /*背景動画にかけるフィルタ*/
+    transition: 0.3s;
+}
 
-    50% {
-        background-position: 100% 50%;
-    }
-
+@keyframes load {
     100% {
-        background-position: 0% 50%;
+        opacity: 1;
     }
+}
+
+#main_title {
+    display: table;
+    position: relative;
+    height: inherit;
+    width: 100vw;
+}
+
+#main_title>div {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    text-align: center;
+}
+
+#main_title>div>p {
+    color: #fff;
+    text-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 10px;
+    font-size: 10vw;
+    font-weight: 600;
+    font-family: 'Fira Sans', sans-serif;
 }
 </style>

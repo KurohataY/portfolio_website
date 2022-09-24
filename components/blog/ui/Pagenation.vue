@@ -48,7 +48,7 @@ let path: string = props.path;
 const prevButtonShow = nowPageNum > 1 ? true : false;
 const nextButtonShow = nowPageNum < pageMaxNum ? true : false;
 
-const pageOffset: number = Math.sign(nowPageNum - 2) === 1 && nowPageNum - 2 !== 0 ? nowPageNum - 2 : 1
+const pageOffset: number = nowPageNum - 2 > 0 ? nowPageNum - 2 : 1
 
 let pager;
 
