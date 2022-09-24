@@ -1,7 +1,7 @@
 <template>
     <div id="search_page">
         <TheHeader />
-        <BlogSearchMain />
+        <BlogSearch />
         <TheFooter />
     </div>
 </template>

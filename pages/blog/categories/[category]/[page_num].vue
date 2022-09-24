@@ -1,7 +1,7 @@
 <template>
     <div id="category">
         <TheHeader />
-        <BlogMain />
+        <Blog />
         <TheFooter />
     </div>
 </template>

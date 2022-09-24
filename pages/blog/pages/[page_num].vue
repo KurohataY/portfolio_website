@@ -1,7 +1,7 @@
 <template>
     <div id="page">
         <TheHeader />
-        <BlogMain />
+        <Blog />
         <TheFooter />
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
     <div id="contact_page">
         <TheHeader />
-        <TopContactMain />
+        <TopContact />
         <TheFooter />
     </div>
 </template>
