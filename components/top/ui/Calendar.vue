@@ -9,7 +9,7 @@
                         <a v-if="!!dayEvent.url" class="calendar-event"
                             :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`" :href="dayEvent.url"
                             style="display: block;overflow: hidden;" target="_blank">{{
-                                    dayEvent.name
+                            dayEvent.name
                             }}</a>
                         <div v-else class="calendar-event"
                             :style="`width:${dayEvent.width}%;background-color:${dayEvent.color}`"
@@ -21,25 +21,43 @@
     </div>
 </template>
 <script setup>
+import { hash } from "ohash"
+
+const config = useRuntimeConfig()
 
 let calendars = ref([])
 let currentDate = ref()
 let currentMonth = ref('')
 
+const today = new Date();
+const year = String(today.getFullYear());
+const month = useZeroPadding(today.getMonth() + 1, 2);
+
+const conpassUrl = config.MY_EVENTS_API_URL + year + month;
+const holidayJPUrl = config.HOLIDAY_JP_API_URL + yaer + "/" + config.HOLIDAY_JP_API_FILENAME
 
 const [{ data: connpass }, { data: holiday }] = await Promise.all([
-    useFetch("/api/connpass"),
-    useFetch("/api/holidays"),
+    useFetch(conpassUrl, {
+        initialCache: false,
+        key: hash(['api-fetch', "/api/connpass", "Connpass"]),
+    }),
+    useFetch(holidayJPUrl, {
+        initialCache: false,
+        key: hash(['api-fetch', "/api/holidays", "Holidays"])
+    }),
 ])
-let events = ref([])
 
 
+const events = ref([]);
+const connpassFormatData = useConnpassEvents(connpass.value.events);
+const holidayFormatData = useHolidayEvents(holiday.value)
 if (!!connpass.value && !!holiday.value) {
-    events.value = connpass.value.concat(holiday.value);
+    events.value = connpassFormatData.concat(holidayFormatData);
 } else if (!!connpass.value) {
-    events.value = connpass.value
+    events.value = connpassFormatData;
+} else if (!!holiday.value) {
+    events.value = holidayFormatData;
 }
-
 // Today
 events.value.push({ name: "Today", start: currentDate.value, end: currentDate.value, color: "skyblue", url: "" })
 
