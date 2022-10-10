@@ -1,8 +1,8 @@
 <template>
     <ul>
-        <template v-for="toc in tocList">
+        <template v-if="tl" v-for="toc in tl">
             <li><a :href="'#' + toc.id">{{toc.name}}</a></li>
-            <BlogUiTocNode v-if="toc.children && toc.children.length" :tocList="toc.children" />
+            <BlogUiTocNode v-if="toc.children" :tocList="toc.children" />
         </template>
     </ul>
 
@@ -14,8 +14,7 @@ const props = defineProps({
     tocList: Object
 });
 
-const tocList = props.tocList;
-
+const tl = props.tocList;
 
 </script>
 
@@ -32,5 +31,4 @@ ul {
 a {
     color: black;
 }
-
 </style>

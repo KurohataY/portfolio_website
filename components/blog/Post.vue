@@ -28,7 +28,7 @@
             </div>
         </v-main>
         <aside id="toc_box">
-            <BlogUiToc :blogContent="text" />
+            <BlogUiToc :blogContent='text' />
         </aside>
     </div>
 </template>

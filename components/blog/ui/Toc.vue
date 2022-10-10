@@ -20,29 +20,35 @@ let h3Flag = 0;
 let h4Flag = 0;
 let tocList = [];
 
-blogContent.forEach(function (t) {
-    let item = {
-        id: "",
-        name: "",
-        children: [],
-    };
-    item.name = t.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
-    item.id = t.match(/\"(.+)\"/)[1]
+if (!!blogContent) {
+    blogContent.forEach(function (t) {
+        let item = {
+            id: "",
+            name: "",
+            children: [],
+        };
+        item.name = t.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
+        item.id = t.match(/\"(.+)\"/)[1]
 
-    if (t.includes("h2")) {
-        h2Flag++;
-        tocList.push(item);
-    } else if (t.includes("h3")) {
-        tocList[h2Flag - 1].children[h3Flag] = item;
-        h3Flag += 1;
-    } else if (t.includes("h4")) {
-        tocList[h2Flag - 1].children[h3Flag - 1].children[h4Flag] = item;
-        h4Flag += 1;
-    }
-});
+        if (t.includes("h2")) {
+            h2Flag++;
+            h3Flag = 0;
+            h4Flag = 0;
+            tocList.push(item);
+        } else if (t.includes("h3")) {
+            h4Flag = 0;
+            tocList[h2Flag - 1].children[h3Flag] = item;
+            h3Flag += 1;
+        } else if (t.includes("h4")) {
+            tocList[h2Flag - 1].children[h3Flag - 1].children[h4Flag] = item;
+            h4Flag += 1;
+        }
+    });
+}
 
 </script>
 
 
 <style lang="scss" scoped>
+
 </style>
